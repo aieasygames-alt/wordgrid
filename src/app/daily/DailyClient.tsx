@@ -3,14 +3,17 @@
 import { useState, useMemo } from "react";
 import GameBoard from "@/components/GameBoard";
 import ResultScreen from "@/components/ResultScreen";
+import StreakDisplay from "@/components/StreakDisplay";
 import { generateGrid, seedFromDate, todayDateString, Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
+import { recordDailyPlay, getStreak, type StreakData } from "@/lib/streak";
 
 interface GameResult {
   words: { word: string; score: number }[];
   total: number;
   grid: Grid;
   trie: Trie | null;
+  streak: StreakData;
 }
 
 export default function DailyClient() {
@@ -24,7 +27,8 @@ export default function DailyClient() {
     total: number,
     trie: Trie | null
   ) => {
-    setResult({ words, total, grid, trie });
+    const streak = recordDailyPlay();
+    setResult({ words, total, grid, trie, streak });
     if (typeof window !== "undefined") {
       localStorage.setItem(
         `daily-${today}`,
@@ -41,6 +45,11 @@ export default function DailyClient() {
             WordGrid
           </a>
         </header>
+        {result.streak.currentStreak >= 2 && (
+          <div className="mb-4">
+            <StreakDisplay />
+          </div>
+        )}
         <ResultScreen
           grid={result.grid}
           trie={result.trie}
@@ -48,6 +57,7 @@ export default function DailyClient() {
           totalScore={result.total}
           mode="daily"
           dateLabel={today}
+          streak={result.streak.currentStreak}
           onPlayAgain={() => (window.location.href = "/play")}
         />
       </main>
@@ -64,6 +74,9 @@ export default function DailyClient() {
           Daily Challenge — {today}
         </h1>
       </header>
+      <div className="mb-3">
+        <StreakDisplay compact />
+      </div>
       <GameBoard grid={grid} onComplete={handleComplete} />
     </main>
   );

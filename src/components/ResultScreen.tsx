@@ -19,6 +19,7 @@ interface ResultScreenProps {
   totalScore: number;
   mode: "play" | "daily";
   dateLabel?: string;
+  streak?: number;
   onPlayAgain?: () => void;
 }
 
@@ -29,6 +30,7 @@ export default function ResultScreen({
   totalScore,
   mode,
   dateLabel,
+  streak,
   onPlayAgain,
 }: ResultScreenProps) {
   const [showMissed, setShowMissed] = useState(true);
@@ -76,8 +78,12 @@ export default function ResultScreen({
       header,
       `Score: ${totalScore} / ${maxPossible} (${percentage}%)`,
       `Words: ${foundWords.length} / ${allWords.length}`,
-      "",
     ];
+
+    if (streak && streak >= 2) {
+      lines.push(`🔥 ${streak}-day streak`);
+    }
+    lines.push("");
 
     // Emoji summary: 🟩 found, 🟥 missed (top 20 by score)
     const topWords = allWords.slice(0, 20);
@@ -89,7 +95,7 @@ export default function ResultScreen({
     lines.push("wordgrid.games/" + mode);
 
     return lines.join("\n");
-  }, [mode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords.length, foundSet]);
+  }, [mode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords.length, foundSet, streak]);
 
   const handleShare = async () => {
     try {

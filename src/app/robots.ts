@@ -7,6 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/data/"],
     },
-    sitemap: "https://wordgrid.games/sitemap.xml",
+    sitemap: "https://wordgrid.games/sitemap.xml",  // no trailing slash for .xml files
+    host: "https://wordgrid.games",
   };
 }

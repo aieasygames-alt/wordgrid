@@ -20,7 +20,7 @@ const ROOT = join(__dirname, "..");
 
 const INDEXNOW_KEY = "741b5f15ed3d8f0f92df581f89009c51";
 const HOST = "wordgrid.games";
-const INDEXNOW_ENDPOINT = "https://api.indexnow.org/IndexNow";
+const INDEXNOW_ENDPOINT = "https://www.bing.com/indexnow";
 
 // Get URLs to submit
 function getUrls() {

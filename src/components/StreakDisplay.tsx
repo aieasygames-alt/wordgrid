@@ -25,10 +25,10 @@ export default function StreakDisplay({ compact = false }: StreakDisplayProps) {
 
   if (compact) {
     return (
-      <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-900/30 rounded-full text-sm">
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/20 rounded-full text-sm">
         <span className="text-lg leading-none">{data.currentStreak >= 3 ? "🔥" : "✨"}</span>
-        <span className="text-orange-300 font-semibold">{data.currentStreak}</span>
-        <span className="text-slate-500 text-xs">day streak</span>
+        <span className="text-accent font-semibold">{data.currentStreak}</span>
+        <span className="text-text-dim text-xs">day streak</span>
       </div>
     );
   }
@@ -39,30 +39,30 @@ export default function StreakDisplay({ compact = false }: StreakDisplayProps) {
       <div className="text-center">
         <div className="flex items-center gap-1 justify-center">
           <span className="text-2xl">{data.currentStreak >= 3 ? "🔥" : "✨"}</span>
-          <span className="text-3xl font-bold text-orange-400">{data.currentStreak}</span>
+          <span className="text-3xl font-bold text-accent">{data.currentStreak}</span>
         </div>
-        <div className="text-slate-500 text-xs uppercase tracking-wide">Current</div>
+        <div className="text-text-dim text-xs uppercase tracking-wide">Current</div>
       </div>
 
-      <div className="w-px h-10 bg-slate-700" />
+      <div className="w-px h-10 bg-surface-hover" />
 
       {/* Best streak */}
       <div className="text-center">
-        <div className="text-3xl font-bold text-amber-400">{data.longestStreak}</div>
-        <div className="text-slate-500 text-xs uppercase tracking-wide">Best</div>
+        <div className="text-3xl font-bold text-accent">{data.longestStreak}</div>
+        <div className="text-text-dim text-xs uppercase tracking-wide">Best</div>
       </div>
 
-      <div className="w-px h-10 bg-slate-700" />
+      <div className="w-px h-10 bg-surface-hover" />
 
       {/* Total played */}
       <div className="text-center">
-        <div className="text-3xl font-bold text-slate-300">{data.totalPlayed}</div>
-        <div className="text-slate-500 text-xs uppercase tracking-wide">Total</div>
+        <div className="text-3xl font-bold text-text">{data.totalPlayed}</div>
+        <div className="text-text-dim text-xs uppercase tracking-wide">Total</div>
       </div>
 
       {/* At-risk warning */}
       {isAtRisk && data.currentStreak >= 2 && (
-        <div className="ml-2 text-xs text-orange-400/80 animate-pulse">
+        <div className="ml-2 text-xs text-accent/80 animate-pulse">
           Don't break your streak!
         </div>
       )}

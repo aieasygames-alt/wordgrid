@@ -99,31 +99,31 @@ export default async function Page({ params }: { params: { word: string } }) {
 
       <article className="max-w-2xl mx-auto">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
-          <a href="/" className="hover:text-slate-300">Home</a>
+        <nav className="flex items-center gap-2 text-sm text-text-dim mb-6">
+          <a href="/" className="hover:text-text">Home</a>
           <span>›</span>
-          <span className="text-slate-400">{wordUpper}</span>
+          <span className="text-text-muted">{wordUpper}</span>
         </nav>
 
         <h1 className="text-5xl font-bold mb-2">{wordUpper}</h1>
         {data?.phonetic && (
-          <p className="text-slate-400 text-lg mb-6 font-mono">{data.phonetic}</p>
+          <p className="text-text-muted text-lg mb-6 font-mono">{data.phonetic}</p>
         )}
 
         {data && data.meanings.length > 0 ? (
           <div className="space-y-6">
             {data.meanings.map((meaning, i) => (
               <div key={i}>
-                <h2 className="text-sm font-semibold text-indigo-400 uppercase tracking-wide mb-2">
+                <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-2">
                   {meaning.partOfSpeech}
                 </h2>
                 <ol className="space-y-2">
                   {meaning.definitions.map((def, j) => (
-                    <li key={j} className="text-slate-200 leading-relaxed">
-                      <span className="text-slate-500 mr-2">{j + 1}.</span>
+                    <li key={j} className="text-text leading-relaxed">
+                      <span className="text-text-dim mr-2">{j + 1}.</span>
                       {def.definition}
                       {def.example && (
-                        <p className="text-slate-400 italic mt-1 ml-5 text-sm">
+                        <p className="text-text-muted italic mt-1 ml-5 text-sm">
                           &ldquo;{def.example}&rdquo;
                         </p>
                       )}
@@ -134,41 +134,41 @@ export default async function Page({ params }: { params: { word: string } }) {
             ))}
           </div>
         ) : (
-          <p className="text-slate-400 leading-relaxed">
+          <p className="text-text-muted leading-relaxed">
             <strong>{wordUpper}</strong> is a valid English word in our dictionary.
             It can be found by connecting adjacent letters in WordGrid puzzles.
           </p>
         )}
 
         {/* SEO content block — unique per word */}
-        <div className="mt-8 p-6 bg-slate-800/50 rounded-xl space-y-3">
-          <h2 className="text-lg font-semibold text-slate-200">
+        <div className="mt-8 p-6 bg-surface/50 rounded-xl space-y-3">
+          <h2 className="text-lg font-semibold text-text">
             About {wordUpper}
           </h2>
-          <p className="text-slate-400 text-sm leading-relaxed">
+          <p className="text-text-muted text-sm leading-relaxed">
             <strong>{wordUpper}</strong> is a {wordUpper.length}-letter English word
             {data?.meanings?.[0]?.partOfSpeech
               ? ` used as a ${data.meanings[0].partOfSpeech}`
               : ""}
             . In WordGrid, it is worth{" "}
-            <span className="text-indigo-400 font-semibold">{points} points</span> and
+            <span className="text-primary font-semibold">{points} points</span> and
             can be found by connecting adjacent letters in our 4×4 word grid puzzles.
             {data?.meanings?.[0]?.definitions?.[0]?.definition
               ? ` The primary definition is: "${data.meanings[0].definitions[0].definition}".`
               : ""}
           </p>
-          <p className="text-slate-400 text-sm leading-relaxed">
+          <p className="text-text-muted text-sm leading-relaxed">
             Looking to improve your word-finding skills? Check out our{" "}
             <a
               href="/guides/how-to-find-more-words"
-              className="text-indigo-400 hover:text-indigo-300 underline"
+              className="text-primary hover:text-primary underline"
             >
               guide to finding more words
             </a>{" "}
             or read about{" "}
             <a
               href="/guides/word-grid-strategies"
-              className="text-indigo-400 hover:text-indigo-300 underline"
+              className="text-primary hover:text-primary underline"
             >
               scoring strategies
             </a>
@@ -179,7 +179,7 @@ export default async function Page({ params }: { params: { word: string } }) {
         {/* Related words — internal linking */}
         {relatedWords.length > 0 && (
           <div className="mt-8">
-            <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-3">
+            <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-3">
               Related Words
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -187,7 +187,7 @@ export default async function Page({ params }: { params: { word: string } }) {
                 <a
                   key={rw}
                   href={`/words/${rw}`}
-                  className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-mono text-slate-300 transition"
+                  className="px-3 py-1.5 bg-surface hover:bg-surface-hover rounded-lg text-sm font-mono text-text transition"
                 >
                   {rw.toUpperCase()}
                 </a>
@@ -198,20 +198,20 @@ export default async function Page({ params }: { params: { word: string } }) {
       </article>
 
       {/* CTA */}
-      <nav className="max-w-2xl mx-auto mt-12 pt-8 border-t border-slate-800">
-        <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-3">
+      <nav className="max-w-2xl mx-auto mt-12 pt-8 border-t border-surface">
+        <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-3">
           Play Word Games
         </h2>
         <div className="flex gap-3 flex-wrap">
           <a
             href="/play"
-            className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 transition rounded-lg text-sm font-medium"
+            className="px-4 py-2.5 bg-primary hover:bg-primary-hover transition rounded-lg text-sm font-medium"
           >
             Play Word Grid
           </a>
           <a
             href="/daily"
-            className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 transition rounded-lg text-sm font-medium"
+            className="px-4 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-medium"
           >
             Daily Challenge
           </a>

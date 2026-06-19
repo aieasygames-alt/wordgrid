@@ -41,7 +41,7 @@ export default function DailyClient() {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center py-8 px-4">
         <header className="mb-6 text-center">
-          <a href="/" className="text-sm text-slate-500 hover:text-slate-300">
+          <a href="/" className="text-sm text-text-dim hover:text-text">
             WordGrid
           </a>
         </header>
@@ -67,7 +67,7 @@ export default function DailyClient() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-start py-6 px-4">
       <header className="mb-2 text-center">
-        <a href="/" className="text-sm text-slate-500 hover:text-slate-300">
+        <a href="/" className="text-sm text-text-dim hover:text-text">
           WordGrid
         </a>
         <h1 className="text-xl font-semibold mt-1">

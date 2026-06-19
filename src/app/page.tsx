@@ -95,20 +95,20 @@ export default function Home() {
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
             WordGrid — Free Daily Word Puzzle
           </h1>
-          <p className="text-lg text-slate-400 max-w-lg mx-auto mb-6">
+          <p className="text-lg text-text-muted max-w-lg mx-auto mb-6">
             Connect adjacent letters in a 4×4 grid to find hidden words. Race against
             the clock in this addictive word search challenge.
           </p>
           <div className="flex gap-3 justify-center">
             <Link
               href="/play"
-              className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 transition rounded-xl text-lg font-semibold active:scale-[0.98]"
+              className="px-8 py-4 bg-primary hover:bg-primary-hover transition rounded-xl text-lg font-semibold active:scale-[0.98]"
             >
               Play Now — Free
             </Link>
             <Link
               href="/daily"
-              className="px-8 py-4 bg-slate-800 hover:bg-slate-700 transition rounded-xl text-lg font-semibold active:scale-[0.98]"
+              className="px-8 py-4 bg-surface hover:bg-surface-hover transition rounded-xl text-lg font-semibold active:scale-[0.98]"
             >
               Daily Challenge
             </Link>
@@ -119,25 +119,25 @@ export default function Home() {
         <section className="mb-10">
           <h2 className="text-2xl font-semibold mb-4">How to Play</h2>
           <div className="grid sm:grid-cols-3 gap-4">
-            <div className="bg-slate-800/50 rounded-xl p-5">
-              <div className="text-indigo-400 text-2xl font-bold mb-2">1</div>
+            <div className="bg-surface/50 rounded-xl p-5">
+              <div className="text-primary text-2xl font-bold mb-2">1</div>
               <h3 className="font-semibold mb-1">Drag to Connect</h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-text-muted">
                 Drag your finger or mouse across adjacent letters — up, down, or
                 diagonal.
               </p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-5">
-              <div className="text-indigo-400 text-2xl font-bold mb-2">2</div>
+            <div className="bg-surface/50 rounded-xl p-5">
+              <div className="text-primary text-2xl font-bold mb-2">2</div>
               <h3 className="font-semibold mb-1">Spell Valid Words</h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-text-muted">
                 Words must be 3+ letters. Each letter can only be used once per word.
               </p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-5">
-              <div className="text-indigo-400 text-2xl font-bold mb-2">3</div>
+            <div className="bg-surface/50 rounded-xl p-5">
+              <div className="text-primary text-2xl font-bold mb-2">3</div>
               <h3 className="font-semibold mb-1">Beat the Clock</h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-text-muted">
                 You have 3 minutes. Longer words score exponentially more points.
               </p>
             </div>
@@ -147,7 +147,7 @@ export default function Home() {
         {/* Scoring */}
         <section className="mb-10">
           <h2 className="text-2xl font-semibold mb-4">Scoring</h2>
-          <p className="text-slate-400 mb-4">
+          <p className="text-text-muted mb-4">
             Longer words are worth dramatically more. Go for length over quantity:
           </p>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -155,9 +155,9 @@ export default function Home() {
               ["3", "1 pt"], ["4", "2 pts"], ["5", "4 pts"],
               ["6", "6 pts"], ["7", "8 pts"], ["8+", "10+"],
             ].map(([len, pts]) => (
-              <div key={len} className="bg-slate-800/50 rounded-lg p-3 text-center">
-                <div className="text-slate-500 text-xs uppercase">{len} letters</div>
-                <div className="text-indigo-400 font-bold">{pts}</div>
+              <div key={len} className="bg-surface/50 rounded-lg p-3 text-center">
+                <div className="text-text-dim text-xs uppercase">{len} letters</div>
+                <div className="text-primary font-bold">{pts}</div>
               </div>
             ))}
           </div>
@@ -169,42 +169,42 @@ export default function Home() {
             Frequently Asked Questions
           </h2>
           <div className="space-y-4">
-            <details className="bg-slate-800/50 rounded-xl p-4" open>
+            <details className="bg-surface/50 rounded-xl p-4" open>
               <summary className="font-semibold cursor-pointer">
                 What is WordGrid?
               </summary>
-              <p className="text-slate-400 mt-2 text-sm leading-relaxed">
+              <p className="text-text-muted mt-2 text-sm leading-relaxed">
                 WordGrid is a free online word puzzle game where you find words by
                 connecting adjacent letters in a 4×4 grid. You have 3 minutes to find
                 as many valid English words as possible. It is similar to Boggle but
                 plays right in your browser — no download needed.
               </p>
             </details>
-            <details className="bg-slate-800/50 rounded-xl p-4">
+            <details className="bg-surface/50 rounded-xl p-4">
               <summary className="font-semibold cursor-pointer">
                 How do I play?
               </summary>
-              <p className="text-slate-400 mt-2 text-sm leading-relaxed">
+              <p className="text-text-muted mt-2 text-sm leading-relaxed">
                 Drag your finger (on mobile) or click and drag (on desktop) across
                 adjacent letters to spell words. Letters can be connected horizontally,
                 vertically, or diagonally. Release to submit your word.
               </p>
             </details>
-            <details className="bg-slate-800/50 rounded-xl p-4">
+            <details className="bg-surface/50 rounded-xl p-4">
               <summary className="font-semibold cursor-pointer">
                 What is the Daily Challenge?
               </summary>
-              <p className="text-slate-400 mt-2 text-sm leading-relaxed">
+              <p className="text-text-muted mt-2 text-sm leading-relaxed">
                 Every day at UTC midnight, a new puzzle is generated. Everyone around
                 the world gets the exact same 4×4 grid. Come back daily to test your
                 skills and compare your score with friends.
               </p>
             </details>
-            <details className="bg-slate-800/50 rounded-xl p-4">
+            <details className="bg-surface/50 rounded-xl p-4">
               <summary className="font-semibold cursor-pointer">
                 Do I need to create an account?
               </summary>
-              <p className="text-slate-400 mt-2 text-sm leading-relaxed">
+              <p className="text-text-muted mt-2 text-sm leading-relaxed">
                 No. WordGrid is completely free with no sign-up, no login, and no ads.
                 Just visit the site and start playing immediately.
               </p>
@@ -218,24 +218,24 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 gap-4">
             <Link
               href="/guides/how-to-find-more-words"
-              className="block bg-slate-800/50 hover:bg-slate-800 transition rounded-xl p-5"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
             >
-              <h3 className="font-semibold mb-1 text-indigo-300">
+              <h3 className="font-semibold mb-1 text-primary">
                 How to Find More Words →
               </h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-text-muted">
                 6 proven techniques to spot more words — prefix scanning, plurals,
                 Qu strategy, and more.
               </p>
             </Link>
             <Link
               href="/guides/word-grid-strategies"
-              className="block bg-slate-800/50 hover:bg-slate-800 transition rounded-xl p-5"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
             >
-              <h3 className="font-semibold mb-1 text-indigo-300">
+              <h3 className="font-semibold mb-1 text-primary">
                 Scoring Strategies →
               </h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-text-muted">
                 Time management, scoring optimization, and word families to maximize
                 your score every game.
               </p>
@@ -246,12 +246,12 @@ export default function Home() {
         {/* CTA */}
         <section className="text-center py-8">
           <h2 className="text-2xl font-semibold mb-3">Ready to Play?</h2>
-          <p className="text-slate-400 mb-6">
+          <p className="text-text-muted mb-6">
             Free, no sign-up. Start finding words in seconds.
           </p>
           <Link
             href="/play"
-            className="inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-500 transition rounded-xl text-lg font-semibold active:scale-[0.98]"
+            className="inline-block px-8 py-4 bg-primary hover:bg-primary-hover transition rounded-xl text-lg font-semibold active:scale-[0.98]"
           >
             Play WordGrid Now
           </Link>

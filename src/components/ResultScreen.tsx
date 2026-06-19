@@ -160,7 +160,7 @@ export default function ResultScreen({
   if (!trie) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-slate-400 animate-pulse">Calculating results…</div>
+        <div className="text-text-muted animate-pulse">Calculating results…</div>
       </div>
     );
   }
@@ -174,16 +174,16 @@ export default function ResultScreen({
 
       {/* Score summary */}
       <div className="text-center">
-        <div className="text-6xl font-bold text-indigo-400 mb-1">{totalScore}</div>
-        <div className="text-slate-400 text-sm">
+        <div className="text-6xl font-bold text-primary mb-1">{totalScore}</div>
+        <div className="text-text-muted text-sm">
           out of {maxPossible} possible ({percentage}%)
         </div>
       </div>
 
       {/* Progress bar */}
-      <div className="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
+      <div className="w-full bg-surface rounded-full h-3 overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-indigo-500 to-indigo-400 transition-all duration-700"
+          className="h-full bg-gradient-to-r from-primary to-primary-hover transition-all duration-700"
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -191,16 +191,16 @@ export default function ResultScreen({
       {/* Stats row */}
       <div className="flex justify-center gap-8 w-full">
         <div className="text-center">
-          <div className="text-2xl font-bold text-green-400">{foundWords.length}</div>
-          <div className="text-slate-500 text-xs uppercase tracking-wide">Found</div>
+          <div className="text-2xl font-bold text-success">{foundWords.length}</div>
+          <div className="text-text-dim text-xs uppercase tracking-wide">Found</div>
         </div>
         <div className="text-center">
-          <div className="text-2xl font-bold text-red-400">{missedWords.length}</div>
-          <div className="text-slate-500 text-xs uppercase tracking-wide">Missed</div>
+          <div className="text-2xl font-bold text-danger">{missedWords.length}</div>
+          <div className="text-text-dim text-xs uppercase tracking-wide">Missed</div>
         </div>
         <div className="text-center">
-          <div className="text-2xl font-bold text-slate-300">{allWords.length}</div>
-          <div className="text-slate-500 text-xs uppercase tracking-wide">Total</div>
+          <div className="text-2xl font-bold text-text">{allWords.length}</div>
+          <div className="text-text-dim text-xs uppercase tracking-wide">Total</div>
         </div>
       </div>
 
@@ -209,13 +209,13 @@ export default function ResultScreen({
         <button
           onClick={handleShareCard}
           disabled={cardLoading}
-          className="flex-1 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 transition rounded-xl font-semibold text-lg active:scale-[0.98] disabled:opacity-50"
+          className="flex-1 px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold text-lg active:scale-[0.98] disabled:opacity-50"
         >
           {cardLoading ? "Generating…" : "Share Image"}
         </button>
         <button
           onClick={handleShare}
-          className="px-6 py-3 bg-slate-800 hover:bg-slate-700 transition rounded-xl font-semibold whitespace-nowrap"
+          className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold whitespace-nowrap"
         >
           {copied ? "Copied!" : "Text"}
         </button>
@@ -224,15 +224,15 @@ export default function ResultScreen({
       {/* Card preview */}
       {previewUrl && (
         <div className="w-full">
-          <div className="text-xs text-slate-500 mb-1">Preview (long-press to save):</div>
+          <div className="text-xs text-text-dim mb-1">Preview (long-press to save):</div>
           <img
             src={previewUrl}
             alt="Share card preview"
-            className="w-full rounded-xl border border-slate-700"
+            className="w-full rounded-xl border border-border"
           />
           <button
             onClick={() => setPreviewUrl(null)}
-            className="mt-1 text-xs text-slate-500 hover:text-slate-400"
+            className="mt-1 text-xs text-text-dim hover:text-text-muted"
           >
             Close preview
           </button>
@@ -241,7 +241,7 @@ export default function ResultScreen({
 
       {/* Found words list */}
       <div className="w-full">
-        <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-2">
+        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-2">
           Your Words ({foundWords.length})
         </h3>
         <div className="flex flex-wrap gap-1.5">
@@ -251,9 +251,9 @@ export default function ResultScreen({
             .map((w, i) => (
               <span
                 key={i}
-                className="px-2.5 py-1 bg-green-900/40 text-green-300 rounded-md text-sm font-mono"
+                className="px-2.5 py-1 bg-success-bg/40 text-success rounded-md text-sm font-mono"
               >
-                {w.word} <span className="text-green-500 text-xs">{w.score}</span>
+                {w.word} <span className="text-success text-xs">{w.score}</span>
               </span>
             ))}
         </div>
@@ -264,7 +264,7 @@ export default function ResultScreen({
         <div className="w-full">
           <button
             onClick={() => setShowMissed(!showMissed)}
-            className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-2 hover:text-slate-300 transition"
+            className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-2 hover:text-text transition"
           >
             {showMissed ? "▼" : "▶"} Missed Words ({missedWords.length})
           </button>
@@ -274,9 +274,9 @@ export default function ResultScreen({
                 <a
                   key={i}
                   href={`/words/${w.word.toLowerCase()}`}
-                  className="px-2.5 py-1 bg-red-900/30 text-red-300/80 hover:bg-red-900/50 hover:text-red-300 rounded-md text-sm font-mono transition"
+                  className="px-2.5 py-1 bg-danger-bg/30 text-danger/80 hover:bg-danger-bg/50 hover:text-danger rounded-md text-sm font-mono transition"
                 >
-                  {w.word} <span className="text-red-500/60 text-xs">{w.score}</span>
+                  {w.word} <span className="text-danger/60 text-xs">{w.score}</span>
                 </a>
               ))}
             </div>
@@ -289,20 +289,20 @@ export default function ResultScreen({
         {onPlayAgain && (
           <button
             onClick={onPlayAgain}
-            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 transition rounded-xl font-semibold"
+            className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
           >
             {mode === "daily" ? "Play Random" : "New Game"}
           </button>
         )}
         <a
           href="/daily"
-          className="px-6 py-3 bg-slate-800 hover:bg-slate-700 transition rounded-xl font-semibold"
+          className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
         >
           Daily Challenge
         </a>
         <a
           href="/"
-          className="px-6 py-3 bg-slate-800 hover:bg-slate-700 transition rounded-xl font-semibold"
+          className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
         >
           Home
         </a>

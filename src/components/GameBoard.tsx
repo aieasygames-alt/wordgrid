@@ -5,6 +5,7 @@ import { Grid, isValidPath, scoreWord } from "@/lib/boggle";
 import { loadDictionary, Trie } from "@/lib/dictionary";
 import { sounds } from "@/lib/sounds";
 import Timer from "./Timer";
+import ThemeToggle from "./ThemeToggle";
 
 interface FoundWord {
   word: string;
@@ -266,7 +267,7 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
           {duration > 0 ? (
             <Timer seconds={duration} onExpire={finishGame} paused={gameOver} />
           ) : (
-            <div className="flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-2xl font-bold bg-slate-800 text-slate-200">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-2xl font-bold bg-surface text-text">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -279,20 +280,20 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
               <button
                 onClick={() => setShowDurationPicker(!showDurationPicker)}
                 aria-label="Change timer"
-                className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center bg-slate-800 hover:bg-slate-700 rounded-lg transition text-xs text-slate-400"
+                className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center bg-surface hover:bg-surface-hover rounded-lg transition text-xs text-text-muted"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                 </svg>
               </button>
               {showDurationPicker && (
-                <div className="absolute top-full mt-1 left-0 bg-slate-800 rounded-lg shadow-xl border border-slate-700 z-50 overflow-hidden">
+                <div className="absolute top-full mt-1 left-0 bg-surface rounded-lg shadow-xl border border-border z-50 overflow-hidden">
                   {DURATION_OPTIONS.map((opt) => (
                     <button
                       key={opt.value}
                       onClick={() => changeDuration(opt.value)}
-                      className={`block w-full px-4 py-2 text-sm text-left hover:bg-slate-700 transition whitespace-nowrap ${
-                        duration === opt.value ? "text-indigo-400 font-semibold" : "text-slate-300"
+                      className={`block w-full px-4 py-2 text-sm text-left hover:bg-surface-hover transition whitespace-nowrap ${
+                        duration === opt.value ? "text-primary font-semibold" : "text-text"
                       }`}
                     >
                       {opt.label}
@@ -304,21 +305,22 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
           )}
         </div>
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <div className="text-right">
-            <div className="text-indigo-300 text-2xl font-bold tabular-nums">{totalScore}</div>
-            <div className="text-slate-400 text-xs">pts</div>
+            <div className="text-primary text-2xl font-bold tabular-nums">{totalScore}</div>
+            <div className="text-text-muted text-xs">pts</div>
           </div>
           <button
             onClick={toggleMute}
             aria-label={muted ? "Unmute" : "Mute"}
-            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-slate-800 hover:bg-slate-700 rounded-xl transition"
+            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-surface hover:bg-surface-hover rounded-xl transition"
           >
             {muted ? (
-              <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.919 3.667 12 4.109 12 5v14c0 .891-1.081 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
               </svg>
             ) : (
-              <svg className="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072M17.95 6.05a8 8 0 010 11.9M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.919 3.667 12 4.109 12 5v14c0 .891-1.081 1.337-1.707.707L5.586 15z" />
               </svg>
             )}
@@ -335,13 +337,13 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
         <span
           className={`text-3xl font-bold tracking-widest min-w-[120px] text-center transition-colors duration-200 ${
             flash === "correct"
-              ? "text-green-400"
+              ? "text-success"
               : flash === "wrong"
-              ? "text-red-400"
-              : "text-indigo-300"
+              ? "text-danger"
+              : "text-primary"
           }`}
         >
-          {currentWord || <span className="text-slate-400 text-lg font-normal">Drag to select</span>}
+          {currentWord || <span className="text-text-muted text-lg font-normal">Drag to select</span>}
         </span>
       </div>
 
@@ -402,7 +404,7 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
                 ${
                   isCellSelected(r, c)
                     ? "bg-indigo-500 text-white scale-105 shadow-lg shadow-indigo-500/50"
-                    : "bg-slate-800 text-slate-100 active:bg-slate-700"
+                    : "bg-surface text-text active:bg-surface-hover"
                 }
               `}
             >
@@ -414,7 +416,7 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
 
       {/* Error feedback */}
       <div className="h-6 text-center" aria-live="assertive" aria-atomic="true">
-        {error && <span className="text-red-400 text-sm font-medium animate-pulse">{error}</span>}
+        {error && <span className="text-danger text-sm font-medium animate-pulse">{error}</span>}
       </div>
 
       {/* Action: Clear only (submit is now on pointer up) */}
@@ -426,25 +428,25 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
           }}
           disabled={gameOver || selected.length === 0}
           aria-label="Clear selection"
-          className="flex-1 py-3.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 transition rounded-xl font-semibold text-lg active:scale-[0.98]"
+          className="flex-1 py-3.5 bg-surface hover:bg-surface-hover disabled:opacity-50 transition rounded-xl font-semibold text-lg active:scale-[0.98]"
         >
           Clear
         </button>
       </div>
-      <p className="text-slate-500 text-xs -mt-2 text-center">
+      <p className="text-text-dim text-xs -mt-2 text-center">
         Release to submit · Drag back to undo
       </p>
 
       {/* Found words */}
-      <div className="w-full bg-slate-800/50 rounded-xl p-4">
+      <div className="w-full bg-surface/50 rounded-xl p-4">
         <div className="flex justify-between items-center mb-3">
-          <span className="text-slate-400 text-sm font-medium">
+          <span className="text-text-muted text-sm font-medium">
             {foundWords.length} {foundWords.length === 1 ? "word" : "words"}
           </span>
         </div>
         <ul className="flex flex-wrap gap-1.5 min-h-[2rem] list-none p-0">
           {foundWords.length === 0 ? (
-            <li className="text-slate-400 text-sm">No words yet — start dragging!</li>
+            <li className="text-text-muted text-sm">No words yet — start dragging!</li>
           ) : (
             foundWords
               .slice()
@@ -452,9 +454,9 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
               .map((f, i) => (
                 <li
                   key={i}
-                  className="px-2 py-1 bg-slate-700 rounded-md text-sm font-mono"
+                  className="px-2 py-1 bg-surface-hover rounded-md text-sm font-mono"
                 >
-                  {f.word} <span className="text-indigo-400 text-xs">{f.score}</span>
+                  {f.word} <span className="text-primary text-xs">{f.score}</span>
                 </li>
               ))
           )}
@@ -465,7 +467,7 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
       {!gameOver && (
         <button
           onClick={finishGame}
-          className="text-slate-400 hover:text-slate-200 text-sm underline min-h-[44px] px-4 py-2"
+          className="text-text-muted hover:text-text text-sm underline min-h-[44px] px-4 py-2"
         >
           End Game
         </button>

@@ -12,18 +12,18 @@ export default function Guide1() {
     <main className="min-h-screen px-4 py-8">
       <article className="max-w-2xl mx-auto">
         <header className="mb-8">
-          <a href="/" className="text-sm text-slate-500 hover:text-slate-300">
+          <a href="/" className="text-sm text-text-dim hover:text-text">
             ← WordGrid
           </a>
           <h1 className="text-4xl font-bold mt-4 mb-2">
             How to Find More Words in Word Grid Puzzles
           </h1>
-          <p className="text-slate-400">6 min read</p>
+          <p className="text-text-muted">6 min read</p>
         </header>
 
-        <div className="prose prose-invert max-w-none space-y-6 text-slate-200">
+        <div className="prose prose-invert max-w-none space-y-6 text-text">
           <section>
-            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+            <h2 className="text-2xl font-semibold text-primary mb-3">
               1. Scan by Starting Letter
             </h2>
             <p className="leading-relaxed">
@@ -35,7 +35,7 @@ export default function Guide1() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+            <h2 className="text-2xl font-semibold text-primary mb-3">
               2. Look for Common Prefixes and Suffixes
             </h2>
             <p className="leading-relaxed mb-3">Train yourself to recognize these patterns:</p>
@@ -51,7 +51,7 @@ export default function Guide1() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+            <h2 className="text-2xl font-semibold text-primary mb-3">
               3. The &ldquo;Qu&rdquo; Strategy
             </h2>
             <p className="leading-relaxed">
@@ -62,7 +62,7 @@ export default function Guide1() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+            <h2 className="text-2xl font-semibold text-primary mb-3">
               4. Go for Length Over Quantity
             </h2>
             <p className="leading-relaxed">
@@ -74,7 +74,7 @@ export default function Guide1() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+            <h2 className="text-2xl font-semibold text-primary mb-3">
               5. Plurals Are Free Points
             </h2>
             <p className="leading-relaxed">
@@ -85,7 +85,7 @@ export default function Guide1() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+            <h2 className="text-2xl font-semibold text-primary mb-3">
               6. Diagonal Awareness
             </h2>
             <p className="leading-relaxed">
@@ -96,22 +96,22 @@ export default function Guide1() {
           </section>
 
           <div className="mt-8 p-6 bg-indigo-900/30 rounded-xl border border-indigo-800/50">
-            <h2 className="text-xl font-semibold text-indigo-300 mb-2">
+            <h2 className="text-xl font-semibold text-primary mb-2">
               Ready to Practice?
             </h2>
-            <p className="text-slate-300 mb-4">
+            <p className="text-text mb-4">
               Put these strategies to work in a real game.
             </p>
             <div className="flex gap-3">
               <a
                 href="/play"
-                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 transition rounded-xl font-semibold"
+                className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
                 Play Now
               </a>
               <a
                 href="/daily"
-                className="px-6 py-3 bg-slate-800 hover:bg-slate-700 transition rounded-xl font-semibold"
+                className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
                 Daily Challenge
               </a>

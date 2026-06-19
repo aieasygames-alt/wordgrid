@@ -59,7 +59,7 @@ export default function Timer({ seconds, onExpire, paused = false }: TimerProps)
       className={`
         flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-2xl font-bold
         transition-colors duration-300
-        ${isCritical ? "bg-red-900/50 text-red-400 animate-pulse" : isLow ? "bg-orange-900/40 text-orange-400" : "bg-slate-800 text-slate-200"}
+        ${isCritical ? "bg-danger-bg/50 text-danger animate-pulse" : isLow ? "bg-orange-900/40 text-accent" : "bg-surface text-text"}
       `}
       role="timer"
       aria-label={`Time remaining: ${mins} minutes ${secs} seconds`}

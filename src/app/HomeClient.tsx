@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from "react";
 import GameBoard from "@/components/GameBoard";
 import ResultScreen from "@/components/ResultScreen";
+import ThemeToggle from "@/components/ThemeToggle";
 import Link from "next/link";
 import { generateGrid, Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
@@ -23,7 +24,6 @@ export default function HomeClient() {
   const [seed, setSeed] = useState(() => Math.floor(Math.random() * 2 ** 31));
   const grid = useMemo(() => generateGrid(seed), [seed]);
   const [result, setResult] = useState<GameResult | null>(null);
-  const [showGame, setShowGame] = useState(false);
 
   const handleComplete = useCallback(
     (words: FoundWord[], total: number, trie: Trie | null) => {
@@ -32,7 +32,12 @@ export default function HomeClient() {
     [grid]
   );
 
-  // Show result screen
+  const playAgain = useCallback(() => {
+    setResult(null);
+    setSeed(Math.floor(Math.random() * 2 ** 31));
+  }, []);
+
+  // Result screen — after first game ends
   if (result) {
     return (
       <div className="mb-8">
@@ -42,57 +47,49 @@ export default function HomeClient() {
           foundWords={result.words}
           totalScore={result.total}
           mode="play"
-          onPlayAgain={() => {
-            setResult(null);
-            setSeed(Math.floor(Math.random() * 2 ** 31));
-            setShowGame(true);
-          }}
+          onPlayAgain={playAgain}
         />
       </div>
     );
   }
 
-  // Show inline game
-  if (showGame) {
-    return (
+  // Default: hero + game visible immediately
+  return (
+    <>
+      {/* Top bar with theme toggle */}
+      <div className="flex justify-end mb-4">
+        <ThemeToggle />
+      </div>
+
+      {/* Hero text */}
+      <section className="text-center mb-6">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+          WordGrid — Free Boggle-Style Word Puzzle
+        </h1>
+        <p className="text-base text-text-muted max-w-lg mx-auto mb-4">
+          Connect adjacent letters to find words. 3 minutes, unlimited fun.
+          No download, no sign-up.
+        </p>
+        <div className="flex gap-3 justify-center">
+          <Link
+            href="/daily"
+            className="px-6 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-semibold active:scale-[0.98]"
+          >
+            Daily Challenge
+          </Link>
+          <Link
+            href="/play"
+            className="px-6 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-semibold active:scale-[0.98]"
+          >
+            Full Screen →
+          </Link>
+        </div>
+      </section>
+
+      {/* Game board — visible immediately */}
       <div className="mb-8">
         <GameBoard grid={grid} onComplete={handleComplete} />
-        <div className="text-center mt-3">
-          <button
-            onClick={() => setShowGame(false)}
-            className="text-sm text-text-dim hover:text-text-muted"
-          >
-            ← Back to home
-          </button>
-        </div>
       </div>
-    );
-  }
-
-  // Hero with Play Now button that reveals the game inline
-  return (
-    <section className="text-center mb-12">
-      <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-        WordGrid — Free Daily Word Puzzle
-      </h1>
-      <p className="text-lg text-text-muted max-w-lg mx-auto mb-6">
-        Connect adjacent letters in a 4×4 grid to find hidden words. Race against
-        the clock in this addictive word search challenge.
-      </p>
-      <div className="flex gap-3 justify-center">
-        <button
-          onClick={() => setShowGame(true)}
-          className="px-8 py-4 bg-primary hover:bg-primary-hover transition rounded-xl text-lg font-semibold active:scale-[0.98]"
-        >
-          Play Now — Free
-        </button>
-        <Link
-          href="/daily"
-          className="px-8 py-4 bg-surface hover:bg-surface-hover transition rounded-xl text-lg font-semibold active:scale-[0.98]"
-        >
-          Daily Challenge
-        </Link>
-      </div>
-    </section>
+    </>
   );
 }

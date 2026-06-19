@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import HomeClient from "./HomeClient";
 
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "WordGrid — Free Daily Word Search Puzzle Game",
+  title: "WordGrid — Free Online Boggle-Style Word Search Puzzle Game",
   description:
-    "Play WordGrid, a free online word search puzzle. Connect adjacent letters in a 4×4 grid to find words. New daily challenge every day. No sign-up required.",
+    "Play WordGrid, a free online Boggle-style word search puzzle. Connect adjacent letters in a 4×4 grid to find words. New daily challenge every day. No download, no sign-up required.",
   alternates: { canonical: "/" },
+  keywords: [
+    "boggle online", "boggle free", "boggle word game", "word game online",
+    "word search puzzle", "daily word game", "word grid", "free boggle",
+    "browser word game", "no download word game",
+  ],
   openGraph: {
-    title: "WordGrid — Free Daily Word Search Puzzle Game",
+    title: "WordGrid — Free Online Boggle-Style Word Puzzle Game",
     description:
-      "Connect letters in a 4×4 grid to find hidden words. New daily challenge every day!",
+      "Play a free Boggle-style word search game right in your browser. Connect letters, find words, beat the clock. New daily challenge every day!",
     url: BASE_URL,
   },
 };
@@ -23,7 +29,7 @@ export default function Home() {
     "@type": "WebSite",
     name: "WordGrid",
     url: BASE_URL,
-    description: "Free daily word search puzzle game",
+    description: "Free online Boggle-style word search puzzle game",
     potentialAction: {
       "@type": "PlayGameAction",
       target: `${BASE_URL}/play`,
@@ -40,7 +46,23 @@ export default function Home() {
         name: "What is WordGrid?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "WordGrid is a free online word puzzle game where you find words by connecting adjacent letters in a 4×4 grid. You have 3 minutes to find as many valid English words as possible.",
+          text: "WordGrid is a free online word puzzle game inspired by Boggle. You find words by connecting adjacent letters in a 4×4 grid. You have 3 minutes to find as many valid English words as possible. Play directly in your browser — no download or sign-up needed.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is WordGrid like Boggle?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes! WordGrid uses the same classic Boggle rules: a 4×4 letter grid where you connect adjacent letters (horizontally, vertically, or diagonally) to form words. The difference is WordGrid is free, runs in your browser, and offers a new daily challenge every day.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I play Boggle online for free?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes — WordGrid is a completely free Boggle-style word game you can play online right now. No download, no registration, no ads. Just visit wordgrid.games and start playing instantly.",
         },
       },
       {
@@ -48,15 +70,7 @@ export default function Home() {
         name: "How do I play WordGrid?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Drag your finger or mouse across adjacent letters to spell words. Words must be at least 3 letters long. Letters can be connected horizontally, vertically, or diagonally.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Is WordGrid free?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, WordGrid is completely free. No sign-up, no download, no ads. Just visit wordgrid.games and start playing.",
+          text: "Drag your finger or mouse across adjacent letters to spell words. Words must be at least 3 letters long. Each letter tile can only be used once per word. Release to submit.",
         },
       },
       {
@@ -64,7 +78,7 @@ export default function Home() {
         name: "What is the Daily Challenge?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Every day at UTC midnight, a new puzzle is generated. Everyone around the world gets the same grid, so you can compare your score with friends.",
+          text: "Every day, a new puzzle is generated. Everyone around the world gets the same grid, so you can compare your score with friends. Build your streak by playing every day!",
         },
       },
       {
@@ -72,7 +86,7 @@ export default function Home() {
         name: "How is WordGrid scored?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Points scale with word length: 3-letter words are 1 point, 4-letter words are 2 points, 5-letter words are 4 points, and longer words are worth even more. Longer words give exponentially higher scores.",
+          text: "Points scale with word length: 3-letter words are 1 point, 4-letter words are 2 points, 5-letter words are 4 points, 6-letter words are 6 points, and 7+ letter words are worth 8 or more. Longer words give exponentially higher scores.",
         },
       },
     ],
@@ -90,30 +104,8 @@ export default function Home() {
       />
 
       <div className="max-w-2xl mx-auto">
-        {/* Hero */}
-        <section className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-            WordGrid — Free Daily Word Puzzle
-          </h1>
-          <p className="text-lg text-text-muted max-w-lg mx-auto mb-6">
-            Connect adjacent letters in a 4×4 grid to find hidden words. Race against
-            the clock in this addictive word search challenge.
-          </p>
-          <div className="flex gap-3 justify-center">
-            <Link
-              href="/play"
-              className="px-8 py-4 bg-primary hover:bg-primary-hover transition rounded-xl text-lg font-semibold active:scale-[0.98]"
-            >
-              Play Now — Free
-            </Link>
-            <Link
-              href="/daily"
-              className="px-8 py-4 bg-surface hover:bg-surface-hover transition rounded-xl text-lg font-semibold active:scale-[0.98]"
-            >
-              Daily Challenge
-            </Link>
-          </div>
-        </section>
+        {/* Interactive game section (client component) */}
+        <HomeClient />
 
         {/* How to play */}
         <section className="mb-10">
@@ -124,14 +116,15 @@ export default function Home() {
               <h3 className="font-semibold mb-1">Drag to Connect</h3>
               <p className="text-sm text-text-muted">
                 Drag your finger or mouse across adjacent letters — up, down, or
-                diagonal.
+                diagonal. Just like Boggle!
               </p>
             </div>
             <div className="bg-surface/50 rounded-xl p-5">
               <div className="text-primary text-2xl font-bold mb-2">2</div>
               <h3 className="font-semibold mb-1">Spell Valid Words</h3>
               <p className="text-sm text-text-muted">
-                Words must be 3+ letters. Each letter can only be used once per word.
+                Words must be 3+ letters. Each letter tile can only be used once
+                per word.
               </p>
             </div>
             <div className="bg-surface/50 rounded-xl p-5">
@@ -174,20 +167,33 @@ export default function Home() {
                 What is WordGrid?
               </summary>
               <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                WordGrid is a free online word puzzle game where you find words by
-                connecting adjacent letters in a 4×4 grid. You have 3 minutes to find
-                as many valid English words as possible. It is similar to Boggle but
-                plays right in your browser — no download needed.
+                WordGrid is a free online word puzzle game inspired by classic
+                Boggle. You find words by connecting adjacent letters in a 4×4
+                grid. You have 3 minutes to find as many valid English words as
+                possible. It plays right in your browser — no download or sign-up
+                needed.
               </p>
             </details>
             <details className="bg-surface/50 rounded-xl p-4">
               <summary className="font-semibold cursor-pointer">
-                How do I play?
+                Is WordGrid like Boggle?
               </summary>
               <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                Drag your finger (on mobile) or click and drag (on desktop) across
-                adjacent letters to spell words. Letters can be connected horizontally,
-                vertically, or diagonally. Release to submit your word.
+                Yes! WordGrid uses the same classic Boggle rules: a 4×4 letter
+                grid where you connect adjacent letters (horizontally, vertically,
+                or diagonally) to form words. The difference is WordGrid is
+                completely free, runs in your browser, and offers a new daily
+                challenge every day.
+              </p>
+            </details>
+            <details className="bg-surface/50 rounded-xl p-4">
+              <summary className="font-semibold cursor-pointer">
+                Can I play Boggle online for free?
+              </summary>
+              <p className="text-text-muted mt-2 text-sm leading-relaxed">
+                Yes — WordGrid is a free Boggle-style word game you can play
+                online right now. No download, no registration, no ads. Just visit
+                wordgrid.games and start playing instantly.
               </p>
             </details>
             <details className="bg-surface/50 rounded-xl p-4">
@@ -195,18 +201,9 @@ export default function Home() {
                 What is the Daily Challenge?
               </summary>
               <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                Every day at UTC midnight, a new puzzle is generated. Everyone around
-                the world gets the exact same 4×4 grid. Come back daily to test your
-                skills and compare your score with friends.
-              </p>
-            </details>
-            <details className="bg-surface/50 rounded-xl p-4">
-              <summary className="font-semibold cursor-pointer">
-                Do I need to create an account?
-              </summary>
-              <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                No. WordGrid is completely free with no sign-up, no login, and no ads.
-                Just visit the site and start playing immediately.
+                Every day, a new puzzle is generated. Everyone around the world
+                gets the exact same 4×4 grid. Come back daily to test your skills,
+                build your streak, and compare your score with friends.
               </p>
             </details>
           </div>
@@ -236,8 +233,8 @@ export default function Home() {
                 Scoring Strategies →
               </h3>
               <p className="text-sm text-text-muted">
-                Time management, scoring optimization, and word families to maximize
-                your score every game.
+                Time management, scoring optimization, and word families to
+                maximize your score every game.
               </p>
             </Link>
           </div>

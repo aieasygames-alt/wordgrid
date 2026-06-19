@@ -16,10 +16,11 @@ export const metadata: Metadata = {
     template: "%s | WordGrid",
   },
   description:
-    "Play WordGrid, a free online word puzzle game. Connect adjacent letters in a 4×4 grid to find words. New daily challenge every day. No sign-up required.",
+    "Play WordGrid, a free online Boggle-style word search puzzle game. Connect adjacent letters in a 4×4 grid to find words. New daily challenge every day. No sign-up required.",
   keywords: [
-    "word game", "word puzzle", "word search", "boggle online",
-    "daily word game", "word grid", "free word game", "browser word game",
+    "word game", "word puzzle", "word search", "boggle online", "boggle free",
+    "boggle word game", "daily word game", "word grid", "free word game",
+    "browser word game", "boggle style", "free boggle",
   ],
   manifest: "/manifest.json",
   appleWebApp: {

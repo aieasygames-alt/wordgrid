@@ -1,0 +1,124 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "How to Find More Words in Word Grid Puzzles | WordGrid",
+  description:
+    "Learn proven techniques to spot more words in word grid puzzles. Master prefix/suffix scanning, pattern recognition, and adjacency strategies.",
+  alternates: { canonical: "/guides/how-to-find-more-words" },
+};
+
+export default function Guide1() {
+  return (
+    <main className="min-h-screen px-4 py-8">
+      <article className="max-w-2xl mx-auto">
+        <header className="mb-8">
+          <a href="/" className="text-sm text-slate-500 hover:text-slate-300">
+            ← WordGrid
+          </a>
+          <h1 className="text-4xl font-bold mt-4 mb-2">
+            How to Find More Words in Word Grid Puzzles
+          </h1>
+          <p className="text-slate-400">6 min read</p>
+        </header>
+
+        <div className="prose prose-invert max-w-none space-y-6 text-slate-200">
+          <section>
+            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+              1. Scan by Starting Letter
+            </h2>
+            <p className="leading-relaxed">
+              Instead of randomly scanning the grid, pick one letter as your anchor
+              and systematically explore all adjacent combinations. Start with rare
+              letters like <strong>Q, Z, J, X</strong> — words containing these are
+              often higher value and easier to spot because there are fewer of them.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+              2. Look for Common Prefixes and Suffixes
+            </h2>
+            <p className="leading-relaxed mb-3">Train yourself to recognize these patterns:</p>
+            <ul className="space-y-1 ml-4">
+              <li><strong>Prefixes:</strong> RE-, UN-, IN-, DIS-, OVER-, OUT-</li>
+              <li><strong>Suffixes:</strong> -ING, -ED, -ER, -EST, -LY, -TION</li>
+              <li><strong>Endings:</strong> -E, -S, -Y (can turn a 3-letter word into 4-5)</li>
+            </ul>
+            <p className="leading-relaxed mt-3">
+              If you found &ldquo;PLAY&rdquo;, immediately check if PLAYING, PLAYED, PLAYS,
+              or PLAYER are also on the board.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+              3. The &ldquo;Qu&rdquo; Strategy
+            </h2>
+            <p className="leading-relaxed">
+              The Qu tile counts as a single cell but produces two letters. Look for
+              words that commonly pair with QU: QUIT, QUEST, QUIET, QUOTE, EQUATION.
+              Since Qu is rare, these words are often missed by other players.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+              4. Go for Length Over Quantity
+            </h2>
+            <p className="leading-relaxed">
+              In WordGrid scoring, longer words are exponentially more valuable:
+              a 5-letter word (4 pts) is worth as much as four 3-letter words.
+              A 7-letter word (8 pts) beats eight 3-letter words. Once you spot a
+              4-letter base, always check if you can extend it.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+              5. Plurals Are Free Points
+            </h2>
+            <p className="leading-relaxed">
+              If you found a noun, check if an S is adjacent — that&apos;s an instant
+              extra point for the plural form. CAT → CATS, DOG → DOGS, STAR → STARS.
+              This is the single easiest way to boost your score.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-indigo-300 mb-3">
+              6. Diagonal Awareness
+            </h2>
+            <p className="leading-relaxed">
+              Many players only scan horizontally and vertically. Remember: in
+              WordGrid, diagonals count! Practice seeing 8 directions from each cell.
+              Diagonal words are often the ones your opponents miss.
+            </p>
+          </section>
+
+          <div className="mt-8 p-6 bg-indigo-900/30 rounded-xl border border-indigo-800/50">
+            <h2 className="text-xl font-semibold text-indigo-300 mb-2">
+              Ready to Practice?
+            </h2>
+            <p className="text-slate-300 mb-4">
+              Put these strategies to work in a real game.
+            </p>
+            <div className="flex gap-3">
+              <a
+                href="/play"
+                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 transition rounded-xl font-semibold"
+              >
+                Play Now
+              </a>
+              <a
+                href="/daily"
+                className="px-6 py-3 bg-slate-800 hover:bg-slate-700 transition rounded-xl font-semibold"
+              >
+                Daily Challenge
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+  );
+}

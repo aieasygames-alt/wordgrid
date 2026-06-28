@@ -10,8 +10,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${BASE_URL}/play/`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE_URL}/daily/`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
-    { url: `${BASE_URL}/guides/how-to-find-more-words/`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/guides/word-grid-strategies/`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/guides/`, lastModified: now, changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE_URL}/guides/how-to-find-more-words/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/word-grid-strategies/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-rules-beginners/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/word-grid-vs-boggle/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/play-word-grid-online/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/play-boggle-online-free/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-word-game/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-game-online/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-online-free/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
   ];
 
   const wordPages: MetadataRoute.Sitemap = HIGH_VALUE_WORDS.map((w) => ({

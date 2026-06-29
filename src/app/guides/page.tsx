@@ -185,6 +185,33 @@ const GUIDES = [
     readTime: "10 min read",
     date: "2026-06-29",
   },
+  {
+    href: "/guides/boggle-solver",
+    title: "Boggle Solver — Find All Words in Any Grid",
+    description:
+      "Free online Boggle solver to find all words in any 4×4 grid. Paste your letters and get instant solutions with word counts, scoring breakdown, and anagram analysis.",
+    category: "Intermediate",
+    readTime: "7 min read",
+    date: "2026-06-29",
+  },
+  {
+    href: "/guides/boggle-generator",
+    title: "Boggle Generator — Create Custom Word Puzzles",
+    description:
+      "Free Boggle generator to create custom 4×4 word puzzles. Design personalized grids for practice, teaching, or game nights with adjustable difficulty and letter distribution.",
+    category: "Intermediate",
+    readTime: "6 min read",
+    date: "2026-06-29",
+  },
+  {
+    href: "/guides/boggle-dictionary",
+    title: "Boggle Dictionary — Complete Word Lists & Vocabulary",
+    description:
+      "Complete Boggle dictionary with word lists, vocabulary references, and valid word guidelines. Lookup any word, explore high-frequency game vocabulary, and improve your word-finding skills.",
+    category: "Intermediate",
+    readTime: "8 min read",
+    date: "2026-06-29",
+  },
 ];
 
 const CATEGORIES = ["Beginner", "Intermediate", "Advanced"];

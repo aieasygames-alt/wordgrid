@@ -95,9 +95,36 @@ const GUIDES = [
     readTime: "4 min read",
     date: "2026-06-28",
   },
+  {
+    href: "/guides/how-to-win-boggle",
+    title: "How to Win at Boggle — Proven Strategies to Score Higher",
+    description:
+      "Learn how to win at Boggle with proven strategies from competitive players. Master word patterns, time management, grid scanning, and scoring optimization.",
+    category: "Intermediate",
+    readTime: "8 min read",
+    date: "2026-06-29",
+  },
+  {
+    href: "/guides/boggle-tips-tricks",
+    title: "Boggle Tips and Tricks — Quick Techniques to Find More Words",
+    description:
+      "Practical Boggle tips and tricks to find more words instantly. Learn grid scanning, letter patterns, word extensions, and time-saving shortcuts.",
+    category: "Beginner",
+    readTime: "6 min read",
+    date: "2026-06-29",
+  },
+  {
+    href: "/guides/boggle-strategy-guide",
+    title: "Boggle Strategy Guide — Complete Competitive Playbook",
+    description:
+      "Master Boggle with comprehensive competitive strategy. Learn advanced grid analysis, word optimization, time management, and championship-level patterns.",
+    category: "Advanced",
+    readTime: "10 min read",
+    date: "2026-06-29",
+  },
 ];
 
-const CATEGORIES = ["Beginner", "Intermediate"];
+const CATEGORIES = ["Beginner", "Intermediate", "Advanced"];
 
 export default function GuidesIndex() {
   return (

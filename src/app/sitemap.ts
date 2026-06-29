@@ -20,6 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/guides/boggle-word-game/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-game-online/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-online-free/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/how-to-win-boggle/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-tips-tricks/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-strategy-guide/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
   ];
 
   const wordPages: MetadataRoute.Sitemap = HIGH_VALUE_WORDS.map((w) => ({

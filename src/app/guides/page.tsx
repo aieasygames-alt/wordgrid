@@ -158,6 +158,33 @@ const GUIDES = [
     readTime: "8 min read",
     date: "2026-06-29",
   },
+  {
+    href: "/guides/advanced-boggle-strategies",
+    title: "Advanced Boggle Strategies — Expert-Level Techniques",
+    description:
+      "Master advanced Boggle strategies from expert players. Learn grid mapping algorithms, word optimization techniques, competitive time management, and pattern recognition systems for 60+ scores.",
+    category: "Advanced",
+    readTime: "12 min read",
+    date: "2026-06-29",
+  },
+  {
+    href: "/guides/boggle-word-lists",
+    title: "Boggle Word Lists by Letter — Complete Reference",
+    description:
+      "Complete Boggle word lists organized by letter. High-frequency words, common patterns, and letter-specific vocabulary to improve your word-finding speed and score.",
+    category: "Intermediate",
+    readTime: "15 min read",
+    date: "2026-06-29",
+  },
+  {
+    href: "/guides/most-common-boggle-words",
+    title: "Most Common Boggle Words — Top 100 High-Frequency List",
+    description:
+      "Top 100 most common Boggle words found in gameplay. High-frequency word list with bonus combinations, letter patterns, and expert strategies for instant recognition.",
+    category: "Intermediate",
+    readTime: "10 min read",
+    date: "2026-06-29",
+  },
 ];
 
 const CATEGORIES = ["Beginner", "Intermediate", "Advanced"];

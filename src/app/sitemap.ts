@@ -23,6 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/guides/how-to-win-boggle/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-tips-tricks/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-strategy-guide/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-rules-printable/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-scoring-sheet/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-rules-for-kids/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-variants/`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
   ];
 
   const wordPages: MetadataRoute.Sitemap = HIGH_VALUE_WORDS.map((w) => ({

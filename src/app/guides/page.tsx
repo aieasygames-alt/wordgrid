@@ -122,6 +122,42 @@ const GUIDES = [
     readTime: "10 min read",
     date: "2026-06-29",
   },
+  {
+    href: "/guides/boggle-rules-printable",
+    title: "Boggle Rules Printable — Free PDF Reference Sheet",
+    description:
+      "Printable Boggle rules reference sheet. Free PDF download with complete game rules, scoring table, word validity guidelines, and quick reference for players.",
+    category: "Beginner",
+    readTime: "5 min read",
+    date: "2026-06-29",
+  },
+  {
+    href: "/guides/boggle-scoring-sheet",
+    title: "Boggle Scoring Sheet — Points Table & Calculation Guide",
+    description:
+      "Complete Boggle scoring reference with points table, calculation examples, and scoring strategies. Learn how points work and optimize your gameplay.",
+    category: "Beginner",
+    readTime: "6 min read",
+    date: "2026-06-29",
+  },
+  {
+    href: "/guides/boggle-rules-for-kids",
+    title: "Boggle Rules for Kids — Simple Guide for Children",
+    description:
+      "Simple Boggle rules for kids and children. Easy-to-understand explanation with examples, tips for parents and teachers, and fun variations for young players.",
+    category: "Beginner",
+    readTime: "7 min read",
+    date: "2026-06-29",
+  },
+  {
+    href: "/guides/boggle-variants",
+    title: "Boggle Variants — Fun Game Variations & Alternatives",
+    description:
+      "Explore fun Boggle variants and game variations. Big Boggle, Boggle Junior, themed games, solo challenges, and creative rule modifications for game nights.",
+    category: "Intermediate",
+    readTime: "8 min read",
+    date: "2026-06-29",
+  },
 ];
 
 const CATEGORIES = ["Beginner", "Intermediate", "Advanced"];

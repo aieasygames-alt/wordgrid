@@ -2,14 +2,19 @@ import type { Metadata } from "next";
 import PlayClient from "./PlayClient";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid — Free Online Word Puzzle",
+  title: "Play Boggle Online Free — Word Grid Puzzle Game",
   description:
-    "Play WordGrid now — a free online word search puzzle. Connect adjacent letters in a 4×4 grid to find words. No sign-up, play instantly in your browser.",
+    "Play free Boggle online right now. No download, no sign-up. Connect letters in a 4×4 grid to find words in this free online Boggle word game. New daily challenge every day.",
   alternates: { canonical: "/play" },
+  keywords: [
+    "play boggle online free", "play boggle online", "boggle online free",
+    "free boggle online", "play free boggle", "boggle game online",
+    "word grid puzzle", "word grid game",
+  ],
   openGraph: {
-    title: "Play Word Grid — Free Online Word Puzzle",
+    title: "Play Boggle Online Free — Word Grid Puzzle",
     description:
-      "Connect adjacent letters in a 4×4 grid to find hidden words. Play free, no sign-up.",
+      "Play free Boggle online right in your browser. No download, no sign-up. Connect letters, find words, beat the clock.",
   },
 };
 

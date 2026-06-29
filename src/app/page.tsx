@@ -5,20 +5,30 @@ import HomeClient from "./HomeClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "WordGrid — Free Online Boggle-Style Word Search Puzzle Game",
+  title: "Word Grid — Play Free Word Grid Puzzle Online | WordGrid",
   description:
-    "Play WordGrid, a free online Boggle-style word search puzzle. Connect adjacent letters in a 4×4 grid to find words. New daily challenge every day. No download, no sign-up required.",
+    "Play word grid, the free online word grid puzzle game. Find words by connecting adjacent letters in a 4×4 grid — like Boggle, free in your browser. No download, no sign-up. New daily challenge every day.",
   alternates: { canonical: "/" },
   keywords: [
-    "boggle online", "boggle free", "boggle word game", "word game online",
-    "word search puzzle", "daily word game", "word grid", "free boggle",
-    "browser word game", "no download word game",
+    "word grid", "word grid online", "word grid puzzle", "word grid game",
+    "play word grid", "free word grid", "word grid puzzle online",
+    "play boggle online free", "boggle online", "boggle online free",
+    "free boggle", "boggle game", "boggle word game", "play boggle",
+    "daily word game", "free word game", "browser word game",
   ],
   openGraph: {
-    title: "WordGrid — Free Online Boggle-Style Word Puzzle Game",
+    title: "Word Grid — Play Free Word Grid Puzzle Online | WordGrid",
     description:
-      "Play a free Boggle-style word search game right in your browser. Connect letters, find words, beat the clock. New daily challenge every day!",
+      "Play word grid free in your browser. Connect letters, find words, beat the clock. New daily challenge every day. No download needed!",
     url: BASE_URL,
+    images: [
+      {
+        url: "/share-card-bg.png",
+        width: 1200,
+        height: 630,
+        alt: "WordGrid — Play the free word grid puzzle game online",
+      },
+    ],
   },
 };
 
@@ -29,7 +39,7 @@ export default function Home() {
     "@type": "WebSite",
     name: "WordGrid",
     url: BASE_URL,
-    description: "Free online Boggle-style word search puzzle game",
+    description: "Play free Boggle online — a word grid puzzle game with daily challenges",
     potentialAction: {
       "@type": "PlayGameAction",
       target: `${BASE_URL}/play`,
@@ -62,7 +72,7 @@ export default function Home() {
         name: "Can I play Boggle online for free?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes — WordGrid is a completely free Boggle-style word game you can play online right now. No download, no registration, no ads. Just visit wordgrid.games and start playing instantly.",
+          text: "Yes — WordGrid lets you play Boggle online for free, right in your browser. No download, no registration, no ads. Just visit wordgrid.games and start playing instantly. You can play unlimited practice games or try the daily challenge.",
         },
       },
       {
@@ -116,7 +126,7 @@ export default function Home() {
               <h3 className="font-semibold mb-1">Drag to Connect</h3>
               <p className="text-sm text-text-muted">
                 Drag your finger or mouse across adjacent letters — up, down, or
-                diagonal. Just like Boggle!
+                diagonal. If you&apos;ve played Boggle, you already know how it works.
               </p>
             </div>
             <div className="bg-surface/50 rounded-xl p-5">
@@ -179,11 +189,11 @@ export default function Home() {
                 Is WordGrid like Boggle?
               </summary>
               <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                Yes! WordGrid uses the same classic Boggle rules: a 4×4 letter
-                grid where you connect adjacent letters (horizontally, vertically,
-                or diagonally) to form words. The difference is WordGrid is
-                completely free, runs in your browser, and offers a new daily
-                challenge every day.
+                Yes! WordGrid uses the exact same rules as classic Boggle: a 4×4
+                letter grid where you connect adjacent letters (horizontally,
+                vertically, or diagonally) to form words. The difference is
+                WordGrid is a free Boggle game you can play online, right in
+                your browser, with a new daily challenge every day.
               </p>
             </details>
             <details className="bg-surface/50 rounded-xl p-4">
@@ -191,9 +201,9 @@ export default function Home() {
                 Can I play Boggle online for free?
               </summary>
               <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                Yes — WordGrid is a free Boggle-style word game you can play
-                online right now. No download, no registration, no ads. Just visit
-                wordgrid.games and start playing instantly.
+                Yes — WordGrid is a completely free Boggle game you can play
+                online right now. No download, no registration, no ads. Just
+                visit wordgrid.games and play Boggle online free, instantly.
               </p>
             </details>
             <details className="bg-surface/50 rounded-xl p-4">
@@ -211,14 +221,55 @@ export default function Home() {
 
         {/* Guides */}
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold mb-4">Word Game Strategies</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-semibold">Guides &amp; Strategies</h2>
+            <Link href="/guides" className="text-sm text-text-dim hover:text-text">
+              View all &rarr;
+            </Link>
+          </div>
           <div className="grid sm:grid-cols-2 gap-4">
+            <Link
+              href="/guides/play-word-grid-online"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Play Word Grid Online &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                How to play word grid free in your browser — what it is, how it
+                works, and where to start. No download, no sign-up.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-rules-beginners"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Rules of Boggle for Beginners &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                New to word grid games? Learn every rule — the grid, adjacency,
+                scoring, and the Qu tile — in 5 minutes.
+              </p>
+            </Link>
+            <Link
+              href="/guides/word-grid-vs-boggle"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Word Grid vs Boggle &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                How online word grid games compare to the 1972 original — rules,
+                scoring, and what playing online changes.
+              </p>
+            </Link>
             <Link
               href="/guides/how-to-find-more-words"
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
             >
               <h3 className="font-semibold mb-1 text-primary">
-                How to Find More Words →
+                How to Find More Words &rarr;
               </h3>
               <p className="text-sm text-text-muted">
                 6 proven techniques to spot more words — prefix scanning, plurals,
@@ -230,7 +281,7 @@ export default function Home() {
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
             >
               <h3 className="font-semibold mb-1 text-primary">
-                Scoring Strategies →
+                Scoring Strategies &rarr;
               </h3>
               <p className="text-sm text-text-muted">
                 Time management, scoring optimization, and word families to

@@ -64,11 +64,13 @@ export default function HomeClient() {
       {/* Hero text */}
       <section className="text-center mb-6">
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-          WordGrid — Free Boggle-Style Word Puzzle
+          Word Grid — Play Free Word Grid Puzzle Online
         </h1>
         <p className="text-base text-text-muted max-w-lg mx-auto mb-4">
-          Connect adjacent letters to find words. 3 minutes, unlimited fun.
-          No download, no sign-up.
+          WordGrid is a free online word grid puzzle — play Boggle-style word
+          search right in your browser. Connect adjacent letters in a 4×4 grid
+          to find hidden words. 3 minutes, unlimited fun. No download, no
+          sign-up.
         </p>
         <div className="flex gap-3 justify-center">
           <Link

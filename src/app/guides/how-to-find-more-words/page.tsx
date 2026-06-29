@@ -5,16 +5,54 @@ export const metadata: Metadata = {
   description:
     "Learn proven techniques to spot more words in word grid puzzles. Master prefix/suffix scanning, pattern recognition, and adjacency strategies.",
   alternates: { canonical: "/guides/how-to-find-more-words" },
+  openGraph: {
+    title: "How to Find More Words in Word Grid Puzzles",
+    description:
+      "Six proven techniques to spot more words — prefix scanning, plurals, Qu strategy, and more.",
+  },
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "How to Find More Words in Word Grid Puzzles",
+  description:
+    "Six proven techniques to spot more words in word grid puzzles.",
+  author: { "@type": "Organization", name: "WordGrid" },
+  publisher: { "@type": "Organization", name: "WordGrid" },
+  datePublished: "2026-06-19",
+  dateModified: "2026-06-20",
+  mainEntityOfPage: "https://wordgrid.games/guides/how-to-find-more-words/",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://wordgrid.games/" },
+    { "@type": "ListItem", position: 2, name: "Guides", item: "https://wordgrid.games/guides/" },
+    { "@type": "ListItem", position: 3, name: "How to Find More Words" },
+  ],
 };
 
 export default function Guide1() {
   return (
     <main className="min-h-screen px-4 py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <article className="max-w-2xl mx-auto">
         <header className="mb-8">
-          <a href="/" className="text-sm text-text-dim hover:text-text">
-            ← WordGrid
-          </a>
+          <nav className="text-sm text-text-dim flex items-center gap-2">
+            <a href="/" className="hover:text-text">Home</a>
+            <span>/</span>
+            <a href="/guides/" className="hover:text-text">Guides</a>
+          </nav>
           <h1 className="text-4xl font-bold mt-4 mb-2">
             How to Find More Words in Word Grid Puzzles
           </h1>
@@ -114,6 +152,23 @@ export default function Guide1() {
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
                 Daily Challenge
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-8 border-t border-border pt-6">
+            <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
+            <div className="space-y-3">
+              <a href="/guides/word-grid-strategies/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Word Grid Strategies: Score Higher Every Game &rarr;</div>
+                <div className="text-sm text-text-muted">Scoring curve analysis, time management, and word families.</div>
+              </a>
+              <a href="/guides/boggle-rules-beginners/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Boggle Rules: A Complete Beginner&apos;s Guide &rarr;</div>
+                <div className="text-sm text-text-muted">New to word grid games? Start here for the full rules breakdown.</div>
+              </a>
+              <a href="/guides/" className="block text-sm text-text-dim hover:text-text">
+                Browse all guides &rarr;
               </a>
             </div>
           </div>

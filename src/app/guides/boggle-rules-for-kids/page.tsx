@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Boggle Rules for Kids — Simple Guide for Children | WordGrid",
+  title: "Boggle Rules for Kids — Simple Guide | WordGrid",
   description:
     "Simple Boggle rules for kids and children. Easy-to-understand explanation with examples, tips for parents and teachers, and fun variations for young players.",
   alternates: { canonical: "/guides/boggle-rules-for-kids" },

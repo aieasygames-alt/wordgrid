@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Boggle Word Lists by Letter — Complete Reference | WordGrid",
+  title: "Boggle Word Lists — Complete Reference | WordGrid",
   description:
     "Complete Boggle word lists organized by letter. High-frequency words, common patterns, and letter-specific vocabulary to improve your word-finding speed and score.",
   alternates: { canonical: "/guides/boggle-word-lists" },

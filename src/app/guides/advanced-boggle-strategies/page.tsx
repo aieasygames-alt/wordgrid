@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Advanced Boggle Strategies — Expert-Level Techniques | WordGrid",
+  title: "Advanced Boggle Strategies — Expert Techniques | WordGrid",
   description:
     "Master advanced Boggle strategies from expert players. Learn grid mapping algorithms, word optimization techniques, competitive time management, and pattern recognition systems for 60+ scores.",
   alternates: { canonical: "/guides/advanced-boggle-strategies" },

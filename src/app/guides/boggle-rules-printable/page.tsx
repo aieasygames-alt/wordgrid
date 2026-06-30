@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Boggle Rules Printable — Free PDF Reference Sheet | WordGrid",
+  title: "Boggle Rules Printable — Free Reference Sheet | WordGrid",
   description:
     "Printable Boggle rules reference sheet. Free PDF download with complete game rules, scoring table, word validity guidelines, and quick reference for players of all levels.",
   alternates: { canonical: "/guides/boggle-rules-printable" },

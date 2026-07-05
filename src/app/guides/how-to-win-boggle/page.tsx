@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How to Win at Boggle — Proven Strategies to Score Higher | WordGrid",
+  title: "How to Win at Boggle — Proven Strategies to Score Higher",
   description:
     "Learn how to win at Boggle with proven strategies from competitive players. Master word patterns, time management, grid scanning techniques, and scoring optimization to consistently beat opponents.",
   alternates: { canonical: "/guides/how-to-win-boggle" },
@@ -123,7 +123,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: `${BASE_URL}/` },
+    { "@type": "ListItem", position: 1, name: "Word Grid", item: `${BASE_URL}/` },
     { "@type": "ListItem", position: 2, name: "Guides", item: `${BASE_URL}/guides/` },
     { "@type": "ListItem", position: 3, name: "How to Win at Boggle" },
   ],
@@ -152,7 +152,7 @@ export default function HowToWinBoggleGuide() {
       <article className="max-w-2xl mx-auto">
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
-            <Link href="/" className="hover:text-text">Home</Link>
+            <Link href="/" className="hover:text-text">Word Grid</Link>
             <span>/</span>
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>

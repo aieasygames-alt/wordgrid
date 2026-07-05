@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "How to Find More Words in Word Grid Puzzles | WordGrid",
+  title: "How to Find More Words in Word Grid Puzzles",
   description:
     "Learn proven techniques to spot more words in word grid puzzles. Master prefix/suffix scanning, pattern recognition, and adjacency strategies.",
   alternates: { canonical: "/guides/how-to-find-more-words" },
@@ -29,7 +29,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://wordgrid.games/" },
+    { "@type": "ListItem", position: 1, name: "Word Grid", item: "https://wordgrid.games/" },
     { "@type": "ListItem", position: 2, name: "Guides", item: "https://wordgrid.games/guides/" },
     { "@type": "ListItem", position: 3, name: "How to Find More Words" },
   ],

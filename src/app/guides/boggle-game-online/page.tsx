@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Boggle Game Online — Play Free, No Download | WordGrid",
+  title: "Boggle Game Online — Play Free, No Download",
   description:
     "Play the Boggle game online for free. No download, no sign-up. Classic 4×4 word puzzle in your browser. 3-minute rounds, same rules as the original board game.",
   alternates: { canonical: "/guides/boggle-game-online" },
@@ -84,7 +84,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: `${BASE_URL}/` },
+    { "@type": "ListItem", position: 1, name: "Word Grid", item: `${BASE_URL}/` },
     { "@type": "ListItem", position: 2, name: "Guides", item: `${BASE_URL}/guides/` },
     { "@type": "ListItem", position: 3, name: "Boggle Game Online" },
   ],
@@ -109,7 +109,7 @@ export default function BoggleGameOnlineGuide() {
       <article className="max-w-2xl mx-auto">
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
-            <Link href="/" className="hover:text-text">Home</Link>
+            <Link href="/" className="hover:text-text">Word Grid</Link>
             <span>/</span>
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>

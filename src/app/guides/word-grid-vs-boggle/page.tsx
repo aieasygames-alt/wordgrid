@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Word Grid vs Boggle: What's the Difference? | WordGrid",
+  title: "Word Grid vs Boggle: What's the Difference?",
   description:
     "Boggle was invented in 1972. Word grid games took the concept online. Here's how they compare — the rules, scoring, and what playing online actually changes.",
   alternates: { canonical: "/guides/word-grid-vs-boggle" },
@@ -29,7 +29,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://wordgrid.games/" },
+    { "@type": "ListItem", position: 1, name: "Word Grid", item: "https://wordgrid.games/" },
     { "@type": "ListItem", position: 2, name: "Guides", item: "https://wordgrid.games/guides/" },
     { "@type": "ListItem", position: 3, name: "Word Grid vs Boggle" },
   ],

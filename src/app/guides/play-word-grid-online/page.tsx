@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online — Free, No Download | WordGrid",
+  title: "Play Word Grid Online — Free, No Download",
   description:
     "Play word grid online for free, right in your browser. No download, no sign-up. A new 4×4 word grid puzzle every day — connect adjacent letters to find words in 3 minutes.",
   alternates: { canonical: "/guides/play-word-grid-online" },
@@ -75,7 +75,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: `${BASE_URL}/` },
+    { "@type": "ListItem", position: 1, name: "Word Grid", item: `${BASE_URL}/` },
     { "@type": "ListItem", position: 2, name: "Guides", item: `${BASE_URL}/guides/` },
     { "@type": "ListItem", position: 3, name: "Play Word Grid Online" },
   ],

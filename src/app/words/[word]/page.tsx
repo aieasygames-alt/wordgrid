@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { fetchWordData, HIGH_VALUE_WORDS } from "@/lib/worddata";
+import { fetchWordData, HIGH_VALUE_WORDS, INDEXABLE_WORDS } from "@/lib/worddata";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -17,29 +17,36 @@ export async function generateMetadata({
   params: { word: string };
 }): Promise<Metadata> {
   const word = params.word.toUpperCase();
+  const wordLower = params.word.toLowerCase();
   const data = await fetchWordData(params.word);
   const definition = data?.meanings?.[0]?.definitions?.[0]?.definition || "";
+  const isIndexable = INDEXABLE_WORDS.includes(wordLower);
 
   return {
-    title: `${word} — Word Meaning & Definition | WordGrid`,
+    title: `${word} — Word Meaning & Definition`,
     description: definition
-      ? `${word}: ${definition.slice(0, 140)}. Play word grid puzzles at WordGrid.`
+      ? `${word}: ${definition.replace(/\.$/, "").slice(0, 140)}. Play word grid puzzles at WordGrid.`
       : `What does "${word}" mean? Definition, pronunciation, and word game tips for ${word}.`,
+    robots: {
+      index: isIndexable,
+      follow: true,
+    },
     alternates: {
-      canonical: `/words/${params.word}`,
+      canonical: `/words/${wordLower}`,
     },
     openGraph: {
-      title: `${word} — Word Meaning | WordGrid`,
+      title: `${word} — Word Meaning`,
       description: definition
         ? `${word}: ${definition.slice(0, 140)}`
         : `Definition and word game tips for "${word}".`,
-      url: `${BASE_URL}/words/${params.word}`,
+      url: `${BASE_URL}/words/${wordLower}`,
     },
   };
 }
 
 export default async function Page({ params }: { params: { word: string } }) {
   const word = params.word;
+  const wordLower = word.toLowerCase();
   const wordUpper = word.toUpperCase();
   const data = await fetchWordData(word);
 
@@ -64,13 +71,13 @@ export default async function Page({ params }: { params: { word: string } }) {
         "@type": "ListItem",
         position: 2,
         name: "Words",
-        item: `${BASE_URL}/play`,
+        item: `${BASE_URL}/words`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: wordUpper,
-        item: `${BASE_URL}/words/${word}`,
+        item: `${BASE_URL}/words/${wordLower}`,
       },
     ],
   };
@@ -79,11 +86,11 @@ export default async function Page({ params }: { params: { word: string } }) {
   const points = scoreMap[wordUpper.length] || 8;
 
   // Related words — words sharing the first 2 letters, for internal linking
-  const relatedWords = HIGH_VALUE_WORDS.filter(
+  const relatedWords = INDEXABLE_WORDS.filter(
     (w) =>
-      w !== word &&
-      w.slice(0, 2) === word.slice(0, 2) &&
-      Math.abs(w.length - word.length) <= 1
+      w !== wordLower &&
+      w.slice(0, 2) === wordLower.slice(0, 2) &&
+      Math.abs(w.length - wordLower.length) <= 1
   ).slice(0, 8);
 
   return (
@@ -101,6 +108,8 @@ export default async function Page({ params }: { params: { word: string } }) {
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-text-dim mb-6">
           <a href="/" className="hover:text-text">Home</a>
+          <span>›</span>
+          <a href="/words" className="hover:text-text">Words</a>
           <span>›</span>
           <span className="text-text-muted">{wordUpper}</span>
         </nav>

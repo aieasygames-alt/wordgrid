@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Word Grid Strategies — Score Higher Every Game | WordGrid",
+  title: "Word Grid Strategies — Score Higher Every Game",
   description:
     "Advanced strategies for word grid and Boggle-style puzzles. Learn scoring optimization, time management, and word patterns to maximize your score.",
   alternates: { canonical: "/guides/word-grid-strategies" },
@@ -29,7 +29,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://wordgrid.games/" },
+    { "@type": "ListItem", position: 1, name: "Word Grid", item: "https://wordgrid.games/" },
     { "@type": "ListItem", position: 2, name: "Guides", item: "https://wordgrid.games/guides/" },
     { "@type": "ListItem", position: 3, name: "Word Grid Strategies" },
   ],

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Advanced Boggle Strategies — Expert Techniques | WordGrid",
+  title: "Advanced Boggle Strategies — Expert Techniques",
   description:
     "Master advanced Boggle strategies from expert players. Learn grid mapping algorithms, word optimization techniques, competitive time management, and pattern recognition systems for 60+ scores.",
   alternates: { canonical: "/guides/advanced-boggle-strategies" },
@@ -84,7 +84,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: `${BASE_URL}/` },
+    { "@type": "ListItem", position: 1, name: "Word Grid", item: `${BASE_URL}/` },
     { "@type": "ListItem", position: 2, name: "Guides", item: `${BASE_URL}/guides/` },
     { "@type": "ListItem", position: 3, name: "Advanced Boggle Strategies" },
   ],
@@ -109,7 +109,7 @@ export default function AdvancedBoggleStrategiesGuide() {
       <article className="max-w-2xl mx-auto">
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
-            <Link href="/" className="hover:text-text">Home</Link>
+            <Link href="/" className="hover:text-text">Word Grid</Link>
             <span>/</span>
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>

@@ -253,6 +253,18 @@ export default function Home() {
               </p>
             </Link>
             <Link
+              href="/guides/play-boggle-online-free"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Play Boggle Online Free &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                Play Boggle online free in your browser — no download, no
+                sign-up. Same 4×4 grid, same classic rules, instant play.
+              </p>
+            </Link>
+            <Link
               href="/guides/word-grid-vs-boggle"
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
             >
@@ -274,6 +286,18 @@ export default function Home() {
               <p className="text-sm text-text-muted">
                 6 proven techniques to spot more words — prefix scanning, plurals,
                 Qu strategy, and more.
+              </p>
+            </Link>
+            <Link
+              href="/words"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Word List &amp; Definitions &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                Browse common WordGrid words with definitions, letter counts,
+                and score values to practice high-value patterns.
               </p>
             </Link>
             <Link

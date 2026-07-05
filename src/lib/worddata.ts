@@ -115,6 +115,15 @@ export const HIGH_VALUE_WORDS: string[] = [
   "craft", "crash", "cream", "crime", "cross", "crowd", "crown", "curve", "cycle", "daily",
 ];
 
+// Keep the crawl/index footprint focused on words that have clear game value
+// and enough search intent to justify standalone indexable pages.
+export const INDEXABLE_WORDS: string[] = [
+  "about", "above", "adult", "after", "agree", "alarm", "alive", "among",
+  "angle", "apple", "arena", "array", "award", "basic", "beach", "begin",
+  "birth", "black", "blade", "blank", "blind", "block", "blood", "board",
+  "brain", "brand", "break", "broad", "brown", "build", "cable",
+];
+
 // Get the curated word list for SSG generation
 export function getStaticWords(): string[] {
   return HIGH_VALUE_WORDS;

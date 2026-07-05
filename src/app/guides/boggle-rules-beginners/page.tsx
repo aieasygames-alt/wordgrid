@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Rules of Boggle: How to Play Boggle (Beginner's Guide) | WordGrid",
+  title: "Rules of Boggle: How to Play Boggle (Beginner's Guide)",
   description:
     "The complete rules of Boggle explained simply. Learn how to play Boggle — the 4×4 grid, how letters connect, what words count, and how scoring works. Free online examples.",
   alternates: { canonical: "/guides/boggle-rules-beginners" },
@@ -97,7 +97,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://wordgrid.games/" },
+    { "@type": "ListItem", position: 1, name: "Word Grid", item: "https://wordgrid.games/" },
     { "@type": "ListItem", position: 2, name: "Guides", item: "https://wordgrid.games/guides/" },
     { "@type": "ListItem", position: 3, name: "Boggle Rules for Beginners" },
   ],

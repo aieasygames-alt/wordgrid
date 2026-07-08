@@ -137,6 +137,7 @@ export default function DailyClient() {
           missions={missionsReady ? missions : []}
           title="Today's Missions"
           subtitle="Complete a few focused goals while you play. The board itself decides the exact targets."
+          initialCollapsed
         />
       </div>
       <GameBoard key={today} grid={grid} onComplete={handleComplete} />

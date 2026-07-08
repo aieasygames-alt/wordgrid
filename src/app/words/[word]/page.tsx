@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { fetchWordData, HIGH_VALUE_WORDS, INDEXABLE_WORDS } from "@/lib/worddata";
+import { HIGH_VALUE_WORDS, INDEXABLE_WORDS } from "@/lib/worddata";
+import { scoreWord } from "@/lib/boggle";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -10,7 +11,6 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-// Fetch definition at BUILD TIME — written into static HTML
 export async function generateMetadata({
   params,
 }: {
@@ -18,15 +18,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const word = params.word.toUpperCase();
   const wordLower = params.word.toLowerCase();
-  const data = await fetchWordData(params.word);
-  const definition = data?.meanings?.[0]?.definitions?.[0]?.definition || "";
   const isIndexable = INDEXABLE_WORDS.includes(wordLower);
+  const points = scoreWord(wordLower);
 
   return {
-    title: `${word} — Word Meaning & Definition`,
-    description: definition
-      ? `${word}: ${definition.replace(/\.$/, "").slice(0, 140)}. Play word grid puzzles at WordGrid.`
-      : `What does "${word}" mean? Definition, pronunciation, and word game tips for ${word}.`,
+    title: `${word} — WordGrid Word Guide`,
+    description: `${word} is a ${word.length}-letter English word in WordGrid. It scores ${points} points and can appear in our curated puzzle word list.`,
     robots: {
       index: isIndexable,
       follow: true,
@@ -35,10 +32,8 @@ export async function generateMetadata({
       canonical: `/words/${wordLower}`,
     },
     openGraph: {
-      title: `${word} — Word Meaning`,
-      description: definition
-        ? `${word}: ${definition.slice(0, 140)}`
-        : `Definition and word game tips for "${word}".`,
+      title: `${word} — WordGrid Word Guide`,
+      description: `${word} is a ${word.length}-letter English word in WordGrid. It scores ${points} points and can appear in our curated puzzle word list.`,
       url: `${BASE_URL}/words/${wordLower}`,
     },
   };
@@ -48,16 +43,14 @@ export default async function Page({ params }: { params: { word: string } }) {
   const word = params.word;
   const wordLower = word.toLowerCase();
   const wordUpper = word.toUpperCase();
-  const data = await fetchWordData(word);
+  const points = scoreWord(wordUpper);
 
-  // JSON-LD: DefinedWord structured data
+  // JSON-LD: Word page structured data
   const definedWordSchema = {
     "@context": "https://schema.org",
     "@type": "DefinedWord",
     name: wordUpper,
-    description:
-      data?.meanings?.[0]?.definitions?.[0]?.definition ||
-      `${wordUpper} is a valid English word.`,
+    description: `${wordUpper} is a ${wordUpper.length}-letter English word used in WordGrid.`,
     inLanguage: "en",
   };
 
@@ -81,9 +74,6 @@ export default async function Page({ params }: { params: { word: string } }) {
       },
     ],
   };
-
-  const scoreMap: Record<number, number> = { 3: 1, 4: 2, 5: 4, 6: 6 };
-  const points = scoreMap[wordUpper.length] || 8;
 
   // Related words — words sharing the first 2 letters, for internal linking
   const relatedWords = INDEXABLE_WORDS.filter(
@@ -115,39 +105,22 @@ export default async function Page({ params }: { params: { word: string } }) {
         </nav>
 
         <h1 className="text-5xl font-bold mb-2">{wordUpper}</h1>
-        {data?.phonetic && (
-          <p className="text-text-muted text-lg mb-6 font-mono">{data.phonetic}</p>
-        )}
+        <p className="text-text-muted text-lg mb-6 font-mono">
+          {wordUpper.length}-letter word · {points} points
+        </p>
 
-        {data && data.meanings.length > 0 ? (
-          <div className="space-y-6">
-            {data.meanings.map((meaning, i) => (
-              <div key={i}>
-                <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-2">
-                  {meaning.partOfSpeech}
-                </h2>
-                <ol className="space-y-2">
-                  {meaning.definitions.map((def, j) => (
-                    <li key={j} className="text-text leading-relaxed">
-                      <span className="text-text-dim mr-2">{j + 1}.</span>
-                      {def.definition}
-                      {def.example && (
-                        <p className="text-text-muted italic mt-1 ml-5 text-sm">
-                          &ldquo;{def.example}&rdquo;
-                        </p>
-                      )}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-text-muted leading-relaxed">
-            <strong>{wordUpper}</strong> is a valid English word in our dictionary.
-            It can be found by connecting adjacent letters in WordGrid puzzles.
+        <div className="space-y-4">
+          <p className="text-text leading-relaxed">
+            <strong>{wordUpper}</strong> is part of the curated WordGrid word list.
+            In a puzzle, it can be formed by connecting adjacent letters without
+            reusing a tile.
           </p>
-        )}
+          <p className="text-text-muted leading-relaxed">
+            This page stays fully static so it can be generated reliably during a
+            site build. If a richer dictionary lookup is ever needed, it can be
+            enabled separately without affecting the default build.
+          </p>
+        </div>
 
         {/* SEO content block — unique per word */}
         <div className="mt-8 p-6 bg-surface/50 rounded-xl space-y-3">
@@ -156,15 +129,9 @@ export default async function Page({ params }: { params: { word: string } }) {
           </h2>
           <p className="text-text-muted text-sm leading-relaxed">
             <strong>{wordUpper}</strong> is a {wordUpper.length}-letter English word
-            {data?.meanings?.[0]?.partOfSpeech
-              ? ` used as a ${data.meanings[0].partOfSpeech}`
-              : ""}
             . In WordGrid, it is worth{" "}
             <span className="text-primary font-semibold">{points} points</span> and
             can be found by connecting adjacent letters in our 4×4 word grid puzzles.
-            {data?.meanings?.[0]?.definitions?.[0]?.definition
-              ? ` The primary definition is: "${data.meanings[0].definitions[0].definition}".`
-              : ""}
           </p>
           <p className="text-text-muted text-sm leading-relaxed">
             Looking to improve your word-finding skills? Check out our{" "}

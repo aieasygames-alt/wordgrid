@@ -77,6 +77,19 @@ export function todayDateString(): string {
   return utc8.toISOString().slice(0, 10);
 }
 
+// Milliseconds until the next UTC+8 midnight boundary.
+// Used to refresh daily UI state without requiring a manual reload.
+export function msUntilNextDailyBoundary(): number {
+  const offsetMs = 8 * 3600_000;
+  const utc8Now = new Date(Date.now() + offsetMs);
+  const nextBoundaryUtcMs = Date.UTC(
+    utc8Now.getUTCFullYear(),
+    utc8Now.getUTCMonth(),
+    utc8Now.getUTCDate() + 1
+  );
+  return Math.max(0, nextBoundaryUtcMs - offsetMs - Date.now());
+}
+
 function areAdjacent(
   r1: number, c1: number,
   r2: number, c2: number

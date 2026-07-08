@@ -1,5 +1,8 @@
-// Word metadata — definitions fetched from Free Dictionary API at build time
-// https://dictionaryapi.dev/
+// Word metadata and curated word lists used by the static word pages.
+// Remote dictionary lookups are opt-in so static builds stay deterministic.
+
+const ENABLE_REMOTE_DICTIONARY =
+  process.env.WORDGRID_ENABLE_REMOTE_DICTIONARY === "1";
 
 export interface WordDefinition {
   word: string;
@@ -10,27 +13,10 @@ export interface WordDefinition {
   }[];
 }
 
-// Types for Free Dictionary API response
-interface DictAPIDefinition {
-  definition?: string;
-  example?: string;
-}
-interface DictAPIMeaning {
-  partOfSpeech?: string;
-  definitions?: DictAPIDefinition[];
-}
-interface DictAPIPhonetic {
-  text?: string;
-}
-interface DictAPIEntry {
-  word?: string;
-  phonetic?: string;
-  phonetics?: DictAPIPhonetic[];
-  meanings?: DictAPIMeaning[];
-}
-
-// Fetch from Free Dictionary API (no key needed, rate-limited)
+// Fetch from Free Dictionary API only when explicitly enabled.
 export async function fetchWordData(word: string): Promise<WordDefinition | null> {
+  if (!ENABLE_REMOTE_DICTIONARY) return null;
+
   try {
     const res = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word.toLowerCase()}`,
@@ -40,7 +26,16 @@ export async function fetchWordData(word: string): Promise<WordDefinition | null
     const data: unknown = await res.json();
     if (!Array.isArray(data) || data.length === 0) return null;
 
-    const entry = data[0] as DictAPIEntry;
+    const entry = data[0] as {
+      word?: string;
+      phonetic?: string;
+      phonetics?: { text?: string }[];
+      meanings?: {
+        partOfSpeech?: string;
+        definitions?: { definition?: string; example?: string }[];
+      }[];
+    };
+
     return {
       word: entry.word || word,
       phonetic: entry.phonetic || entry.phonetics?.[0]?.text || null,

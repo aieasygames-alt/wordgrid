@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { msUntilNextDailyBoundary } from "@/lib/boggle";
 import { getStreakStatus, type StreakData } from "@/lib/streak";
 
 interface StreakDisplayProps {
@@ -16,7 +17,24 @@ export default function StreakDisplay({ compact = false }: StreakDisplayProps) {
   } | null>(null);
 
   useEffect(() => {
-    setStatus(getStreakStatus());
+    let timer: number | null = null;
+
+    const refresh = () => {
+      setStatus(getStreakStatus());
+    };
+
+    const schedule = () => {
+      timer = window.setTimeout(() => {
+        refresh();
+        schedule();
+      }, msUntilNextDailyBoundary() + 1000);
+    };
+
+    refresh();
+    schedule();
+    return () => {
+      if (timer !== null) window.clearTimeout(timer);
+    };
   }, []);
 
   if (!status || status.data.totalPlayed === 0) return null;

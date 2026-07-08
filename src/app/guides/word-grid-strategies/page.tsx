@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Word Grid Strategies — Score Higher Every Game",
@@ -60,6 +61,36 @@ export default function Guide2() {
         </header>
 
         <div className="space-y-6 text-text">
+          <section>
+            <p className="leading-relaxed">
+              If you are building toward higher scores, the two best companion
+              pages are{" "}
+              <Link href="/guides/how-to-find-more-words" className="text-primary hover:underline">
+                How to Find More Words
+              </Link>{" "}
+              and{" "}
+              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                Most Common Boggle Words
+              </Link>
+              . Use them together with the live game on{" "}
+              <Link href="/play" className="text-primary hover:underline">
+                /play
+              </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you are still learning the rules, step back to{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                Boggle Rules for Beginners
+              </Link>
+              . If you want the browser-game wording, try{" "}
+              <Link href="/guides/play-word-grid-online" className="text-primary hover:underline">
+                Play Word Grid Online
+              </Link>
+              .
+            </p>
+          </section>
+
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
               Understand the Scoring Curve
@@ -172,8 +203,30 @@ export default function Guide2() {
           </div>
 
           <div className="mt-8 border-t border-border pt-6">
+            <h2 className="text-lg font-semibold mb-3">Best Next Pages</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/guides/boggle-tips-tricks" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Boggle Tips and Tricks</div>
+                <p className="text-sm text-text-muted mt-1">
+                  Quick tactical habits you can use inside a live round.
+                </p>
+              </Link>
+              <Link href="/guides/most-common-boggle-words" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Most Common Boggle Words</div>
+                <p className="text-sm text-text-muted mt-1">
+                  Frequency list that supports the scoring strategy in this guide.
+                </p>
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
+              <a href="/guides/boggle-rules-beginners/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Boggle Rules for Beginners &rarr;</div>
+                <div className="text-sm text-text-muted">Step back to the fundamentals if you need a reset.</div>
+              </a>
               <a href="/guides/how-to-find-more-words/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">How to Find More Words in Word Grid Puzzles &rarr;</div>
                 <div className="text-sm text-text-muted">Six techniques to spot more words on every board.</div>
@@ -181,6 +234,10 @@ export default function Guide2() {
               <a href="/guides/word-grid-vs-boggle/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">Word Grid vs Boggle: What&apos;s the Difference? &rarr;</div>
                 <div className="text-sm text-text-muted">How online word grid games compare to classic Boggle.</div>
+              </a>
+              <a href="/play/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Play Now</div>
+                <div className="text-sm text-text-muted">Put the strategy into a live round.</div>
               </a>
               <a href="/guides/" className="block text-sm text-text-dim hover:text-text">
                 Browse all guides &rarr;

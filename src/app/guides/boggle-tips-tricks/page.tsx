@@ -129,7 +129,12 @@ export default function BoggleTipsTricksGuide() {
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
                 Try these tips now →
+              </Link>{" "}
+              and compare them with the{" "}
+              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                most common Boggle words
               </Link>
+              .
             </p>
           </section>
 
@@ -470,6 +475,34 @@ export default function BoggleTipsTricksGuide() {
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
                 Daily Challenge
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-8 border-t border-border pt-6">
+            <h2 className="text-lg font-semibold mb-3">Next Pages</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link
+                href="/guides/boggle-rules-beginners"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Rules for Beginners
+                </div>
+                <div className="text-sm text-text-muted mt-1">
+                  Good if you want the rules and scoring refresher first.
+                </div>
+              </Link>
+              <Link
+                href="/guides/word-grid-strategies"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Word Grid Strategies
+                </div>
+                <div className="text-sm text-text-muted mt-1">
+                  Best for turning these tips into higher scores.
+                </div>
               </Link>
             </div>
           </div>

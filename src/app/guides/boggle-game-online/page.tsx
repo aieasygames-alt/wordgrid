@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Boggle Game Online — Play Free, No Download",
+  title: "Boggle Game Online — Free Play in Your Browser",
   description:
     "Play the Boggle game online for free. No download, no sign-up. Classic 4×4 word puzzle in your browser. 3-minute rounds, same rules as the original board game.",
   alternates: { canonical: "/guides/boggle-game-online" },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "boggle game browser", "online boggle game",
   ],
   openGraph: {
-    title: "Boggle Game Online — Play Free, No Download Required",
+    title: "Boggle Game Online — Free Play in Your Browser",
     description:
       "Classic Boggle gameplay in your browser. Free online word puzzle with 4×4 grid, 3-minute timer. No download, no sign-up required.",
   },
@@ -123,13 +123,25 @@ export default function BoggleGameOnlineGuide() {
           <section>
             <p className="leading-relaxed">
               The <strong>Boggle game online</strong> brings the classic 1972
-              word puzzle to your browser. Same 4×4 grid. Same 3-minute timer.
-              Same word-finding challenge. No physical dice required.
+              word puzzle to your browser. If you want the browser version,
+              this page explains what changes and what stays the same. Same
+              4×4 grid. Same 3-minute timer. Same word-finding challenge.
             </p>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
                 Play Boggle online free now →
               </Link>
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you want the rules first, open{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                Boggle Rules for Beginners
+              </Link>{" "}
+              or{" "}
+              <Link href="/guides/boggle-online-free" className="text-primary hover:underline">
+                Boggle Online Free
+              </Link>
+              .
             </p>
           </section>
 
@@ -212,6 +224,26 @@ export default function BoggleGameOnlineGuide() {
                   <li>No sign-up required</li>
                 </ul>
               </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Related Pages
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/guides/boggle-online-free" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Boggle Online Free</div>
+                <p className="text-sm text-text-muted mt-1">
+                  Best for the no-download, no-sign-up search intent.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-rules-beginners" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Boggle Rules for Beginners</div>
+                <p className="text-sm text-text-muted mt-1">
+                  Best for players who need the rule explanation first.
+                </p>
+              </Link>
             </div>
           </section>
 
@@ -376,6 +408,17 @@ export default function BoggleGameOnlineGuide() {
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
               <Link
+                href="/guides/play-word-grid-online/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Word Grid Online →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Direct browser-play intent with the same rules and timer.
+                </div>
+              </Link>
+              <Link
                 href="/guides/boggle-rules-beginners/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
@@ -395,6 +438,17 @@ export default function BoggleGameOnlineGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Advanced scoring strategy and word-finding techniques.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Start a live round in the browser.
                 </div>
               </Link>
               <Link

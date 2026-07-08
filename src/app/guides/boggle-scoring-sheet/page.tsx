@@ -127,6 +127,17 @@ export default function BoggleScoringSheetGuide() {
               exactly how points work, why longer words score more, and how to
               optimize your gameplay for maximum points.
             </p>
+            <p className="leading-relaxed mt-3">
+              If you want the tactical side next, move to{" "}
+              <Link href="/guides/how-to-win-boggle" className="text-primary hover:underline">
+                how to win at Boggle
+              </Link>{" "}
+              or{" "}
+              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+                the WordGrid strategy guide
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -444,6 +455,17 @@ export default function BoggleScoringSheetGuide() {
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
               <Link
+                href="/guides/boggle-rules-printable/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Rules Printable →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Keep the rules and scoring chart together as one reference.
+                </div>
+              </Link>
+              <Link
                 href="/guides/how-to-win-boggle/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
@@ -463,6 +485,17 @@ export default function BoggleScoringSheetGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Comprehensive competitive playbook.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Word Grid Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Turn better scoring decisions into a live round.
                 </div>
               </Link>
               <Link

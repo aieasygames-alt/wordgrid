@@ -165,12 +165,13 @@ export default function PlayBoggleOnlineFreeGuide() {
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
-              <strong>You can play Boggle online for free right now.</strong> No
-              download, no sign-up, no credit card, no ads. Just open your browser
-              and start playing. The classic 4×4 word grid game you remember —
-              same rules, same 3-minute timer, same word-finding excitement.
+              <strong>You can play Boggle online for free right now.</strong> If
+              that&apos;s what you searched for, this page gets you to the game
+              fast. No download, no sign-up, no credit card, no ads. Just open
+              your browser and start playing the classic 4×4 word grid game.
             </p>
             <p className="leading-relaxed mt-3">
+              Prefer the live board immediately?{" "}
               <Link href="/play" className="text-primary hover:underline">
                 Play free Boggle now →
               </Link>

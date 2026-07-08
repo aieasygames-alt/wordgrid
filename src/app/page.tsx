@@ -5,9 +5,9 @@ import HomeClient from "./HomeClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Word Grid — Play Free Word Grid Puzzle Online | WordGrid",
+  title: "Word Grid Online Free — Play Boggle-Style Puzzle | WordGrid",
   description:
-    "Play word grid, the free online word grid puzzle game. Find words by connecting adjacent letters in a 4×4 grid — like Boggle, free in your browser. No download, no sign-up. New daily challenge every day.",
+    "Play word grid online free in your browser. Find words in a 4×4 grid, play Boggle-style puzzle rounds, and try the daily challenge. No download, no sign-up.",
   alternates: { canonical: "/" },
   keywords: [
     "word grid", "word grid online", "word grid puzzle", "word grid game",
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     "daily word game", "free word game", "browser word game",
   ],
   openGraph: {
-    title: "Word Grid — Play Free Word Grid Puzzle Online | WordGrid",
+    title: "Word Grid Online Free — Play Boggle-Style Puzzle | WordGrid",
     description:
-      "Play word grid free in your browser. Connect letters, find words, beat the clock. New daily challenge every day. No download needed!",
+      "Play word grid online free in your browser. Connect letters, find words, and try the daily challenge. No download needed!",
     url: BASE_URL,
     images: [
       {
@@ -39,7 +39,7 @@ export default function Home() {
     "@type": "WebSite",
     name: "WordGrid",
     url: BASE_URL,
-    description: "Play free Boggle online — a word grid puzzle game with daily challenges",
+    description: "Play word grid online free — a Boggle-style puzzle game with daily challenges",
     potentialAction: {
       "@type": "PlayGameAction",
       target: `${BASE_URL}/play`,

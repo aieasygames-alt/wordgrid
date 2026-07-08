@@ -25,7 +25,7 @@ const GUIDES = [
   },
   {
     href: "/guides/boggle-rules-beginners",
-    title: "Rules of Boggle: A Complete Beginner's Guide",
+    title: "Boggle Rules for Beginners: How to Play Boggle",
     description:
       "Never played Boggle or a word grid game before? This guide walks you through every rule, step by step, with a real example board.",
     category: "Beginner",
@@ -230,6 +230,51 @@ export default function GuidesIndex() {
             first game to competitive-level strategy.
           </p>
         </header>
+
+        <section className="mb-10">
+          <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-3">
+            Best Matches for Searchers
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Link
+              href="/play"
+              className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-4 border border-primary/20"
+            >
+              <div className="font-semibold text-primary">Play Word Grid Online Free</div>
+              <p className="text-sm text-text-muted mt-1">
+                Jump straight into the game if you want the word grid online free
+                experience.
+              </p>
+            </Link>
+            <Link
+              href="/guides/play-boggle-online-free"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Play Boggle Online Free</div>
+              <p className="text-sm text-text-muted mt-1">
+                The fastest path for players searching for free Boggle online.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-rules-beginners"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Boggle Rules for Beginners</div>
+              <p className="text-sm text-text-muted mt-1">
+                Learn the core rules, scoring, and Qu tile behavior in a few minutes.
+              </p>
+            </Link>
+            <Link
+              href="/guides/most-common-boggle-words"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Most Common Boggle Words</div>
+              <p className="text-sm text-text-muted mt-1">
+                High-frequency words and patterns that are already earning clicks.
+              </p>
+            </Link>
+          </div>
+        </section>
 
         {CATEGORIES.map((cat) => (
           <section key={cat} className="mb-10">

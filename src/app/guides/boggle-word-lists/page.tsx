@@ -152,6 +152,17 @@ export default function BoggleWordListsGuide() {
               develop instant word recognition — the skill that separates 40-
               point players from 60+ champions.
             </p>
+            <p className="leading-relaxed mt-3">
+              If you want the highest-yield vocabulary first, start with{" "}
+              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                the most common Boggle words
+              </Link>{" "}
+              and then move into{" "}
+              <Link href="/guides/how-to-find-more-words" className="text-primary hover:underline">
+                how to find more words
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -383,6 +394,17 @@ export default function BoggleWordListsGuide() {
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
               <Link
+                href="/guides/boggle-dictionary/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Dictionary →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Check what counts as valid while you study word lists.
+                </div>
+              </Link>
+              <Link
                 href="/guides/most-common-boggle-words/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
@@ -402,6 +424,17 @@ export default function BoggleWordListsGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Expert-level techniques for consistently high scores.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Word Grid Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Put the word lists into a real game and build recognition.
                 </div>
               </Link>
               <Link

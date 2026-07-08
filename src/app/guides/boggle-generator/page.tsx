@@ -139,6 +139,32 @@ export default function BoggleGeneratorGuide() {
                 Generate and play custom grids now →
               </Link>
             </p>
+            <p className="leading-relaxed mt-3">
+              If you want to tune the practice effect, read{" "}
+              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+                Word Grid Strategies
+              </Link>{" "}
+              or{" "}
+              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                Most Common Boggle Words
+              </Link>
+              .
+            </p>
+          </section>
+
+          <section>
+            <p className="leading-relaxed">
+              If you want the rules before generating boards, read{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                Boggle Rules for Beginners
+              </Link>
+              . If you want to see how generator boards compare to the classic
+              game, check{" "}
+              <Link href="/guides/boggle-game-online" className="text-primary hover:underline">
+                Boggle Game Online
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -468,6 +494,45 @@ export default function BoggleGeneratorGuide() {
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
                 Daily Challenge
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-8 border-t border-border pt-6">
+            <h2 className="text-lg font-semibold mb-3">Next Pages</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link
+                href="/guides/boggle-solver"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Solver
+                </div>
+                <div className="text-sm text-text-muted mt-1">
+                  Use a solver after generating boards to review missed words.
+                </div>
+              </Link>
+              <Link
+                href="/guides/most-common-boggle-words"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Most Common Boggle Words
+                </div>
+                <div className="text-sm text-text-muted mt-1">
+                  Pair custom practice with high-frequency word patterns.
+                </div>
+              </Link>
+              <Link
+                href="/guides/word-grid-strategies"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Word Grid Strategies
+                </div>
+                <div className="text-sm text-text-muted mt-1">
+                  Use generated boards to train scoring and timing.
+                </div>
               </Link>
             </div>
           </div>

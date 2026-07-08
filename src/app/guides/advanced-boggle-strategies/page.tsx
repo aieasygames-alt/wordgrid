@@ -132,6 +132,17 @@ export default function AdvancedBoggleStrategiesGuide() {
               execution, pattern recognition, and mathematical optimization of
               your time and attention.
             </p>
+            <p className="leading-relaxed mt-3">
+              For a more practical bridge from theory to play, start with{" "}
+              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                the high-frequency word list
+              </Link>{" "}
+              or{" "}
+              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+                the main strategy guide
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -608,6 +619,17 @@ export default function AdvancedBoggleStrategiesGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   High-frequency words by letter and pattern.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Word Grid Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Test the advanced patterns in a live game.
                 </div>
               </Link>
               <Link

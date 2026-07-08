@@ -128,6 +128,17 @@ export default function BoggleRulesPrintableGuide() {
               game nights, teaching new players, or quick reference during
               gameplay.
             </p>
+            <p className="leading-relaxed mt-3">
+              If you want the full beginner walkthrough after printing, jump to{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                the beginner rules guide
+              </Link>{" "}
+              or{" "}
+              <Link href="/guides/play-word-grid-online" className="text-primary hover:underline">
+                how to play online
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -471,6 +482,17 @@ export default function BoggleRulesPrintableGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Detailed scoring reference and calculation guide.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Word Grid Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Put the printed rules into practice in the browser.
                 </div>
               </Link>
               <Link

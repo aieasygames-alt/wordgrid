@@ -122,14 +122,26 @@ export default function BoggleOnlineFreeGuide() {
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
-              You can play <strong>Boggle online free</strong> right now. No
-              download. No sign-up. No credit card. No ads. Just open your
-              browser and start playing the classic 4×4 word puzzle game.
+              If you searched <strong>Boggle online free</strong>, this is the
+              direct answer: you can play right now, in your browser, with no
+              download, no sign-up, no credit card, and no ads.
             </p>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
                 Play Boggle online free now →
+              </Link>{" "}
+              or switch to{" "}
+              <Link href="/guides/boggle-game-online" className="text-primary hover:underline">
+                the game-online guide
               </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you want the rules refresher first, read{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                Boggle Rules for Beginners
+              </Link>
+              .
             </p>
           </section>
 
@@ -208,6 +220,24 @@ export default function BoggleOnlineFreeGuide() {
                 play.
               </li>
             </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Best Next Step
+            </h2>
+            <p className="leading-relaxed">
+              If you want to start a game immediately, jump to{" "}
+              <Link href="/play" className="text-primary hover:underline">
+                /play
+              </Link>
+              . If you want a page that compares the browser game with the
+              original board game, read{" "}
+              <Link href="/guides/boggle-game-online" className="text-primary hover:underline">
+                Boggle Game Online
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -352,6 +382,17 @@ export default function BoggleOnlineFreeGuide() {
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
               <Link
+                href="/guides/play-word-grid-online/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Word Grid Online →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Better for users searching the browser-game phrasing.
+                </div>
+              </Link>
+              <Link
                 href="/guides/boggle-rules-beginners/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
@@ -371,6 +412,17 @@ export default function BoggleOnlineFreeGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Advanced scoring strategy and word-finding techniques.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Jump straight into a game.
                 </div>
               </Link>
               <Link

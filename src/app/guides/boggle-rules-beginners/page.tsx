@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Rules of Boggle: How to Play Boggle (Beginner's Guide)",
+  title: "Boggle Rules for Beginners: How to Play Boggle",
   description:
     "The complete rules of Boggle explained simply. Learn how to play Boggle — the 4×4 grid, how letters connect, what words count, and how scoring works. Free online examples.",
   alternates: { canonical: "/guides/boggle-rules-beginners" },
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "boggle word game rules", "boggle game instructions",
   ],
   openGraph: {
-    title: "Rules of Boggle: A Complete Beginner's Guide (with Examples)",
+    title: "Boggle Rules for Beginners: How to Play Boggle",
     description:
       "Learn the rules of Boggle from scratch — the 4×4 grid, letter adjacency, valid words, and scoring. Free interactive examples included.",
   },
@@ -138,7 +138,7 @@ export default function BoggleRulesGuide() {
             <a href="/guides/" className="hover:text-text">Guides</a>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Rules of Boggle: A Complete Beginner&apos;s Guide
+            Boggle Rules for Beginners: How to Play Boggle
           </h1>
           <p className="text-text-muted">7 min read &middot; Updated June 2026</p>
         </header>
@@ -147,14 +147,26 @@ export default function BoggleRulesGuide() {
           {/* Intro */}
           <section>
             <p className="leading-relaxed">
-              Maybe you found an old Boggle set in a closet. Maybe a friend sent
-              you a word game link and you have no idea what you&apos;re looking
-              at. Either way, you&apos;re in the right place. This guide covers
-              every rule you need to play Boggle, or any word grid game like it.
+              If you&apos;re searching for the <strong>rules of Boggle</strong> or
+              wondering <strong>how to play Boggle</strong>, this is the fastest
+              place to start. The game looks busier than it is: 16 letters in a
+              4×4 grid, 3 minutes on the clock, and words built by connecting
+              adjacent letters.
             </p>
             <p className="leading-relaxed mt-3">
-              The good news? The rules are simpler than they look. You can learn
-              them in about five minutes.
+              The good news? The rules are simpler than they look, and the core
+              mechanics are the same whether you call it Boggle or word grid.
+            </p>
+            <p className="leading-relaxed mt-3">
+              Once the rules make sense, the best next step is to{" "}
+              <a href="/play/" className="text-primary hover:underline">
+                play a round
+              </a>{" "}
+              or move to{" "}
+              <a href="/guides/how-to-find-more-words/" className="text-primary hover:underline">
+                how to find more words
+              </a>
+              .
             </p>
           </section>
 
@@ -356,9 +368,15 @@ export default function BoggleRulesGuide() {
               you play more.
             </p>
             <p className="leading-relaxed mt-3">
-              Once you&apos;re comfortable, check out our deeper strategy guides:
+              Once you&apos;re comfortable, jump into the game or keep reading:
             </p>
             <ul className="space-y-1 ml-4 mt-2">
+              <li>
+                <a href="/play/" className="text-primary hover:underline">
+                  Play Word Grid Online Free
+                </a>{" "}
+                — start a practice round immediately
+              </li>
               <li>
                 <a href="/guides/how-to-find-more-words/" className="text-primary hover:underline">
                   How to Find More Words
@@ -403,9 +421,17 @@ export default function BoggleRulesGuide() {
           <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
+              <a href="/guides/play-word-grid-online/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Play Word Grid Online &rarr;</div>
+                <div className="text-sm text-text-muted">The fastest way to move from rules to a live round.</div>
+              </a>
               <a href="/guides/how-to-find-more-words/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">How to Find More Words in Word Grid Puzzles &rarr;</div>
                 <div className="text-sm text-text-muted">Ready to go beyond the basics? Six proven word-finding techniques.</div>
+              </a>
+              <a href="/guides/word-grid-strategies/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Word Grid Strategies &rarr;</div>
+                <div className="text-sm text-text-muted">Turn rule knowledge into better scores and timing.</div>
               </a>
               <a href="/guides/word-grid-vs-boggle/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">Word Grid vs Boggle: What&apos;s the Difference? &rarr;</div>

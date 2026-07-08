@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "How to Find More Words in Word Grid Puzzles",
@@ -60,6 +61,32 @@ export default function Guide1() {
         </header>
 
         <div className="prose prose-invert max-w-none space-y-6 text-text">
+          <section>
+            <p className="leading-relaxed">
+              If you want to test these techniques immediately, jump into{" "}
+              <Link href="/play" className="text-primary hover:underline">
+                /play
+              </Link>
+              . If you want the word-frequency page that already earned clicks,
+              read{" "}
+              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                Most Common Boggle Words
+              </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              Once you can spot more words reliably, the next step is{" "}
+              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+                Word Grid Strategies
+              </Link>{" "}
+              for scoring and{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                the rules page
+              </Link>{" "}
+              if you want a reset.
+            </p>
+          </section>
+
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
               1. Scan by Starting Letter
@@ -157,8 +184,30 @@ export default function Guide1() {
           </div>
 
           <div className="mt-8 border-t border-border pt-6">
+            <h2 className="text-lg font-semibold mb-3">Next Pages</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/guides/word-grid-strategies" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Word Grid Strategies</div>
+                <p className="text-sm text-text-muted mt-1">
+                  Learn how to convert these tips into points and better timing.
+                </p>
+              </Link>
+              <Link href="/guides/most-common-boggle-words" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Most Common Boggle Words</div>
+                <p className="text-sm text-text-muted mt-1">
+                  Repeated patterns and high-frequency words to memorize visually.
+                </p>
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
+              <Link href="/guides/most-common-boggle-words/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Most Common Boggle Words &rarr;</div>
+                <div className="text-sm text-text-muted">Use the high-frequency list to train faster recognition.</div>
+              </Link>
               <a href="/guides/word-grid-strategies/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">Word Grid Strategies: Score Higher Every Game &rarr;</div>
                 <div className="text-sm text-text-muted">Scoring curve analysis, time management, and word families.</div>
@@ -166,6 +215,10 @@ export default function Guide1() {
               <a href="/guides/boggle-rules-beginners/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">Boggle Rules: A Complete Beginner&apos;s Guide &rarr;</div>
                 <div className="text-sm text-text-muted">New to word grid games? Start here for the full rules breakdown.</div>
+              </a>
+              <a href="/play/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Play Now &rarr;</div>
+                <div className="text-sm text-text-muted">Practice these techniques in a live round.</div>
               </a>
               <a href="/guides/" className="block text-sm text-text-dim hover:text-text">
                 Browse all guides &rarr;

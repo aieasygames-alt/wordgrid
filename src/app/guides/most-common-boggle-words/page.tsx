@@ -149,6 +149,28 @@ export default function MostCommonBoggleWordsGuide() {
               words and patterns show up most often so your brain can spot them
               without conscious thought.
             </p>
+            <p className="leading-relaxed mt-3">
+              Use this page together with{" "}
+              <Link href="/play" className="text-primary hover:underline">
+                /play
+              </Link>{" "}
+              and{" "}
+              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+                Word Grid Strategies
+              </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you want the broader vocabulary reference, go to{" "}
+              <Link href="/guides/boggle-word-lists" className="text-primary hover:underline">
+                Boggle Word Lists
+              </Link>
+              . If you want to turn recognition into points, use{" "}
+              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+                the strategy guide
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -415,8 +437,47 @@ export default function MostCommonBoggleWordsGuide() {
           </div>
 
           <div className="mt-8 border-t border-border pt-6">
+            <h2 className="text-lg font-semibold mb-3">Next Pages</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link
+                href="/guides/how-to-find-more-words"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  How to Find More Words
+                </div>
+                <div className="text-sm text-text-muted mt-1">
+                  Turn frequency recognition into a search routine.
+                </div>
+              </Link>
+              <Link
+                href="/guides/boggle-tips-tricks"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Tips and Tricks
+                </div>
+                <div className="text-sm text-text-muted mt-1">
+                  Use the word list with tactical scanning habits.
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
+              <Link
+                href="/guides/word-grid-strategies/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Word Grid Strategies →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Turn common-word recognition into a scoring plan.
+                </div>
+              </Link>
               <Link
                 href="/guides/boggle-word-lists/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
@@ -437,6 +498,17 @@ export default function MostCommonBoggleWordsGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Expert-level techniques for competitive play.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Apply the list in a live board immediately.
                 </div>
               </Link>
               <Link

@@ -74,6 +74,25 @@ export default function WordGridVsBoggleGuide() {
               identical. But enough small things have changed that it&apos;s
               worth laying out exactly how they compare.
             </p>
+            <p className="leading-relaxed mt-3">
+              If you already know the difference and just want to play, go
+              straight to{" "}
+              <a href="/play" className="text-primary hover:underline">
+                /play
+              </a>
+              . If you want the rules first, try{" "}
+              <a href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                Boggle Rules for Beginners
+              </a>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you want the browser-game version of this comparison, read{" "}
+              <a href="/guides/play-word-grid-online" className="text-primary hover:underline">
+                Play Word Grid Online
+              </a>
+              .
+            </p>
           </section>
 
           {/* TL;DR comparison table */}
@@ -215,6 +234,21 @@ export default function WordGridVsBoggleGuide() {
               <a href="/words/trail/" className="text-primary hover:underline">TRAIL</a>.
             </p>
 
+            <div className="mt-6 p-5 bg-surface/50 rounded-xl">
+              <h3 className="font-semibold mb-2">Best next pages</h3>
+              <div className="flex flex-wrap gap-2 text-sm">
+                <a href="/guides/play-word-grid-online" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
+                  Play Word Grid Online
+                </a>
+                <a href="/guides/play-boggle-online-free" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
+                  Play Boggle Online Free
+                </a>
+                <a href="/guides/boggle-rules-beginners" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
+                  Boggle Rules for Beginners
+                </a>
+              </div>
+            </div>
+
             <h3 className="font-semibold text-lg mb-2 mt-4">
               You can play alone
             </h3>
@@ -273,6 +307,10 @@ export default function WordGridVsBoggleGuide() {
           <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
+              <a href="/guides/play-word-grid-online/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Play Word Grid Online &rarr;</div>
+                <div className="text-sm text-text-muted">The browser version explained in direct search-intent language.</div>
+              </a>
               <a href="/guides/boggle-rules-beginners/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">Boggle Rules: A Complete Beginner&apos;s Guide &rarr;</div>
                 <div className="text-sm text-text-muted">New to the game entirely? Start here for the full rules walkthrough.</div>
@@ -280,6 +318,10 @@ export default function WordGridVsBoggleGuide() {
               <a href="/guides/word-grid-strategies/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">Word Grid Strategies: Score Higher Every Game &rarr;</div>
                 <div className="text-sm text-text-muted">Scoring math, time management, and word family patterns.</div>
+              </a>
+              <a href="/play" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Play Now &rarr;</div>
+                <div className="text-sm text-text-muted">Try the game in your browser.</div>
               </a>
               <a href="/guides/" className="block text-sm text-text-dim hover:text-text">
                 Browse all guides &rarr;

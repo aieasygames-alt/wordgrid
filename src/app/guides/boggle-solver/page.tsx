@@ -139,6 +139,32 @@ export default function BoggleSolverGuide() {
                 Play Boggle now and solve your grid later →
               </Link>
             </p>
+            <p className="leading-relaxed mt-3">
+              If you want to build the right habit first, start with{" "}
+              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                Most Common Boggle Words
+              </Link>{" "}
+              or{" "}
+              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+                Word Grid Strategies
+              </Link>
+              .
+            </p>
+          </section>
+
+          <section>
+            <p className="leading-relaxed">
+              If you are still learning the game, start with{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                Boggle Rules for Beginners
+              </Link>
+              . If you want the high-frequency words that matter most while
+              solving, open{" "}
+              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                Most Common Boggle Words
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -434,8 +460,47 @@ export default function BoggleSolverGuide() {
           </div>
 
           <div className="mt-8 border-t border-border pt-6">
+            <h2 className="text-lg font-semibold mb-3">Next Pages</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link
+                href="/guides/boggle-generator"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Generator
+                </div>
+                <div className="text-sm text-text-muted mt-1">
+                  Create practice boards before you test yourself with a solver.
+                </div>
+              </Link>
+              <Link
+                href="/guides/word-grid-vs-boggle"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Word Grid vs Boggle
+                </div>
+                <div className="text-sm text-text-muted mt-1">
+                  Useful if you want the browser-game context around the solver.
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Related Tools</h2>
             <div className="space-y-3">
+              <Link
+                href="/guides/most-common-boggle-words/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Most Common Boggle Words →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Pair solver review with high-frequency vocabulary.
+                </div>
+              </Link>
               <Link
                 href="/guides/boggle-generator/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"

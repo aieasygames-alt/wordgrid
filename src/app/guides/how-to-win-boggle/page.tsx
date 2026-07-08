@@ -175,6 +175,17 @@ export default function HowToWinBoggleGuide() {
               game — the same techniques that separate 25-point scores from
               60+ point champions.
             </p>
+            <p className="leading-relaxed mt-3">
+              If you want a tighter next step, move to{" "}
+              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+                the WordGrid strategies guide
+              </Link>{" "}
+              or{" "}
+              <Link href="/guides/advanced-boggle-strategies" className="text-primary hover:underline">
+                advanced Boggle strategies
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -509,6 +520,17 @@ export default function HowToWinBoggleGuide() {
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
               <Link
+                href="/guides/most-common-boggle-words/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Most Common Boggle Words →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Build speed by recognizing the highest-frequency words first.
+                </div>
+              </Link>
+              <Link
                 href="/guides/boggle-tips-tricks/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
@@ -528,6 +550,17 @@ export default function HowToWinBoggleGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Advanced scoring strategy and time management breakdown.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Word Grid Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Put the winning tactics into a live round right away.
                 </div>
               </Link>
               <Link

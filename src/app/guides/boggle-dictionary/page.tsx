@@ -127,6 +127,17 @@ export default function BoggleDictionaryGuide() {
               repertoire. Understanding what words count and building your
               vocabulary are keys to consistently high scores.
             </p>
+            <p className="leading-relaxed mt-3">
+              For the practical side of the dictionary, see{" "}
+              <Link href="/guides/boggle-word-lists" className="text-primary hover:underline">
+                Boggle word lists
+              </Link>{" "}
+              or{" "}
+              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                the most common words page
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -460,6 +471,17 @@ export default function BoggleDictionaryGuide() {
                 </div>
               </Link>
               <Link
+                href="/guides/most-common-boggle-words/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Most Common Boggle Words →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Start with the highest-frequency vocabulary first.
+                </div>
+              </Link>
+              <Link
                 href="/guides/boggle-solver/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
@@ -468,6 +490,17 @@ export default function BoggleDictionaryGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Find all words in any grid.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Word Grid Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Apply vocabulary knowledge in a live round.
                 </div>
               </Link>
               <Link

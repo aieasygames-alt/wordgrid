@@ -130,15 +130,26 @@ export default function BoggleWordGameGuide() {
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
-              The <strong>Boggle word game</strong> is a classic that has
-              challenged word lovers since 1972. A 4×4 grid of letters. Three
-              minutes on the clock. Your job: find as many words as possible by
-              connecting adjacent letters. Simple rules, deep strategy.
+              If you searched for the <strong>Boggle word game</strong>, you
+              probably want the rules, the scoring, and a place to play. This
+              guide covers all three: how the game works, what points are worth,
+              and where to start a round instantly.
             </p>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
                 Play the Boggle word game free online →
               </Link>
+            </p>
+            <p className="leading-relaxed mt-3">
+              New to the game? Start with{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                Boggle Rules for Beginners
+              </Link>{" "}
+              or{" "}
+              <Link href="/guides/play-boggle-online-free" className="text-primary hover:underline">
+                Play Boggle Online Free
+              </Link>
+              .
             </p>
           </section>
 
@@ -157,6 +168,29 @@ export default function BoggleWordGameGuide() {
               Longer words score dramatically more points, so experienced players
               focus on finding 5+ letter words rather than chasing every short
               word they see.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              If You Want to Play Right Now
+            </h2>
+            <p className="leading-relaxed">
+              Start a practice round on{" "}
+              <Link href="/play" className="text-primary hover:underline">
+                /play
+              </Link>
+              , or read the beginner rules page if you want a slower walkthrough
+              first:
+            </p>
+            <p className="leading-relaxed mt-3">
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                Boggle Rules for Beginners
+              </Link>{" "}
+              ·{" "}
+              <Link href="/guides/play-boggle-online-free" className="text-primary hover:underline">
+                Play Boggle Online Free
+              </Link>
             </p>
           </section>
 
@@ -421,6 +455,17 @@ export default function BoggleWordGameGuide() {
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
               <Link
+                href="/guides/play-word-grid-online/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Word Grid Online →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Browser-first phrasing for users coming from search.
+                </div>
+              </Link>
+              <Link
                 href="/guides/boggle-rules-beginners/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
@@ -441,6 +486,17 @@ export default function BoggleWordGameGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Advanced scoring strategy, time management, and word families.
+                </div>
+              </Link>
+              <Link
+                href="/play"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Play Now →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Start a round immediately.
                 </div>
               </Link>
               <Link

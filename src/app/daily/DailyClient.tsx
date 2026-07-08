@@ -1,12 +1,21 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import GameBoard from "@/components/GameBoard";
 import ResultScreen from "@/components/ResultScreen";
 import StreakDisplay from "@/components/StreakDisplay";
-import { generateGrid, seedFromDate, todayDateString, Grid } from "@/lib/boggle";
-import { Trie } from "@/lib/dictionary";
-import { recordDailyPlay, getStreak, type StreakData } from "@/lib/streak";
+import DailyMissionPanel from "@/components/DailyMissionPanel";
+import {
+  generateGrid,
+  seedFromDate,
+  todayDateString,
+  msUntilNextDailyBoundary,
+  Grid,
+} from "@/lib/boggle";
+import { loadDictionary, Trie } from "@/lib/dictionary";
+import { solveBoard } from "@/lib/solver";
+import { buildDailyMissions, type DailyMission } from "@/lib/daily-missions";
+import { recordDailyPlay, type StreakData } from "@/lib/streak";
 
 interface GameResult {
   words: { word: string; score: number }[];
@@ -14,21 +23,66 @@ interface GameResult {
   grid: Grid;
   trie: Trie | null;
   streak: StreakData;
+  dateLabel: string;
+  bestCombo: number;
 }
 
 export default function DailyClient() {
-  const today = todayDateString();
+  const [today, setToday] = useState(todayDateString);
   const seed = useMemo(() => seedFromDate(today), [today]);
   const grid = useMemo(() => generateGrid(seed), [seed]);
   const [result, setResult] = useState<GameResult | null>(null);
+  const [missions, setMissions] = useState<DailyMission[]>([]);
+  const [missionsReady, setMissionsReady] = useState(false);
+
+  useEffect(() => {
+    let timer: number | null = null;
+
+    const schedule = () => {
+      timer = window.setTimeout(() => {
+        setToday(todayDateString());
+        schedule();
+      }, msUntilNextDailyBoundary() + 1000);
+    };
+
+    schedule();
+    return () => {
+      if (timer !== null) window.clearTimeout(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadMissions = async () => {
+      setMissionsReady(false);
+      try {
+        const trie = await loadDictionary();
+        if (cancelled) return;
+        const allWords = solveBoard(grid, trie);
+        setMissions(buildDailyMissions(allWords, [], 0));
+      } catch {
+        if (!cancelled) setMissions([]);
+      } finally {
+        if (!cancelled) setMissionsReady(true);
+      }
+    };
+
+    loadMissions();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [grid]);
 
   const handleComplete = (
     words: { word: string; score: number }[],
     total: number,
-    trie: Trie | null
+    trie: Trie | null,
+    bestCombo: number
   ) => {
     const streak = recordDailyPlay();
-    setResult({ words, total, grid, trie, streak });
+    setResult({ words, total, grid, trie, streak, dateLabel: today, bestCombo });
     if (typeof window !== "undefined") {
       localStorage.setItem(
         `daily-${today}`,
@@ -56,8 +110,9 @@ export default function DailyClient() {
           foundWords={result.words}
           totalScore={result.total}
           mode="daily"
-          dateLabel={today}
+          dateLabel={result.dateLabel}
           streak={result.streak.currentStreak}
+          bestCombo={result.bestCombo}
           onPlayAgain={() => (window.location.href = "/play")}
         />
       </main>
@@ -77,7 +132,14 @@ export default function DailyClient() {
       <div className="mb-3">
         <StreakDisplay compact />
       </div>
-      <GameBoard grid={grid} onComplete={handleComplete} />
+      <div className="mb-5 w-full max-w-lg">
+        <DailyMissionPanel
+          missions={missionsReady ? missions : []}
+          title="Today's Missions"
+          subtitle="Complete a few focused goals while you play. The board itself decides the exact targets."
+        />
+      </div>
+      <GameBoard key={today} grid={grid} onComplete={handleComplete} />
     </main>
   );
 }

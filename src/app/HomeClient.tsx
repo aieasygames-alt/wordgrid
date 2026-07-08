@@ -18,6 +18,7 @@ interface GameResult {
   total: number;
   grid: Grid;
   trie: Trie | null;
+  bestCombo: number;
 }
 
 export default function HomeClient() {
@@ -26,8 +27,8 @@ export default function HomeClient() {
   const [result, setResult] = useState<GameResult | null>(null);
 
   const handleComplete = useCallback(
-    (words: FoundWord[], total: number, trie: Trie | null) => {
-      setResult({ words, total, grid, trie });
+    (words: FoundWord[], total: number, trie: Trie | null, bestCombo: number) => {
+      setResult({ words, total, grid, trie, bestCombo });
     },
     [grid]
   );
@@ -47,6 +48,7 @@ export default function HomeClient() {
           foundWords={result.words}
           totalScore={result.total}
           mode="play"
+          bestCombo={result.bestCombo}
           onPlayAgain={playAgain}
         />
       </div>
@@ -64,13 +66,12 @@ export default function HomeClient() {
       {/* Hero text */}
       <section className="text-center mb-6">
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-          Word Grid — Play Free Word Grid Puzzle Online
+          Word Grid Online Free — Play Boggle-Style Puzzle
         </h1>
         <p className="text-base text-text-muted max-w-lg mx-auto mb-4">
-          WordGrid is a free online word grid puzzle — play Boggle-style word
-          search right in your browser. Connect adjacent letters in a 4×4 grid
-          to find hidden words. 3 minutes, unlimited fun. No download, no
-          sign-up.
+          WordGrid is a free word grid online game. Play Boggle online free in
+          your browser, connect adjacent letters in a 4×4 grid, and race the
+          clock or relax in Zen mode. No download, no sign-up.
         </p>
         <div className="flex gap-3 justify-center">
           <Link
@@ -84,6 +85,17 @@ export default function HomeClient() {
             className="px-6 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-semibold active:scale-[0.98]"
           >
             Full Screen →
+          </Link>
+        </div>
+        <div className="mt-5 flex flex-wrap justify-center gap-2 text-sm">
+          <Link href="/play" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Play Word Grid Online
+          </Link>
+          <Link href="/guides/play-boggle-online-free" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Play Boggle Online Free
+          </Link>
+          <Link href="/guides/boggle-rules-beginners" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Boggle Rules for Beginners
           </Link>
         </div>
       </section>

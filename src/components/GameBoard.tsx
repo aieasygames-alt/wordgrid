@@ -15,7 +15,12 @@ interface FoundWord {
 interface GameBoardProps {
   grid: Grid;
   duration?: number;
-  onComplete?: (words: FoundWord[], totalScore: number, trie: Trie | null) => void;
+  onComplete?: (
+    words: FoundWord[],
+    totalScore: number,
+    trie: Trie | null,
+    bestCombo: number
+  ) => void;
 }
 
 interface CellPos {
@@ -37,23 +42,30 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
   const [foundWords, setFoundWords] = useState<FoundWord[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [flash, setFlash] = useState<"correct" | "wrong" | null>(null);
+  const [comboBurst, setComboBurst] = useState<number | null>(null);
   const [trie, setTrie] = useState<Trie | null>(null);
   const [dictError, setDictError] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [muted, setMuted] = useState(false);
   const [duration, setDuration] = useState(180);
   const [showDurationPicker, setShowDurationPicker] = useState(false);
+  const [combo, setCombo] = useState(0);
+  const [bestCombo, setBestCombo] = useState(0);
   const cellRefs = useRef<(HTMLDivElement | null)[][]>([]);
   const completedRef = useRef(false);
   const foundWordsRef = useRef<FoundWord[]>([]);
   const trieRef = useRef<Trie | null>(null);
   const selectedRef = useRef<CellPos[]>([]);
+  const comboRef = useRef(0);
+  const bestComboRef = useRef(0);
   const boardRef = useRef<HTMLDivElement | null>(null);
+  const comboBurstTimerRef = useRef<number | null>(null);
 
   // Keep refs in sync
   useEffect(() => { foundWordsRef.current = foundWords; }, [foundWords]);
   useEffect(() => { trieRef.current = trie; }, [trie]);
   useEffect(() => { selectedRef.current = selected; }, [selected]);
+  useEffect(() => { bestComboRef.current = bestCombo; }, [bestCombo]);
 
   // Load saved duration
   useEffect(() => {
@@ -136,6 +148,8 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
 
     if (foundWordsRef.current.some((f) => f.word === word)) {
       setError("Already found");
+      setCombo(0);
+      comboRef.current = 0;
       triggerFlash("wrong");
       playSound(sounds.error);
       return;
@@ -150,6 +164,8 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
     }
     if (!trieRef.current.contains(word)) {
       setError("Not a valid word");
+      setCombo(0);
+      comboRef.current = 0;
       triggerFlash("wrong");
       playSound(sounds.error);
       shakeBoard();
@@ -158,6 +174,23 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
 
     const score = scoreWord(word);
     setFoundWords((prev) => [...prev, { word, score }]);
+    const nextCombo = comboRef.current + 1;
+    comboRef.current = nextCombo;
+    setCombo(nextCombo);
+    if (nextCombo > bestComboRef.current) {
+      bestComboRef.current = nextCombo;
+      setBestCombo(nextCombo);
+    }
+    if (nextCombo === 3 || nextCombo === 5) {
+      if (comboBurstTimerRef.current) {
+        window.clearTimeout(comboBurstTimerRef.current);
+      }
+      setComboBurst(nextCombo);
+      comboBurstTimerRef.current = window.setTimeout(() => {
+        setComboBurst(null);
+        comboBurstTimerRef.current = null;
+      }, nextCombo === 5 ? 900 : 700);
+    }
     setSelected([]);
     setError(null);
     triggerFlash("correct");
@@ -219,6 +252,14 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
     };
   }, [handlePointerMove, handlePointerUp]);
 
+  useEffect(() => {
+    return () => {
+      if (comboBurstTimerRef.current) {
+        window.clearTimeout(comboBurstTimerRef.current);
+      }
+    };
+  }, []);
+
   const triggerFlash = (type: "correct" | "wrong") => {
     setFlash(type);
     setTimeout(() => setFlash(null), 300);
@@ -239,7 +280,7 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
     playSound(sounds.gameEnd);
     const current = foundWordsRef.current;
     const total = current.reduce((s, w) => s + w.score, 0);
-    onComplete?.(current, total, trieRef.current);
+    onComplete?.(current, total, trieRef.current, bestComboRef.current);
   }, [onComplete, playSound]);
 
   const toggleMute = () => {
@@ -261,6 +302,19 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
 
   return (
     <div className="flex flex-col items-center gap-4 w-full max-w-lg mx-auto">
+      {comboBurst && (
+        <div
+          className={`pointer-events-none fixed left-1/2 top-20 z-50 -translate-x-1/2 rounded-full px-5 py-2 text-sm font-black uppercase tracking-[0.3em] text-white shadow-2xl ${
+            comboBurst === 5
+              ? "bg-gradient-to-r from-emerald-400 via-lime-400 to-yellow-300"
+              : "bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-pink-500"
+          } animate-combo-burst`}
+          aria-live="polite"
+        >
+          {comboBurst === 5 ? "Combo x5!" : "Combo x3!"}
+        </div>
+      )}
+
       {/* Top bar: timer + score + mute */}
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center gap-2">
@@ -306,9 +360,21 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
         </div>
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <div className="text-right">
-            <div className="text-primary text-2xl font-bold tabular-nums">{totalScore}</div>
-            <div className="text-text-muted text-xs">pts</div>
+          <div className={`text-right transition-all duration-300 ${comboBurst ? "scale-110" : ""}`}>
+            <div
+              className={`text-2xl font-bold tabular-nums transition-all duration-300 ${
+                comboBurst === 5
+                  ? "text-success drop-shadow-[0_0_18px_rgba(74,222,128,0.55)]"
+                  : comboBurst === 3
+                  ? "text-primary drop-shadow-[0_0_18px_rgba(129,140,248,0.55)]"
+                  : "text-primary"
+              }`}
+            >
+              {totalScore}
+            </div>
+            <div className={`text-xs transition-colors duration-300 ${comboBurst ? "text-text" : "text-text-muted"}`}>
+              pts
+            </div>
           </div>
           <button
             onClick={toggleMute}
@@ -334,28 +400,56 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
         aria-live="polite"
         aria-atomic="true"
       >
-        <span
-          className={`text-3xl font-bold tracking-widest min-w-[120px] text-center transition-colors duration-200 ${
-            flash === "correct"
-              ? "text-success"
-              : flash === "wrong"
-              ? "text-danger"
-              : "text-primary"
-          }`}
-        >
-          {currentWord || <span className="text-text-muted text-lg font-normal">Drag to select</span>}
-        </span>
+        <div className="flex flex-col items-center gap-0.5">
+          <span
+            className={`text-3xl font-bold tracking-widest min-w-[120px] text-center transition-colors duration-200 ${
+              flash === "correct"
+                ? "text-success"
+                : flash === "wrong"
+                ? "text-danger"
+                : "text-primary"
+            }`}
+          >
+            {currentWord || <span className="text-text-muted text-lg font-normal">Drag to select</span>}
+          </span>
+          <span
+            className={`min-h-4 text-xs font-semibold uppercase tracking-[0.24em] transition-all duration-300 ${
+              comboBurst === 5
+                ? "text-success drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]"
+                : comboBurst === 3
+                ? "text-primary drop-shadow-[0_0_10px_rgba(99,102,241,0.5)]"
+                : "text-text-muted"
+            }`}
+          >
+            {combo > 1 ? `Combo x${combo}` : combo === 1 ? "Combo started" : " "}
+          </span>
+        </div>
       </div>
 
       {/* Grid with SVG path overlay */}
       <div
         ref={boardRef}
         id="game-board"
-        className="relative grid grid-cols-4 gap-2 sm:gap-3 touch-none select-none"
+        className={`relative grid grid-cols-4 gap-2 sm:gap-3 touch-none select-none transition-all duration-300 ${
+          comboBurst === 5
+            ? "scale-[1.03] drop-shadow-[0_0_28px_rgba(74,222,128,0.32)]"
+            : comboBurst === 3
+            ? "scale-[1.02] drop-shadow-[0_0_24px_rgba(99,102,241,0.28)]"
+            : ""
+        }`}
         style={{ width: "fit-content" }}
         role="grid"
         aria-label="4 by 4 letter grid"
       >
+        {comboBurst && (
+          <div
+            className={`pointer-events-none absolute -inset-3 rounded-3xl opacity-80 blur-md ${
+              comboBurst === 5
+                ? "bg-emerald-400/15 animate-combo-ring"
+                : "bg-indigo-400/15 animate-combo-ring"
+            }`}
+          />
+        )}
         {/* SVG path line — rendered above cells */}
         {selected.length > 1 && (
           <svg
@@ -442,6 +536,9 @@ export default function GameBoard({ grid, onComplete }: GameBoardProps) {
         <div className="flex justify-between items-center mb-3">
           <span className="text-text-muted text-sm font-medium">
             {foundWords.length} {foundWords.length === 1 ? "word" : "words"}
+          </span>
+          <span className="text-text-muted text-sm font-medium">
+            Best combo: <span className="text-primary">{bestCombo > 0 ? `x${bestCombo}` : "—"}</span>
           </span>
         </div>
         <ul className="flex flex-wrap gap-1.5 min-h-[2rem] list-none p-0">

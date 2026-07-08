@@ -12,6 +12,7 @@ export interface ShareCardData {
   percentage: number;
   mode: "play" | "daily";
   dateLabel?: string;
+  bestCombo?: number;
 }
 
 let _bgImage: HTMLImageElement | null = null;
@@ -85,16 +86,22 @@ export async function generateShareCard(
   ctx.font = "bold 36px system-ui, -apple-system, sans-serif";
   ctx.fillText(`${data.percentage}%`, rightX, 260);
 
+  if (data.bestCombo && data.bestCombo >= 2) {
+    ctx.fillStyle = "#22c55e";
+    ctx.font = "700 24px system-ui, -apple-system, sans-serif";
+    ctx.fillText(`Best combo x${data.bestCombo}`, rightX, 302);
+  }
+
   // Word stats
   ctx.fillStyle = "#4ade80";
   ctx.font = "600 24px system-ui, -apple-system, sans-serif";
-  ctx.fillText(`${data.foundCount} found`, rightX, 320);
+  ctx.fillText(`${data.foundCount} found`, rightX, 348);
 
   ctx.fillStyle = "#f87171";
   ctx.fillText(
     `${data.totalCount - data.foundCount} missed`,
     rightX + 160,
-    320
+    348
   );
 
   // Mode label
@@ -104,7 +111,7 @@ export async function generateShareCard(
     data.mode === "daily"
       ? `Daily Challenge — ${data.dateLabel ?? ""}`
       : "Practice Game";
-  ctx.fillText(modeText, rightX, 360);
+  ctx.fillText(modeText, rightX, 388);
 
   // CTA at bottom
   ctx.fillStyle = "#94a3b8";
@@ -187,7 +194,7 @@ export async function shareCardImage(data: ShareCardData): Promise<void> {
   if (navigator.canShare?.({ files: [file] })) {
     await navigator.share({
       files: [file],
-      text: `WordGrid — ${data.totalScore} pts (${data.percentage}%)`,
+      text: `WordGrid — ${data.totalScore} pts (${data.percentage}%)${data.bestCombo && data.bestCombo >= 2 ? `, best combo x${data.bestCombo}` : ""}`,
     });
   } else {
     // Fallback: download the image

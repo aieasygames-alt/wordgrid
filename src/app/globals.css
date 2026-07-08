@@ -62,3 +62,47 @@ body {
 .animate-shake {
   animation: shake 0.3s ease-in-out;
 }
+
+@keyframes combo-burst {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px) scale(0.72);
+    filter: blur(2px);
+  }
+  18% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1.08);
+    filter: blur(0);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px) scale(1.04);
+  }
+}
+
+@keyframes combo-ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+}
+
+.animate-combo-burst {
+  animation: combo-burst 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-combo-ring {
+  animation: combo-ring 0.9s ease-out;
+}

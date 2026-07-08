@@ -4,13 +4,50 @@ import { useState, useMemo, useEffect } from "react";
 import { Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
 import { solveBoard, SolvedWord } from "@/lib/solver";
+import { buildDailyMissions } from "@/lib/daily-missions";
 import { shareCardImage, generateShareCard } from "@/lib/shareCard";
 import Confetti from "./Confetti";
+import DailyMissionPanel from "./DailyMissionPanel";
 
 interface FoundWord {
   word: string;
   score: number;
 }
+
+type TrainingHint = {
+  label: string;
+  detail: string;
+};
+
+const PREFIX_PATTERNS = [
+  "RE",
+  "UN",
+  "IN",
+  "DIS",
+  "PRE",
+  "OVER",
+  "UNDER",
+  "INTER",
+  "OUT",
+  "TRANS",
+  "CON",
+  "COM",
+];
+
+const SUFFIX_PATTERNS = [
+  "ING",
+  "ED",
+  "ER",
+  "EST",
+  "LY",
+  "NESS",
+  "TION",
+  "MENT",
+  "ABLE",
+  "ION",
+  "TY",
+  "S",
+];
 
 interface ResultScreenProps {
   grid: Grid;
@@ -20,6 +57,7 @@ interface ResultScreenProps {
   mode: "play" | "daily";
   dateLabel?: string;
   streak?: number;
+  bestCombo?: number;
   onPlayAgain?: () => void;
 }
 
@@ -31,6 +69,7 @@ export default function ResultScreen({
   mode,
   dateLabel,
   streak,
+  bestCombo,
   onPlayAgain,
 }: ResultScreenProps) {
   const [showMissed, setShowMissed] = useState(true);
@@ -38,6 +77,7 @@ export default function ResultScreen({
   const [fireConfetti, setFireConfetti] = useState(false);
   const [cardLoading, setCardLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const hasDictionary = Boolean(trie);
 
   // Trigger confetti when result screen mounts with a good score
   useEffect(() => {
@@ -57,16 +97,100 @@ export default function ResultScreen({
   );
 
   const missedWords = useMemo(
-    () => allWords.filter((w) => !foundSet.has(w.word)),
-    [allWords, foundSet]
+    () => (hasDictionary ? allWords.filter((w) => !foundSet.has(w.word)) : []),
+    [allWords, foundSet, hasDictionary]
   );
 
+  const bestMissedWords = useMemo(
+    () => missedWords.slice().sort((a, b) => b.score - a.score).slice(0, 6),
+    [missedWords]
+  );
+
+  const trainingHint = useMemo<TrainingHint | null>(() => {
+    if (!hasDictionary || missedWords.length === 0) return null;
+
+    const counts = new Map<string, number>();
+    const add = (label: string) => {
+      counts.set(label, (counts.get(label) || 0) + 1);
+    };
+
+    for (const { word } of missedWords) {
+      const upper = word.toUpperCase();
+      if (upper.includes("QU")) add("Qu");
+
+      const prefix = PREFIX_PATTERNS.find((p) => upper.startsWith(p) || upper.includes(p));
+      if (prefix) add(`Prefix: ${prefix}`);
+
+      const suffix = SUFFIX_PATTERNS.find((s) => upper.endsWith(s));
+      if (suffix) add(`Suffix: ${suffix}`);
+
+      if (upper.length >= 6) add("Long words");
+      else if (upper.length <= 4) add("Quick grabs");
+    }
+
+    let topLabel = "";
+    let topCount = 0;
+    for (const [label, count] of counts) {
+      if (count > topCount) {
+        topLabel = label;
+        topCount = count;
+      }
+    }
+
+    if (!topLabel) {
+      return {
+        label: "Training focus: Mixed",
+        detail: "The missed words were spread out. Try a more systematic scan next round.",
+      };
+    }
+
+    if (topLabel === "Qu") {
+      return {
+        label: "Training focus: Qu",
+        detail: "You missed several Qu words. Next round, check every Q tile first.",
+      };
+    }
+
+    if (topLabel.startsWith("Prefix: ")) {
+      const prefix = topLabel.replace("Prefix: ", "");
+      return {
+        label: `Training focus: ${topLabel}`,
+        detail: `You missed words built around the ${prefix} pattern. Scan for extensions and word families around that prefix.`,
+      };
+    }
+
+    if (topLabel.startsWith("Suffix: ")) {
+      const suffix = topLabel.replace("Suffix: ", "");
+      return {
+        label: `Training focus: ${topLabel}`,
+        detail: `You missed words ending in ${suffix}. Look for base words that can extend into that ending.`,
+      };
+    }
+
+    if (topLabel === "Long words") {
+      return {
+        label: "Training focus: Long words",
+        detail: "Longer scoring words were left behind. Prioritize 5+ letter paths earlier in the next game.",
+      };
+    }
+
+    return {
+      label: "Training focus: Quick grabs",
+      detail: "Several easy words were available. Start the next board with a quick sweep before hunting long words.",
+    };
+  }, [hasDictionary, missedWords]);
+
   const maxPossible = useMemo(
-    () => allWords.reduce((s, w) => s + w.score, 0),
-    [allWords]
+    () => (hasDictionary ? allWords.reduce((s, w) => s + w.score, 0) : 0),
+    [allWords, hasDictionary]
   );
 
   const percentage = maxPossible > 0 ? Math.round((totalScore / maxPossible) * 100) : 0;
+
+  const dailyMissions = useMemo(
+    () => (mode === "daily" && hasDictionary ? buildDailyMissions(allWords, foundWords, bestCombo ?? 0) : []),
+    [mode, hasDictionary, allWords, foundWords, bestCombo]
+  );
 
   // Generate emoji grid for sharing (like Wordle)
   const shareText = useMemo(() => {
@@ -76,26 +200,39 @@ export default function ResultScreen({
         : "WordGrid";
     const lines = [
       header,
-      `Score: ${totalScore} / ${maxPossible} (${percentage}%)`,
-      `Words: ${foundWords.length} / ${allWords.length}`,
+      hasDictionary
+        ? `Score: ${totalScore} / ${maxPossible} (${percentage}%)`
+        : `Score: ${totalScore}`,
+      hasDictionary
+        ? `Words: ${foundWords.length} / ${allWords.length}`
+        : `Words found: ${foundWords.length}`,
     ];
 
     if (streak && streak >= 2) {
       lines.push(`🔥 ${streak}-day streak`);
     }
+    if (bestCombo && bestCombo >= 2) {
+      lines.push(`⚡ Best combo: x${bestCombo}`);
+    }
+    if (!hasDictionary) {
+      lines.push("Dictionary data was unavailable, so missed words could not be calculated.");
+    }
     lines.push("");
 
     // Emoji summary: 🟩 found, 🟥 missed (top 20 by score)
-    const topWords = allWords.slice(0, 20);
-    const emojis = topWords
-      .map((w) => (foundSet.has(w.word) ? "🟩" : "🟥"))
-      .join("");
-    lines.push(emojis);
+    if (hasDictionary) {
+      const topWords = allWords.slice(0, 20);
+      const emojis = topWords
+        .map((w) => (foundSet.has(w.word) ? "🟩" : "🟥"))
+        .join("");
+      lines.push(emojis);
+      lines.push("");
+    }
     lines.push("");
     lines.push("wordgrid.games/" + mode);
 
     return lines.join("\n");
-  }, [mode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords.length, foundSet, streak]);
+  }, [mode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords, foundSet, streak, hasDictionary, bestCombo]);
 
   const handleShare = async () => {
     try {
@@ -114,16 +251,17 @@ export default function ResultScreen({
   const handleShareCard = async () => {
     setCardLoading(true);
     try {
-      await shareCardImage({
-        grid,
-        totalScore,
-        maxScore: maxPossible,
-        foundCount: foundWords.length,
-        totalCount: allWords.length,
-        percentage,
-        mode,
-        dateLabel,
-      });
+        await shareCardImage({
+          grid,
+          totalScore,
+          maxScore: maxPossible,
+          foundCount: foundWords.length,
+          totalCount: allWords.length,
+          percentage,
+          mode,
+          dateLabel,
+          bestCombo,
+        });
     } catch {
       // fallback to text share
       handleShare();
@@ -139,7 +277,7 @@ export default function ResultScreen({
     }
     setCardLoading(true);
     try {
-      const blob = await generateShareCard({
+        const blob = await generateShareCard({
         grid,
         totalScore,
         maxScore: maxPossible,
@@ -148,6 +286,7 @@ export default function ResultScreen({
         percentage,
         mode,
         dateLabel,
+        bestCombo,
       });
       if (blob) {
         setPreviewUrl(URL.createObjectURL(blob));
@@ -156,14 +295,6 @@ export default function ResultScreen({
       setCardLoading(false);
     }
   };
-
-  if (!trie) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-text-muted animate-pulse">Calculating results…</div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col items-center gap-6 w-full max-w-lg mx-auto">
@@ -175,18 +306,34 @@ export default function ResultScreen({
       {/* Score summary */}
       <div className="text-center">
         <div className="text-6xl font-bold text-primary mb-1">{totalScore}</div>
-        <div className="text-text-muted text-sm">
-          out of {maxPossible} possible ({percentage}%)
-        </div>
+        {hasDictionary ? (
+          <div className="text-text-muted text-sm">
+            out of {maxPossible} possible ({percentage}%)
+          </div>
+        ) : (
+          <div className="text-text-muted text-sm">
+            Dictionary data was not ready, so missed words are hidden.
+          </div>
+        )}
       </div>
 
-      {/* Progress bar */}
-      <div className="w-full bg-surface rounded-full h-3 overflow-hidden">
-        <div
-          className="h-full bg-gradient-to-r from-primary to-primary-hover transition-all duration-700"
-          style={{ width: `${percentage}%` }}
+      {mode === "daily" && dailyMissions.length > 0 && (
+        <DailyMissionPanel
+          missions={dailyMissions}
+          title="Daily Missions"
+          subtitle="How well you matched today's board-specific goals."
         />
-      </div>
+      )}
+
+      {/* Progress bar */}
+      {hasDictionary && (
+        <div className="w-full bg-surface rounded-full h-3 overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-primary to-primary-hover transition-all duration-700"
+            style={{ width: `${percentage}%` }}
+          />
+        </div>
+      )}
 
       {/* Stats row */}
       <div className="flex justify-center gap-8 w-full">
@@ -202,7 +349,62 @@ export default function ResultScreen({
           <div className="text-2xl font-bold text-text">{allWords.length}</div>
           <div className="text-text-dim text-xs uppercase tracking-wide">Total</div>
         </div>
+        <div className="text-center">
+          <div className="text-2xl font-bold text-primary">
+            {bestCombo && bestCombo > 0 ? `x${bestCombo}` : "—"}
+          </div>
+          <div className="text-text-dim text-xs uppercase tracking-wide">Best Combo</div>
+        </div>
       </div>
+
+      {/* Game review */}
+      {hasDictionary && (
+        <div className="w-full rounded-2xl border border-border bg-surface/40 p-4 sm:p-5">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted mb-3">
+            Game Review
+          </h3>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl bg-surface/60 p-3">
+              <div className="text-xs uppercase tracking-wide text-text-muted mb-1">
+                Best missed words
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {bestMissedWords.length > 0 ? (
+                  bestMissedWords.map((w) => (
+                    <a
+                      key={w.word}
+                      href={`/words/${w.word.toLowerCase()}`}
+                      className="px-2.5 py-1 rounded-md bg-danger-bg/30 text-danger hover:bg-danger-bg/50 transition text-sm font-mono"
+                    >
+                      {w.word}
+                      <span className="ml-1 text-xs text-danger/70">{w.score}</span>
+                    </a>
+                  ))
+                ) : (
+                  <span className="text-sm text-text-muted">No missed words to review.</span>
+                )}
+              </div>
+            </div>
+            <div className="rounded-xl bg-surface/60 p-3">
+              <div className="text-xs uppercase tracking-wide text-text-muted mb-1">
+                Next focus
+              </div>
+              {trainingHint ? (
+                <div className="space-y-1">
+                  <div className="font-semibold text-primary">{trainingHint.label}</div>
+                  <p className="text-sm text-text-muted leading-relaxed">
+                    {trainingHint.detail}
+                  </p>
+                </div>
+              ) : (
+                <p className="text-sm text-text-muted">
+                  Great scan. Try the next board and keep building speed.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Share buttons */}
       <div className="flex gap-3 w-full">
@@ -225,6 +427,8 @@ export default function ResultScreen({
       {previewUrl && (
         <div className="w-full">
           <div className="text-xs text-text-dim mb-1">Preview (long-press to save):</div>
+          {/* Blob preview URLs are a good fit for a plain img tag here. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={previewUrl}
             alt="Share card preview"
@@ -260,7 +464,7 @@ export default function ResultScreen({
       </div>
 
       {/* Missed words */}
-      {missedWords.length > 0 && (
+      {hasDictionary && missedWords.length > 0 && (
         <div className="w-full">
           <button
             onClick={() => setShowMissed(!showMissed)}

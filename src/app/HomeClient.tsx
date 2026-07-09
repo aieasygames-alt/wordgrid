@@ -80,6 +80,7 @@ export default function HomeClient() {
           <TodayTipCard
             tip={todayTip}
             grid={grid}
+            compact
             primaryHref="/daily"
             primaryLabel="Try today's board"
             secondaryHref="/guides/word-pattern-library"

@@ -318,186 +318,190 @@ export default function ResultScreen({
   }, [mode, totalScore, foundWords.length, allWords.length, maxPossible, percentage, bestCombo, streak, dateLabel]);
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full max-w-lg mx-auto">
+    <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
       <Confetti fire={fireConfetti} />
-      <h2 className="text-3xl font-bold">
+      <h2 className="text-center text-3xl font-bold">
         {mode === "daily" ? `Daily — ${dateLabel}` : "Game Over"}
       </h2>
 
-      {/* Score summary */}
-      <div className="text-center">
-        <div className="text-6xl font-bold text-primary mb-1">{totalScore}</div>
-        {hasDictionary ? (
-          <div className="text-text-muted text-sm">
-            out of {maxPossible} possible ({percentage}%)
-          </div>
-        ) : (
-          <div className="text-text-muted text-sm">
-            Dictionary data was not ready, so missed words are hidden.
-          </div>
-        )}
-      </div>
-
-      {mode === "daily" && dailyMissions.length > 0 && (
-        <DailyMissionPanel
-          missions={dailyMissions}
-          title="Daily Missions"
-          subtitle="How well you matched today's board-specific goals."
-        />
-      )}
-
-      {/* Progress bar */}
-      {hasDictionary && (
-        <div className="w-full bg-surface rounded-full h-3 overflow-hidden">
-          <div
-            className="h-full bg-gradient-to-r from-primary to-primary-hover transition-all duration-700"
-            style={{ width: `${percentage}%` }}
-          />
-        </div>
-      )}
-
-      {/* Stats row */}
-      <div className="flex justify-center gap-8 w-full">
-        <div className="text-center">
-          <div className="text-2xl font-bold text-success">{foundWords.length}</div>
-          <div className="text-text-dim text-xs uppercase tracking-wide">Found</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-danger">{missedWords.length}</div>
-          <div className="text-text-dim text-xs uppercase tracking-wide">Missed</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-text">{allWords.length}</div>
-          <div className="text-text-dim text-xs uppercase tracking-wide">Total</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-primary">
-            {bestCombo && bestCombo > 0 ? `x${bestCombo}` : "—"}
-          </div>
-          <div className="text-text-dim text-xs uppercase tracking-wide">Best Combo</div>
-        </div>
-      </div>
-
-      <div className="w-full">
-        <TodayTipCard
-          tip={boardTip}
-          grid={grid}
-          primaryHref="/guides/word-pattern-library"
-          primaryLabel="Study this pattern"
-          secondaryHref="/play"
-          secondaryLabel="Practice another round"
-        />
-      </div>
-
-      {/* Game review */}
-      {hasDictionary && (
-        <div className="w-full rounded-2xl border border-border bg-surface/40 p-4 sm:p-5">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted mb-3">
-            Game Review
-          </h3>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl bg-surface/60 p-3">
-              <div className="text-xs uppercase tracking-wide text-text-muted mb-1">
-                Best missed words
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {bestMissedWords.length > 0 ? (
-                  bestMissedWords.map((w) => (
-                    <a
-                      key={w.word}
-                      href={`/words/${w.word.toLowerCase()}`}
-                      className="px-2.5 py-1 rounded-md bg-danger-bg/30 text-danger hover:bg-danger-bg/50 transition text-sm font-mono"
-                    >
-                      {w.word}
-                      <span className="ml-1 text-xs text-danger/70">{w.score}</span>
-                    </a>
-                  ))
-                ) : (
-                  <span className="text-sm text-text-muted">No missed words to review.</span>
-                )}
-              </div>
-            </div>
-            <div className="rounded-xl bg-surface/60 p-3">
-              <div className="text-xs uppercase tracking-wide text-text-muted mb-1">
-                Next focus
-              </div>
-              {trainingHint ? (
-                <div className="space-y-1">
-                  <div className="font-semibold text-primary">{trainingHint.label}</div>
-                  <p className="text-sm text-text-muted leading-relaxed">
-                    {trainingHint.detail}
-                  </p>
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
+        <div className="flex flex-col gap-6">
+          <div className="rounded-3xl border border-border bg-surface/35 p-5 shadow-lg shadow-black/5 sm:p-6">
+            <div className="text-center">
+              <div className="mb-1 text-6xl font-bold text-primary">{totalScore}</div>
+              {hasDictionary ? (
+                <div className="text-sm text-text-muted">
+                  out of {maxPossible} possible ({percentage}%)
                 </div>
               ) : (
-                <p className="text-sm text-text-muted">
-                  Great scan. Try the next board and keep building speed.
-                </p>
+                <div className="text-sm text-text-muted">
+                  Dictionary data was not ready, so missed words are hidden.
+                </div>
               )}
+            </div>
+
+            {mode === "daily" && dailyMissions.length > 0 && (
+              <div className="mt-5">
+                <DailyMissionPanel
+                  missions={dailyMissions}
+                  title="Daily Missions"
+                  subtitle="How well you matched today's board-specific goals."
+                />
+              </div>
+            )}
+
+            {hasDictionary && (
+              <div className="mt-5">
+                <div className="h-3 w-full overflow-hidden rounded-full bg-surface">
+                  <div
+                    className="h-full bg-gradient-to-r from-primary to-primary-hover transition-all duration-700"
+                    style={{ width: `${percentage}%` }}
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="rounded-2xl border border-border bg-bg/70 p-3 text-center">
+                <div className="text-2xl font-bold text-success">{foundWords.length}</div>
+                <div className="text-xs uppercase tracking-wide text-text-dim">Found</div>
+              </div>
+              <div className="rounded-2xl border border-border bg-bg/70 p-3 text-center">
+                <div className="text-2xl font-bold text-danger">{missedWords.length}</div>
+                <div className="text-xs uppercase tracking-wide text-text-dim">Missed</div>
+              </div>
+              <div className="rounded-2xl border border-border bg-bg/70 p-3 text-center">
+                <div className="text-2xl font-bold text-text">{allWords.length}</div>
+                <div className="text-xs uppercase tracking-wide text-text-dim">Total</div>
+              </div>
+              <div className="rounded-2xl border border-border bg-bg/70 p-3 text-center">
+                <div className="text-2xl font-bold text-primary">
+                  {bestCombo && bestCombo > 0 ? `x${bestCombo}` : "—"}
+                </div>
+                <div className="text-xs uppercase tracking-wide text-text-dim">Best Combo</div>
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <button
+                onClick={handleShareCard}
+                disabled={cardLoading}
+                className="min-w-[140px] flex-1 rounded-xl bg-primary px-6 py-3 text-lg font-semibold transition hover:bg-primary-hover active:scale-[0.98] disabled:opacity-50"
+              >
+                {cardLoading ? "Generating…" : "Share Image"}
+              </button>
+              <button
+                onClick={handleShare}
+                className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
+              >
+                {copied ? "Copied!" : "Text"}
+              </button>
+              <a
+                href="/stats"
+                className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
+              >
+                Stats
+              </a>
+            </div>
+          </div>
+
+          <div className="w-full">
+            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-text-muted">
+              Your Words ({foundWords.length})
+            </h3>
+            <div className="flex flex-wrap gap-1.5">
+              {foundWords
+                .slice()
+                .sort((a, b) => b.score - a.score)
+                .map((w, i) => (
+                  <span
+                    key={i}
+                    className="rounded-md bg-success-bg/40 px-2.5 py-1 font-mono text-sm text-success"
+                  >
+                    {w.word} <span className="text-xs text-success">{w.score}</span>
+                  </span>
+                ))}
             </div>
           </div>
         </div>
-      )}
 
-      {/* Share buttons */}
-      <div className="flex gap-3 w-full">
-        <button
-          onClick={handleShareCard}
-          disabled={cardLoading}
-          className="flex-1 px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold text-lg active:scale-[0.98] disabled:opacity-50"
-        >
-          {cardLoading ? "Generating…" : "Share Image"}
-        </button>
-        <button
-          onClick={handleShare}
-          className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold whitespace-nowrap"
-        >
-          {copied ? "Copied!" : "Text"}
-        </button>
-        <a
-          href="/stats"
-          className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold whitespace-nowrap"
-        >
-          Stats
-        </a>
-      </div>
-
-      {/* Card preview */}
-      {previewUrl && (
-        <div className="w-full">
-          <div className="text-xs text-text-dim mb-1">Preview (long-press to save):</div>
-          {/* Blob preview URLs are a good fit for a plain img tag here. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={previewUrl}
-            alt="Share card preview"
-            className="w-full rounded-xl border border-border"
+        <div className="flex flex-col gap-6">
+          <TodayTipCard
+            tip={boardTip}
+            grid={grid}
+            primaryHref="/guides/word-pattern-library"
+            primaryLabel="Study this pattern"
+            secondaryHref="/play"
+            secondaryLabel="Practice another round"
+            compact
           />
-          <button
-            onClick={() => setPreviewUrl(null)}
-            className="mt-1 text-xs text-text-dim hover:text-text-muted"
-          >
-            Close preview
-          </button>
-        </div>
-      )}
 
-      {/* Found words list */}
-      <div className="w-full">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-2">
-          Your Words ({foundWords.length})
-        </h3>
-        <div className="flex flex-wrap gap-1.5">
-          {foundWords
-            .slice()
-            .sort((a, b) => b.score - a.score)
-            .map((w, i) => (
-              <span
-                key={i}
-                className="px-2.5 py-1 bg-success-bg/40 text-success rounded-md text-sm font-mono"
+          {hasDictionary && (
+            <div className="w-full rounded-2xl border border-border bg-surface/40 p-4 sm:p-5">
+              <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-text-muted">
+                Game Review
+              </h3>
+              <div className="grid gap-3">
+                <div className="rounded-xl bg-surface/60 p-3">
+                  <div className="mb-1 text-xs uppercase tracking-wide text-text-muted">
+                    Best missed words
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {bestMissedWords.length > 0 ? (
+                      bestMissedWords.map((w) => (
+                        <a
+                          key={w.word}
+                          href={`/words/${w.word.toLowerCase()}`}
+                          className="rounded-md bg-danger-bg/30 px-2.5 py-1 font-mono text-sm text-danger transition hover:bg-danger-bg/50"
+                        >
+                          {w.word}
+                          <span className="ml-1 text-xs text-danger/70">{w.score}</span>
+                        </a>
+                      ))
+                    ) : (
+                      <span className="text-sm text-text-muted">No missed words to review.</span>
+                    )}
+                  </div>
+                </div>
+                <div className="rounded-xl bg-surface/60 p-3">
+                  <div className="mb-1 text-xs uppercase tracking-wide text-text-muted">
+                    Next focus
+                  </div>
+                  {trainingHint ? (
+                    <div className="space-y-1">
+                      <div className="font-semibold text-primary">{trainingHint.label}</div>
+                      <p className="text-sm leading-relaxed text-text-muted">
+                        {trainingHint.detail}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-sm text-text-muted">
+                      Great scan. Try the next board and keep building speed.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {previewUrl && (
+            <div className="w-full">
+              <div className="mb-1 text-xs text-text-dim">Preview (long-press to save):</div>
+              {/* Blob preview URLs are a good fit for a plain img tag here. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={previewUrl}
+                alt="Share card preview"
+                className="w-full rounded-xl border border-border"
+              />
+              <button
+                onClick={() => setPreviewUrl(null)}
+                className="mt-1 text-xs text-text-dim hover:text-text-muted"
               >
-                {w.word} <span className="text-success text-xs">{w.score}</span>
-              </span>
-            ))}
+                Close preview
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -506,7 +510,7 @@ export default function ResultScreen({
         <div className="w-full">
           <button
             onClick={() => setShowMissed(!showMissed)}
-            className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-2 hover:text-text transition"
+            className="mb-2 text-sm font-semibold uppercase tracking-wide text-text-muted transition hover:text-text"
           >
             {showMissed ? "▼" : "▶"} Missed Words ({missedWords.length})
           </button>
@@ -516,9 +520,9 @@ export default function ResultScreen({
                 <a
                   key={i}
                   href={`/words/${w.word.toLowerCase()}`}
-                  className="px-2.5 py-1 bg-danger-bg/30 text-danger/80 hover:bg-danger-bg/50 hover:text-danger rounded-md text-sm font-mono transition"
+                  className="rounded-md bg-danger-bg/30 px-2.5 py-1 font-mono text-sm text-danger/80 transition hover:bg-danger-bg/50 hover:text-danger"
                 >
-                  {w.word} <span className="text-danger/60 text-xs">{w.score}</span>
+                  {w.word} <span className="text-xs text-danger/60">{w.score}</span>
                 </a>
               ))}
             </div>
@@ -526,25 +530,24 @@ export default function ResultScreen({
         </div>
       )}
 
-      {/* Actions */}
-      <div className="flex gap-3 mt-2">
+      <div className="flex flex-wrap gap-3">
         {onPlayAgain && (
           <button
             onClick={onPlayAgain}
-            className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
+            className="rounded-xl bg-primary px-6 py-3 font-semibold transition hover:bg-primary-hover"
           >
             {mode === "daily" ? "Play Random" : "New Game"}
           </button>
         )}
         <a
           href="/daily"
-          className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
+          className="rounded-xl bg-surface px-6 py-3 font-semibold transition hover:bg-surface-hover"
         >
           Daily Challenge
         </a>
         <a
           href="/"
-          className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
+          className="rounded-xl bg-surface px-6 py-3 font-semibold transition hover:bg-surface-hover"
         >
           Home
         </a>

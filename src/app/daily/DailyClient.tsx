@@ -16,6 +16,9 @@ import { loadDictionary, Trie } from "@/lib/dictionary";
 import { solveBoard } from "@/lib/solver";
 import { buildDailyMissions, type DailyMission } from "@/lib/daily-missions";
 import { recordDailyPlay, type StreakData } from "@/lib/streak";
+import { getTodayActionTip } from "@/lib/daily-tip";
+import TodayTipCard from "@/components/TodayTipCard";
+import Link from "next/link";
 
 interface GameResult {
   words: { word: string; score: number }[];
@@ -34,6 +37,7 @@ export default function DailyClient() {
   const [result, setResult] = useState<GameResult | null>(null);
   const [missions, setMissions] = useState<DailyMission[]>([]);
   const [missionsReady, setMissionsReady] = useState(false);
+  const todayTip = useMemo(() => getTodayActionTip(today), [today]);
 
   useEffect(() => {
     let timer: number | null = null;
@@ -128,9 +132,30 @@ export default function DailyClient() {
         <h1 className="text-xl font-semibold mt-1">
           Daily Challenge — {today}
         </h1>
+        <div className="mt-3 flex flex-wrap justify-center gap-2 text-xs">
+          <Link href="/daily/archive" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Archive
+          </Link>
+          <Link href="/solver" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Solver
+          </Link>
+          <Link href="/stats" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Stats
+          </Link>
+        </div>
       </header>
       <div className="mb-3">
         <StreakDisplay compact />
+      </div>
+      <div className="mb-5 w-full max-w-3xl">
+        <TodayTipCard
+          tip={todayTip}
+          grid={grid}
+          primaryHref="/play"
+          primaryLabel="Practice this tip"
+          secondaryHref="/guides/word-pattern-library"
+          secondaryLabel="See the pattern library"
+        />
       </div>
       <div className="mb-5 w-full max-w-lg">
         <DailyMissionPanel

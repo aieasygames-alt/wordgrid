@@ -4,9 +4,11 @@ import { useState, useMemo, useCallback } from "react";
 import GameBoard from "@/components/GameBoard";
 import ResultScreen from "@/components/ResultScreen";
 import ThemeToggle from "@/components/ThemeToggle";
+import TodayTipCard from "@/components/TodayTipCard";
 import Link from "next/link";
 import { generateGrid, Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
+import { getTodayActionTip } from "@/lib/daily-tip";
 
 interface FoundWord {
   word: string;
@@ -25,6 +27,7 @@ export default function HomeClient() {
   const [seed, setSeed] = useState(() => Math.floor(Math.random() * 2 ** 31));
   const grid = useMemo(() => generateGrid(seed), [seed]);
   const [result, setResult] = useState<GameResult | null>(null);
+  const todayTip = useMemo(() => getTodayActionTip(), []);
 
   const handleComplete = useCallback(
     (words: FoundWord[], total: number, trie: Trie | null, bestCombo: number) => {
@@ -73,12 +76,28 @@ export default function HomeClient() {
           your browser, connect adjacent letters in a 4×4 grid, and race the
           clock or relax in Zen mode. No download, no sign-up.
         </p>
+        <div className="mt-6 mb-5 text-left">
+          <TodayTipCard
+            tip={todayTip}
+            grid={grid}
+            primaryHref="/daily"
+            primaryLabel="Try today's board"
+            secondaryHref="/guides/word-pattern-library"
+            secondaryLabel="Open pattern library"
+          />
+        </div>
         <div className="flex gap-3 justify-center">
           <Link
             href="/daily"
             className="px-6 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-semibold active:scale-[0.98]"
           >
             Daily Challenge
+          </Link>
+          <Link
+            href="/daily/archive"
+            className="px-6 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-semibold active:scale-[0.98]"
+          >
+            Archive
           </Link>
           <Link
             href="/play"
@@ -96,6 +115,18 @@ export default function HomeClient() {
           </Link>
           <Link href="/guides/boggle-rules-beginners" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
             Boggle Rules for Beginners
+          </Link>
+          <Link href="/guides/word-pattern-library" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Pattern Library
+          </Link>
+          <Link href="/solver" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Solver
+          </Link>
+          <Link href="/stats" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Stats
+          </Link>
+          <Link href="/daily/archive" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Archive
           </Link>
         </div>
       </section>

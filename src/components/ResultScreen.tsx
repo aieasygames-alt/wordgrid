@@ -1,13 +1,16 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
 import { solveBoard, SolvedWord } from "@/lib/solver";
+import { recordGameHistory } from "@/lib/game-history";
 import { buildDailyMissions } from "@/lib/daily-missions";
+import { getBoardActionTip } from "@/lib/daily-tip";
 import { shareCardImage, generateShareCard } from "@/lib/shareCard";
 import Confetti from "./Confetti";
 import DailyMissionPanel from "./DailyMissionPanel";
+import TodayTipCard from "./TodayTipCard";
 
 interface FoundWord {
   word: string;
@@ -78,6 +81,7 @@ export default function ResultScreen({
   const [cardLoading, setCardLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const hasDictionary = Boolean(trie);
+  const recordedRef = useRef(false);
 
   // Trigger confetti when result screen mounts with a good score
   useEffect(() => {
@@ -191,6 +195,7 @@ export default function ResultScreen({
     () => (mode === "daily" && hasDictionary ? buildDailyMissions(allWords, foundWords, bestCombo ?? 0) : []),
     [mode, hasDictionary, allWords, foundWords, bestCombo]
   );
+  const boardTip = useMemo(() => getBoardActionTip(grid), [grid]);
 
   // Generate emoji grid for sharing (like Wordle)
   const shareText = useMemo(() => {
@@ -296,6 +301,22 @@ export default function ResultScreen({
     }
   };
 
+  useEffect(() => {
+    if (recordedRef.current) return;
+    recordedRef.current = true;
+    recordGameHistory({
+      mode,
+      score: totalScore,
+      foundCount: foundWords.length,
+      totalCount: allWords.length,
+      maxScore: maxPossible,
+      percentage,
+      bestCombo: bestCombo ?? 0,
+      streak,
+      dateLabel,
+    });
+  }, [mode, totalScore, foundWords.length, allWords.length, maxPossible, percentage, bestCombo, streak, dateLabel]);
+
   return (
     <div className="flex flex-col items-center gap-6 w-full max-w-lg mx-auto">
       <Confetti fire={fireConfetti} />
@@ -355,6 +376,17 @@ export default function ResultScreen({
           </div>
           <div className="text-text-dim text-xs uppercase tracking-wide">Best Combo</div>
         </div>
+      </div>
+
+      <div className="w-full">
+        <TodayTipCard
+          tip={boardTip}
+          grid={grid}
+          primaryHref="/guides/word-pattern-library"
+          primaryLabel="Study this pattern"
+          secondaryHref="/play"
+          secondaryLabel="Practice another round"
+        />
       </div>
 
       {/* Game review */}
@@ -421,6 +453,12 @@ export default function ResultScreen({
         >
           {copied ? "Copied!" : "Text"}
         </button>
+        <a
+          href="/stats"
+          className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold whitespace-nowrap"
+        >
+          Stats
+        </a>
       </div>
 
       {/* Card preview */}

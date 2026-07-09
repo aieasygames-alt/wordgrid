@@ -186,6 +186,42 @@ const GUIDES = [
     date: "2026-06-29",
   },
   {
+    href: "/guides/word-pattern-library",
+    title: "Word Grid Pattern Library — Prefixes, Suffixes & Qu",
+    description:
+      "A practical pattern library for scanning prefixes, suffixes, plurals, word families, and Qu before the board runs dry.",
+    category: "Intermediate",
+    readTime: "8 min read",
+    date: "2026-07-09",
+  },
+  {
+    href: "/guides/prefix-strategy",
+    title: "Prefix Strategy for Word Grid — RE, UN, IN & PRE",
+    description:
+      "Learn how prefixes turn one stem into a family of related answers and make the board easier to scan.",
+    category: "Intermediate",
+    readTime: "5 min read",
+    date: "2026-07-09",
+  },
+  {
+    href: "/guides/suffix-strategy",
+    title: "Suffix Strategy for Word Grid — ING, ED, ER & LY",
+    description:
+      "Use endings to extend base words, pick up cheap plural points, and raise your score efficiently.",
+    category: "Intermediate",
+    readTime: "5 min read",
+    date: "2026-07-09",
+  },
+  {
+    href: "/guides/qu-strategy",
+    title: "Qu Strategy for Word Grid — Find Qu Words Faster",
+    description:
+      "A special-case guide for the Qu tile and the high-value words it unlocks.",
+    category: "Intermediate",
+    readTime: "4 min read",
+    date: "2026-07-09",
+  },
+  {
     href: "/guides/boggle-solver",
     title: "Boggle Solver — Find All Words in Any Grid",
     description:
@@ -256,6 +292,15 @@ export default function GuidesIndex() {
               </p>
             </Link>
             <Link
+              href="/solver"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Boggle Solver</div>
+              <p className="text-sm text-text-muted mt-1">
+                Paste a grid and find every valid word with score breakdowns.
+              </p>
+            </Link>
+            <Link
               href="/guides/boggle-rules-beginners"
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
             >
@@ -271,6 +316,24 @@ export default function GuidesIndex() {
               <div className="font-semibold text-primary">Most Common Boggle Words</div>
               <p className="text-sm text-text-muted mt-1">
                 High-frequency words and patterns that are already earning clicks.
+              </p>
+            </Link>
+            <Link
+              href="/guides/word-pattern-library"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Word Grid Pattern Library</div>
+              <p className="text-sm text-text-muted mt-1">
+                Prefixes, suffixes, Qu, and word-family scans in one practical hub.
+              </p>
+            </Link>
+            <Link
+              href="/guides/prefix-strategy"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Prefix Strategy</div>
+              <p className="text-sm text-text-muted mt-1">
+                RE, UN, IN, and PRE turns one stem into a family.
               </p>
             </Link>
           </div>

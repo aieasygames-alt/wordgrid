@@ -40,6 +40,15 @@ export default function PlayClient() {
             <a href="/guides/how-to-find-more-words" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
               Find More Words
             </a>
+            <a href="/solver" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+              Solver
+            </a>
+            <a href="/stats" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+              Stats
+            </a>
+            <a href="/daily/archive" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+              Archive
+            </a>
             <a href="/daily" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
               Daily Challenge
             </a>
@@ -80,6 +89,15 @@ export default function PlayClient() {
           </a>
           <a href="/guides/word-grid-strategies" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
             Strategy
+          </a>
+          <a href="/solver" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Solver
+          </a>
+          <a href="/stats" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Stats
+          </a>
+          <a href="/daily/archive" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
+            Archive
           </a>
           <a href="/daily" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
             Daily Challenge

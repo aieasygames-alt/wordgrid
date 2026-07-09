@@ -151,6 +151,7 @@ export default function DailyClient() {
         <TodayTipCard
           tip={todayTip}
           grid={grid}
+          compact
           primaryHref="/play"
           primaryLabel="Practice this tip"
           secondaryHref="/guides/word-pattern-library"

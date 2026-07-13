@@ -28,6 +28,19 @@ export default function HomeClient() {
   const grid = useMemo(() => generateGrid(seed), [seed]);
   const [result, setResult] = useState<GameResult | null>(null);
   const todayTip = useMemo(() => getTodayActionTip(), []);
+  const primaryEntrances = [
+    { href: "/play", label: "Play Free" },
+    { href: "/zen", label: "Zen" },
+    { href: "/daily", label: "Daily" },
+    { href: "/challenge", label: "Challenge" },
+  ];
+  const secondaryEntrances = [
+    { href: "/guides/boggle-rules-beginners", label: "Rules" },
+    { href: "/guides/word-pattern-library", label: "Pattern Library" },
+    { href: "/solver", label: "Solver" },
+    { href: "/stats", label: "Stats" },
+    { href: "/daily/archive", label: "Archive" },
+  ];
 
   const handleComplete = useCallback(
     (words: FoundWord[], total: number, trie: Trie | null, bestCombo: number) => {
@@ -67,68 +80,55 @@ export default function HomeClient() {
       </div>
 
       {/* Hero text */}
-      <section className="text-center mb-6">
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-          Word Grid Online Free — Play Boggle-Style Puzzle
-        </h1>
-        <p className="text-base text-text-muted max-w-lg mx-auto mb-4">
-          WordGrid is a free word grid online game. Play Boggle online free in
-          your browser, connect adjacent letters in a 4×4 grid, and race the
-          clock or relax in Zen mode. No download, no sign-up.
-        </p>
-        <div className="mt-6 mb-5 text-left">
+      <section className="mb-6">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-start">
+          <div className="text-center lg:text-left">
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+              Play Word Grid Online Free
+            </h1>
+            <p className="text-base text-text-muted max-w-lg mx-auto lg:mx-0 mb-4">
+              Start a free word grid game in your browser. Connect adjacent
+              letters in a Boggle-style puzzle, choose timed or untimed play,
+              and come back for the shared Daily board. No download, no sign-up.
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {primaryEntrances.map((entry) => (
+                <Link
+                  key={entry.href}
+                  href={entry.href}
+                  className="px-5 py-3 bg-surface hover:bg-surface-hover transition rounded-xl text-sm font-semibold text-center active:scale-[0.98]"
+                >
+                  {entry.label}
+                </Link>
+              ))}
+            </div>
+            <div className="mt-5 flex flex-wrap justify-center lg:justify-start gap-2 text-sm">
+              {secondaryEntrances.map((entry) => (
+                <Link
+                  key={entry.href}
+                  href={entry.href}
+                  className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition"
+                >
+                  {entry.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <TodayTipCard
             tip={todayTip}
             grid={grid}
             compact
+            layout="split"
+            density="tight"
+            actionsLayout="inline"
+            showActionBox={false}
+            showGrid={false}
             primaryHref="/daily"
-            primaryLabel="Try today's board"
+            primaryLabel="Open Daily"
             secondaryHref="/guides/word-pattern-library"
             secondaryLabel="Open pattern library"
           />
-        </div>
-        <div className="flex gap-3 justify-center">
-          <Link
-            href="/daily"
-            className="px-6 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-semibold active:scale-[0.98]"
-          >
-            Daily Challenge
-          </Link>
-          <Link
-            href="/daily/archive"
-            className="px-6 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-semibold active:scale-[0.98]"
-          >
-            Archive
-          </Link>
-          <Link
-            href="/play"
-            className="px-6 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-semibold active:scale-[0.98]"
-          >
-            Full Screen →
-          </Link>
-        </div>
-        <div className="mt-5 flex flex-wrap justify-center gap-2 text-sm">
-          <Link href="/play" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Play Word Grid Online
-          </Link>
-          <Link href="/guides/play-boggle-online-free" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Play Boggle Online Free
-          </Link>
-          <Link href="/guides/boggle-rules-beginners" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Boggle Rules for Beginners
-          </Link>
-          <Link href="/guides/word-pattern-library" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Pattern Library
-          </Link>
-          <Link href="/solver" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Solver
-          </Link>
-          <Link href="/stats" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Stats
-          </Link>
-          <Link href="/daily/archive" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Archive
-          </Link>
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Boggle Variants — Fun Game Variations & Alternatives",
@@ -66,7 +67,7 @@ const faqSchema = {
       name: "Can you play Boggle solo?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, solo Boggle is excellent for practice and skill-building. Play against your own high score, set word-count targets, or use online Daily Challenges. Solo play focuses on personal improvement rather than competition, making it perfect for vocabulary building and pattern recognition training.",
+        text: "Yes, solo Boggle is excellent for practice and skill-building. Play against your own high score, set word-count targets, or use online Daily boards. Solo play focuses on personal improvement rather than competition, making it perfect for vocabulary building and pattern recognition training.",
       },
     },
     {
@@ -106,7 +107,7 @@ export default function BoggleVariantsGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -295,7 +296,7 @@ export default function BoggleVariantsGuide() {
                 </p>
                 <p className="text-sm leading-relaxed">
                   <strong>Play:</strong> Beat your own high score, set word-count
-                  targets, or complete Daily Challenges. Focus on personal
+                  targets, or complete the Daily board. Focus on personal
                   improvement.
                 </p>
                 <p className="text-xs text-text-muted mt-2">
@@ -341,7 +342,7 @@ export default function BoggleVariantsGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Digital Boggle</h3>
                 <p className="text-sm leading-relaxed">
-                  Online and app versions with unlimited grids, Daily Challenges,
+                  Online and app versions with unlimited grids, Daily board,
                   leaderboards, and multiplayer modes. Offers convenience and
                   variety beyond physical sets.
                 </p>
@@ -417,7 +418,7 @@ export default function BoggleVariantsGuide() {
                   ["Family game night", "Team Boggle or Category Boggle"],
                   ["Party with adults", "Speed Boggle or Elimination"],
                   ["Classroom learning", "Category Boggle or Story Boggle"],
-                  ["Solo practice", "Solo Boggle or Daily Challenges"],
+                  ["Solo practice", "Solo Boggle or Daily board"],
                   ["Experienced players", "Big Boggle or Boggle Master"],
                   ["Quick games", "Speed Boggle (90 seconds)"],
                   ["Creative groups", "Story Boggle or Relay Boggle"],
@@ -477,9 +478,9 @@ export default function BoggleVariantsGuide() {
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   Yes, solo Boggle is excellent for practice. Play against your
-                  own high score, set word-count targets, or use online Daily
-                  Challenges. Solo play focuses on personal improvement and
-                  skill-building rather than competition.
+                  own high score, set word-count targets, or use the online
+                  Daily board challenge. Solo play focuses on personal
+                  improvement and skill-building rather than competition.
                 </p>
               </details>
             </div>
@@ -504,7 +505,7 @@ export default function BoggleVariantsGuide() {
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -543,7 +544,7 @@ export default function BoggleVariantsGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

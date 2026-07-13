@@ -47,7 +47,9 @@ export default function Guide1() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <article className="max-w-2xl mx-auto">
+      <article className="mx-auto max-w-7xl">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+          <div>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2">
             <a href="/" className="hover:text-text">Home</a>
@@ -172,13 +174,13 @@ export default function Guide1() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Play Now
+                Play
               </a>
               <a
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </a>
             </div>
           </div>
@@ -217,7 +219,7 @@ export default function Guide1() {
                 <div className="text-sm text-text-muted">New to word grid games? Start here for the full rules breakdown.</div>
               </a>
               <a href="/play/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
-                <div className="font-semibold text-primary">Play Now &rarr;</div>
+                <div className="font-semibold text-primary">Play &rarr;</div>
                 <div className="text-sm text-text-muted">Practice these techniques in a live round.</div>
               </a>
               <a href="/guides/" className="block text-sm text-text-dim hover:text-text">
@@ -225,6 +227,48 @@ export default function Guide1() {
               </a>
             </div>
           </div>
+        </div>
+          </div>
+
+          <aside className="space-y-4 lg:sticky lg:top-8">
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
+              <h2 className="text-2xl font-bold">Find more words faster</h2>
+              <p className="mt-3 text-sm text-text-muted leading-relaxed">
+                Keep the right-side rail visible on desktop so the six techniques and
+                the practice links stay in one reading flow.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold text-text">Practice now</h2>
+              <div className="mt-4 grid gap-2">
+                <a href="/play/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Play now
+                </a>
+                <a href="/daily/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Daily board
+                </a>
+                <a href="/guides/word-grid-strategies/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Score higher
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold text-text">Next reads</h2>
+              <div className="mt-4 grid gap-2">
+                <a href="/guides/most-common-boggle-words/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Common words
+                </a>
+                <a href="/guides/boggle-rules-beginners/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Rules refresher
+                </a>
+                <a href="/guides/word-grid-vs-boggle/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Compare with Boggle
+                </a>
+              </div>
+            </div>
+          </aside>
         </div>
       </article>
     </main>

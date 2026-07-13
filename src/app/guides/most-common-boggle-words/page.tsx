@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Most Common Boggle Words — Top 100 High-Frequency List",
@@ -46,7 +47,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-06-29",
+  dateModified: "2026-07-13",
   mainEntityOfPage: `${BASE_URL}/guides/most-common-boggle-words/`,
 };
 
@@ -91,7 +92,7 @@ const faqSchema = {
       name: "How can I memorize common Boggle words?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Don't memorize — build pattern recognition. Practice Daily Challenges to see these words repeatedly. Focus on letter clusters (TH, HE, IN, ER) rather than individual words. Look for word endings (-TION, -NESS, -MENT). Play consistently and your brain will automatically recognize common patterns without memorization.",
+        text: "Don't memorize — build pattern recognition. Practice the Daily board to see these words repeatedly. Focus on letter clusters (TH, HE, IN, ER) rather than individual words. Look for word endings (-TION, -NESS, -MENT). Play consistently and your brain will automatically recognize common patterns without memorization.",
       },
     },
   ],
@@ -123,7 +124,7 @@ export default function MostCommonBoggleWordsGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -133,7 +134,7 @@ export default function MostCommonBoggleWordsGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Most Common Boggle Words — Top 100 High-Frequency List
           </h1>
-          <p className="text-text-muted">10 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">10 min read &middot; Updated July 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -171,6 +172,36 @@ export default function MostCommonBoggleWordsGuide() {
               </Link>
               .
             </p>
+          </section>
+
+          <section className="grid gap-3 sm:grid-cols-3">
+            <Link
+              href="/guides/boggle-word-lists"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Browse by letter</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Expand this top list into a full letter-by-letter vocabulary reference.
+              </p>
+            </Link>
+            <Link
+              href="/guides/word-pattern-library"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Study patterns</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Turn common words into prefix, suffix, plural, and Qu scanning habits.
+              </p>
+            </Link>
+            <Link
+              href="/play"
+              className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-4 border border-primary/20"
+            >
+              <h2 className="font-semibold text-primary">Practice live</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Apply the list immediately on a fresh word grid board.
+              </p>
+            </Link>
           </section>
 
           <section>
@@ -416,7 +447,7 @@ export default function MostCommonBoggleWordsGuide() {
               Practice Recognizing These Words
             </h2>
             <p className="text-text mb-4">
-              Don't memorize — play. Daily Challenges will help you recognize these
+              Don't memorize — play. The Daily board will help you recognize these
               patterns automatically. Consistent practice builds instant word
               recognition.
             </p>
@@ -425,13 +456,13 @@ export default function MostCommonBoggleWordsGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Practice Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -505,7 +536,7 @@ export default function MostCommonBoggleWordsGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Now →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Apply the list in a live board immediately.
@@ -520,7 +551,7 @@ export default function MostCommonBoggleWordsGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

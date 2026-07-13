@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Boggle Online Free — Play Instantly, No Download",
   description:
-    "Play Boggle online free in your browser. No download, no sign-up, no ads. Classic 4×4 word puzzle with 3-minute rounds. Instant play on desktop and mobile.",
+    "Play Boggle online free in your browser. No download, no sign-up, no ads. Classic Boggle plus larger practice grids with 3-minute rounds. Instant play on desktop and mobile.",
   alternates: { canonical: "/guides/boggle-online-free" },
   keywords: [
     "boggle online free", "boggle online free game", "free boggle online",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Boggle Online Free — Play Instantly, No Download Required",
     description:
-      "Classic Boggle gameplay, free in your browser. 4×4 word grid, 3-minute timer. No download, no sign-up, no ads.",
+      "Classic Boggle gameplay, free in your browser. Standard and larger practice grids, 3-minute timer. No download, no sign-up, no ads.",
   },
 };
 
@@ -74,7 +75,7 @@ const faqSchema = {
       name: "How do you play Boggle online?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "To play Boggle online, visit wordgrid.games and click Play. A 4×4 grid of letters appears. Click and drag across adjacent letters (horizontally, vertically, or diagonally) to spell words. Each word must be 3+ letters, and you can't reuse the same tile. Find as many words as possible in 3 minutes.",
+        text: "To play Boggle online, visit wordgrid.games and click Play. A square grid of letters appears. Click and drag across adjacent letters (horizontally, vertically, or diagonally) to spell words. Each word must be 3+ letters, and you can't reuse the same tile. Find as many words as possible in 3 minutes. The classic board is 4×4, and larger practice boards are also available.",
       },
     },
   ],
@@ -106,7 +107,7 @@ export default function BoggleOnlineFreeGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -128,7 +129,7 @@ export default function BoggleOnlineFreeGuide() {
             </p>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
-                Play Boggle online free now →
+                Play →
               </Link>{" "}
               or switch to{" "}
               <Link href="/guides/boggle-game-online" className="text-primary hover:underline">
@@ -151,9 +152,10 @@ export default function BoggleOnlineFreeGuide() {
             </h2>
             <p className="leading-relaxed">
               Free online Boggle is a browser-based version of the classic 1972
-              word game. You get a 4×4 grid of 16 letters and 3 minutes to find
+              word game. You get a square grid of letters and 3 minutes to find
               as many words as possible by connecting adjacent letters —
-              horizontally, vertically, or diagonally.
+              horizontally, vertically, or diagonally. The classic board is
+              4×4, and larger practice boards are also available.
             </p>
             <p className="leading-relaxed mt-3">
               The rules are identical to the original board game. The only
@@ -212,7 +214,7 @@ export default function BoggleOnlineFreeGuide() {
                 Just open and play.
               </li>
               <li>
-                <strong>Daily Challenge.</strong> Same grid for everyone each
+                <strong>Daily board.</strong> Same grid for everyone each
                 day. Compare scores with friends.
               </li>
               <li>
@@ -287,7 +289,7 @@ export default function BoggleOnlineFreeGuide() {
                 for warming up.
               </li>
               <li>
-                <strong>Daily Challenge:</strong> One grid per day for everyone.
+                <strong>Daily board:</strong> One grid per day for everyone.
                 Compare scores with friends.
               </li>
               <li>
@@ -367,13 +369,13 @@ export default function BoggleOnlineFreeGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Play Free Boggle
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -386,7 +388,7 @@ export default function BoggleOnlineFreeGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Word Grid Online →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Better for users searching the browser-game phrasing.
@@ -419,7 +421,7 @@ export default function BoggleOnlineFreeGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Now →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Jump straight into a game.
@@ -434,7 +436,7 @@ export default function BoggleOnlineFreeGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

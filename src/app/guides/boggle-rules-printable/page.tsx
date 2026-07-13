@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Boggle Rules Printable — Free Reference Sheet",
@@ -106,7 +107,7 @@ export default function BoggleRulesPrintableGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -448,13 +449,13 @@ export default function BoggleRulesPrintableGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Play Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -489,7 +490,7 @@ export default function BoggleRulesPrintableGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Word Grid Now →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Put the printed rules into practice in the browser.
@@ -504,7 +505,7 @@ export default function BoggleRulesPrintableGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

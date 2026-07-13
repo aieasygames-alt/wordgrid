@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Play Word Grid Online — Free, No Download",
   description:
-    "Play word grid online for free, right in your browser. No download, no sign-up. A new 4×4 word grid puzzle every day — connect adjacent letters to find words in 3 minutes.",
+    "Play word grid online for free, right in your browser. No download, no sign-up. A new word grid puzzle every day — connect adjacent letters to find words on standard or larger boards.",
   alternates: { canonical: "/guides/play-word-grid-online" },
   keywords: [
     "word grid online", "play word grid online", "word grid online free",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Play Word Grid Online — Free, No Download Needed",
     description:
-      "Word grid is a free online word puzzle. Connect adjacent letters in a 4×4 grid to find words. Play instantly — no download, no sign-up.",
+      "Word grid is a free online word puzzle. Connect adjacent letters in square grids to find words. Play instantly — no download, no sign-up.",
   },
 };
 
@@ -41,7 +42,7 @@ const faqSchema = {
       name: "Can I play word grid online for free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. WordGrid lets you play word grid online for free, directly in your browser. There is no download, no sign-up, and no ads. Visit wordgrid.games and start playing instantly — either a random practice game or today's Daily Challenge.",
+        text: "Yes. WordGrid lets you play word grid online for free, directly in your browser. There is no download, no sign-up, and no ads. Visit wordgrid.games and start playing instantly — either a random practice game or today's Daily board.",
       },
     },
     {
@@ -49,7 +50,7 @@ const faqSchema = {
       name: "What is a word grid puzzle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A word grid puzzle is a word search game played on a 4×4 grid of letters. You find words by connecting adjacent letters — horizontally, vertically, or diagonally — like in Boggle. Words must be at least 3 letters long and you cannot reuse the same tile twice in one word.",
+        text: "A word grid puzzle is a word search game played on a square grid of letters. You find words by connecting adjacent letters — horizontally, vertically, or diagonally — like in Boggle. Words must be at least 3 letters long and you cannot reuse the same tile twice in one word.",
       },
     },
     {
@@ -57,7 +58,7 @@ const faqSchema = {
       name: "How is playing word grid online different from Boggle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The rules are the same as classic Boggle — same 4×4 grid, same adjacency rules, same scoring. Playing word grid online just means you don't need to shake physical dice: the grid is generated instantly, you can play unlimited games, and there's a new Daily Challenge every day.",
+        text: "The rules are the same as classic Boggle on the standard board, and the online version also supports larger practice grids. Playing word grid online just means you don't need to shake physical dice: the grid is generated instantly, you can play unlimited games, and there's a new Daily board every day.",
       },
     },
     {
@@ -97,7 +98,7 @@ export default function PlayWordGridOnlineGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <a href="/" className="hover:text-text">Home</a>
@@ -114,14 +115,15 @@ export default function PlayWordGridOnlineGuide() {
           <section>
             <p className="leading-relaxed">
               <strong>Word grid</strong> is a classic word search puzzle played on
-              a 4×4 grid of letters — the same format as the board game Boggle.
+              a square grid of letters — the same format as the board game Boggle,
+              with standard and larger practice boards available online.
               The good news: you don&apos;t need a physical set to play. You can
               play word grid online for free, right in your browser, with no
               download and no sign-up.
             </p>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
-                Play a word grid puzzle now →
+                Play →
               </Link>{" "}
               or read on to learn how it works.
             </p>
@@ -132,7 +134,7 @@ export default function PlayWordGridOnlineGuide() {
               What Is a Word Grid Puzzle?
             </h2>
             <p className="leading-relaxed">
-              A word grid puzzle gives you 16 letters arranged in 4 rows of 4.
+              A word grid puzzle gives you letters arranged in a square grid.
               Your job is to find as many valid English words as possible by
               connecting adjacent letters — horizontally, vertically, or
               diagonally. Each word must be at least 3 letters long, and you
@@ -160,7 +162,7 @@ export default function PlayWordGridOnlineGuide() {
                 <Link href="/daily" className="text-primary hover:underline">
                   /daily
                 </Link>{" "}
-                for the Daily Challenge (same grid for everyone).
+                for the Daily board (same grid for everyone).
               </li>
               <li>
                 <strong>Drag to connect letters.</strong> Click or tap a letter,
@@ -197,7 +199,7 @@ export default function PlayWordGridOnlineGuide() {
                 fresh grid every time — there&apos;s no daily limit.
               </li>
               <li>
-                <strong>Daily Challenge.</strong> One grid per day, the same for
+                <strong>Daily board.</strong> One grid per day, the same for
                 everyone worldwide, so you can compare scores with friends.
               </li>
               <li>
@@ -226,9 +228,9 @@ export default function PlayWordGridOnlineGuide() {
                   What is a word grid puzzle?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  It&apos;s a word search game on a 4×4 grid of letters. You
+                  It&apos;s a word search game on a square grid of letters. You
                   connect adjacent letters to spell words. The rules are the same
-                  as Boggle — see our{" "}
+                  as Boggle on the standard board — see our{" "}
                   <Link href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">
                     beginner&apos;s guide to the rules
                   </Link>
@@ -260,13 +262,13 @@ export default function PlayWordGridOnlineGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Play Word Grid Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Today&apos;s Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -296,7 +298,7 @@ export default function PlayWordGridOnlineGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

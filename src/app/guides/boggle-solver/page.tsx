@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Boggle Solver — Find All Words in Any Grid",
   description:
-    "Free online Boggle solver to find all words in any 4×4 grid. Paste your letters and get instant solutions with word counts, scoring breakdown, and anagram analysis.",
+    "Free online Boggle solver to find all words in any square grid. Paste your letters and get instant solutions with word counts, scoring breakdown, and anagram analysis.",
   alternates: { canonical: "/guides/boggle-solver" },
   keywords: [
     "boggle solver", "boggle word finder", "boggle cheat", "boggle helper",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Boggle Solver — Find All Words in Any Grid",
     description:
-      "Free online Boggle solver and word finder. Paste any 4×4 grid and get instant solutions with scoring breakdown and word analysis.",
+      "Free online Boggle solver and word finder. Paste any square grid and get instant solutions with scoring breakdown and word analysis.",
   },
 };
 
@@ -32,7 +32,7 @@ const articleSchema = {
     priceCurrency: "USD",
   },
   description:
-    "Free online Boggle solver that finds all valid words in any 4×4 grid. Instant solutions with scoring breakdown, word counts, and anagram analysis.",
+    "Free online Boggle solver that finds all valid words in any square grid. Instant solutions with scoring breakdown, word counts, and anagram analysis.",
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.8",
@@ -49,7 +49,7 @@ const faqSchema = {
       name: "How does a Boggle solver work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A Boggle solver works by taking a 4×4 grid of letters and systematically checking all possible letter combinations against a dictionary. It uses algorithms to find valid words following Boggle rules: adjacent connections only, minimum 3 letters, no repeated tiles. The solver generates a complete list of all possible words with their scores, typically finding 100-200 words per grid.",
+        text: "A Boggle solver works by taking a square grid of letters and systematically checking all possible letter combinations against a dictionary. It uses algorithms to find valid words following Boggle rules: adjacent connections only, minimum 3 letters, no repeated tiles. The solver generates a complete list of all possible words with their scores, typically finding 100-200 words on a standard board and more on larger boards.",
       },
     },
     {
@@ -57,7 +57,7 @@ const faqSchema = {
       name: "Is using a Boggle solver cheating?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Using a Boggle solver during competitive play is considered cheating. However, solvers are valuable learning tools when used after a game to see what words you missed, analyze grid patterns, and improve vocabulary. Many players use solvers to review Daily Challenges and identify missed opportunities for skill development.",
+        text: "Using a Boggle solver during competitive play is considered cheating. However, solvers are valuable learning tools when used after a game to see what words you missed, analyze grid patterns, and improve vocabulary. Many players use solvers to review the Daily board and identify missed opportunities for skill development.",
       },
     },
     {
@@ -65,7 +65,7 @@ const faqSchema = {
       name: "How many words can a Boggle solver find?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A Boggle solver typically finds 100-200 words in a standard 4×4 grid, depending on letter distribution. Exceptional grids with favorable letter combinations can yield 200-300+ words. The solver identifies every valid word following standard Boggle rules, including many words human players miss.",
+        text: "A Boggle solver typically finds 100-200 words in a standard 4×4 grid, depending on letter distribution. Larger boards can produce even more. The solver identifies every valid word following standard Boggle rules, including many words human players miss.",
       },
     },
     {
@@ -81,7 +81,7 @@ const faqSchema = {
       name: "Can I use a Boggle solver to practice?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, Boggle solvers are excellent practice tools. Use them to: 1) Review Daily Challenges after playing to see missed words, 2) Analyze grid patterns and letter combinations, 3) Learn new vocabulary from solver results, 4) Study word extensions and patterns you didn't spot, 5) Identify your weak scanning areas (diagonals, specific letter clusters). Solvers accelerate skill development when used as learning tools.",
+        text: "Yes, Boggle solvers are excellent practice tools. Use them to: 1) Review the Daily board after playing to see missed words, 2) Analyze grid patterns and letter combinations, 3) Learn new vocabulary from solver results, 4) Study word extensions and patterns you didn't spot, 5) Identify your weak scanning areas (diagonals, specific letter clusters). Solvers accelerate skill development when used as learning tools.",
       },
     },
   ],
@@ -113,7 +113,9 @@ export default function BoggleSolverGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <article className="mx-auto max-w-7xl">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+          <div>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -126,17 +128,18 @@ export default function BoggleSolverGuide() {
           <p className="text-text-muted">7 min read &middot; Updated June 2026</p>
         </header>
 
-        <div className="space-y-6 text-text">
+        <div className="space-y-6 text-text max-w-3xl">
           <section>
             <p className="leading-relaxed">
               A <strong>Boggle solver</strong> finds every possible word in a
-              4×4 grid instantly. Paste any Boggle grid and get a complete word
-              list with scoring breakdown — perfect for analyzing games after
-              you play, learning what you missed, and improving your skills.
+              square grid instantly. Paste any Boggle grid and get a complete
+              word list with scoring breakdown — perfect for analyzing games
+              after you play, learning what you missed, and improving your
+              skills.
             </p>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
-                Play Boggle now and solve your grid later →
+                Play →
               </Link>
             </p>
             <p className="leading-relaxed mt-3">
@@ -177,7 +180,7 @@ export default function BoggleSolverGuide() {
                 round on your own to build your skills.
               </li>
               <li>
-                <strong>Note your grid.</strong> Write down or screenshot the 4×4
+                <strong>Note your grid.</strong> Write down or screenshot the
                 letter arrangement.
               </li>
               <li>
@@ -247,9 +250,9 @@ export default function BoggleSolverGuide() {
             </p>
             <div className="space-y-4">
               <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Daily Challenge Review</h3>
+                <h3 className="font-semibold mb-2">Daily Review</h3>
                 <p className="text-sm leading-relaxed">
-                  After each Daily Challenge, use a solver to see what you missed.
+                  After each Daily, use a solver to see what you missed.
                   Review the complete word list and study missed patterns.
                   Track your improvement over time by comparing your percentage
                   of possible words found.
@@ -297,7 +300,7 @@ export default function BoggleSolverGuide() {
               </p>
               <ol className="space-y-2 list-decimal ml-4 text-sm">
                 <li>
-                  <strong>Grid input:</strong> Accept 16 letters in 4×4 arrangement
+                  <strong>Grid input:</strong> Accept square grids of letters
                 </li>
                 <li>
                   <strong>Path generation:</strong> Create all possible paths
@@ -392,10 +395,11 @@ export default function BoggleSolverGuide() {
                   How does a Boggle solver work?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  A Boggle solver takes a 4×4 grid and systematically checks all
-                  possible letter combinations against a dictionary. It follows
+                  A Boggle solver takes a square grid and systematically checks
+                  all possible letter combinations against a dictionary. It follows
                   Boggle rules: adjacent connections only, minimum 3 letters, no
-                  repeated tiles. Typically finds 100-200 words per grid.
+                  repeated tiles. Typically finds 100-200 words on a standard grid
+                  and more on larger grids.
                 </p>
               </details>
               <details className="bg-surface/50 rounded-xl p-4">
@@ -406,7 +410,7 @@ export default function BoggleSolverGuide() {
                   Using a solver during competitive play is cheating. However,
                   solvers are valuable learning tools when used after a game to
                   see what you missed, analyze patterns, and improve vocabulary.
-                  Many players use solvers to review Daily Challenges.
+                  Many players use solvers to review the Daily board.
                 </p>
               </details>
               <details className="bg-surface/50 rounded-xl p-4">
@@ -415,9 +419,8 @@ export default function BoggleSolverGuide() {
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   A Boggle solver typically finds 100-200 words in a standard 4×4
-                  grid. Exceptional grids with favorable letter combinations
-                  can yield 200-300+ words. The solver identifies every valid
-                  word following standard Boggle rules.
+                  grid. Larger grids can yield more words. The solver identifies
+                  every valid word following standard Boggle rules.
                 </p>
               </details>
               <details className="bg-surface/50 rounded-xl p-4">
@@ -426,7 +429,7 @@ export default function BoggleSolverGuide() {
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   Yes, Boggle solvers are excellent practice tools. Use them to
-                  review Daily Challenges, analyze grid patterns, learn new
+                  review the Daily board, analyze grid patterns, learn new
                   vocabulary, study word extensions, and identify weak scanning
                   areas. Solvers accelerate skill development when used as learning
                   tools.
@@ -448,13 +451,13 @@ export default function BoggleSolverGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Play Boggle Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -531,6 +534,41 @@ export default function BoggleSolverGuide() {
               </Link>
             </div>
           </div>
+        </div>
+          </div>
+
+          <aside className="space-y-4 lg:sticky lg:top-8">
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
+              <h2 className="text-2xl font-bold">Solver at a glance</h2>
+              <p className="mt-3 text-sm text-text-muted leading-relaxed">
+                Keep the solver page wide on desktop so the board input, results, and
+                analysis all stay visible together.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold text-text">Open next</h2>
+              <div className="mt-4 grid gap-2">
+                <Link href="/play" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Play first
+                </Link>
+                <Link href="/daily" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Daily board
+                </Link>
+                <Link href="/guides/most-common-boggle-words" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Word patterns
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold text-text">Learning loop</h2>
+              <p className="mt-3 text-sm text-text-muted leading-relaxed">
+                Play a round, solve the board, review what you missed, then try the
+                next grid with a sharper scan.
+              </p>
+            </div>
+          </aside>
         </div>
       </article>
     </main>

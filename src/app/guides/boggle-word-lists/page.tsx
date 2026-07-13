@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Boggle Word Lists — Complete Reference",
@@ -58,7 +59,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-06-29",
+  dateModified: "2026-07-13",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-word-lists/`,
 };
 
@@ -79,7 +80,7 @@ const faqSchema = {
       name: "How can I learn Boggle word lists?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Learn Boggle word lists by starting with high-frequency words organized by letter. Focus on S, R, T, N, E, A which appear in 65% of words. Practice 10-20 words per letter, focusing on common patterns like -TION, -NESS, -MENT, -ING. Play Daily Challenges to reinforce pattern recognition rather than rote memorization.",
+        text: "Learn Boggle word lists by starting with high-frequency words organized by letter. Focus on S, R, T, N, E, A which appear in 65% of words. Practice 10-20 words per letter, focusing on common patterns like -TION, -NESS, -MENT, -ING. Play Daily to reinforce pattern recognition rather than rote memorization.",
       },
     },
     {
@@ -127,7 +128,7 @@ export default function BoggleWordListsGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -137,7 +138,7 @@ export default function BoggleWordListsGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Word Lists by Letter — Complete Reference
           </h1>
-          <p className="text-text-muted">15 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">15 min read &middot; Updated July 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -165,6 +166,36 @@ export default function BoggleWordListsGuide() {
             </p>
           </section>
 
+          <section className="grid gap-3 sm:grid-cols-3">
+            <Link
+              href="/guides/most-common-boggle-words"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Start with top words</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Use the top 100 list when you want the shortest path into useful vocabulary.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-dictionary"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Check valid words</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Pair the lists with dictionary guidance for Boggle-style play.
+              </p>
+            </Link>
+            <Link
+              href="/play"
+              className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-4 border border-primary/20"
+            >
+              <h2 className="font-semibold text-primary">Practice live</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Try the patterns on a fresh board while they are easy to recall.
+              </p>
+            </Link>
+          </section>
+
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
               How to Use These Word Lists
@@ -180,7 +211,7 @@ export default function BoggleWordListsGuide() {
                   65% of words. Prioritize these.
                 </li>
                 <li>
-                  <strong>Practice with Daily Challenges.</strong> Apply what you
+                  <strong>Practice with the Daily board.</strong> Apply what you
                   see here in real games.
                 </li>
                 <li>
@@ -347,7 +378,7 @@ export default function BoggleWordListsGuide() {
                   Learn Boggle word lists by focusing on high-frequency words by
                   letter. Start with S, R, T, N, E, A (65% of words). Practice
                   10-20 words per letter, focusing on patterns like -TION, -NESS,
-                  -MENT. Play Daily Challenges to reinforce recognition rather
+                  -MENT. Play Daily to reinforce recognition rather
                   than memorization.
                 </p>
               </details>
@@ -372,20 +403,20 @@ export default function BoggleWordListsGuide() {
             </h2>
             <p className="text-text mb-4">
               Don't memorize — practice. Play games and look for these patterns.
-              Daily Challenges are perfect for building word recognition.
+              Daily boards are perfect for building word recognition.
             </p>
             <div className="flex gap-3 flex-wrap">
               <Link
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Practice Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -431,7 +462,7 @@ export default function BoggleWordListsGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Word Grid Now →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Put the word lists into a real game and build recognition.
@@ -446,7 +477,7 @@ export default function BoggleWordListsGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

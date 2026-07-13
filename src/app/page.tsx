@@ -5,9 +5,9 @@ import HomeClient from "./HomeClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Word Grid Online Free — Play Boggle-Style Puzzle | WordGrid",
+  title: "Play Word Grid Online Free — No Download | WordGrid",
   description:
-    "Play word grid online free in your browser. Find words in a 4×4 grid, play Boggle-style puzzle rounds, and try the daily challenge. No download, no sign-up.",
+    "Play WordGrid online free now. Connect adjacent letters in a Boggle-style word grid puzzle with timed, Zen, and Daily boards. No download, no sign-up.",
   alternates: { canonical: "/" },
   keywords: [
     "word grid", "word grid online", "word grid puzzle", "word grid game",
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     "daily word game", "free word game", "browser word game",
   ],
   openGraph: {
-    title: "Word Grid Online Free — Play Boggle-Style Puzzle | WordGrid",
+    title: "Play Word Grid Online Free — No Download | WordGrid",
     description:
-      "Play word grid online free in your browser. Connect letters, find words, and try the daily challenge. No download needed!",
+      "Play WordGrid online free in your browser. Connect letters, find words, and try timed, Zen, or Daily boards. No download needed.",
     url: BASE_URL,
     images: [
       {
@@ -39,10 +39,29 @@ export default function Home() {
     "@type": "WebSite",
     name: "WordGrid",
     url: BASE_URL,
-    description: "Play word grid online free — a Boggle-style puzzle game with daily challenges",
+    description: "Play word grid online free — a Boggle-style puzzle game with a Daily board",
     potentialAction: {
       "@type": "PlayGameAction",
       target: `${BASE_URL}/play`,
+    },
+  };
+
+  const gameSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    name: "WordGrid",
+    url: BASE_URL,
+    gamePlatform: "Web browser",
+    applicationCategory: "Game",
+    genre: ["Word game", "Puzzle game"],
+    playMode: ["SinglePlayer"],
+    isAccessibleForFree: true,
+    description:
+      "A free online word grid puzzle game where players connect adjacent letters to find words on timed, Zen, and Daily boards.",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
     },
   };
 
@@ -56,7 +75,7 @@ export default function Home() {
         name: "What is WordGrid?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "WordGrid is a free online word puzzle game inspired by Boggle. You find words by connecting adjacent letters in a 4×4 grid. You have 3 minutes to find as many valid English words as possible. Play directly in your browser — no download or sign-up needed.",
+          text: "WordGrid is a free online word puzzle game inspired by Boggle. You find words by connecting adjacent letters in square grids. You can play classic 4×4 boards or larger practice boards. Play directly in your browser — no download or sign-up needed.",
         },
       },
       {
@@ -64,7 +83,7 @@ export default function Home() {
         name: "Is WordGrid like Boggle?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes! WordGrid uses the same classic Boggle rules: a 4×4 letter grid where you connect adjacent letters (horizontally, vertically, or diagonally) to form words. The difference is WordGrid is free, runs in your browser, and offers a new daily challenge every day.",
+          text: "Yes! WordGrid uses the same classic Boggle rules on the standard board, and also supports larger practice grids. You connect adjacent letters (horizontally, vertically, or diagonally) to form words. The difference is WordGrid is free, runs in your browser, and offers a new Daily board every day.",
         },
       },
       {
@@ -72,7 +91,7 @@ export default function Home() {
         name: "Can I play Boggle online for free?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes — WordGrid lets you play Boggle online for free, right in your browser. No download, no registration, no ads. Just visit wordgrid.games and start playing instantly. You can play unlimited practice games or try the daily challenge.",
+          text: "Yes — WordGrid lets you play Boggle online for free, right in your browser. No download, no registration, no ads. Just visit wordgrid.games and start playing instantly. You can play unlimited practice games or try the Daily board.",
         },
       },
       {
@@ -85,7 +104,7 @@ export default function Home() {
       },
       {
         "@type": "Question",
-        name: "What is the Daily Challenge?",
+        name: "What is the Daily board?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Every day, a new puzzle is generated. Everyone around the world gets the same grid, so you can compare your score with friends. Build your streak by playing every day!",
@@ -110,10 +129,14 @@ export default function Home() {
       />
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(gameSchema) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <div className="max-w-2xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         {/* Interactive game section (client component) */}
         <HomeClient />
 
@@ -178,10 +201,10 @@ export default function Home() {
               </summary>
               <p className="text-text-muted mt-2 text-sm leading-relaxed">
                 WordGrid is a free online word puzzle game inspired by classic
-                Boggle. You find words by connecting adjacent letters in a 4×4
-                grid. You have 3 minutes to find as many valid English words as
-                possible. It plays right in your browser — no download or sign-up
-                needed.
+                Boggle. You find words by connecting adjacent letters in square
+                grids. You can play the standard board or switch to larger
+                practice grids. It plays right in your browser — no download or
+                sign-up needed.
               </p>
             </details>
             <details className="bg-surface/50 rounded-xl p-4">
@@ -189,11 +212,12 @@ export default function Home() {
                 Is WordGrid like Boggle?
               </summary>
               <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                Yes! WordGrid uses the exact same rules as classic Boggle: a 4×4
-                letter grid where you connect adjacent letters (horizontally,
-                vertically, or diagonally) to form words. The difference is
-                WordGrid is a free Boggle game you can play online, right in
-                your browser, with a new daily challenge every day.
+                Yes! WordGrid uses the exact same rules as classic Boggle on the
+                standard board, and also supports larger practice grids. You
+                connect adjacent letters (horizontally, vertically, or
+                diagonally) to form words. The difference is WordGrid is a free
+                Boggle game you can play online, right in your browser, with a
+                new Daily board every day.
               </p>
             </details>
             <details className="bg-surface/50 rounded-xl p-4">
@@ -208,12 +232,12 @@ export default function Home() {
             </details>
             <details className="bg-surface/50 rounded-xl p-4">
               <summary className="font-semibold cursor-pointer">
-                What is the Daily Challenge?
+                What is the Daily board?
               </summary>
               <p className="text-text-muted mt-2 text-sm leading-relaxed">
                 Every day, a new puzzle is generated. Everyone around the world
-                gets the exact same 4×4 grid. Come back daily to test your skills,
-                build your streak, and compare your score with friends.
+                gets the exact same Daily grid. Come back daily to test your
+                skills, build your streak, and compare your score with friends.
               </p>
             </details>
           </div>
@@ -229,15 +253,28 @@ export default function Home() {
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             <Link
+              href="/play"
+              className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-5 border border-primary/20"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Play Word Grid Online Free &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                Jump straight into a live word grid puzzle with 4x4, 5x5, and
+                6x6 boards. This is the fastest path for players who want the
+                game first.
+              </p>
+            </Link>
+            <Link
               href="/guides/play-word-grid-online"
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
             >
               <h3 className="font-semibold mb-1 text-primary">
-                Play Word Grid Online &rarr;
+                Play Word Grid Online Guide &rarr;
               </h3>
               <p className="text-sm text-text-muted">
-                How to play word grid free in your browser — what it is, how it
-                works, and where to start. No download, no sign-up.
+                New to word grid puzzles? Learn how the browser game works, why
+                it feels like Boggle, and which mode to start with.
               </p>
             </Link>
             <Link
@@ -261,7 +298,8 @@ export default function Home() {
               </h3>
               <p className="text-sm text-text-muted">
                 Play Boggle online free in your browser — no download, no
-                sign-up. Same 4×4 grid, same classic rules, instant play.
+                sign-up. Same classic rules, with standard and larger practice
+                grids, instant play.
               </p>
             </Link>
             <Link
@@ -289,15 +327,27 @@ export default function Home() {
               </p>
             </Link>
             <Link
-              href="/words"
+              href="/guides/most-common-boggle-words"
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
             >
               <h3 className="font-semibold mb-1 text-primary">
-                Word List &amp; Definitions &rarr;
+                Most Common Boggle Words &rarr;
               </h3>
               <p className="text-sm text-text-muted">
-                Browse common WordGrid words with definitions, letter counts,
-                and score values to practice high-value patterns.
+                Start with the high-frequency words and letter pairs that show
+                up again and again in real boards.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-word-lists"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Boggle Word Lists by Letter &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                Browse vocabulary by starting letter, then practice the patterns
+                in a live word grid round.
               </p>
             </Link>
             <Link
@@ -325,7 +375,7 @@ export default function Home() {
             href="/play"
             className="inline-block px-8 py-4 bg-primary hover:bg-primary-hover transition rounded-xl text-lg font-semibold active:scale-[0.98]"
           >
-            Play WordGrid Now
+            Play Word Grid Free
           </Link>
         </section>
       </div>

@@ -18,7 +18,7 @@ const GUIDES = [
     href: "/guides/play-word-grid-online",
     title: "Play Word Grid Online — Free, No Download",
     description:
-      "How to play word grid free in your browser — what a word grid puzzle is, how it works, and where to play instantly with no download or sign-up.",
+      "How to play word grid free in your browser — what a word grid puzzle is, how it works, and where to play instantly with standard or larger square grids.",
     category: "Beginner",
     readTime: "4 min read",
     date: "2026-06-27",
@@ -63,7 +63,7 @@ const GUIDES = [
     href: "/guides/play-boggle-online-free",
     title: "Play Boggle Online Free — No Download, No Sign-Up",
     description:
-      "Play Boggle online for free in your browser. No download, no sign-up, no ads. Classic 4×4 word grid game with 3-minute timer. Instant play.",
+      "Play Boggle online for free in your browser. No download, no sign-up, no ads. Classic Boggle plus larger practice grids, instant play.",
     category: "Beginner",
     readTime: "5 min read",
     date: "2026-06-28",
@@ -72,7 +72,7 @@ const GUIDES = [
     href: "/guides/boggle-word-game",
     title: "Boggle Word Game — Rules, Scoring & Free Online Play",
     description:
-      "Master the Boggle word game. Learn the rules, how scoring works, and play free online instantly. 4×4 grid, 3-minute rounds.",
+      "Master the Boggle word game. Learn the rules, how scoring works, and play free online instantly on standard or larger grids.",
     category: "Beginner",
     readTime: "6 min read",
     date: "2026-06-28",
@@ -81,7 +81,7 @@ const GUIDES = [
     href: "/guides/boggle-game-online",
     title: "Boggle Game Online — Play Free, No Download",
     description:
-      "Play the Boggle game online for free. No download, no sign-up. Classic 4×4 word puzzle in your browser with 3-minute rounds.",
+      "Play the Boggle game online for free. No download, no sign-up. Classic Boggle with standard and larger practice grids in your browser.",
     category: "Beginner",
     readTime: "5 min read",
     date: "2026-06-28",
@@ -90,7 +90,7 @@ const GUIDES = [
     href: "/guides/boggle-online-free",
     title: "Boggle Online Free — Play Instantly, No Download",
     description:
-      "Play Boggle online free in your browser. No download, no sign-up, no ads. Classic 4×4 word puzzle with 3-minute rounds.",
+      "Play Boggle online free in your browser. No download, no sign-up, no ads. Classic Boggle plus larger practice grids.",
     category: "Beginner",
     readTime: "4 min read",
     date: "2026-06-28",
@@ -225,7 +225,7 @@ const GUIDES = [
     href: "/guides/boggle-solver",
     title: "Boggle Solver — Find All Words in Any Grid",
     description:
-      "Free online Boggle solver to find all words in any 4×4 grid. Paste your letters and get instant solutions with word counts, scoring breakdown, and anagram analysis.",
+      "Free online Boggle solver to find all words in any square grid. Paste your letters and get instant solutions with word counts, scoring breakdown, and anagram analysis.",
     category: "Intermediate",
     readTime: "7 min read",
     date: "2026-06-29",
@@ -234,7 +234,7 @@ const GUIDES = [
     href: "/guides/boggle-generator",
     title: "Boggle Generator — Create Custom Word Puzzles",
     description:
-      "Free Boggle generator to create custom 4×4 word puzzles. Design personalized grids for practice, teaching, or game nights with adjustable difficulty and letter distribution.",
+      "Free Boggle generator to create custom square word puzzles. Design personalized grids for practice, teaching, or game nights with adjustable difficulty and letter distribution.",
     category: "Intermediate",
     readTime: "6 min read",
     date: "2026-06-29",
@@ -253,9 +253,26 @@ const GUIDES = [
 const CATEGORIES = ["Beginner", "Intermediate", "Advanced"];
 
 export default function GuidesIndex() {
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "WordGrid guides and strategy pages",
+    itemListElement: GUIDES.map((guide, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `https://wordgrid.games${guide.href}/`,
+      name: guide.title,
+      description: guide.description,
+    })),
+  };
+
   return (
     <main className="min-h-screen px-4 py-8 sm:py-12">
-      <article className="max-w-2xl mx-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
+      <article className="mx-auto max-w-7xl">
         <header className="mb-8">
           <Link href="/" className="text-sm text-text-dim hover:text-text">
             &larr; WordGrid
@@ -271,7 +288,7 @@ export default function GuidesIndex() {
           <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-3">
             Best Matches for Searchers
           </h2>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             <Link
               href="/play"
               className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-4 border border-primary/20"
@@ -328,6 +345,24 @@ export default function GuidesIndex() {
               </p>
             </Link>
             <Link
+              href="/guides/boggle-word-lists"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Boggle Word Lists</div>
+              <p className="text-sm text-text-muted mt-1">
+                Letter-by-letter vocabulary reference for players building recognition.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-dictionary"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Boggle Dictionary</div>
+              <p className="text-sm text-text-muted mt-1">
+                Valid-word guidance and vocabulary lookup context for Boggle-style play.
+              </p>
+            </Link>
+            <Link
               href="/guides/prefix-strategy"
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
             >
@@ -339,12 +374,49 @@ export default function GuidesIndex() {
           </div>
         </section>
 
+        <section className="mb-10">
+          <h2 className="text-xl font-semibold mb-4 text-text-muted">
+            Vocabulary and Pattern Hub
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <Link
+              href="/guides/most-common-boggle-words"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold text-lg mb-1">Common words first</h3>
+              <p className="text-sm text-text-muted">
+                Learn the words and letter pairs that show up most often before
+                going deeper.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-word-lists"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold text-lg mb-1">Browse by letter</h3>
+              <p className="text-sm text-text-muted">
+                Move from high-frequency words into a fuller letter-by-letter
+                vocabulary reference.
+              </p>
+            </Link>
+            <Link
+              href="/play"
+              className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-5 border border-primary/20"
+            >
+              <h3 className="font-semibold text-lg mb-1 text-primary">Practice now</h3>
+              <p className="text-sm text-text-muted">
+                Test the patterns immediately on a fresh timed, Zen, or Daily board.
+              </p>
+            </Link>
+          </div>
+        </section>
+
         {CATEGORIES.map((cat) => (
           <section key={cat} className="mb-10">
             <h2 className="text-xl font-semibold mb-4 text-text-muted">
               {cat}
             </h2>
-            <div className="space-y-3">
+            <div className="grid gap-3">
               {GUIDES.filter((g) => g.category === cat).map((guide) => (
                 <Link
                   key={guide.href}
@@ -366,7 +438,7 @@ export default function GuidesIndex() {
           </section>
         ))}
 
-        <div className="mt-8 p-6 bg-indigo-900/30 rounded-xl border border-indigo-800/50">
+        <div className="mt-8 p-6 bg-indigo-900/30 rounded-3xl border border-indigo-800/50">
           <h2 className="text-xl font-semibold text-primary mb-2">
             Ready to Play?
           </h2>
@@ -378,13 +450,13 @@ export default function GuidesIndex() {
               href="/play"
               className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
             >
-              Play Now
+              Play
             </Link>
             <Link
               href="/daily"
               className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
             >
-              Daily Challenge
+              Daily
             </Link>
           </div>
         </div>

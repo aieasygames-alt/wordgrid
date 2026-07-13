@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Play Boggle Online Free — No Download, No Sign-Up",
   description:
-    "Play Boggle online free in your browser. No download, no sign-up, no ads. Classic 4×4 word grid game with 3-minute timer. Instant play on desktop and mobile.",
+    "Play Boggle online free in your browser. No download, no sign-up, no ads. Classic Boggle with standard and larger practice grids. Instant play on desktop and mobile.",
   alternates: { canonical: "/guides/play-boggle-online-free" },
   keywords: [
     "play boggle free online game", "play boggle online free", "boggle online free game",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Play Boggle Online Free — No Download, No Sign-Up Required",
     description:
-      "Classic Boggle gameplay, free in your browser. 4×4 word grid, 3-minute rounds, no account needed. Play instantly on phone or desktop.",
+      "Classic Boggle gameplay, free in your browser. Standard and larger word grids, 3-minute rounds, no account needed. Play instantly on phone or desktop.",
   },
 };
 
@@ -25,7 +26,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "Play Boggle Online Free — No Download, No Sign-Up",
   description:
-    "How to play Boggle online for free with no download or sign-up required. Classic 4×4 word grid gameplay in your browser.",
+    "How to play Boggle online for free with no download or sign-up required. Classic word grid gameplay with standard and larger boards in your browser.",
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-28",
@@ -66,7 +67,7 @@ const faqSchema = {
       name: "How do you play Boggle online?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "To play Boggle online, open wordgrid.games and click Play. You'll see a 4×4 grid of letters. Click and drag across adjacent letters (horizontally, vertically, or diagonally) to spell words. Each word must be 3+ letters, and you can't reuse the same tile. Find as many words as possible in 3 minutes.",
+        text: "To play Boggle online, open wordgrid.games and click Play. You'll see a square grid of letters. Click and drag across adjacent letters (horizontally, vertically, or diagonally) to spell words. Each word must be 3+ letters, and you can't reuse the same tile. Find as many words as possible in 3 minutes.",
       },
     },
     {
@@ -74,7 +75,7 @@ const faqSchema = {
       name: "Can I play Boggle online with friends?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. WordGrid offers a Daily Challenge where everyone gets the same grid each day. You can compare scores with friends to see who found the most words. There's also a practice mode for unlimited solo games.",
+        text: "Yes. WordGrid offers a Daily board where everyone gets the same grid each day. You can compare scores with friends to see who found the most words. There's also a practice mode for unlimited solo games.",
       },
     },
   ],
@@ -90,7 +91,7 @@ const howToSchema = {
       "@type": "HowToStep",
       position: 1,
       name: "Open the game in your browser",
-      text: "Visit wordgrid.games/play for a random practice game, or wordgrid.games/daily for the Daily Challenge. No app or download needed — it runs in any modern browser.",
+      text: "Visit wordgrid.games/play for a random practice game, or wordgrid.games/daily for the Daily board. No app or download needed — it runs in any modern browser.",
     },
     {
       "@type": "HowToStep",
@@ -149,7 +150,7 @@ export default function PlayBoggleOnlineFreeGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -168,7 +169,7 @@ export default function PlayBoggleOnlineFreeGuide() {
               <strong>You can play Boggle online for free right now.</strong> If
               that&apos;s what you searched for, this page gets you to the game
               fast. No download, no sign-up, no credit card, no ads. Just open
-              your browser and start playing the classic 4×4 word grid game.
+              your browser and start playing the classic word grid game.
             </p>
             <p className="leading-relaxed mt-3">
               Prefer the live board immediately?{" "}
@@ -183,8 +184,8 @@ export default function PlayBoggleOnlineFreeGuide() {
               What Is Online Boggle?
             </h2>
             <p className="leading-relaxed">
-              Online Boggle (also called a word grid game) gives you a 4×4 grid
-              of 16 letters. Your goal: find as many English words as possible
+              Online Boggle (also called a word grid game) gives you a square grid
+              of letters. Your goal: find as many English words as possible
               by connecting adjacent letters — horizontally, vertically, or
               diagonally. Words must be at least 3 letters long, and you can't
               reuse the same tile twice in one word.
@@ -210,7 +211,7 @@ export default function PlayBoggleOnlineFreeGuide() {
               </li>
               <li>
                 <strong>Click Start.</strong> The 3-minute timer begins
-                immediately. A 4×4 grid of letters appears.
+                immediately. A grid of letters appears.
               </li>
               <li>
                 <strong>Connect letters to spell words.</strong> Click or tap a
@@ -247,7 +248,7 @@ export default function PlayBoggleOnlineFreeGuide() {
                 Just open and play.
               </li>
               <li>
-                <strong>Daily Challenge.</strong> Everyone gets the same grid
+                <strong>Daily board.</strong> Everyone gets the same grid
                 each day. Compare scores with friends.
               </li>
               <li>
@@ -321,7 +322,7 @@ export default function PlayBoggleOnlineFreeGuide() {
                   Can I play Boggle online with friends?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  The Daily Challenge gives everyone the same grid each day, so
+                  The Daily board gives everyone the same grid each day, so
                   you can compare scores with friends. There's also unlimited
                   practice mode for solo play.
                 </p>
@@ -351,13 +352,13 @@ export default function PlayBoggleOnlineFreeGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Play Free Boggle Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -398,7 +399,7 @@ export default function PlayBoggleOnlineFreeGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

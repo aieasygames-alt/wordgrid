@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Advanced Boggle Strategies — Expert Techniques",
@@ -106,7 +107,7 @@ export default function AdvancedBoggleStrategiesGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -476,7 +477,7 @@ export default function AdvancedBoggleStrategiesGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Week 1-2: Pattern Foundation</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Daily Challenges: focus on systematic scanning only</li>
+                  <li>• Daily: focus on systematic scanning only</li>
                   <li>• Memorize Tier 1 anchor letters and common pairs</li>
                   <li>• Practice 30-second grid mapping without submissions</li>
                   <li>• Target: Consistent 45+ scores</li>
@@ -486,7 +487,7 @@ export default function AdvancedBoggleStrategiesGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Week 3-4: Extension Mastery</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Daily Challenges: focus on word extensions</li>
+                  <li>• Daily: focus on word extensions</li>
                   <li>• For each base word, check S, -ED, -ING, -ER, PRE-, RE-</li>
                   <li>• Practice automatic extension checking</li>
                   <li>• Target: 20+ extensions per game</li>
@@ -496,7 +497,7 @@ export default function AdvancedBoggleStrategiesGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Week 5-6: Length Optimization</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Daily Challenges: prioritize 5+ letter words first</li>
+                  <li>• Daily: prioritize 5+ letter words first</li>
                   <li>• Learn -TION, -NESS, -MENT, -ABLE pattern locations</li>
                   <li>• Practice time-phased approach (long → medium → short)</li>
                   <li>• Target: 8+ long words per game</li>
@@ -506,7 +507,7 @@ export default function AdvancedBoggleStrategiesGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Week 7-8: Full Integration</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Daily Challenges: complete expert strategy</li>
+                  <li>• Daily: complete expert strategy</li>
                   <li>• Combine mapping, extensions, length prioritization</li>
                   <li>• Use full 3 minutes with precise time allocation</li>
                   <li>• Target: Consistent 60+ scores</li>
@@ -577,7 +578,7 @@ export default function AdvancedBoggleStrategiesGuide() {
             </h2>
             <p className="text-text mb-4">
               Expert-level play requires consistent practice. Start with one
-              advanced technique and build systematically. Daily Challenges are
+              advanced technique and build systematically. Daily boards are
               perfect for tracking improvement.
             </p>
             <div className="flex gap-3 flex-wrap">
@@ -585,13 +586,13 @@ export default function AdvancedBoggleStrategiesGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Practice Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -626,7 +627,7 @@ export default function AdvancedBoggleStrategiesGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Word Grid Now →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Test the advanced patterns in a live game.
@@ -641,7 +642,7 @@ export default function AdvancedBoggleStrategiesGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

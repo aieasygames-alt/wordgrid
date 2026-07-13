@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -65,7 +66,7 @@ export default function QuStrategyPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <article className="max-w-3xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">WordGrid</Link>
@@ -108,12 +109,12 @@ export default function QuStrategyPage() {
             Use this guide with the pattern library, then practice in the daily challenge to see whether Qu boards feel easier to decode.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play now</Link>
+            <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play</Link>
             <Link href="/guides/word-pattern-library" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Pattern library</Link>
-            <Link href="/daily" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Daily challenge</Link>
+            <Link href="/daily" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Daily</Link>
           </div>
         </section>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

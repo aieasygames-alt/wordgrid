@@ -42,23 +42,22 @@ export default function CookieBanner() {
       role="dialog"
       aria-label="Cookie consent"
       aria-live="polite"
-      className="fixed bottom-0 left-0 right-0 z-50 p-2 sm:p-4"
+      className="fixed bottom-2 left-2 right-2 z-50 sm:bottom-4 sm:left-4 sm:right-4 lg:left-auto lg:right-4 lg:p-0 lg:w-[min(21rem,calc(100vw-2rem))]"
     >
-      <div className="max-w-xl mx-auto bg-surface/95 backdrop-blur border border-border rounded-2xl shadow-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-3">
-        <p className="text-xs sm:text-sm text-text-muted flex-1 leading-relaxed">
-          We use cookies to understand how you use WordGrid and improve your
-          experience. Anonymous analytics only — no personal data.
+      <div className="max-w-xl mx-auto lg:mx-0 bg-surface/95 backdrop-blur border border-border rounded-xl shadow-xl p-2.5 sm:p-3 flex items-center gap-2">
+        <p className="text-xs text-text-muted flex-1 leading-snug">
+          Anonymous analytics help improve WordGrid.
         </p>
         <div className="flex gap-2 shrink-0">
           <button
             onClick={() => handleChoice("denied")}
-            className="px-3 py-1.5 text-xs sm:text-sm font-medium text-text-muted hover:text-text transition rounded-lg"
+            className="px-2.5 py-1 text-xs font-medium text-text-muted hover:text-text transition rounded-lg"
           >
             Decline
           </button>
           <button
             onClick={() => handleChoice("granted")}
-            className="px-4 py-1.5 text-xs sm:text-sm font-semibold bg-primary hover:bg-primary-hover transition rounded-lg"
+            className="px-3 py-1 text-xs font-semibold bg-primary hover:bg-primary-hover transition rounded-lg"
           >
             Accept
           </button>

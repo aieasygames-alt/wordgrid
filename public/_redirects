@@ -2,6 +2,8 @@
 http://wordgrid.games/*    https://wordgrid.games/:splat   301
 http://www.wordgrid.games/* https://wordgrid.games/:splat  301
 http://*.wordgrid.games/*  https://wordgrid.games/:splat   301
+http://wordgrid.clevergoat.com/* https://wordgrid.games/:splat 301
+https://wordgrid.clevergoat.com/* https://wordgrid.games/:splat 301
 
 # Redirect www to apex on HTTPS
 https://www.wordgrid.games/* https://wordgrid.games/:splat  301

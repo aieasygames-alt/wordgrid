@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Boggle Scoring Sheet — Points Table & Calculation Guide",
@@ -66,7 +67,7 @@ const faqSchema = {
       name: "What is a winning Boggle score?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Winning Boggle scores by level: 25-35 points for beginners, 35-50 points for intermediate players, 50-60 points for advanced players, 60-70 points for experts, and 70+ points for champions. In Daily Challenges, beating the average score typically puts you in the top half of players.",
+        text: "Winning Boggle scores by level: 25-35 points for beginners, 35-50 points for intermediate players, 50-60 points for advanced players, 60-70 points for experts, and 70+ points for champions. In the Daily board, beating the average score typically puts you in the top half of players.",
       },
     },
     {
@@ -106,7 +107,7 @@ export default function BoggleScoringSheetGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -421,7 +422,7 @@ export default function BoggleScoringSheetGuide() {
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   Winning Boggle scores: 25-35 for beginners, 35-50
                   intermediate, 50-60 advanced, 60-70 expert, 70+ champion.
-                  Beating the Daily Challenge average puts you in the top half.
+                  Beating the Daily average puts you in the top half.
                 </p>
               </details>
             </div>
@@ -440,13 +441,13 @@ export default function BoggleScoringSheetGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Practice Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -492,7 +493,7 @@ export default function BoggleScoringSheetGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Word Grid Now →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Turn better scoring decisions into a live round.
@@ -507,7 +508,7 @@ export default function BoggleScoringSheetGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

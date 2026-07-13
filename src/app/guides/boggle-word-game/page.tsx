@@ -114,7 +114,9 @@ export default function BoggleWordGameGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <article className="mx-auto max-w-7xl">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+          <div>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -127,7 +129,7 @@ export default function BoggleWordGameGuide() {
           <p className="text-text-muted">6 min read &middot; Updated June 2026</p>
         </header>
 
-        <div className="space-y-6 text-text">
+        <div className="space-y-6 text-text max-w-3xl">
           <section>
             <p className="leading-relaxed">
               If you searched for the <strong>Boggle word game</strong>, you
@@ -336,7 +338,7 @@ export default function BoggleWordGameGuide() {
                 <strong>No sign-up.</strong> No account, no email, no password.
               </li>
               <li>
-                <strong>Daily Challenge.</strong> Same grid for everyone each
+                <strong>Daily board.</strong> Same grid for everyone each
                 day — compare scores with friends.
               </li>
               <li>
@@ -346,7 +348,7 @@ export default function BoggleWordGameGuide() {
             </ul>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
-                Play Boggle online free now →
+                Play →
               </Link>
             </p>
           </section>
@@ -440,13 +442,13 @@ export default function BoggleWordGameGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Play Boggle Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -459,7 +461,7 @@ export default function BoggleWordGameGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Word Grid Online →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Browser-first phrasing for users coming from search.
@@ -493,7 +495,7 @@ export default function BoggleWordGameGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Now →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Start a round immediately.
@@ -507,6 +509,48 @@ export default function BoggleWordGameGuide() {
               </Link>
             </div>
           </div>
+        </div>
+          </div>
+
+          <aside className="space-y-4 lg:sticky lg:top-8">
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
+              <h2 className="text-2xl font-bold">Quick playbook</h2>
+              <p className="mt-3 text-sm text-text-muted leading-relaxed">
+                Use this page as a desktop reference for the standard rules, scoring,
+                and how WordGrid fits the classic Boggle format.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold text-text">Start playing</h2>
+              <div className="mt-4 grid gap-2">
+                <Link href="/play" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Play now
+                </Link>
+                <Link href="/daily" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Daily board
+                </Link>
+                <Link href="/solver" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Review solver
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold text-text">Related guides</h2>
+              <div className="mt-4 grid gap-2">
+                <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Rules for beginners
+                </Link>
+                <Link href="/guides/play-boggle-online-free" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Play online free
+                </Link>
+                <Link href="/guides/word-grid-strategies" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Score higher
+                </Link>
+              </div>
+            </div>
+          </aside>
         </div>
       </article>
     </main>

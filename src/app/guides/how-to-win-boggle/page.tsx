@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "How to Win at Boggle — Proven Strategies to Score Higher",
@@ -50,7 +51,7 @@ const faqSchema = {
       name: "What is a winning score in Boggle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A winning Boggle score depends on the specific grid and player skill level, but generally: 25-35 points is beginner level, 35-50 is intermediate, 50+ is advanced, and 60+ is expert/champion level. In competitive play, scores of 70+ are possible on exceptional grids. For Daily Challenges, beating the average score puts you in the top half of players.",
+        text: "A winning Boggle score depends on the specific grid and player skill level, but generally: 25-35 points is beginner level, 35-50 is intermediate, 50+ is advanced, and 60+ is expert/champion level. In competitive play, scores of 70+ are possible on exceptional grids. For Daily, beating the average score puts you in the top half of players.",
       },
     },
     {
@@ -74,7 +75,7 @@ const faqSchema = {
       name: "How can I improve my Boggle score quickly?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "To quickly improve your Boggle score: 1) Memorize the 50 most common Boggle words, 2) Learn common word patterns (consonant clusters, vowel combinations), 3) Practice daily challenges to build pattern recognition, 4) Focus on 5+ letter words which score disproportionately higher, 5) Use the full 3 minutes — many beginners stop searching too early.",
+        text: "To quickly improve your Boggle score: 1) Memorize the 50 most common Boggle words, 2) Learn common word patterns (consonant clusters, vowel combinations), 3) Practice on Daily boards to build pattern recognition, 4) Focus on 5+ letter words which score disproportionately higher, 5) Use the full 3 minutes — many beginners stop searching too early.",
       },
     },
   ],
@@ -149,7 +150,7 @@ export default function HowToWinBoggleGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -218,7 +219,7 @@ export default function HowToWinBoggleGuide() {
               </tbody>
             </table>
             <p className="leading-relaxed mt-3">
-              In Daily Challenges, beating the average score typically puts you
+              In the Daily board, beating the average score typically puts you
               in the top 50% of players. The top 10% consistently score 55+.
             </p>
           </section>
@@ -433,7 +434,7 @@ export default function HowToWinBoggleGuide() {
                 PLAYER → PLAYED → PLAYING.
               </li>
               <li>
-                <strong>Practice daily.</strong> Play the Daily Challenge every
+                <strong>Practice daily.</strong> Play the Daily board every
                 day. Pattern recognition compounds.
               </li>
             </ul>
@@ -463,7 +464,7 @@ export default function HowToWinBoggleGuide() {
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   A winning Boggle score: 25-35 for beginners, 35-50
                   intermediate, 50+ advanced, 60+ expert, and 70+ champion
-                  level. In Daily Challenges, beating the average puts you in
+                  level. In the Daily board, beating the average puts you in
                   the top half of players.
                 </p>
               </details>
@@ -473,8 +474,8 @@ export default function HowToWinBoggleGuide() {
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   To quickly improve: 1) Memorize the 50 most common Boggle
-                  words, 2) Learn common word patterns, 3) Practice daily
-                  challenges, 4) Focus on 5+ letter words, 5) Use the full 3
+                  words, 2) Learn common word patterns, 3) Practice on Daily
+                  boards, 4) Focus on 5+ letter words, 5) Use the full 3
                   minutes instead of stopping early.
                 </p>
               </details>
@@ -498,20 +499,20 @@ export default function HowToWinBoggleGuide() {
             </h2>
             <p className="text-text mb-4">
               The best way to improve: play daily. Pattern recognition builds
-              over time. Start a Daily Challenge now.
+              over time. Start a Daily board now.
             </p>
             <div className="flex gap-3 flex-wrap">
               <Link
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Practice Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -557,7 +558,7 @@ export default function HowToWinBoggleGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Word Grid Now →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Put the winning tactics into a live round right away.
@@ -572,7 +573,7 @@ export default function HowToWinBoggleGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

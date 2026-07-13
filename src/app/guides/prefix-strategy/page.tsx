@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -65,7 +66,7 @@ export default function PrefixStrategyPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <article className="max-w-3xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">WordGrid</Link>
@@ -105,12 +106,12 @@ export default function PrefixStrategyPage() {
             Practice this in the live game, then review the archive to see which boards gave you the strongest prefix families.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play now</Link>
+            <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play</Link>
             <Link href="/guides/word-pattern-library" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Pattern library</Link>
             <Link href="/daily/archive" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Archive</Link>
           </div>
         </section>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Boggle Game Online — Free Play in Your Browser",
   description:
-    "Play the Boggle game online for free. No download, no sign-up. Classic 4×4 word puzzle in your browser. 3-minute rounds, same rules as the original board game.",
+    "Play the Boggle game online for free. No download, no sign-up. Classic Boggle plus larger practice grids in your browser. 3-minute rounds, same rules as the original board game.",
   alternates: { canonical: "/guides/boggle-game-online" },
   keywords: [
     "boggle game online", "boggle online game", "boggle game online free",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Boggle Game Online — Free Play in Your Browser",
     description:
-      "Classic Boggle gameplay in your browser. Free online word puzzle with 4×4 grid, 3-minute timer. No download, no sign-up required.",
+      "Classic Boggle gameplay in your browser. Free online word puzzle with standard and larger practice grids, 3-minute timer. No download, no sign-up required.",
   },
 };
 
@@ -42,7 +43,7 @@ const faqSchema = {
       name: "Can I play the Boggle game online?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. WordGrid offers free online Boggle gameplay with no download or sign-up required. The game runs entirely in your browser on desktop and mobile with the same 4×4 grid and 3-minute timer as the classic board game.",
+        text: "Yes. WordGrid offers free online Boggle gameplay with no download or sign-up required. The game runs entirely in your browser on desktop and mobile with the classic board plus larger practice grids and a 3-minute timer.",
       },
     },
     {
@@ -74,7 +75,7 @@ const faqSchema = {
       name: "How does online Boggle compare to the board game?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The gameplay is identical — same 4×4 grid, same rules, same scoring. The difference is that online Boggle generates grids algorithmically instead of using physical dice, offers unlimited games, and includes a Daily Challenge where everyone gets the same grid.",
+        text: "The gameplay is identical on the classic board — same rules, same scoring. The difference is that online Boggle generates grids algorithmically instead of using physical dice, offers unlimited games, supports larger practice boards, and includes a Daily board where everyone gets the same grid.",
       },
     },
   ],
@@ -106,7 +107,7 @@ export default function BoggleGameOnlineGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -125,11 +126,12 @@ export default function BoggleGameOnlineGuide() {
               The <strong>Boggle game online</strong> brings the classic 1972
               word puzzle to your browser. If you want the browser version,
               this page explains what changes and what stays the same. Same
-              4×4 grid. Same 3-minute timer. Same word-finding challenge.
+              classic rules. Same 3-minute timer. Same word-finding challenge,
+              with larger practice boards available too.
             </p>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
-                Play Boggle online free now →
+                Play →
               </Link>
             </p>
             <p className="leading-relaxed mt-3">
@@ -151,9 +153,10 @@ export default function BoggleGameOnlineGuide() {
             </h2>
             <p className="leading-relaxed">
               Online Boggle is a browser-based version of the classic word game.
-              You get a 4×4 grid of 16 letters and 3 minutes on the clock. Your
+              You get a square grid of letters and 3 minutes on the clock. Your
               goal: find as many English words as possible by connecting
-              adjacent letters horizontally, vertically, or diagonally.
+              adjacent letters horizontally, vertically, or diagonally. The
+              classic board is 4×4, and larger practice boards are also available.
             </p>
             <p className="leading-relaxed mt-3">
               The rules match the original board game exactly. The only difference
@@ -177,7 +180,7 @@ export default function BoggleGameOnlineGuide() {
               </li>
               <li>
                 <strong>Click Start.</strong> The 3-minute timer begins
-                immediately and a fresh 4×4 grid appears.
+                immediately and a fresh grid appears.
               </li>
               <li>
                 <strong>Connect letters to spell words.</strong> Click or tap a
@@ -207,7 +210,7 @@ export default function BoggleGameOnlineGuide() {
               <div>
                 <h3 className="font-semibold mb-2">Same</h3>
                 <ul className="space-y-1">
-                  <li>4×4 grid of letters</li>
+                  <li>Standard board plus larger practice grids</li>
                   <li>3-minute timer</li>
                   <li>Same adjacency rules</li>
                   <li>Same scoring system</li>
@@ -219,7 +222,7 @@ export default function BoggleGameOnlineGuide() {
                 <ul className="space-y-1">
                   <li>No physical dice</li>
                   <li>Unlimited games</li>
-                  <li>Daily Challenge</li>
+                  <li>Daily board</li>
                   <li>Plays in browser</li>
                   <li>No sign-up required</li>
                 </ul>
@@ -299,7 +302,7 @@ export default function BoggleGameOnlineGuide() {
                 Just open and play.
               </li>
               <li>
-                <strong>Daily Challenge.</strong> Same grid for everyone each
+                <strong>Daily board.</strong> Same grid for everyone each
                 day. Compare scores with friends.
               </li>
               <li>
@@ -319,7 +322,7 @@ export default function BoggleGameOnlineGuide() {
                 for warming up or improving your skills.
               </li>
               <li>
-                <strong>Daily Challenge:</strong> One grid per day, the same for
+                <strong>Daily board:</strong> One grid per day, the same for
                 everyone worldwide. Compete with friends or replay to beat your
                 own best.
               </li>
@@ -374,7 +377,7 @@ export default function BoggleGameOnlineGuide() {
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   The gameplay is identical. Online Boggle uses algorithmic
                   dice rolls instead of physical ones, offers unlimited games,
-                  and includes a Daily Challenge for score comparison.
+                  and includes a Daily board for score comparison.
                 </p>
               </details>
             </div>
@@ -393,13 +396,13 @@ export default function BoggleGameOnlineGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Play Boggle Online Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -412,7 +415,7 @@ export default function BoggleGameOnlineGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Word Grid Online →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Direct browser-play intent with the same rules and timer.
@@ -445,7 +448,7 @@ export default function BoggleGameOnlineGuide() {
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  Play Now →
+                  Play →
                 </div>
                 <div className="text-sm text-text-muted">
                   Start a live round in the browser.
@@ -460,7 +463,7 @@ export default function BoggleGameOnlineGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

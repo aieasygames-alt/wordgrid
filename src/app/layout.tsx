@@ -26,11 +26,11 @@ const BASE_URL = "https://wordgrid.games";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Word Grid — Play Free Word Grid Puzzle Online | WordGrid",
+    default: "Play Word Grid Online Free — No Download | WordGrid",
     template: "%s | WordGrid",
   },
   description:
-    "Play word grid, the free online word grid puzzle game. Connect adjacent letters in a 4×4 grid to find hidden words — like Boggle, free in your browser. New daily challenge every day. No download, no sign-up.",
+    "Play WordGrid online free in your browser. Connect adjacent letters in classic or larger square grids, try timed or Zen mode, and come back for the Daily board. No download, no sign-up.",
   keywords: [
     "boggle online", "boggle online free", "play boggle online free",
     "free boggle", "boggle game", "boggle word game", "play boggle",
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "WordGrid",
     url: BASE_URL,
-    title: "WordGrid — Free Daily Word Grid Puzzle Game",
+    title: "Play Word Grid Online Free — WordGrid",
     description:
-      "Connect adjacent letters in a 4×4 grid to find hidden words. New daily challenge every day!",
+      "Connect adjacent letters in square grids to find hidden words. Play free in your browser with timed, Zen, and Daily boards.",
     images: [
       {
         url: "/share-card-bg.png",
@@ -72,8 +72,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "WordGrid — Free Daily Word Grid Puzzle",
-    description: "Find words in a 4×4 grid. New daily challenge!",
+    title: "Play Word Grid Online Free — WordGrid",
+    description: "Find words in square grids. Free browser play, no download.",
     images: ["/share-card-bg.png"],
   },
   robots: {

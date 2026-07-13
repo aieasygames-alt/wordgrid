@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Boggle Tips and Tricks — Quick Techniques to Find More Words",
@@ -106,7 +107,7 @@ export default function BoggleTipsTricksGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -358,7 +359,7 @@ export default function BoggleTipsTricksGuide() {
               60-point players is <strong>pattern recognition speed</strong>.
             </p>
             <p className="leading-relaxed mt-3">
-              Play the Daily Challenge every day. Over time, your brain will
+              Play the Daily board every day. Over time, your brain will
               instantly recognize TH, HE, IN, ER, -TION, -NESS, -ING without
               conscious thought. That's how champions find 10+ words in the time
               beginners find 5.
@@ -468,13 +469,13 @@ export default function BoggleTipsTricksGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Practice Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -541,7 +542,7 @@ export default function BoggleTipsTricksGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

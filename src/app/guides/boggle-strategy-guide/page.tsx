@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
   title: "Boggle Strategy Guide — Complete Competitive Playbook",
@@ -106,7 +107,7 @@ export default function BoggleStrategyGuide() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="max-w-2xl mx-auto">
+      <GuideDesktopShell>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">Word Grid</Link>
@@ -447,7 +448,7 @@ export default function BoggleStrategyGuide() {
               </tbody>
             </table>
             <p className="leading-relaxed mt-3">
-              Play Daily Challenge every day. Track your scores. You should see
+              Play the Daily board every day. Track your scores. You should see
               10-15 point improvement by Week 4 if you practice consistently.
             </p>
           </section>
@@ -523,13 +524,13 @@ export default function BoggleStrategyGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Practice Now
+                Play
               </Link>
               <Link
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Daily Challenge
+                Daily
               </Link>
             </div>
           </div>
@@ -568,7 +569,7 @@ export default function BoggleStrategyGuide() {
             </div>
           </div>
         </div>
-      </article>
+      </GuideDesktopShell>
     </main>
   );
 }

@@ -170,7 +170,7 @@ export default function WordPatternLibraryPage() {
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
-                  Play now
+                  Play
                 </Link>
                 <Link href="/solver" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                   Open solver
@@ -368,7 +368,7 @@ export default function WordPatternLibraryPage() {
                 Open stats
               </Link>
               <Link href="/daily" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
-                Daily challenge
+                Daily
               </Link>
             </div>
           </div>

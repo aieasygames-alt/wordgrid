@@ -65,7 +65,7 @@ const faqSchema = {
       name: "How long do you have in Boggle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A standard game of Boggle lasts 3 minutes. Online variants like WordGrid also offer 5-minute and untimed Zen modes, but the Daily Challenge always uses the classic 3-minute clock so every player has the same experience.",
+        text: "A standard game of Boggle lasts 3 minutes. Online variants like WordGrid also offer 5-minute and untimed Zen modes, but the Daily always uses the classic 3-minute clock so every player has the same experience.",
       },
     },
     {
@@ -130,7 +130,9 @@ export default function BoggleRulesGuide() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <article className="max-w-2xl mx-auto">
+      <article className="mx-auto max-w-7xl">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+          <div>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <a href="/" className="hover:text-text">Home</a>
@@ -345,7 +347,7 @@ export default function BoggleRulesGuide() {
             <p className="leading-relaxed mt-3">
               In WordGrid, you can also choose a 5-minute mode or a no-timer
               &ldquo;Zen&rdquo; mode if you just want to relax and find words at
-              your own pace. But if you&apos;re playing the Daily Challenge,
+              your own pace. But if you&apos;re playing the Daily board,
               everyone gets the same 3-minute clock.
             </p>
           </section>
@@ -412,7 +414,7 @@ export default function BoggleRulesGuide() {
                 href="/daily"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Today&apos;s Challenge
+                Daily board
               </a>
             </div>
           </div>
@@ -442,6 +444,48 @@ export default function BoggleRulesGuide() {
               </a>
             </div>
           </div>
+        </div>
+          </div>
+
+          <aside className="space-y-4 lg:sticky lg:top-8">
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
+              <h2 className="text-2xl font-bold">Rules at a glance</h2>
+              <p className="mt-3 text-sm text-text-muted leading-relaxed">
+                On desktop, use this rail to keep the core rules visible while you
+                read through scoring, the timer, and the Qu tile.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold text-text">Try it now</h2>
+              <div className="mt-4 grid gap-2">
+                <a href="/play/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Play now
+                </a>
+                <a href="/daily/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Daily board
+                </a>
+                <a href="/guides/how-to-find-more-words/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Find more words
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold text-text">Related pages</h2>
+              <div className="mt-4 grid gap-2">
+                <a href="/guides/word-grid-strategies/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Score higher
+                </a>
+                <a href="/guides/play-boggle-online-free/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Play online free
+                </a>
+                <a href="/guides/word-grid-vs-boggle/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Compare versions
+                </a>
+              </div>
+            </div>
+          </aside>
         </div>
       </article>
     </main>

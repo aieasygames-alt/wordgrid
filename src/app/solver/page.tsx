@@ -7,7 +7,7 @@ const BASE_URL = "https://wordgrid.games";
 export const metadata: Metadata = {
   title: "Boggle Solver — Find All Words in Any Grid",
   description:
-    "Paste any 4x4 letter grid into the free Boggle solver. Find every valid word, compare scores, and review missed patterns to improve your game.",
+    "Paste any square letter grid into the free Boggle solver. Find every valid word, compare scores, and review missed patterns to improve your game.",
   alternates: { canonical: "/solver" },
   keywords: [
     "boggle solver",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Boggle Solver — Find All Words in Any Grid",
     description:
-      "Paste a 4x4 grid, solve it instantly, and review the highest-value words and missed patterns.",
+      "Paste a square grid, solve it instantly, and review the highest-value words and missed patterns.",
     url: `${BASE_URL}/solver`,
   },
 };
@@ -38,7 +38,7 @@ const softwareSchema = {
     priceCurrency: "USD",
   },
   description:
-    "Free online solver for 4x4 word grid puzzles with scoring breakdown and pattern review.",
+    "Free online solver for square word grid puzzles with scoring breakdown and pattern review.",
 };
 
 const faqSchema = {
@@ -50,7 +50,7 @@ const faqSchema = {
       name: "How do I use the Boggle solver?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Enter or paste a 4x4 letter grid, then click Solve. The solver finds every valid word, sorts them by score, and highlights the highest-value options first.",
+        text: "Enter or paste a square letter grid, then click Solve. The solver finds every valid word, sorts them by score, and highlights the highest-value options first.",
       },
     },
     {
@@ -88,7 +88,7 @@ export default function Page() {
         <div className="absolute right-[-4rem] top-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
       </div>
 
-      <article className="max-w-6xl mx-auto">
+      <article className="mx-auto max-w-7xl">
         <header className="mb-8 sm:mb-10">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">
@@ -104,7 +104,7 @@ export default function Page() {
           <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] items-start">
             <div>
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-                Boggle Solver for Any 4x4 Grid
+                Boggle Solver for Any Square Grid
               </h1>
               <p className="mt-4 text-base sm:text-lg text-text-muted max-w-2xl leading-relaxed">
                 Paste a board, hit solve, and get every valid word with score
@@ -112,14 +112,14 @@ export default function Page() {
                 fastest way to turn a finished game into a learning session.
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
-                <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
-                  Play a Round
+                <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                  Play
                 </Link>
                 <Link href="/daily" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
-                  Daily Challenge
+                  Daily
                 </Link>
-                <Link href="/stats" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
-                  My Stats
+                <Link href="/stats" className="px-4 py-2 rounded-xl border border-border bg-transparent hover:bg-surface transition font-semibold text-text-muted hover:text-text">
+                  Stats
                 </Link>
               </div>
             </div>
@@ -132,6 +132,10 @@ export default function Page() {
                 <li>Compare score density and high-value words at a glance.</li>
                 <li>Use the daily board or any custom layout as input.</li>
               </ul>
+              <div className="mt-4 rounded-2xl bg-bg/60 p-4 text-sm text-text-muted leading-relaxed">
+                Open the solver after a round, not during it. That keeps the
+                learning loop clear and makes the next play session more useful.
+              </div>
             </div>
           </div>
         </header>

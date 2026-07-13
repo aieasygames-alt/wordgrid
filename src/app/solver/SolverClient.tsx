@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { generateGrid, seedFromDate, todayDateString, type Grid } from "@/lib/boggle";
+import { generateGrid, generateSizedGrid, seedFromDate, todayDateString, type Grid } from "@/lib/boggle";
+import { decodeBoard } from "@/lib/board-link";
 import { loadDictionary, Trie } from "@/lib/dictionary";
 import { solveBoard, type SolvedWord } from "@/lib/solver";
 
@@ -38,8 +39,8 @@ function normalizeCell(value: string): string {
   return cleaned.slice(0, 1);
 }
 
-function buildEmptyValues(): CellValue[][] {
-  return Array.from({ length: 4 }, () => Array.from({ length: 4 }, () => ""));
+function buildEmptyValues(size = 4): CellValue[][] {
+  return Array.from({ length: size }, () => Array.from({ length: size }, () => ""));
 }
 
 function classifyPattern(word: string): string[] {
@@ -140,6 +141,7 @@ export default function SolverClient() {
   const [pasted, setPasted] = useState("");
   const [activeBoardName, setActiveBoardName] = useState("Today's board");
   const autoSolvedRef = useRef(false);
+  const boardSize = values.length;
 
   useEffect(() => {
     let cancelled = false;
@@ -160,11 +162,31 @@ export default function SolverClient() {
     };
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const boardParam = params.get("board");
+    if (!boardParam) return;
+
+    const parsed = decodeBoard(boardParam);
+    if (!parsed) {
+      setError("Could not read the shared board link.");
+      return;
+    }
+
+    const next = gridToValues(parsed);
+    setValues(next);
+    setActiveBoardName("Shared challenge");
+    setSolvedWords([]);
+    setFilter("all");
+    setSearch("");
+  }, []);
+
   const solveCurrentBoard = useCallback(
     async (nextValues: CellValue[][] = values, label = activeBoardName) => {
       const boardReady = nextValues.flat().every(Boolean);
       if (!boardReady) {
-        setError("Fill all 16 cells before solving.");
+        setError("Fill every cell before solving.");
         return;
       }
 
@@ -188,8 +210,8 @@ export default function SolverClient() {
   useEffect(() => {
     if (autoSolvedRef.current || !trie) return;
     autoSolvedRef.current = true;
-    void solveCurrentBoard(values, "Today's board");
-  }, [trie, solveCurrentBoard, values]);
+    void solveCurrentBoard(values, activeBoardName);
+  }, [trie, solveCurrentBoard, values, activeBoardName]);
 
   const updateCell = (row: number, col: number, nextValue: string) => {
     setValues((current) => {
@@ -206,13 +228,13 @@ export default function SolverClient() {
   };
 
   const loadRandomBoard = () => {
-    const next = gridToValues(generateGrid(Math.floor(Math.random() * 1e9)));
+    const next = gridToValues(generateSizedGrid(Math.floor(Math.random() * 1e9), boardSize));
     setValues(next);
     void solveCurrentBoard(next, "Random board");
   };
 
   const clearBoard = () => {
-    const empty = buildEmptyValues();
+    const empty = buildEmptyValues(boardSize);
     setValues(empty);
     setSolvedWords([]);
     setSearch("");
@@ -267,15 +289,16 @@ export default function SolverClient() {
       }
     }
 
-    if (tokens.length < 16) {
-      setError("Paste 16 letters or 4 rows of board text.");
+    const size = Math.sqrt(tokens.length);
+    if (!Number.isInteger(size)) {
+      setError("Paste a square board: 16, 25, or 36 letters.");
       return;
     }
 
-    const next = buildEmptyValues();
+    const next = buildEmptyValues(size);
     let idx = 0;
-    for (let r = 0; r < 4; r++) {
-      for (let c = 0; c < 4; c++) {
+    for (let r = 0; r < size; r++) {
+      for (let c = 0; c < size; c++) {
         next[r][c] = normalizeCell(tokens[idx] || "");
         idx += 1;
       }
@@ -287,13 +310,13 @@ export default function SolverClient() {
 
   return (
     <section className="space-y-6">
-      <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
+      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10 lg:sticky lg:top-8">
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold">Board Input</h2>
               <p className="text-sm text-text-muted mt-1">
-                Edit the 4x4 board, load today&apos;s daily grid, or paste a custom layout.
+                Edit the board, load today&apos;s daily grid, or paste a custom layout.
               </p>
             </div>
             <div className="text-right">
@@ -304,7 +327,10 @@ export default function SolverClient() {
             </div>
           </div>
 
-          <div className="mt-5 grid grid-cols-4 gap-2 sm:gap-3">
+          <div
+            className="mt-5 grid gap-2 sm:gap-3"
+            style={{ gridTemplateColumns: `repeat(${boardSize}, minmax(0, 1fr))` }}
+          >
             {values.map((row, r) =>
               row.map((cell, c) => (
                 <input
@@ -335,6 +361,26 @@ export default function SolverClient() {
               className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold"
             >
               Random board
+            </button>
+            <button
+              onClick={() => {
+                const next = generateSizedGrid(Math.floor(Math.random() * 1e9), 5);
+                setValues(gridToValues(next));
+                void solveCurrentBoard(gridToValues(next), "Big board");
+              }}
+              className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold"
+            >
+              Big board 5x5
+            </button>
+            <button
+              onClick={() => {
+                const next = generateSizedGrid(Math.floor(Math.random() * 1e9), 6);
+                setValues(gridToValues(next));
+                void solveCurrentBoard(gridToValues(next), "Huge board");
+              }}
+              className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold"
+            >
+              Huge board 6x6
             </button>
             <button
               onClick={clearBoard}
@@ -375,7 +421,7 @@ export default function SolverClient() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
+        <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10 lg:sticky lg:top-8 lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto">
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold">Results</h2>
@@ -514,7 +560,7 @@ export default function SolverClient() {
               Play again
             </Link>
             <Link href="/daily" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
-              Daily challenge
+              Daily
             </Link>
           </div>
         </div>

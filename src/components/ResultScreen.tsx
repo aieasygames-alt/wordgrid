@@ -8,6 +8,7 @@ import { recordGameHistory } from "@/lib/game-history";
 import { buildDailyMissions } from "@/lib/daily-missions";
 import { getBoardActionTip } from "@/lib/daily-tip";
 import { shareCardImage, generateShareCard } from "@/lib/shareCard";
+import { buildBoardUrl } from "@/lib/board-link";
 import Confetti from "./Confetti";
 import DailyMissionPanel from "./DailyMissionPanel";
 import TodayTipCard from "./TodayTipCard";
@@ -19,6 +20,14 @@ interface FoundWord {
 
 type TrainingHint = {
   label: string;
+  detail: string;
+};
+
+type MissedCategory = {
+  id: string;
+  label: string;
+  count: number;
+  total: number;
   detail: string;
 };
 
@@ -52,12 +61,47 @@ const SUFFIX_PATTERNS = [
   "S",
 ];
 
+function buildMissedBreakdown(words: SolvedWord[]): MissedCategory[] {
+  const categories = [
+    { id: "qu", label: "Qu", detail: "Special-case Q tiles and their nearby vowels." },
+    { id: "prefix", label: "Prefixes", detail: "RE, UN, IN, PRE, and other starts." },
+    { id: "suffix", label: "Suffixes", detail: "ING, ED, ER, LY, and other endings." },
+    { id: "long", label: "Long words", detail: "5+ letter words that pay off most." },
+    { id: "quick", label: "Quick grabs", detail: "Short, easy words you can take early." },
+  ];
+
+  const counts = new Map<string, number>(categories.map((category) => [category.id, 0]));
+
+  for (const { word } of words) {
+    const upper = word.toUpperCase();
+    if (upper.includes("QU")) counts.set("qu", (counts.get("qu") || 0) + 1);
+    if (PREFIX_PATTERNS.some((pattern) => upper.startsWith(pattern) || upper.includes(pattern))) {
+      counts.set("prefix", (counts.get("prefix") || 0) + 1);
+    }
+    if (SUFFIX_PATTERNS.some((pattern) => upper.endsWith(pattern))) {
+      counts.set("suffix", (counts.get("suffix") || 0) + 1);
+    }
+    if (upper.length >= 6) {
+      counts.set("long", (counts.get("long") || 0) + 1);
+    } else if (upper.length <= 4) {
+      counts.set("quick", (counts.get("quick") || 0) + 1);
+    }
+  }
+
+  return categories.map((category) => ({
+    ...category,
+    count: counts.get(category.id) || 0,
+    total: words.length,
+  }));
+}
+
 interface ResultScreenProps {
   grid: Grid;
   trie: Trie | null;
   foundWords: FoundWord[];
   totalScore: number;
   mode: "play" | "daily";
+  sessionMode?: "timed" | "zen";
   dateLabel?: string;
   streak?: number;
   bestCombo?: number;
@@ -70,6 +114,7 @@ export default function ResultScreen({
   foundWords,
   totalScore,
   mode,
+  sessionMode = "timed",
   dateLabel,
   streak,
   bestCombo,
@@ -77,6 +122,8 @@ export default function ResultScreen({
 }: ResultScreenProps) {
   const [showMissed, setShowMissed] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [challengeCopied, setChallengeCopied] = useState(false);
+  const [reviewCopied, setReviewCopied] = useState(false);
   const [fireConfetti, setFireConfetti] = useState(false);
   const [cardLoading, setCardLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -110,68 +157,92 @@ export default function ResultScreen({
     [missedWords]
   );
 
+  const missedBreakdown = useMemo(
+    () => buildMissedBreakdown(missedWords),
+    [missedWords]
+  );
+
+  const topMissedCategory = useMemo(
+    () => [...missedBreakdown].sort((a, b) => b.count - a.count)[0],
+    [missedBreakdown]
+  );
+
+  const bestFoundWord = useMemo(
+    () =>
+      [...foundWords].sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return b.word.length - a.word.length;
+      })[0],
+    [foundWords]
+  );
+
+  const longestFoundWord = useMemo(
+    () =>
+      [...foundWords].sort((a, b) => {
+        if (b.word.length !== a.word.length) return b.word.length - a.word.length;
+        return b.score - a.score;
+      })[0],
+    [foundWords]
+  );
+
+  const maxPossible = useMemo(
+    () => (hasDictionary ? allWords.reduce((s, w) => s + w.score, 0) : 0),
+    [allWords, hasDictionary]
+  );
+
+  const challengePath = useMemo(
+    () =>
+      buildBoardUrl("/challenge", grid, {
+        score: totalScore,
+        found: foundWords.length,
+        max: maxPossible,
+        mode,
+        session: sessionMode,
+        date: dateLabel,
+      }),
+    [grid, totalScore, foundWords.length, maxPossible, mode, sessionMode, dateLabel]
+  );
+  const solverPath = useMemo(() => buildBoardUrl("/solver", grid), [grid]);
+  const challengeUrl = useMemo(
+    () =>
+      typeof window !== "undefined"
+        ? new URL(challengePath, window.location.origin).toString()
+        : challengePath,
+    [challengePath]
+  );
+  const solverUrl = useMemo(
+    () =>
+      typeof window !== "undefined"
+        ? new URL(solverPath, window.location.origin).toString()
+        : solverPath,
+    [solverPath]
+  );
+
   const trainingHint = useMemo<TrainingHint | null>(() => {
-    if (!hasDictionary || missedWords.length === 0) return null;
+    if (!hasDictionary || missedWords.length === 0 || !topMissedCategory || topMissedCategory.count === 0) return null;
 
-    const counts = new Map<string, number>();
-    const add = (label: string) => {
-      counts.set(label, (counts.get(label) || 0) + 1);
-    };
-
-    for (const { word } of missedWords) {
-      const upper = word.toUpperCase();
-      if (upper.includes("QU")) add("Qu");
-
-      const prefix = PREFIX_PATTERNS.find((p) => upper.startsWith(p) || upper.includes(p));
-      if (prefix) add(`Prefix: ${prefix}`);
-
-      const suffix = SUFFIX_PATTERNS.find((s) => upper.endsWith(s));
-      if (suffix) add(`Suffix: ${suffix}`);
-
-      if (upper.length >= 6) add("Long words");
-      else if (upper.length <= 4) add("Quick grabs");
-    }
-
-    let topLabel = "";
-    let topCount = 0;
-    for (const [label, count] of counts) {
-      if (count > topCount) {
-        topLabel = label;
-        topCount = count;
-      }
-    }
-
-    if (!topLabel) {
-      return {
-        label: "Training focus: Mixed",
-        detail: "The missed words were spread out. Try a more systematic scan next round.",
-      };
-    }
-
-    if (topLabel === "Qu") {
+    if (topMissedCategory.id === "qu") {
       return {
         label: "Training focus: Qu",
         detail: "You missed several Qu words. Next round, check every Q tile first.",
       };
     }
 
-    if (topLabel.startsWith("Prefix: ")) {
-      const prefix = topLabel.replace("Prefix: ", "");
+    if (topMissedCategory.id === "prefix") {
       return {
-        label: `Training focus: ${topLabel}`,
-        detail: `You missed words built around the ${prefix} pattern. Scan for extensions and word families around that prefix.`,
+        label: "Training focus: Prefixes",
+        detail: "You missed words built from shared prefixes. Scan for stems you can extend into whole families.",
       };
     }
 
-    if (topLabel.startsWith("Suffix: ")) {
-      const suffix = topLabel.replace("Suffix: ", "");
+    if (topMissedCategory.id === "suffix") {
       return {
-        label: `Training focus: ${topLabel}`,
-        detail: `You missed words ending in ${suffix}. Look for base words that can extend into that ending.`,
+        label: "Training focus: Suffixes",
+        detail: "You missed words that end in common suffixes. Look for base words that can stretch into endings.",
       };
     }
 
-    if (topLabel === "Long words") {
+    if (topMissedCategory.id === "long") {
       return {
         label: "Training focus: Long words",
         detail: "Longer scoring words were left behind. Prioritize 5+ letter paths earlier in the next game.",
@@ -182,12 +253,7 @@ export default function ResultScreen({
       label: "Training focus: Quick grabs",
       detail: "Several easy words were available. Start the next board with a quick sweep before hunting long words.",
     };
-  }, [hasDictionary, missedWords]);
-
-  const maxPossible = useMemo(
-    () => (hasDictionary ? allWords.reduce((s, w) => s + w.score, 0) : 0),
-    [allWords, hasDictionary]
-  );
+  }, [hasDictionary, missedWords.length, topMissedCategory]);
 
   const percentage = maxPossible > 0 ? Math.round((totalScore / maxPossible) * 100) : 0;
 
@@ -202,7 +268,9 @@ export default function ResultScreen({
     const header =
       mode === "daily"
         ? `WordGrid Daily ${dateLabel}`
-        : "WordGrid";
+        : sessionMode === "zen"
+        ? "WordGrid Zen"
+        : "WordGrid Play";
     const lines = [
       header,
       hasDictionary
@@ -223,6 +291,7 @@ export default function ResultScreen({
       lines.push("Dictionary data was unavailable, so missed words could not be calculated.");
     }
     lines.push("");
+    lines.push(`Challenge: ${challengeUrl}`);
 
     // Emoji summary: 🟩 found, 🟥 missed (top 20 by score)
     if (hasDictionary) {
@@ -233,11 +302,8 @@ export default function ResultScreen({
       lines.push(emojis);
       lines.push("");
     }
-    lines.push("");
-    lines.push("wordgrid.games/" + mode);
-
     return lines.join("\n");
-  }, [mode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords, foundSet, streak, hasDictionary, bestCombo]);
+  }, [mode, sessionMode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords, foundSet, streak, hasDictionary, bestCombo, challengeUrl]);
 
   const handleShare = async () => {
     try {
@@ -250,6 +316,53 @@ export default function ResultScreen({
       }
     } catch {
       // user cancelled or clipboard failed
+    }
+  };
+
+  const handleCopyChallenge = async () => {
+    try {
+      await navigator.clipboard.writeText(challengeUrl);
+      setChallengeCopied(true);
+      setTimeout(() => setChallengeCopied(false), 2000);
+    } catch {
+      // clipboard may be unavailable
+    }
+  };
+
+  const reviewSummary = useMemo(() => {
+    const boardSize = grid.length;
+    const focusLabel = topMissedCategory?.label || "Mixed";
+    const focusCount = topMissedCategory?.count || 0;
+    const sessionLabel = mode === "daily" ? "Daily" : sessionMode === "zen" ? "Zen" : "Timed";
+    const lines = [
+      `WordGrid review`,
+      `${sessionLabel} · ${boardSize}x${boardSize} · ${totalScore}${hasDictionary ? ` / ${maxPossible} (${percentage}%)` : ""}`,
+      `Found: ${foundWords.length}${hasDictionary ? ` / ${allWords.length}` : ""}`,
+    ];
+
+    if (bestCombo && bestCombo > 1) {
+      lines.push(`Best combo: x${bestCombo}`);
+    }
+    if (streak && streak > 1) {
+      lines.push(`Streak: ${streak}`);
+    }
+    lines.push(`Training focus: ${focusLabel}${focusCount ? ` (${focusCount})` : ""}`);
+
+    if (bestMissedWords.length > 0) {
+      lines.push(`Best missed: ${bestMissedWords.map((word) => word.word).join(", ")}`);
+    }
+
+    lines.push(`Challenge: ${challengeUrl}`);
+    return lines.join("\n");
+  }, [grid.length, mode, sessionMode, totalScore, hasDictionary, maxPossible, percentage, foundWords.length, allWords.length, bestCombo, streak, topMissedCategory, bestMissedWords, challengeUrl]);
+
+  const handleCopyReview = async () => {
+    try {
+      await navigator.clipboard.writeText(reviewSummary);
+      setReviewCopied(true);
+      setTimeout(() => setReviewCopied(false), 2000);
+    } catch {
+      // clipboard may be unavailable
     }
   };
 
@@ -306,6 +419,7 @@ export default function ResultScreen({
     recordedRef.current = true;
     recordGameHistory({
       mode,
+      sessionMode,
       score: totalScore,
       foundCount: foundWords.length,
       totalCount: allWords.length,
@@ -314,14 +428,21 @@ export default function ResultScreen({
       bestCombo: bestCombo ?? 0,
       streak,
       dateLabel,
+      boardSize: grid.length,
+      focusLabel: topMissedCategory?.label,
+      focusCount: topMissedCategory?.count,
     });
-  }, [mode, totalScore, foundWords.length, allWords.length, maxPossible, percentage, bestCombo, streak, dateLabel]);
+  }, [mode, sessionMode, totalScore, foundWords.length, allWords.length, maxPossible, percentage, bestCombo, streak, dateLabel, grid.length, topMissedCategory]);
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
+    <div className="mx-auto flex w-full max-w-4xl flex-col gap-6">
       <Confetti fire={fireConfetti} />
       <h2 className="text-center text-3xl font-bold">
-        {mode === "daily" ? `Daily — ${dateLabel}` : "Game Over"}
+        {mode === "daily"
+          ? `Daily — ${dateLabel}`
+          : sessionMode === "zen"
+          ? "Zen Complete"
+          : "Game Over"}
       </h2>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
@@ -382,25 +503,43 @@ export default function ResultScreen({
               </div>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-3">
-              <button
-                onClick={handleShareCard}
-                disabled={cardLoading}
-                className="min-w-[140px] flex-1 rounded-xl bg-primary px-6 py-3 text-lg font-semibold transition hover:bg-primary-hover active:scale-[0.98] disabled:opacity-50"
-              >
-                {cardLoading ? "Generating…" : "Share Image"}
-              </button>
-              <button
-                onClick={handleShare}
-                className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
-              >
-                {copied ? "Copied!" : "Text"}
-              </button>
-              <a
-                href="/stats"
-                className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
-              >
-                Stats
+          <div className="mt-5 flex flex-wrap gap-3">
+            <button
+              onClick={handleShareCard}
+              disabled={cardLoading}
+              className="min-w-[140px] flex-1 rounded-xl bg-primary px-6 py-3 text-lg font-semibold transition hover:bg-primary-hover active:scale-[0.98] disabled:opacity-50"
+            >
+              {cardLoading ? "Generating…" : "Share Image"}
+            </button>
+            <button
+              onClick={handleShare}
+              className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
+            >
+              {copied ? "Copied!" : "Text"}
+            </button>
+            <button
+              onClick={handleCopyChallenge}
+              className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
+            >
+              {challengeCopied ? "Link Copied!" : "Challenge Link"}
+            </button>
+            <button
+              onClick={handleCopyReview}
+              className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
+            >
+              {reviewCopied ? "Review Copied!" : "Review Text"}
+            </button>
+            <a
+              href={solverUrl}
+              className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
+            >
+              Open Solver
+            </a>
+            <a
+              href="/stats"
+              className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
+            >
+              Stats
               </a>
             </div>
           </div>
@@ -442,6 +581,59 @@ export default function ResultScreen({
                 Game Review
               </h3>
               <div className="grid gap-3">
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {missedBreakdown.map((item) => {
+                    const pct = missedWords.length > 0 ? Math.round((item.count / missedWords.length) * 100) : 0;
+                    return (
+                      <div key={item.id} className="rounded-xl bg-bg/60 p-3">
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <div className="text-xs uppercase tracking-wide text-text-dim">{item.label}</div>
+                            <div className="mt-1 text-lg font-bold text-primary">{item.count}</div>
+                          </div>
+                          <div className="rounded-full bg-surface px-2 py-1 text-xs font-semibold text-text-muted">
+                            {pct}%
+                          </div>
+                        </div>
+                        <p className="mt-2 text-xs text-text-muted leading-relaxed">
+                          {item.detail}
+                        </p>
+                        <div className="mt-3 h-2 rounded-full bg-surface overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-gradient-to-r from-primary via-indigo-400 to-success"
+                            style={{ width: `${Math.max(8, pct)}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl bg-surface/60 p-3">
+                    <div className="text-xs uppercase tracking-wide text-text-muted">
+                      Best found
+                    </div>
+                    <div className="mt-1 font-semibold text-success">
+                      {bestFoundWord ? `${bestFoundWord.word} (${bestFoundWord.score})` : "—"}
+                    </div>
+                  </div>
+                  <div className="rounded-xl bg-surface/60 p-3">
+                    <div className="text-xs uppercase tracking-wide text-text-muted">
+                      Longest found
+                    </div>
+                    <div className="mt-1 font-semibold text-primary">
+                      {longestFoundWord ? `${longestFoundWord.word} (${longestFoundWord.word.length})` : "—"}
+                    </div>
+                  </div>
+                  <div className="rounded-xl bg-surface/60 p-3">
+                    <div className="text-xs uppercase tracking-wide text-text-muted">
+                      Best missed
+                    </div>
+                    <div className="mt-1 font-semibold text-danger">
+                      {bestMissedWords[0] ? `${bestMissedWords[0].word} (${bestMissedWords[0].score})` : "—"}
+                    </div>
+                  </div>
+                </div>
                 <div className="rounded-xl bg-surface/60 p-3">
                   <div className="mb-1 text-xs uppercase tracking-wide text-text-muted">
                     Best missed words
@@ -543,7 +735,7 @@ export default function ResultScreen({
           href="/daily"
           className="rounded-xl bg-surface px-6 py-3 font-semibold transition hover:bg-surface-hover"
         >
-          Daily Challenge
+          Daily
         </a>
         <a
           href="/"

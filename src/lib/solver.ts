@@ -24,6 +24,7 @@ function cellLetter(letter: string): string {
 export function solveBoard(grid: Grid, trie: Trie): SolvedWord[] {
   const results: SolvedWord[] = [];
   const found = new Set<string>();
+  const size = grid.length;
 
   function dfs(
     row: number,
@@ -53,15 +54,15 @@ export function solveBoard(grid: Grid, trie: Trie): SolvedWord[] {
     for (const [dr, dc] of DIRECTIONS) {
       const nr = row + dr;
       const nc = col + dc;
-      if (nr < 0 || nr >= 4 || nc < 0 || nc >= 4) continue;
+      if (nr < 0 || nr >= size || nc < 0 || nc >= size) continue;
       if (path.some((p) => p.row === nr && p.col === nc)) continue;
       dfs(nr, nc, [...path, { row: nr, col: nc }], newPrefix, child);
     }
   }
 
   const root = trie.root;
-  for (let r = 0; r < 4; r++) {
-    for (let c = 0; c < 4; c++) {
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
       dfs(r, c, [{ row: r, col: c }], "", root);
     }
   }

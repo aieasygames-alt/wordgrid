@@ -1,4 +1,4 @@
-// Streak system for Daily Challenge
+// Streak system for Daily board
 // Tracks consecutive days played, best streak, and total games.
 
 import { todayDateString } from "./boggle";

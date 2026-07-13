@@ -109,7 +109,7 @@ export async function generateShareCard(
   ctx.font = "500 20px system-ui, -apple-system, sans-serif";
   const modeText =
     data.mode === "daily"
-      ? `Daily Challenge — ${data.dateLabel ?? ""}`
+      ? `Daily board — ${data.dateLabel ?? ""}`
       : "Practice Game";
   ctx.fillText(modeText, rightX, 388);
 
@@ -118,7 +118,7 @@ export async function generateShareCard(
   ctx.font = "500 18px system-ui, -apple-system, sans-serif";
   ctx.fillText("wordgrid.games", rightX, 560);
 
-  // Mini board thumbnail (4x4, drawn in bottom-right corner)
+  // Mini board thumbnail, scaled to the active grid size.
   drawMiniBoard(ctx, data.grid, rightX, 400, 220);
 
   return new Promise((resolve) => {
@@ -133,12 +133,13 @@ function drawMiniBoard(
   y: number,
   size: number
 ) {
-  const gap = 4;
-  const cellSize = (size - gap * 3) / 4;
+  const boardSize = grid.length;
+  const gap = boardSize <= 4 ? 4 : boardSize === 5 ? 3 : 2;
+  const cellSize = (size - gap * (boardSize - 1)) / boardSize;
   const radius = 6;
 
-  for (let r = 0; r < 4; r++) {
-    for (let c = 0; c < 4; c++) {
+  for (let r = 0; r < boardSize; r++) {
+    for (let c = 0; c < boardSize; c++) {
       const cx = x + c * (cellSize + gap);
       const cy = y + r * (cellSize + gap);
       const letter = grid[r][c].letter.toUpperCase();

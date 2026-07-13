@@ -123,50 +123,73 @@ export default function DailyClient() {
     );
   }
 
+  const entryLinks = [
+    { href: "/play", label: "Play" },
+    { href: "/zen", label: "Zen" },
+    { href: "/daily", label: "Daily" },
+    { href: "/challenge", label: "Challenge" },
+    { href: "/daily/archive", label: "Archive" },
+    { href: "/solver", label: "Solver" },
+    { href: "/stats", label: "Stats" },
+  ];
+
   return (
-    <main className="min-h-screen flex flex-col items-center justify-start py-6 px-4">
-      <header className="mb-2 text-center">
-        <a href="/" className="text-sm text-text-dim hover:text-text">
-          WordGrid
-        </a>
-        <h1 className="text-xl font-semibold mt-1">
-          Daily Challenge — {today}
-        </h1>
-        <div className="mt-3 flex flex-wrap justify-center gap-2 text-xs">
-          <Link href="/daily/archive" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Archive
-          </Link>
-          <Link href="/solver" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Solver
-          </Link>
-          <Link href="/stats" className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition">
-            Stats
-          </Link>
+    <main className="min-h-screen px-4 py-8 sm:py-12">
+      <article className="mx-auto max-w-7xl">
+        <header className="mb-6 sm:mb-8 text-center">
+          <a href="/" className="text-sm text-text-dim hover:text-text">
+            WordGrid
+          </a>
+          <h1 className="mt-1 text-3xl sm:text-4xl font-bold tracking-tight">
+            Daily — {today}
+          </h1>
+          <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
+            {entryLinks.map((entry) => (
+              <Link
+                key={entry.href}
+                href={entry.href}
+                aria-current={entry.href === "/daily" ? "page" : undefined}
+                className={`px-3 py-1.5 rounded-full transition ${
+                  entry.href === "/daily"
+                    ? "bg-primary text-white shadow-lg shadow-primary/20"
+                    : "bg-surface/70 hover:bg-surface text-text-muted hover:text-text"
+                }`}
+              >
+                {entry.label}
+              </Link>
+            ))}
+          </div>
+        </header>
+
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
+          <section className="space-y-5">
+            <StreakDisplay compact />
+            <GameBoard key={today} grid={grid} onComplete={handleComplete} />
+          </section>
+
+          <aside className="space-y-4 lg:sticky lg:top-8">
+            <TodayTipCard
+              tip={todayTip}
+              grid={grid}
+              compact
+              layout="stack"
+              density="tight"
+              showActionBox={false}
+              showGrid={false}
+              primaryHref="/play"
+              primaryLabel="Play"
+              secondaryHref="/guides/word-pattern-library"
+              secondaryLabel="Pattern Library"
+            />
+            <DailyMissionPanel
+              missions={missionsReady ? missions : []}
+              title="Daily Missions"
+              subtitle="Complete a few focused goals while you play. The board itself decides the exact targets."
+              initialCollapsed
+            />
+          </aside>
         </div>
-      </header>
-      <div className="mb-3">
-        <StreakDisplay compact />
-      </div>
-      <div className="mb-5 w-full max-w-3xl">
-        <TodayTipCard
-          tip={todayTip}
-          grid={grid}
-          compact
-          primaryHref="/play"
-          primaryLabel="Practice this tip"
-          secondaryHref="/guides/word-pattern-library"
-          secondaryLabel="See the pattern library"
-        />
-      </div>
-      <div className="mb-5 w-full max-w-lg">
-        <DailyMissionPanel
-          missions={missionsReady ? missions : []}
-          title="Today's Missions"
-          subtitle="Complete a few focused goals while you play. The board itself decides the exact targets."
-          initialCollapsed
-        />
-      </div>
-      <GameBoard key={today} grid={grid} onComplete={handleComplete} />
+      </article>
     </main>
   );
 }

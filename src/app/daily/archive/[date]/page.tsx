@@ -25,12 +25,12 @@ export function generateMetadata({ params }: PageProps): Metadata {
   const entry = getDailyArchiveEntry(params.date);
   if (!entry) {
     return {
-      title: "Daily Challenge Archive",
+      title: "Daily Archive",
     };
   }
 
   return {
-    title: `${formatArchiveDate(entry.date)} Daily Board — WordGrid Archive`,
+    title: `${formatArchiveDate(entry.date)} Daily Board — WordGrid`,
     description:
       `Review the WordGrid daily board for ${formatArchiveDate(entry.date)}. See the grid, board traits, and a quick solving note.`,
     alternates: { canonical: `/daily/archive/${entry.date}` },
@@ -68,7 +68,7 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(detailSchema) }}
       />
 
-      <article className="max-w-6xl mx-auto">
+      <article className="mx-auto max-w-7xl">
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">
@@ -82,10 +82,10 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
             <span className="text-text">{formatArchiveDate(entry.date)}</span>
           </nav>
 
-          <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div>
               <span className="inline-flex items-center rounded-full border border-border bg-surface/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-text-dim">
-                Daily breakdown
+                Daily board
               </span>
               <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight">
                 {formatArchiveDate(entry.date)}
@@ -104,8 +104,8 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
                 <Metric label="Qu" value={entry.quCount || "0"} />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link href="/daily" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
-                  Play today&apos;s board
+                <Link href="/daily" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                  Daily
                 </Link>
                 <Link href="/daily/archive" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                   Back to archive
@@ -179,18 +179,18 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
               <div className="mt-4 flex flex-wrap gap-2">
                 {newer && (
                   <Link href={`/daily/archive/${newer.date}`} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
-                    Newer day
+                    Newer board
                   </Link>
                 )}
                 {older && (
                   <Link href={`/daily/archive/${older.date}`} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
-                    Older day
+                    Older board
                   </Link>
                 )}
-                <Link href="/stats" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+                <Link href="/stats" className="px-4 py-2 rounded-xl border border-border bg-transparent hover:bg-surface transition font-semibold text-text-muted hover:text-text">
                   Stats
                 </Link>
-                <Link href="/solver" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+                <Link href="/solver" className="px-4 py-2 rounded-xl border border-border bg-transparent hover:bg-surface transition font-semibold text-text-muted hover:text-text">
                   Solver
                 </Link>
               </div>

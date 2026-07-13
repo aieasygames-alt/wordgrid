@@ -1,9 +1,11 @@
 export type GameMode = "play" | "daily";
+export type SessionMode = "timed" | "zen";
 
 export interface GameHistoryEntry {
   id: string;
   playedAt: string;
   mode: GameMode;
+  sessionMode?: SessionMode;
   score: number;
   foundCount: number;
   totalCount: number;
@@ -12,6 +14,9 @@ export interface GameHistoryEntry {
   bestCombo: number;
   streak?: number;
   dateLabel?: string;
+  boardSize?: number;
+  focusLabel?: string;
+  focusCount?: number;
 }
 
 export interface GameHistorySummary {
@@ -51,6 +56,7 @@ export function loadGameHistory(): GameHistoryEntry[] {
         id: String(item.id || safeRandomId()),
         playedAt: String(item.playedAt || new Date().toISOString()),
         mode: item.mode === "daily" ? "daily" : "play",
+        sessionMode: item.sessionMode === "zen" ? "zen" : "timed",
         score: Number(item.score) || 0,
         foundCount: Number(item.foundCount) || 0,
         totalCount: Number(item.totalCount) || 0,
@@ -59,6 +65,9 @@ export function loadGameHistory(): GameHistoryEntry[] {
         bestCombo: Number(item.bestCombo) || 0,
         streak: typeof item.streak === "number" ? item.streak : undefined,
         dateLabel: typeof item.dateLabel === "string" ? item.dateLabel : undefined,
+        boardSize: typeof item.boardSize === "number" ? item.boardSize : undefined,
+        focusLabel: typeof item.focusLabel === "string" ? item.focusLabel : undefined,
+        focusCount: typeof item.focusCount === "number" ? item.focusCount : undefined,
       } satisfies GameHistoryEntry))
       .slice(0, MAX_ENTRIES);
   } catch {

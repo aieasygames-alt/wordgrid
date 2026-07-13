@@ -5,14 +5,14 @@ import { formatArchiveDate, getRecentDailyArchive } from "@/lib/daily-archive";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Daily Challenge Archive — Recent WordGrid Boards",
+  title: "Daily Archive — Recent WordGrid Boards",
   description:
-    "Browse recent WordGrid daily challenge boards. Review the last two weeks of grids, spot patterns, and jump back into today's puzzle.",
+    "Browse recent WordGrid daily boards. Review the last two weeks of grids, spot patterns, and jump back into today's puzzle.",
   alternates: { canonical: "/daily/archive" },
   openGraph: {
-    title: "Daily Challenge Archive — WordGrid",
+    title: "Daily Archive — WordGrid",
     description:
-      "Review recent daily WordGrid boards and return to today's challenge whenever you're ready.",
+      "Review recent daily WordGrid boards and return to today's board whenever you're ready.",
     url: `${BASE_URL}/daily/archive`,
   },
 };
@@ -23,7 +23,7 @@ export default function DailyArchivePage() {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "WordGrid daily challenge archive",
+    name: "WordGrid daily archive",
     itemListElement: archive.map((entry, index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -39,7 +39,7 @@ export default function DailyArchivePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
 
-      <article className="max-w-6xl mx-auto">
+      <article className="mx-auto max-w-7xl">
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">
@@ -53,17 +53,17 @@ export default function DailyArchivePage() {
             <span className="text-text">Archive</span>
           </nav>
 
-          <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+          <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <div>
               <span className="inline-flex items-center rounded-full border border-border bg-surface/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-text-dim">
                 Retention hub
               </span>
               <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight">
-                Daily Challenge Archive
+                Daily Archive
               </h1>
               <p className="mt-4 max-w-2xl text-base sm:text-lg text-text-muted leading-relaxed">
                 Review recent daily boards, notice recurring letter patterns,
-                and jump back into today&apos;s challenge when you are ready to
+                and jump back into today&apos;s board when you are ready to
                 play again. This page gives the daily mode a visible history
                 instead of a single isolated game.
               </p>
@@ -76,12 +76,17 @@ export default function DailyArchivePage() {
                 <Metric label="Today" value={formatArchiveDate(archive[0]?.date || "")} />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link href="/daily" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
-                  Play today&apos;s board
+                <Link href="/daily" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                  Daily
                 </Link>
                 <Link href="/solver" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                   Open solver
                 </Link>
+              </div>
+              <div className="mt-4 rounded-2xl bg-bg/60 p-4 text-sm text-text-muted leading-relaxed">
+                Use the archive on desktop as a pattern board: compare Qu-heavy
+                days, look for repeated suffixes, and open the details page when
+                one layout feels especially unusual.
               </div>
             </div>
           </div>
@@ -157,16 +162,16 @@ export default function DailyArchivePage() {
             <div>
               <h2 className="text-2xl font-semibold">Keep the streak moving</h2>
               <p className="mt-2 text-sm text-text-muted leading-relaxed max-w-2xl">
-                Daily mode still updates through the live challenge, but this
+                Daily mode still updates through the live board, but this
                 archive gives players a reason to return, review, and explore
                 patterns between sessions.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
-              <Link href="/daily" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
-                Today&apos;s challenge
+              <Link href="/daily" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                Daily
               </Link>
-              <Link href="/stats" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+              <Link href="/stats" className="px-4 py-2 rounded-xl border border-border bg-transparent hover:bg-surface transition font-semibold text-text-muted hover:text-text">
                 View stats
               </Link>
             </div>

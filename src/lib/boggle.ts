@@ -18,6 +18,36 @@ export const BOGGLE_DICE: string[][] = [
   ["N", "U", "I", "H", "M", "Qu"],
 ];
 
+const LETTER_WEIGHTS: Array<[string, number]> = [
+  ["A", 9],
+  ["B", 2],
+  ["C", 3],
+  ["D", 4],
+  ["E", 12],
+  ["F", 2],
+  ["G", 3],
+  ["H", 2],
+  ["I", 9],
+  ["J", 1],
+  ["K", 1],
+  ["L", 4],
+  ["M", 2],
+  ["N", 6],
+  ["O", 8],
+  ["P", 2],
+  ["Q", 1],
+  ["R", 6],
+  ["S", 4],
+  ["T", 6],
+  ["U", 4],
+  ["V", 1],
+  ["W", 2],
+  ["X", 1],
+  ["Y", 2],
+  ["Z", 1],
+  ["Qu", 1],
+];
+
 export interface Cell {
   row: number;
   col: number;
@@ -38,27 +68,51 @@ function mulberry32(seed: number) {
 }
 
 export function generateGrid(seed: number): Grid {
-  const rand = mulberry32(seed);
+  return generateGridWithSize(seed, 4);
+}
 
-  // Shuffle dice positions
-  const diceOrder = [...BOGGLE_DICE.keys()];
-  for (let i = diceOrder.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [diceOrder[i], diceOrder[j]] = [diceOrder[j], diceOrder[i]];
+function pickWeightedLetter(rand: () => number): string {
+  const total = LETTER_WEIGHTS.reduce((sum, [, weight]) => sum + weight, 0);
+  let roll = rand() * total;
+  for (const [letter, weight] of LETTER_WEIGHTS) {
+    roll -= weight;
+    if (roll <= 0) return letter;
+  }
+  return "E";
+}
+
+function generateGridWithSize(seed: number, size: number): Grid {
+  const rand = mulberry32(seed);
+  const grid: Grid = [];
+  const useClassicDice = size === 4;
+  let diceOrder: number[] = [];
+  if (useClassicDice) {
+    diceOrder = [...BOGGLE_DICE.keys()];
+    for (let i = diceOrder.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [diceOrder[i], diceOrder[j]] = [diceOrder[j], diceOrder[i]];
+    }
   }
 
-  const grid: Grid = [];
-  for (let row = 0; row < 4; row++) {
+  for (let row = 0; row < size; row++) {
     const cells: Cell[] = [];
-    for (let col = 0; col < 4; col++) {
-      const dieIdx = diceOrder[row * 4 + col];
-      const die = BOGGLE_DICE[dieIdx];
-      const face = Math.floor(rand() * die.length);
-      cells.push({ row, col, letter: die[face] });
+    for (let col = 0; col < size; col++) {
+      if (useClassicDice) {
+        const dieIdx = diceOrder[row * size + col];
+        const die = BOGGLE_DICE[dieIdx];
+        const face = Math.floor(rand() * die.length);
+        cells.push({ row, col, letter: die[face] });
+      } else {
+        cells.push({ row, col, letter: pickWeightedLetter(rand) });
+      }
     }
     grid.push(cells);
   }
   return grid;
+}
+
+export function generateSizedGrid(seed: number, size: number): Grid {
+  return generateGridWithSize(seed, size);
 }
 
 // Seed from date string "YYYY-MM-DD"

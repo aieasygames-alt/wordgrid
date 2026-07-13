@@ -52,7 +52,7 @@ export default function StreakDisplay({ compact = false }: StreakDisplayProps) {
   }
 
   return (
-    <div className="flex items-center justify-center gap-4 w-full max-w-sm">
+    <div className="flex items-center justify-center gap-4 w-full max-w-md">
       {/* Current streak */}
       <div className="text-center">
         <div className="flex items-center gap-1 justify-center">

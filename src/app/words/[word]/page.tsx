@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { HIGH_VALUE_WORDS, INDEXABLE_WORDS } from "@/lib/worddata";
+import { INDEXABLE_WORDS } from "@/lib/worddata";
 import { scoreWord } from "@/lib/boggle";
 
 const BASE_URL = "https://wordgrid.games";
 
-// Pre-generate 300 high-value words at build time
+// Pre-generate only the curated word pages that should be indexable.
 export function generateStaticParams() {
-  return HIGH_VALUE_WORDS.map((w) => ({ word: w }));
+  return INDEXABLE_WORDS.map((w) => ({ word: w }));
 }
 
 export const dynamicParams = false;
@@ -29,12 +29,12 @@ export async function generateMetadata({
       follow: true,
     },
     alternates: {
-      canonical: `/words/${wordLower}`,
+      canonical: `/words/${wordLower}/`,
     },
     openGraph: {
       title: `${word} — WordGrid Word Guide`,
       description: `${word} is a ${word.length}-letter English word in WordGrid. It scores ${points} points and can appear in our curated puzzle word list.`,
-      url: `${BASE_URL}/words/${wordLower}`,
+      url: `${BASE_URL}/words/${wordLower}/`,
     },
   };
 }
@@ -70,7 +70,7 @@ export default async function Page({ params }: { params: { word: string } }) {
         "@type": "ListItem",
         position: 3,
         name: wordUpper,
-        item: `${BASE_URL}/words/${wordLower}`,
+        item: `${BASE_URL}/words/${wordLower}/`,
       },
     ],
   };
@@ -163,7 +163,7 @@ export default async function Page({ params }: { params: { word: string } }) {
                   {relatedWords.map((rw) => (
                     <a
                       key={rw}
-                      href={`/words/${rw}`}
+                      href={`/words/${rw}/`}
                       className="px-3 py-1.5 bg-surface hover:bg-surface-hover rounded-lg text-sm font-mono text-text transition"
                     >
                       {rw.toUpperCase()}

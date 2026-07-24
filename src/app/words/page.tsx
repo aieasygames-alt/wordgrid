@@ -40,7 +40,7 @@ export default function WordsIndex() {
     itemListElement: INDEXABLE_WORDS.map((word, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: `${BASE_URL}/words/${word}`,
+      url: `${BASE_URL}/words/${word}/`,
       name: word.toUpperCase(),
     })),
   };
@@ -100,7 +100,7 @@ export default function WordsIndex() {
                       {words.map((word) => (
                         <Link
                           key={word}
-                          href={`/words/${word}`}
+                          href={`/words/${word}/`}
                           className="block bg-surface/50 hover:bg-surface transition rounded-2xl p-4"
                         >
                           <div className="flex items-center justify-between gap-3">

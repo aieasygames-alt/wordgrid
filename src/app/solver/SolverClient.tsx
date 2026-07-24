@@ -6,6 +6,7 @@ import { generateGrid, generateSizedGrid, seedFromDate, todayDateString, type Gr
 import { decodeBoard } from "@/lib/board-link";
 import { loadDictionary, Trie } from "@/lib/dictionary";
 import { solveBoard, type SolvedWord } from "@/lib/solver";
+import { INDEXABLE_WORDS } from "@/lib/indexable-words";
 
 type CellValue = string;
 
@@ -14,6 +15,7 @@ type PatternInsight = {
   detail: string;
 };
 
+const INDEXABLE_WORD_SET = new Set(INDEXABLE_WORDS);
 const DEFAULT_SAMPLE = generateGrid(seedFromDate(todayDateString()));
 const LENGTH_FILTERS = ["all", "3", "4", "5", "6", "7"] as const;
 type LengthFilter = (typeof LENGTH_FILTERS)[number];
@@ -490,20 +492,34 @@ export default function SolverClient() {
           <div className="mt-4 max-h-[30rem] overflow-auto rounded-2xl border border-border bg-bg/50 p-3">
             {filteredWords.length ? (
               <div className="flex flex-wrap gap-2">
-                {filteredWords.map((word) => (
-                  <Link
-                    key={word.word}
-                    href={`/words/${word.word.toLowerCase()}`}
-                    className="rounded-xl border border-border bg-surface/60 px-3 py-2 transition hover:border-primary/40 hover:bg-surface"
-                  >
+                {filteredWords.map((word) => {
+                  const wordLower = word.word.toLowerCase();
+                  const content = (
                     <div className="flex items-center gap-2">
                       <span className="font-mono font-semibold">{word.word}</span>
                       <span className="text-xs text-primary font-semibold">
                         {word.score}
                       </span>
                     </div>
-                  </Link>
-                ))}
+                  );
+
+                  return INDEXABLE_WORD_SET.has(wordLower) ? (
+                    <Link
+                      key={word.word}
+                      href={`/words/${wordLower}/`}
+                      className="rounded-xl border border-border bg-surface/60 px-3 py-2 transition hover:border-primary/40 hover:bg-surface"
+                    >
+                      {content}
+                    </Link>
+                  ) : (
+                    <span
+                      key={word.word}
+                      className="rounded-xl border border-border bg-surface/60 px-3 py-2"
+                    >
+                      {content}
+                    </span>
+                  );
+                })}
               </div>
             ) : (
               <div className="py-12 text-center text-sm text-text-muted">

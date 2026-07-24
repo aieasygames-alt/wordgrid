@@ -7,6 +7,7 @@ import { solveBoard, SolvedWord } from "@/lib/solver";
 import { recordGameHistory } from "@/lib/game-history";
 import { buildDailyMissions } from "@/lib/daily-missions";
 import { getBoardActionTip } from "@/lib/daily-tip";
+import { INDEXABLE_WORDS } from "@/lib/indexable-words";
 import { shareCardImage, generateShareCard } from "@/lib/shareCard";
 import { buildBoardUrl } from "@/lib/board-link";
 import Confetti from "./Confetti";
@@ -60,6 +61,8 @@ const SUFFIX_PATTERNS = [
   "TY",
   "S",
 ];
+
+const INDEXABLE_WORD_SET = new Set(INDEXABLE_WORDS);
 
 function buildMissedBreakdown(words: SolvedWord[]): MissedCategory[] {
   const categories = [
@@ -640,16 +643,32 @@ export default function ResultScreen({
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {bestMissedWords.length > 0 ? (
-                      bestMissedWords.map((w) => (
-                        <a
-                          key={w.word}
-                          href={`/words/${w.word.toLowerCase()}`}
-                          className="rounded-md bg-danger-bg/30 px-2.5 py-1 font-mono text-sm text-danger transition hover:bg-danger-bg/50"
-                        >
-                          {w.word}
-                          <span className="ml-1 text-xs text-danger/70">{w.score}</span>
-                        </a>
-                      ))
+                      bestMissedWords.map((w) => {
+                        const wordLower = w.word.toLowerCase();
+                        const content = (
+                          <>
+                            {w.word}
+                            <span className="ml-1 text-xs text-danger/70">{w.score}</span>
+                          </>
+                        );
+
+                        return INDEXABLE_WORD_SET.has(wordLower) ? (
+                          <a
+                            key={w.word}
+                            href={`/words/${wordLower}/`}
+                            className="rounded-md bg-danger-bg/30 px-2.5 py-1 font-mono text-sm text-danger transition hover:bg-danger-bg/50"
+                          >
+                            {content}
+                          </a>
+                        ) : (
+                          <span
+                            key={w.word}
+                            className="rounded-md bg-danger-bg/30 px-2.5 py-1 font-mono text-sm text-danger"
+                          >
+                            {content}
+                          </span>
+                        );
+                      })
                     ) : (
                       <span className="text-sm text-text-muted">No missed words to review.</span>
                     )}
@@ -708,15 +727,31 @@ export default function ResultScreen({
           </button>
           {showMissed && (
             <div className="flex flex-wrap gap-1.5">
-              {missedWords.map((w, i) => (
-                <a
-                  key={i}
-                  href={`/words/${w.word.toLowerCase()}`}
-                  className="rounded-md bg-danger-bg/30 px-2.5 py-1 font-mono text-sm text-danger/80 transition hover:bg-danger-bg/50 hover:text-danger"
-                >
-                  {w.word} <span className="text-xs text-danger/60">{w.score}</span>
-                </a>
-              ))}
+              {missedWords.map((w, i) => {
+                const wordLower = w.word.toLowerCase();
+                const content = (
+                  <>
+                    {w.word} <span className="text-xs text-danger/60">{w.score}</span>
+                  </>
+                );
+
+                return INDEXABLE_WORD_SET.has(wordLower) ? (
+                  <a
+                    key={i}
+                    href={`/words/${wordLower}/`}
+                    className="rounded-md bg-danger-bg/30 px-2.5 py-1 font-mono text-sm text-danger/80 transition hover:bg-danger-bg/50 hover:text-danger"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <span
+                    key={i}
+                    className="rounded-md bg-danger-bg/30 px-2.5 py-1 font-mono text-sm text-danger/80"
+                  >
+                    {content}
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>

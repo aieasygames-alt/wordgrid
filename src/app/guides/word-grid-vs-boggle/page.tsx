@@ -21,7 +21,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-20",
-  dateModified: "2026-06-20",
+  dateModified: "2026-07-24",
   mainEntityOfPage: "https://wordgrid.games/guides/word-grid-vs-boggle/",
 };
 
@@ -67,7 +67,7 @@ export default function WordGridVsBoggleGuide() {
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-2">
                 Word Grid vs Boggle: What&apos;s the Difference?
               </h1>
-              <p className="text-text-muted">5 min read · Updated June 2026</p>
+              <p className="text-text-muted">5 min read · Updated July 24, 2026</p>
             </header>
 
             <section className="space-y-6 text-text max-w-3xl">
@@ -90,6 +90,21 @@ export default function WordGridVsBoggleGuide() {
                 . If you want the rules first, try{" "}
                 <a href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
                   Boggle Rules for Beginners
+                </a>
+                .
+              </p>
+              <p className="leading-relaxed">
+                If you want the full modern workflow after that, add the{" "}
+                <a href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                  scoring sheet
+                </a>
+                ,{" "}
+                <a href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                  dictionary guide
+                </a>
+                , and{" "}
+                <a href="/solver" className="text-primary hover:underline">
+                  solver
                 </a>
                 .
               </p>

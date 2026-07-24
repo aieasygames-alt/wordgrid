@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-06-29",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/how-to-win-boggle/`,
 };
 
@@ -81,45 +81,6 @@ const faqSchema = {
   ],
 };
 
-const howToSchema = {
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  name: "How to Win at Boggle",
-  description: "Step-by-step competitive strategies to achieve higher Boggle scores consistently.",
-  step: [
-    {
-      "@type": "HowToStep",
-      position: 1,
-      name: "Scan systematically",
-      text: "Start with horizontal row-by-row scanning, then vertical columns, then diagonals. Look for common letter clusters: TH, HE, IN, ER, AN, RE. These appear in thousands of words.",
-    },
-    {
-      "@type": "HowToStep",
-      position: 2,
-      name: "Hunt for 5+ letter words",
-      text: "Prioritize finding longer words. A single 5-letter word (4 points) beats four 3-letter words (4 points total). Look for word patterns like -TION, -NESS, -ING.",
-    },
-    {
-      "@type": "HowToStep",
-      position: 3,
-      name: "Use prefix and suffix knowledge",
-      text: "When you find a word, mentally add common prefixes (RE-, UN-, PRE-) and suffixes (-ING, -ED, -ER, -EST) to generate related words from the same letters.",
-    },
-    {
-      "@type": "HowToStep",
-      position: 4,
-      name: "Check every word for plurals",
-      text: "Whenever you find a noun, check if adding S creates a valid word. This doubles your word count with minimal effort.",
-    },
-    {
-      "@type": "HowToStep",
-      position: 5,
-      name: "Practice pattern recognition",
-      text: "Play daily and learn to instantly recognize high-value letter combinations like QU, TH, HE, and common word structures. Build mental shortcuts.",
-    },
-  ],
-};
-
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -143,10 +104,6 @@ export default function HowToWinBoggleGuide() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
@@ -160,7 +117,7 @@ export default function HowToWinBoggleGuide() {
           <h1 className="text-4xl font-bold mb-2">
             How to Win at Boggle — Proven Strategies to Score Higher
           </h1>
-          <p className="text-text-muted">8 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">9 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -184,6 +141,21 @@ export default function HowToWinBoggleGuide() {
               or{" "}
               <Link href="/guides/advanced-boggle-strategies" className="text-primary hover:underline">
                 advanced Boggle strategies
+              </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              To turn these ideas into real score gains, pair this page with the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              ,{" "}
+              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                dictionary guide
+              </Link>
+              , and{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
               </Link>
               .
             </p>

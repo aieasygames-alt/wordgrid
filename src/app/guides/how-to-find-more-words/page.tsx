@@ -22,7 +22,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-19",
-  dateModified: "2026-06-20",
+  dateModified: "2026-07-24",
   mainEntityOfPage: "https://wordgrid.games/guides/how-to-find-more-words/",
 };
 
@@ -59,7 +59,7 @@ export default function Guide1() {
           <h1 className="text-4xl font-bold mt-4 mb-2">
             How to Find More Words in Word Grid Puzzles
           </h1>
-          <p className="text-text-muted">6 min read</p>
+          <p className="text-text-muted">6 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="prose prose-invert max-w-none space-y-6 text-text">
@@ -86,6 +86,21 @@ export default function Guide1() {
                 the rules page
               </Link>{" "}
               if you want a reset.
+            </p>
+            <p className="leading-relaxed mt-3">
+              For the full review loop, add the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              ,{" "}
+              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                dictionary guide
+              </Link>
+              , and{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
+              </Link>
+              .
             </p>
           </section>
 

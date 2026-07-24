@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-06-29",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/advanced-boggle-strategies/`,
 };
 
@@ -117,7 +117,7 @@ export default function AdvancedBoggleStrategiesGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Advanced Boggle Strategies — Expert-Level Techniques
           </h1>
-          <p className="text-text-muted">12 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">13 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -143,6 +143,21 @@ export default function AdvancedBoggleStrategiesGuide() {
                 the main strategy guide
               </Link>
               .
+            </p>
+            <p className="leading-relaxed mt-3">
+              To connect expert theory to real boards, keep the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              ,{" "}
+              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                dictionary guide
+              </Link>
+              , and{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
+              </Link>
+              open in the same workflow.
             </p>
           </section>
 

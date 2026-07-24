@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-28",
-  dateModified: "2026-06-28",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-online-free/`,
 };
 
@@ -117,7 +117,7 @@ export default function BoggleOnlineFreeGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Online Free — Play Instantly, No Download
           </h1>
-          <p className="text-text-muted">4 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">5 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -141,6 +141,21 @@ export default function BoggleOnlineFreeGuide() {
               If you want the rules refresher first, read{" "}
               <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
                 Boggle Rules for Beginners
+              </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you want more than instant play, go next to the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              ,{" "}
+              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                dictionary guide
+              </Link>
+              , and{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
               </Link>
               .
             </p>

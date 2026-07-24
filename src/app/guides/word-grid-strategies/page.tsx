@@ -22,7 +22,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-19",
-  dateModified: "2026-06-20",
+  dateModified: "2026-07-24",
   mainEntityOfPage: "https://wordgrid.games/guides/word-grid-strategies/",
 };
 
@@ -59,7 +59,7 @@ export default function Guide2() {
               <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight mb-2">
                 Word Grid Strategies: Score Higher Every Game
               </h1>
-              <p className="text-text-muted">5 min read</p>
+              <p className="text-text-muted">5 min read &middot; Updated July 24, 2026</p>
             </header>
 
             <section className="space-y-6 text-text max-w-3xl">
@@ -90,6 +90,21 @@ export default function Guide2() {
                 </Link>
                 .
               </p>
+              <p className="leading-relaxed">
+                To translate strategy into score gains, keep the{" "}
+                <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                  scoring sheet
+                </Link>
+                ,{" "}
+                <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                  dictionary guide
+                </Link>
+                , and{" "}
+                <Link href="/solver" className="text-primary hover:underline">
+                  solver
+                </Link>
+                in the same review cycle.
+              </p>
             </section>
 
             <section className="mt-8 max-w-4xl">
@@ -107,7 +122,7 @@ export default function Guide2() {
                   </thead>
                   <tbody>
                     {[
-                      [3, 1], [4, 2], [5, 4], [6, 6], [7, 8], [8, 10],
+                      [3, 1], [4, 2], [5, 4], [6, 6], [7, 8], [8, 11],
                     ].map(([len, pts]) => (
                       <tr key={len} className="border-t border-border/70">
                         <td className="py-2 px-4">{len} letters</td>

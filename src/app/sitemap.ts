@@ -3,9 +3,9 @@ import { getDailyArchiveDates } from "@/lib/daily-archive";
 import { INDEXABLE_WORDS } from "@/lib/worddata";
 
 const BASE_URL = "https://wordgrid.games";
-const SITE_UPDATED = new Date("2026-07-13");
-const GUIDE_UPDATED = new Date("2026-07-13");
-const WORDS_UPDATED = new Date("2026-07-13");
+const SITE_UPDATED = new Date("2026-07-24");
+const GUIDE_UPDATED = new Date("2026-07-24");
+const WORDS_UPDATED = new Date("2026-07-24");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

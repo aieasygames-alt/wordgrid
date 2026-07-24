@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-06-29",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-variants/`,
 };
 
@@ -117,7 +117,7 @@ export default function BoggleVariantsGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Variants — Fun Game Variations & Alternatives
           </h1>
-          <p className="text-text-muted">8 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">9 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -131,6 +131,21 @@ export default function BoggleVariantsGuide() {
             <p className="leading-relaxed mt-3">
               From official spinoffs to creative house rules, there's a
               variation for every situation.
+            </p>
+            <p className="leading-relaxed mt-3">
+              For standard play before you branch into variants, use{" "}
+              <Link href="/play" className="text-primary hover:underline">
+                the live game
+              </Link>
+              , the{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                rules guide
+              </Link>
+              , and the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              .
             </p>
           </section>
 

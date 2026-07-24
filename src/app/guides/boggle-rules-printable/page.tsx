@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-06-29",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-rules-printable/`,
 };
 
@@ -117,7 +117,7 @@ export default function BoggleRulesPrintableGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Rules Printable — Free Reference Sheet
           </h1>
-          <p className="text-text-muted">5 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">6 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -137,6 +137,21 @@ export default function BoggleRulesPrintableGuide() {
               or{" "}
               <Link href="/guides/play-word-grid-online" className="text-primary hover:underline">
                 how to play online
+              </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              For a sharper reference stack, pair this sheet with the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              ,{" "}
+              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                dictionary guide
+              </Link>
+              , and{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
               </Link>
               .
             </p>

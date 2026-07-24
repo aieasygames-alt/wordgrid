@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-06-29",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-tips-tricks/`,
 };
 
@@ -117,7 +117,7 @@ export default function BoggleTipsTricksGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Tips and Tricks — Quick Techniques to Find More Words
           </h1>
-          <p className="text-text-muted">6 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">7 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -134,6 +134,22 @@ export default function BoggleTipsTricksGuide() {
               and compare them with the{" "}
               <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
                 most common Boggle words
+              </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you want the full score logic and post-game review flow, pair these
+              tips with the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              ,{" "}
+              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                dictionary guide
+              </Link>
+              , and{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
               </Link>
               .
             </p>

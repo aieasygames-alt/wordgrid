@@ -29,8 +29,8 @@ const GUIDES = [
     description:
       "Never played Boggle or a word grid game before? This guide walks you through every rule, step by step, with a real example board.",
     category: "Beginner",
-    readTime: "7 min read",
-    date: "2026-06-20",
+    readTime: "8 min read",
+    date: "2026-07-24",
   },
   {
     href: "/guides/how-to-find-more-words",
@@ -137,8 +137,8 @@ const GUIDES = [
     description:
       "Complete Boggle scoring reference with points table, calculation examples, and scoring strategies. Learn how points work and optimize your gameplay.",
     category: "Beginner",
-    readTime: "6 min read",
-    date: "2026-06-29",
+    readTime: "7 min read",
+    date: "2026-07-24",
   },
   {
     href: "/guides/boggle-rules-for-kids",
@@ -227,8 +227,8 @@ const GUIDES = [
     description:
       "Free online Boggle solver to find all words in any square grid. Paste your letters and get instant solutions with word counts, scoring breakdown, and anagram analysis.",
     category: "Intermediate",
-    readTime: "7 min read",
-    date: "2026-06-29",
+    readTime: "8 min read",
+    date: "2026-07-24",
   },
   {
     href: "/guides/boggle-generator",
@@ -245,8 +245,8 @@ const GUIDES = [
     description:
       "Complete Boggle dictionary with word lists, vocabulary references, and valid word guidelines. Lookup any word, explore high-frequency game vocabulary, and improve your word-finding skills.",
     category: "Intermediate",
-    readTime: "8 min read",
-    date: "2026-06-29",
+    readTime: "9 min read",
+    date: "2026-07-24",
   },
 ];
 
@@ -369,6 +369,50 @@ export default function GuidesIndex() {
               <div className="font-semibold text-primary">Prefix Strategy</div>
               <p className="text-sm text-text-muted mt-1">
                 RE, UN, IN, and PRE turns one stem into a family.
+              </p>
+            </Link>
+          </div>
+        </section>
+
+        <section className="mb-10">
+          <h2 className="text-xl font-semibold mb-4 text-text-muted">
+            Rules, Scoring, and Solver Hub
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <Link
+              href="/guides/boggle-rules-beginners"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold text-lg mb-1">Learn the rules</h3>
+              <p className="text-sm text-text-muted">
+                Adjacency, minimum word length, Qu, and valid-word basics.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-scoring-sheet"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold text-lg mb-1">Understand scoring</h3>
+              <p className="text-sm text-text-muted">
+                Official point values, score ranges, and why 5+ letter words matter.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-dictionary"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold text-lg mb-1">Build vocabulary</h3>
+              <p className="text-sm text-text-muted">
+                Valid-word guidance, common patterns, and study priorities.
+              </p>
+            </Link>
+            <Link
+              href="/solver"
+              className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-5 border border-primary/20"
+            >
+              <h3 className="font-semibold text-lg mb-1 text-primary">Review with the solver</h3>
+              <p className="text-sm text-text-muted">
+                Paste a finished board and see every valid answer with scoring detail.
               </p>
             </Link>
           </div>

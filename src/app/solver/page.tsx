@@ -30,6 +30,7 @@ const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "WordGrid Solver",
+  url: `${BASE_URL}/solver/`,
   applicationCategory: "Game",
   operatingSystem: "Web",
   offers: {
@@ -39,6 +40,7 @@ const softwareSchema = {
   },
   description:
     "Free online solver for square word grid puzzles with scoring breakdown and pattern review.",
+  dateModified: "2026-07-24",
 };
 
 const faqSchema = {
@@ -83,11 +85,6 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute left-[-6rem] top-10 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl" />
-        <div className="absolute right-[-4rem] top-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
-      </div>
-
       <article className="mx-auto max-w-7xl">
         <header className="mb-8 sm:mb-10">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
@@ -110,6 +107,21 @@ export default function Page() {
                 Paste a board, hit solve, and get every valid word with score
                 ranking, length filters, and quick pattern review. It is the
                 fastest way to turn a finished game into a learning session.
+              </p>
+              <p className="mt-4 text-sm sm:text-base text-text-muted max-w-2xl leading-relaxed">
+                The cleanest workflow is:{" "}
+                <Link href="/play" className="text-primary hover:underline">
+                  play a round
+                </Link>
+                , review what counted in the{" "}
+                <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                  dictionary guide
+                </Link>
+                , compare the missed points in the{" "}
+                <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                  scoring sheet
+                </Link>
+                , then come back here and solve the board.
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
                 <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
@@ -141,6 +153,35 @@ export default function Page() {
         </header>
 
         <SolverClient />
+
+        <section className="mt-12 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="rounded-2xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-semibold">Best Way to Use the Solver</h2>
+            <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm text-text-muted leading-relaxed">
+              <li>Play first on `/play` or the Daily board so the review stays honest.</li>
+              <li>Paste the finished grid or load today&apos;s board inside the solver.</li>
+              <li>Check the highest-value words before reading the full list.</li>
+              <li>Use the missing patterns as your next practice target.</li>
+            </ol>
+          </div>
+          <div className="rounded-2xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-semibold">Related Pages</h2>
+            <div className="mt-4 grid gap-3">
+              <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Boggle Rules for Beginners
+              </Link>
+              <Link href="/guides/boggle-scoring-sheet" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Boggle Scoring Sheet
+              </Link>
+              <Link href="/guides/boggle-dictionary" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Boggle Dictionary
+              </Link>
+              <Link href="/guides/boggle-solver" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Solver Guide
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <section className="mt-12 grid gap-4 sm:grid-cols-3">
           <div className="rounded-2xl bg-surface/50 border border-border p-5">

@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-06-29",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-scoring-sheet/`,
 };
 
@@ -117,7 +117,7 @@ export default function BoggleScoringSheetGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Scoring Sheet — Points Table & Calculation Guide
           </h1>
-          <p className="text-text-muted">6 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">7 min read &middot; Updated July 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -127,6 +127,17 @@ export default function BoggleScoringSheetGuide() {
               between 25-point games and 60-point games. This guide shows
               exactly how points work, why longer words score more, and how to
               optimize your gameplay for maximum points.
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you are still learning the basics, start with{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                Boggle rules for beginners
+              </Link>
+              . If you want to check missed words after a round, use the{" "}
+              <Link href="/guides/boggle-solver" className="text-primary hover:underline">
+                solver guide
+              </Link>
+              .
             </p>
             <p className="leading-relaxed mt-3">
               If you want the tactical side next, move to{" "}
@@ -379,6 +390,38 @@ export default function BoggleScoringSheetGuide() {
 
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
+              Rules, Scoring, and Review
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/guides/boggle-rules-beginners/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Start with the rules</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Confirm adjacency, minimum word length, and Qu behavior before optimizing score.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-dictionary/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Know what counts</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Use the dictionary guide to avoid wasting time on invalid words.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-solver/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Review with a solver</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Compare your score to the full board after the game and see where the points were hiding.
+                </p>
+              </Link>
+              <Link href="/play" className="block rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">
+                <div className="font-semibold text-primary">Practice live</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Try a fresh board and apply the length-first scoring approach right away.
+                </p>
+              </Link>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
               Frequently Asked Questions
             </h2>
             <div className="space-y-4">
@@ -456,6 +499,17 @@ export default function BoggleScoringSheetGuide() {
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
               <Link
+                href="/guides/boggle-rules-beginners/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Rules for Beginners →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Lock in the core rules before you optimize for points.
+                </div>
+              </Link>
+              <Link
                 href="/guides/boggle-rules-printable/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
@@ -486,6 +540,17 @@ export default function BoggleScoringSheetGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Comprehensive competitive playbook.
+                </div>
+              </Link>
+              <Link
+                href="/guides/boggle-solver/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Solver →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Review missed words and compare your score with the full board.
                 </div>
               </Link>
               <Link

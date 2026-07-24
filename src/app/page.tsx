@@ -115,7 +115,7 @@ export default function Home() {
         name: "How is WordGrid scored?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Points scale with word length: 3-letter words are 1 point, 4-letter words are 2 points, 5-letter words are 4 points, 6-letter words are 6 points, and 7+ letter words are worth 8 or more. Longer words give exponentially higher scores.",
+          text: "Points scale with word length: 3-letter words are 1 point, 4-letter words are 2 points, 5-letter words are 4 points, 6-letter words are 6 points, 7-letter words are 8 points, 8-letter words are 11 points, and 9+ letter words are worth even more. Longer words give exponentially higher scores.",
         },
       },
     ],
@@ -179,7 +179,7 @@ export default function Home() {
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
             {[
               ["3", "1 pt"], ["4", "2 pts"], ["5", "4 pts"],
-              ["6", "6 pts"], ["7", "8 pts"], ["8+", "10+"],
+              ["6", "6 pts"], ["7", "8 pts"], ["8", "11 pts"],
             ].map(([len, pts]) => (
               <div key={len} className="bg-surface/50 rounded-lg p-3 text-center">
                 <div className="text-text-dim text-xs uppercase">{len} letters</div>
@@ -187,6 +187,13 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <p className="text-sm text-text-muted mt-4">
+            Need the full point table and winning score ranges? Open the{" "}
+            <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+              Boggle scoring sheet
+            </Link>
+            .
+          </p>
         </section>
 
         {/* FAQ */}
@@ -351,6 +358,30 @@ export default function Home() {
               </p>
             </Link>
             <Link
+              href="/guides/boggle-scoring-sheet"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Boggle Scoring Sheet &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                The exact point table, score ranges, and why 5+ letter words
+                change the game.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-dictionary"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Boggle Dictionary &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                Learn what counts as a valid word and which vocabulary families
+                show up most often.
+              </p>
+            </Link>
+            <Link
               href="/guides/word-grid-strategies"
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
             >
@@ -360,6 +391,18 @@ export default function Home() {
               <p className="text-sm text-text-muted">
                 Time management, scoring optimization, and word families to
                 maximize your score every game.
+              </p>
+            </Link>
+            <Link
+              href="/solver"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+            >
+              <h3 className="font-semibold mb-1 text-primary">
+                Boggle Solver &rarr;
+              </h3>
+              <p className="text-sm text-text-muted">
+                Review a finished board, find missed words, and turn results
+                into your next practice target.
               </p>
             </Link>
           </div>

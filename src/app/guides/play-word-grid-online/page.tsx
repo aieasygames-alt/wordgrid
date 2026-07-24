@@ -29,7 +29,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-27",
-  dateModified: "2026-06-27",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/play-word-grid-online/`,
 };
 
@@ -108,7 +108,7 @@ export default function PlayWordGridOnlineGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Play Word Grid Online — Free, No Download
           </h1>
-          <p className="text-text-muted">4 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">5 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -126,6 +126,21 @@ export default function PlayWordGridOnlineGuide() {
                 Play →
               </Link>{" "}
               or read on to learn how it works.
+            </p>
+            <p className="leading-relaxed mt-3">
+              After your first round, the best next pages are the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              ,{" "}
+              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                dictionary guide
+              </Link>
+              , and{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
+              </Link>
+              .
             </p>
           </section>
 
@@ -177,8 +192,8 @@ export default function PlayWordGridOnlineGuide() {
               <li>
                 <strong>Find as many as you can in 3 minutes.</strong> Longer
                 words score more — see the scoring table on the{" "}
-                <Link href="/" className="text-primary hover:underline">
-                  home page
+                <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                  Boggle scoring sheet
                 </Link>
                 .
               </li>
@@ -290,6 +305,30 @@ export default function PlayWordGridOnlineGuide() {
                 </div>
                 <div className="text-sm text-text-muted">
                   Time management, scoring math, and word families to maximize your score.
+                </div>
+              </Link>
+              <Link href="/guides/boggle-scoring-sheet/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">
+                  Boggle Scoring Sheet →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Full point values, score ranges, and length-first scoring strategy.
+                </div>
+              </Link>
+              <Link href="/guides/boggle-dictionary/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">
+                  Boggle Dictionary →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Valid-word guidance and the vocabulary patterns that matter most.
+                </div>
+              </Link>
+              <Link href="/solver" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">
+                  Boggle Solver →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Review a board after you play and turn missed words into practice.
                 </div>
               </Link>
               <Link href="/guides/" className="block text-sm text-text-dim hover:text-text">

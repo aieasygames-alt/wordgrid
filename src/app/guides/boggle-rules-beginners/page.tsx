@@ -26,7 +26,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-20",
-  dateModified: "2026-06-27",
+  dateModified: "2026-07-24",
   mainEntityOfPage: "https://wordgrid.games/guides/boggle-rules-beginners/",
 };
 
@@ -79,20 +79,6 @@ const faqSchema = {
   ],
 };
 
-const howToSchema = {
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  name: "How to Play Boggle / Word Grid",
-  description: "Complete rules for playing a word grid puzzle game.",
-  step: [
-    { "@type": "HowToStep", position: 1, name: "Look at the grid", text: "A 4×4 grid of 16 lettered dice is displayed. Each cell contains one letter (Qu counts as one cell)." },
-    { "@type": "HowToStep", position: 2, name: "Connect adjacent letters", text: "Drag across letters that are next to each other — horizontally, vertically, or diagonally — to spell a word." },
-    { "@type": "HowToStep", position: 3, name: "Follow the rules", text: "Words must be at least 3 letters long. Each letter tile can only be used once per word. You cannot reuse a tile in the same word." },
-    { "@type": "HowToStep", position: 4, name: "Submit and score", text: "Release your finger or mouse to submit the word. If valid, you earn points based on word length. Longer words are worth more." },
-    { "@type": "HowToStep", position: 5, name: "Beat the clock", text: "You have 3 minutes. Find as many valid words as possible before time runs out." },
-  ],
-};
-
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -120,10 +106,6 @@ export default function BoggleRulesGuide() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
@@ -142,7 +124,7 @@ export default function BoggleRulesGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Rules for Beginners: How to Play Boggle
           </h1>
-          <p className="text-text-muted">7 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -164,7 +146,15 @@ export default function BoggleRulesGuide() {
               <a href="/play/" className="text-primary hover:underline">
                 play a round
               </a>{" "}
-              or move to{" "}
+              and then move to{" "}
+              <a href="/guides/boggle-scoring-sheet/" className="text-primary hover:underline">
+                the scoring sheet
+              </a>
+              ,{" "}
+              <a href="/guides/boggle-dictionary/" className="text-primary hover:underline">
+                the dictionary guide
+              </a>
+              , or{" "}
               <a href="/guides/how-to-find-more-words/" className="text-primary hover:underline">
                 how to find more words
               </a>
@@ -313,7 +303,9 @@ export default function BoggleRulesGuide() {
                   [5, 4, "QUEST, TRAIN, BOARD"],
                   [6, 6, "PLAYER, GARDEN, ACTION"],
                   [7, 8, "PLAYING, STARTED"],
-                  ["8+", "10+", "EQUATION, FORMATION"],
+                  [8, 11, "EQUATION, FORMATION"],
+                  [9, 13, "DIRECTION"],
+                  ["10+", "15+", "OPERATION (+2 per extra letter)"],
                 ].map(([len, pts, example]) => (
                   <tr key={String(len)} className="border-b border-surface">
                     <td className="py-2">{len} letters</td>
@@ -332,6 +324,14 @@ export default function BoggleRulesGuide() {
             <p className="leading-relaxed mt-3">
               For words of 8 letters or more, each additional letter adds 2 more
               points. These are rare but game-changing when you find them.
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you want the full points table with examples and winning score
+              ranges, open the{" "}
+              <a href="/guides/boggle-scoring-sheet/" className="text-primary hover:underline">
+                Boggle scoring sheet
+              </a>
+              .
             </p>
           </section>
 
@@ -353,6 +353,38 @@ export default function BoggleRulesGuide() {
           </section>
 
           {/* Quick strategy tip */}
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              What to Learn After the Rules
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <a href="/guides/boggle-scoring-sheet/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Boggle Scoring Sheet</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Learn the exact point table and why 5+ letter words matter so much.
+                </p>
+              </a>
+              <a href="/guides/boggle-dictionary/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Boggle Dictionary</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  See what counts as a valid word and which word families show up most.
+                </p>
+              </a>
+              <a href="/guides/boggle-solver/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Boggle Solver Guide</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Review missed words after a game and turn them into practice material.
+                </p>
+              </a>
+              <a href="/play/" className="block rounded-xl bg-primary/10 border border-primary/20 p-4 hover:bg-primary/15 transition">
+                <div className="font-semibold text-primary">Play a Live Round</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Use the rules right away on a timed, Daily, or Zen board.
+                </p>
+              </a>
+            </div>
+          </section>
+
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
               One Tip Before You Start
@@ -435,6 +467,14 @@ export default function BoggleRulesGuide() {
                 <div className="font-semibold text-primary">Word Grid Strategies &rarr;</div>
                 <div className="text-sm text-text-muted">Turn rule knowledge into better scores and timing.</div>
               </a>
+              <a href="/guides/boggle-scoring-sheet/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Boggle Scoring Sheet &rarr;</div>
+                <div className="text-sm text-text-muted">Use the official point table and winning score ranges as your next step.</div>
+              </a>
+              <a href="/guides/boggle-solver/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
+                <div className="font-semibold text-primary">Boggle Solver &rarr;</div>
+                <div className="text-sm text-text-muted">Check missed words after a game without interrupting fair play.</div>
+              </a>
               <a href="/guides/word-grid-vs-boggle/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">Word Grid vs Boggle: What&apos;s the Difference? &rarr;</div>
                 <div className="text-sm text-text-muted">How modern word grid games compare to the 1972 original.</div>
@@ -468,12 +508,21 @@ export default function BoggleRulesGuide() {
                 <a href="/guides/how-to-find-more-words/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Find more words
                 </a>
+                <a href="/guides/boggle-scoring-sheet/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Scoring guide
+                </a>
               </div>
             </div>
 
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">Related pages</h2>
               <div className="mt-4 grid gap-2">
+                <a href="/guides/boggle-dictionary/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Dictionary
+                </a>
+                <a href="/guides/boggle-solver/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Solver guide
+                </a>
                 <a href="/guides/word-grid-strategies/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Score higher
                 </a>

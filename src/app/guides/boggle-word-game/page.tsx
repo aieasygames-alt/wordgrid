@@ -29,7 +29,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-28",
-  dateModified: "2026-06-28",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-word-game/`,
 };
 
@@ -126,7 +126,7 @@ export default function BoggleWordGameGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Word Game — Rules, Scoring &amp; Free Online Play
           </h1>
-          <p className="text-text-muted">6 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">7 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="space-y-6 text-text max-w-3xl">
@@ -150,6 +150,21 @@ export default function BoggleWordGameGuide() {
               or{" "}
               <Link href="/guides/play-boggle-online-free" className="text-primary hover:underline">
                 Play Boggle Online Free
+              </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              Once you know the basics, the best companion pages are the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              ,{" "}
+              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                dictionary guide
+              </Link>
+              , and{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
               </Link>
               .
             </p>
@@ -300,6 +315,13 @@ export default function BoggleWordGameGuide() {
               as much as four 3-letter words. This is why competitive players
               prioritize finding longer words over grabbing every short word in
               sight.
+            </p>
+            <p className="leading-relaxed mt-3">
+              For the exact point table and stronger score benchmarks, see the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                Boggle scoring sheet
+              </Link>
+              .
             </p>
           </section>
 
@@ -456,6 +478,28 @@ export default function BoggleWordGameGuide() {
           <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
+              <Link
+                href="/guides/boggle-scoring-sheet/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Scoring Sheet →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Exact point values, winning score ranges, and why longer words dominate.
+                </div>
+              </Link>
+              <Link
+                href="/guides/boggle-dictionary/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Dictionary →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Use the valid-word guide to avoid spending time on non-answers.
+                </div>
+              </Link>
               <Link
                 href="/guides/play-word-grid-online/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"

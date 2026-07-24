@@ -229,6 +229,20 @@ export default function PlayClient() {
           bestCombo={result.bestCombo}
           onPlayAgain={newGame}
         />
+        <section className="mt-10 w-full max-w-5xl grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Link href="/guides/boggle-rules-beginners" className="rounded-2xl border border-border bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+            Rules guide
+          </Link>
+          <Link href="/guides/boggle-scoring-sheet" className="rounded-2xl border border-border bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+            Scoring guide
+          </Link>
+          <Link href="/guides/boggle-dictionary" className="rounded-2xl border border-border bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+            Dictionary guide
+          </Link>
+          <Link href="/solver" className="rounded-2xl border border-primary/20 bg-primary/10 p-4 font-semibold text-primary hover:bg-primary/15 transition">
+            Review with solver
+          </Link>
+        </section>
       </main>
     );
   }
@@ -316,6 +330,72 @@ export default function PlayClient() {
         </div>
         {desktopRail}
       </div>
+      <section className="mt-10 w-full max-w-7xl mx-auto space-y-10">
+        <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-bold">Why This Play Page Matters</h2>
+            <p className="mt-3 text-sm text-text-muted leading-relaxed">
+              This is the direct play surface for searchers who want an instant
+              game, especially on Bing-style discovery where playable intent
+              often wins faster than a long guide.
+            </p>
+            <p className="mt-3 text-sm text-text-muted leading-relaxed">
+              For Google, the stronger path is usually to pair the live board
+              with supporting pages about rules, scoring, vocabulary, and
+              solver review. That is why this page links into the guide cluster
+              instead of standing alone.
+            </p>
+          </div>
+          <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-bold">Choose Your Next Step</h2>
+            <div className="mt-4 grid gap-3">
+              <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Learn the rules
+              </Link>
+              <Link href="/guides/boggle-scoring-sheet" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Understand scoring
+              </Link>
+              <Link href="/guides/boggle-dictionary" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Build vocabulary
+              </Link>
+              <Link href="/solver" className="rounded-xl bg-primary/10 border border-primary/20 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+                Review with solver
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="rounded-2xl border border-border bg-surface/50 p-5">
+            <h2 className="font-semibold text-primary">Timed mode</h2>
+            <p className="mt-2 text-sm text-text-muted leading-relaxed">
+              The classic 3-minute rhythm for players who want standard
+              Boggle-style pressure and comparable scores.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-border bg-surface/50 p-5">
+            <h2 className="font-semibold text-primary">Zen mode</h2>
+            <p className="mt-2 text-sm text-text-muted leading-relaxed">
+              Slow practice with no clock, useful for learning new families and
+              scanning patterns without rushing.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-border bg-surface/50 p-5">
+            <h2 className="font-semibold text-primary">Daily board</h2>
+            <p className="mt-2 text-sm text-text-muted leading-relaxed">
+              Everyone gets the same board, which makes it easier to compare
+              scores and review the same puzzle later in the solver.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-border bg-surface/50 p-5">
+            <h2 className="font-semibold text-primary">Board sizes</h2>
+            <p className="mt-2 text-sm text-text-muted leading-relaxed">
+              Use 4x4 for classic play, then move to 5x5 and 6x6 when you want
+              longer paths and more vocabulary pressure.
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

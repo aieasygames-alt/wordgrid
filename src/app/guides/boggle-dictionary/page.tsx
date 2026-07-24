@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-06-29",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-dictionary/`,
 };
 
@@ -117,7 +117,7 @@ export default function BoggleDictionaryGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Dictionary — Complete Word Lists & Vocabulary
           </h1>
-          <p className="text-text-muted">8 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">9 min read &middot; Updated July 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -127,6 +127,21 @@ export default function BoggleDictionaryGuide() {
               vocabulary references, and helps you expand your word-finding
               repertoire. Understanding what words count and building your
               vocabulary are keys to consistently high scores.
+            </p>
+            <p className="leading-relaxed mt-3">
+              The practical order is: learn the{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                rules
+              </Link>
+              , learn{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring
+              </Link>
+              , build vocabulary here, then review missed answers with the{" "}
+              <Link href="/guides/boggle-solver" className="text-primary hover:underline">
+                solver
+              </Link>
+              .
             </p>
             <p className="leading-relaxed mt-3">
               For the practical side of the dictionary, see{" "}
@@ -139,6 +154,38 @@ export default function BoggleDictionaryGuide() {
               </Link>
               .
             </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              How This Dictionary Helps You Win More Boards
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/guides/boggle-rules-beginners/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Valid-word rules</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Avoid spending time on abbreviations, proper nouns, and other dead ends.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-scoring-sheet/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Point-aware vocabulary</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Learn which word families are worth chasing because they convert into real points.
+                </p>
+              </Link>
+              <Link href="/guides/most-common-boggle-words/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Common words first</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Start with the highest-frequency answers before you memorize rarer vocabulary.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-solver/" className="block rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">
+                <div className="font-semibold text-primary">Solver review</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Turn missed words from a finished board into your next study list.
+                </p>
+              </Link>
+            </div>
           </section>
 
           <section>
@@ -460,6 +507,28 @@ export default function BoggleDictionaryGuide() {
           <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Related Resources</h2>
             <div className="space-y-3">
+              <Link
+                href="/guides/boggle-rules-beginners/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Rules for Beginners →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Recheck the exact valid-word rules and adjacency basics.
+                </div>
+              </Link>
+              <Link
+                href="/guides/boggle-scoring-sheet/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Scoring Sheet →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Pair vocabulary growth with the point table that rewards longer words.
+                </div>
+              </Link>
               <Link
                 href="/guides/boggle-word-lists/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"

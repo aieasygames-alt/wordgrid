@@ -24,6 +24,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "Boggle Solver",
+  url: `${BASE_URL}/guides/boggle-solver/`,
   applicationCategory: "Game",
   operatingSystem: "Web",
   offers: {
@@ -38,6 +39,8 @@ const articleSchema = {
     ratingValue: "4.8",
     ratingCount: "1250",
   },
+  datePublished: "2026-06-29",
+  dateModified: "2026-07-24",
 };
 
 const faqSchema = {
@@ -125,7 +128,7 @@ export default function BoggleSolverGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Solver — Find All Words in Any Grid
           </h1>
-          <p className="text-text-muted">7 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
 
         <div className="space-y-6 text-text max-w-3xl">
@@ -138,8 +141,29 @@ export default function BoggleSolverGuide() {
               skills.
             </p>
             <p className="leading-relaxed mt-3">
+              <Link href="/solver" className="text-primary hover:underline">
+                Open the live solver
+              </Link>{" "}
+              to review a finished board, or{" "}
               <Link href="/play" className="text-primary hover:underline">
-                Play →
+                play first
+              </Link>{" "}
+              if you want a clean round before analysis.
+            </p>
+            <p className="leading-relaxed mt-3">
+              The strongest workflow is simple: learn the{" "}
+              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                rules
+              </Link>
+              , understand{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring
+              </Link>
+              , then use the solver after the clock ends.
+            </p>
+            <p className="leading-relaxed mt-3">
+              <Link href="/solver" className="text-primary hover:underline">
+                Live solver →
               </Link>
             </p>
             <p className="leading-relaxed mt-3">
@@ -238,6 +262,38 @@ export default function BoggleSolverGuide() {
                   and optimal search patterns.
                 </p>
               </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Best Way to Use a Solver
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/guides/boggle-rules-beginners/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Know the rules first</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Confirm what counts as adjacent, how Qu works, and why repeated tiles are not allowed.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-scoring-sheet/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">See where the points were</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Use the scoring guide to separate missed high-value words from harmless misses.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-dictionary/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Check vocabulary patterns</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Build the word families and valid-word instincts that help you miss fewer answers next time.
+                </p>
+              </Link>
+              <Link href="/solver" className="block rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">
+                <div className="font-semibold text-primary">Use the live solver</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Paste a board, see every valid word, and turn the result into a practice review.
+                </p>
+              </Link>
             </div>
           </section>
 
@@ -493,6 +549,28 @@ export default function BoggleSolverGuide() {
           <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Related Tools</h2>
             <div className="space-y-3">
+              <Link
+                href="/guides/boggle-rules-beginners/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Rules for Beginners →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Start with the rules that the solver is checking against.
+                </div>
+              </Link>
+              <Link
+                href="/guides/boggle-scoring-sheet/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Scoring Sheet →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Compare missed words with the exact point table.
+                </div>
+              </Link>
               <Link
                 href="/guides/most-common-boggle-words/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"

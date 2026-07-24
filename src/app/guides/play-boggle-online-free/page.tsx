@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-28",
-  dateModified: "2026-06-28",
+  dateModified: "2026-07-24",
   mainEntityOfPage: `${BASE_URL}/guides/play-boggle-online-free/`,
 };
 
@@ -81,45 +81,6 @@ const faqSchema = {
   ],
 };
 
-const howToSchema = {
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  name: "How to Play Boggle Online Free",
-  description: "Step-by-step instructions for playing free online Boggle/word grid games.",
-  step: [
-    {
-      "@type": "HowToStep",
-      position: 1,
-      name: "Open the game in your browser",
-      text: "Visit wordgrid.games/play for a random practice game, or wordgrid.games/daily for the Daily board. No app or download needed — it runs in any modern browser.",
-    },
-    {
-      "@type": "HowToStep",
-      position: 2,
-      name: "Start the timer",
-      text: "Click Start to begin the 3-minute countdown. The clock starts immediately, so be ready to search.",
-    },
-    {
-      "@type": "HowToStep",
-      position: 3,
-      name: "Connect adjacent letters",
-      text: "Click or tap a letter, then drag to neighboring letters (up, down, left, right, or diagonal) to spell a word.",
-    },
-    {
-      "@type": "HowToStep",
-      position: 4,
-      name: "Release to submit",
-      text: "Release your mouse or finger to submit the word. If it's valid and 3+ letters, you earn points based on length.",
-    },
-    {
-      "@type": "HowToStep",
-      position: 5,
-      name: "Find as many words as possible",
-      text: "Keep finding words until the 3-minute timer ends. Longer words (5+ letters) score significantly more points.",
-    },
-  ],
-};
-
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -143,10 +104,6 @@ export default function PlayBoggleOnlineFreeGuide() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
@@ -160,7 +117,7 @@ export default function PlayBoggleOnlineFreeGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Play Boggle Online Free — No Download, No Sign-Up
           </h1>
-          <p className="text-text-muted">5 min read &middot; Updated June 2026</p>
+          <p className="text-text-muted">6 min read &middot; Updated July 24, 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
@@ -176,6 +133,21 @@ export default function PlayBoggleOnlineFreeGuide() {
               <Link href="/play" className="text-primary hover:underline">
                 Play free Boggle now →
               </Link>
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you want the full learning path after that first round, go next to the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                scoring sheet
+              </Link>
+              ,{" "}
+              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                dictionary guide
+              </Link>
+              , and{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
+              </Link>
+              .
             </p>
           </section>
 
@@ -279,7 +251,8 @@ export default function PlayBoggleOnlineFreeGuide() {
                   ["5 letters", "4 points"],
                   ["6 letters", "6 points"],
                   ["7 letters", "8 points"],
-                  ["8+ letters", "10+ points"],
+                  ["8 letters", "11 points"],
+                  ["9+ letters", "13+ points"],
                 ].map(([len, pts]) => (
                   <tr key={len} className="border-b border-surface">
                     <td className="py-2">{len}</td>
@@ -291,6 +264,13 @@ export default function PlayBoggleOnlineFreeGuide() {
             <p className="leading-relaxed mt-3">
               Notice the jump at 5 letters — that's where the real points start.
               Experienced players focus on finding 5+ letter words.
+            </p>
+            <p className="leading-relaxed mt-3">
+              For the full chart and score ranges, open the{" "}
+              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                Boggle scoring sheet
+              </Link>
+              .
             </p>
           </section>
 
@@ -366,6 +346,39 @@ export default function PlayBoggleOnlineFreeGuide() {
           <div className="mt-8 border-t border-border pt-6">
             <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
             <div className="space-y-3">
+              <Link
+                href="/guides/boggle-scoring-sheet/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Scoring Sheet →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Exact point values, score ranges, and what to chase after the timer starts.
+                </div>
+              </Link>
+              <Link
+                href="/guides/boggle-dictionary/"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Dictionary →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Learn what counts as a valid word before you waste moves on dead ends.
+                </div>
+              </Link>
+              <Link
+                href="/solver"
+                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+              >
+                <div className="font-semibold text-primary">
+                  Boggle Solver →
+                </div>
+                <div className="text-sm text-text-muted">
+                  Review a finished board and see which high-value words you missed.
+                </div>
+              </Link>
               <Link
                 href="/guides/boggle-rules-beginners/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"

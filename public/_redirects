@@ -9,13 +9,14 @@ https://wordgrid.clevergoat.com/* https://wordgrid.games/:splat 301
 https://www.wordgrid.games/* https://wordgrid.games/:splat  301
 
 # Search Console priority cleanup
+/kat /words/ 301
+/kat/ /words/ 301
 /words/fell /words/ 301
 /words/fell/ /words/ 301
 /words/foot /words/ 301
 /words/foot/ /words/ 301
 /bɔːd/ /words/board/ 301
 /klʌb/ /words/ 301
-/kat/ /words/ 301
 
 # Historical phonetic word URLs that were previously discovered by crawlers
 /t͡ʃɛst/ /words/ 301

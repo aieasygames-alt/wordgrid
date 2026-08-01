@@ -8,6 +8,15 @@ https://wordgrid.clevergoat.com/* https://wordgrid.games/:splat 301
 # Redirect www to apex on HTTPS
 https://www.wordgrid.games/* https://wordgrid.games/:splat  301
 
+# Search Console priority cleanup
+/words/fell /words/ 301
+/words/fell/ /words/ 301
+/words/foot /words/ 301
+/words/foot/ /words/ 301
+/bɔːd/ /words/board/ 301
+/klʌb/ /words/ 301
+/kat/ /words/ 301
+
 # Historical phonetic word URLs that were previously discovered by crawlers
 /t͡ʃɛst/ /words/ 301
 /ɑːm/ /words/ 301
@@ -499,8 +508,6 @@ https://www.wordgrid.games/* https://wordgrid.games/:splat  301
 /words/feel/ /words/ 301
 /words/feet /words/ 301
 /words/feet/ /words/ 301
-/words/fell /words/ 301
-/words/fell/ /words/ 301
 /words/felt /words/ 301
 /words/felt/ /words/ 301
 /words/file /words/ 301
@@ -531,8 +538,6 @@ https://www.wordgrid.games/* https://wordgrid.games/:splat  301
 /words/flow/ /words/ 301
 /words/food /words/ 301
 /words/food/ /words/ 301
-/words/foot /words/ 301
-/words/foot/ /words/ 301
 /words/ford /words/ 301
 /words/ford/ /words/ 301
 /words/form /words/ 301

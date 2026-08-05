@@ -5,7 +5,7 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 export const metadata: Metadata = {
   title: "Boggle Dictionary — Complete Word Lists & Vocabulary",
   description:
-    "Complete Boggle dictionary with word lists, vocabulary references, and valid word guidelines. Lookup any word, explore high-frequency game vocabulary, and improve your word-finding skills.",
+    "Explore a Boggle dictionary guide with valid-word rules, word lists, vocabulary tips, lookup context, and high-frequency words for gameplay.",
   alternates: { canonical: "/guides/boggle-dictionary" },
   keywords: [
     "boggle dictionary", "boggle word list", "boggle vocabulary",
@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-dictionary/`,
 };
 

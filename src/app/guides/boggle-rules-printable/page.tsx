@@ -5,7 +5,7 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 export const metadata: Metadata = {
   title: "Boggle Rules Printable — Free Reference Sheet",
   description:
-    "Printable Boggle rules reference sheet. Free PDF download with complete game rules, scoring table, word validity guidelines, and quick reference for players of all levels.",
+    "Printable Boggle rules reference with game setup, word validity, scoring table, Qu tile notes, and quick instructions for players.",
   alternates: { canonical: "/guides/boggle-rules-printable" },
   keywords: [
     "boggle rules printable", "boggle rules pdf", "boggle scoring sheet printable",
@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-rules-printable/`,
 };
 

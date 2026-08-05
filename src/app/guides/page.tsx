@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Word Grid Guides — Rules, Strategy & Tips",
+  title: "Word Grid Guides — Rules, Strategy, Solver & Tips",
   description:
-    "Master word grid puzzles with our guides. Learn the rules of Boggle, how to play word grid online, scoring tips, word-finding techniques, and advanced strategy.",
+    "Master word grid puzzles with guides for rules, Boggle-style strategy, the Word Grid Solver, scoring, word-finding techniques, and online play.",
   alternates: { canonical: "/guides" },
   openGraph: {
-    title: "Word Grid Guides — Rules, Strategy & Tips",
+    title: "Word Grid Guides — Rules, Strategy, Solver & Tips",
     description:
       "Learn how to find more words, score higher, and master word grid puzzles with our complete strategy guide collection.",
   },
@@ -21,7 +21,7 @@ const GUIDES = [
       "How to play word grid free in your browser — what a word grid puzzle is, how it works, and where to play instantly with standard or larger square grids.",
     category: "Beginner",
     readTime: "4 min read",
-    date: "2026-06-27",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-rules-beginners",
@@ -30,7 +30,7 @@ const GUIDES = [
       "Never played Boggle or a word grid game before? This guide walks you through every rule, step by step, with a real example board.",
     category: "Beginner",
     readTime: "8 min read",
-    date: "2026-07-24",
+    date: "2026-08-05",
   },
   {
     href: "/guides/how-to-find-more-words",
@@ -51,6 +51,15 @@ const GUIDES = [
     date: "2026-06-20",
   },
   {
+    href: "/guides/word-grid-vs-word-search",
+    title: "Word Grid vs Word Search vs Crossword: Key Differences",
+    description:
+      "Compare word grid games, word search puzzles, and crosswords so you can pick the right online word puzzle for how you want to play.",
+    category: "Beginner",
+    readTime: "6 min read",
+    date: "2026-08-05",
+  },
+  {
     href: "/guides/word-grid-strategies",
     title: "Word Grid Strategies: Score Higher Every Game",
     description:
@@ -66,7 +75,7 @@ const GUIDES = [
       "Play Boggle online for free in your browser. No download, no sign-up, no ads. Classic Boggle plus larger practice grids, instant play.",
     category: "Beginner",
     readTime: "5 min read",
-    date: "2026-06-28",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-word-game",
@@ -84,7 +93,7 @@ const GUIDES = [
       "Play the Boggle game online for free. No download, no sign-up. Classic Boggle with standard and larger practice grids in your browser.",
     category: "Beginner",
     readTime: "5 min read",
-    date: "2026-06-28",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-online-free",
@@ -93,7 +102,7 @@ const GUIDES = [
       "Play Boggle online free in your browser. No download, no sign-up, no ads. Classic Boggle plus larger practice grids.",
     category: "Beginner",
     readTime: "4 min read",
-    date: "2026-06-28",
+    date: "2026-08-05",
   },
   {
     href: "/guides/how-to-win-boggle",
@@ -102,7 +111,7 @@ const GUIDES = [
       "Learn how to win at Boggle with proven strategies from competitive players. Master word patterns, time management, grid scanning, and scoring optimization.",
     category: "Intermediate",
     readTime: "8 min read",
-    date: "2026-06-29",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-tips-tricks",
@@ -111,7 +120,7 @@ const GUIDES = [
       "Practical Boggle tips and tricks to find more words instantly. Learn grid scanning, letter patterns, word extensions, and time-saving shortcuts.",
     category: "Beginner",
     readTime: "6 min read",
-    date: "2026-06-29",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-strategy-guide",
@@ -120,7 +129,7 @@ const GUIDES = [
       "Master Boggle with comprehensive competitive strategy. Learn advanced grid analysis, word optimization, time management, and championship-level patterns.",
     category: "Advanced",
     readTime: "10 min read",
-    date: "2026-06-29",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-rules-printable",
@@ -129,7 +138,7 @@ const GUIDES = [
       "Printable Boggle rules reference sheet. Free PDF download with complete game rules, scoring table, word validity guidelines, and quick reference for players.",
     category: "Beginner",
     readTime: "5 min read",
-    date: "2026-06-29",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-scoring-sheet",
@@ -138,7 +147,7 @@ const GUIDES = [
       "Complete Boggle scoring reference with points table, calculation examples, and scoring strategies. Learn how points work and optimize your gameplay.",
     category: "Beginner",
     readTime: "7 min read",
-    date: "2026-07-24",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-rules-for-kids",
@@ -147,7 +156,7 @@ const GUIDES = [
       "Simple Boggle rules for kids and children. Easy-to-understand explanation with examples, tips for parents and teachers, and fun variations for young players.",
     category: "Beginner",
     readTime: "7 min read",
-    date: "2026-06-29",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-variants",
@@ -165,7 +174,7 @@ const GUIDES = [
       "Master advanced Boggle strategies from expert players. Learn grid mapping algorithms, word optimization techniques, competitive time management, and pattern recognition systems for 60+ scores.",
     category: "Advanced",
     readTime: "12 min read",
-    date: "2026-06-29",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-word-lists",
@@ -174,7 +183,7 @@ const GUIDES = [
       "Complete Boggle word lists organized by letter. High-frequency words, common patterns, and letter-specific vocabulary to improve your word-finding speed and score.",
     category: "Intermediate",
     readTime: "15 min read",
-    date: "2026-06-29",
+    date: "2026-08-05",
   },
   {
     href: "/guides/most-common-boggle-words",
@@ -223,12 +232,12 @@ const GUIDES = [
   },
   {
     href: "/guides/boggle-solver",
-    title: "Boggle Solver — Find All Words in Any Grid",
+    title: "Word Grid Solver — Find All Words in Any Boggle Grid",
     description:
-      "Free online Boggle solver to find all words in any square grid. Paste your letters and get instant solutions with word counts, scoring breakdown, and anagram analysis.",
+      "Free Word Grid Solver and Boggle solver for any square grid. Paste letters and get instant word lists, counts, and scoring breakdowns.",
     category: "Intermediate",
     readTime: "8 min read",
-    date: "2026-07-24",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-generator",
@@ -237,7 +246,7 @@ const GUIDES = [
       "Free Boggle generator to create custom square word puzzles. Design personalized grids for practice, teaching, or game nights with adjustable difficulty and letter distribution.",
     category: "Intermediate",
     readTime: "6 min read",
-    date: "2026-06-29",
+    date: "2026-08-05",
   },
   {
     href: "/guides/boggle-dictionary",
@@ -246,7 +255,7 @@ const GUIDES = [
       "Complete Boggle dictionary with word lists, vocabulary references, and valid word guidelines. Lookup any word, explore high-frequency game vocabulary, and improve your word-finding skills.",
     category: "Intermediate",
     readTime: "9 min read",
-    date: "2026-07-24",
+    date: "2026-08-05",
   },
 ];
 
@@ -277,7 +286,7 @@ export default function GuidesIndex() {
           <Link href="/" className="text-sm text-text-dim hover:text-text">
             &larr; WordGrid
           </Link>
-          <h1 className="text-4xl font-bold mt-4 mb-2">Guides</h1>
+          <h1 className="text-4xl font-bold mt-4 mb-2">Word Grid Guides</h1>
           <p className="text-text-muted">
             Everything you need to get better at word grid puzzles — from your
             first game to competitive-level strategy.
@@ -289,6 +298,15 @@ export default function GuidesIndex() {
             Best Matches for Searchers
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            <Link
+              href="/guides/word-grid-vs-word-search"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Word Grid vs Word Search</div>
+              <p className="text-sm text-text-muted mt-1">
+                Compare word grid, word search, and crossword puzzles before you play.
+              </p>
+            </Link>
             <Link
               href="/play"
               className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-4 border border-primary/20"
@@ -312,7 +330,7 @@ export default function GuidesIndex() {
               href="/solver"
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
             >
-              <div className="font-semibold text-primary">Boggle Solver</div>
+              <div className="font-semibold text-primary">Word Grid Solver</div>
               <p className="text-sm text-text-muted mt-1">
                 Paste a grid and find every valid word with score breakdowns.
               </p>

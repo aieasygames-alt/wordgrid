@@ -5,9 +5,9 @@ import HomeClient from "./HomeClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online Free — No Download | WordGrid",
+  title: "WordGrid: Play Word Grid Online Free, No Download",
   description:
-    "Play WordGrid online free now. Connect adjacent letters in a Boggle-style word grid puzzle with timed, Zen, and Daily boards. No download, no sign-up.",
+    "Play WordGrid online free. Connect adjacent letters in a Boggle-style word grid game with timed, Zen, and Daily boards. No download or sign-up needed.",
   alternates: { canonical: "/" },
   keywords: [
     "word grid", "word grid online", "word grid puzzle", "word grid game",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "daily word game", "free word game", "browser word game",
   ],
   openGraph: {
-    title: "Play Word Grid Online Free — No Download | WordGrid",
+    title: "WordGrid: Play Word Grid Online Free, No Download",
     description:
       "Play WordGrid online free in your browser. Connect letters, find words, and try timed, Zen, or Daily boards. No download needed.",
     url: BASE_URL,
@@ -398,7 +398,7 @@ export default function Home() {
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
             >
               <h3 className="font-semibold mb-1 text-primary">
-                Boggle Solver &rarr;
+                Word Grid Solver &rarr;
               </h3>
               <p className="text-sm text-text-muted">
                 Review a finished board, find missed words, and turn results

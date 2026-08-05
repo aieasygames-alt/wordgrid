@@ -37,7 +37,8 @@ export default function HomeClient() {
   const secondaryEntrances = [
     { href: "/guides/boggle-rules-beginners", label: "Rules" },
     { href: "/guides/word-pattern-library", label: "Pattern Library" },
-    { href: "/solver", label: "Solver" },
+    { href: "/solver", label: "Word Grid Solver" },
+    { href: "/guides/word-grid-vs-word-search", label: "Compare Puzzles" },
     { href: "/stats", label: "Stats" },
     { href: "/daily/archive", label: "Archive" },
   ];
@@ -84,10 +85,10 @@ export default function HomeClient() {
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-start">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-              Play Word Grid Online Free
+              WordGrid: Play Word Grid Online Free
             </h1>
             <p className="text-base text-text-muted max-w-lg mx-auto lg:mx-0 mb-4">
-              Start a free word grid game in your browser. Connect adjacent
+              Start WordGrid, a free word grid game in your browser. Connect adjacent
               letters in a Boggle-style puzzle, choose timed or untimed play,
               and come back for the shared Daily board. No download, no sign-up.
             </p>

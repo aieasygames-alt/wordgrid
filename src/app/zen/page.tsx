@@ -7,12 +7,12 @@ import { getTodayActionTip } from "@/lib/daily-tip";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Zen — Play Word Grid Without the Clock",
+  title: "Zen Word Grid: Practice Without the Clock",
   description:
-    "Practice WordGrid at your own pace with no timer. Use Zen mode to learn patterns, test boards, and build speed without pressure.",
+    "Practice WordGrid at your own pace with no timer. Use Zen mode to learn patterns, test boards, warm up, and build speed without pressure.",
   alternates: { canonical: "/zen" },
   openGraph: {
-    title: "Zen — WordGrid",
+    title: "Zen Word Grid: Practice Without the Clock",
     description:
       "No timer, no pressure. Use Zen mode to practice patterns and build board recognition at your own pace.",
     url: `${BASE_URL}/zen`,

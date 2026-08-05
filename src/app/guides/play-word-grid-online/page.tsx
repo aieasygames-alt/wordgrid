@@ -5,7 +5,7 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 export const metadata: Metadata = {
   title: "Play Word Grid Online — Free, No Download",
   description:
-    "Play word grid online for free, right in your browser. No download, no sign-up. A new word grid puzzle every day — connect adjacent letters to find words on standard or larger boards.",
+    "Play word grid online for free in your browser. No download or sign-up. Connect adjacent letters, find words, and try Daily or practice boards.",
   alternates: { canonical: "/guides/play-word-grid-online" },
   keywords: [
     "word grid online", "play word grid online", "word grid online free",
@@ -29,7 +29,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-27",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/play-word-grid-online/`,
 };
 

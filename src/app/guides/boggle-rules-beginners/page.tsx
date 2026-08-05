@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Boggle Rules for Beginners: How to Play Boggle",
   description:
-    "The complete rules of Boggle explained simply. Learn how to play Boggle — the 4×4 grid, how letters connect, what words count, and how scoring works. Free online examples.",
+    "Learn Boggle rules step by step: the 4x4 grid, adjacent letters, valid words, Qu tile behavior, scoring, and free online examples.",
   alternates: { canonical: "/guides/boggle-rules-beginners" },
   keywords: [
     "rules of boggle", "boggle rules", "how to play boggle",
@@ -26,7 +26,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-20",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: "https://wordgrid.games/guides/boggle-rules-beginners/",
 };
 
@@ -472,7 +472,7 @@ export default function BoggleRulesGuide() {
                 <div className="text-sm text-text-muted">Use the official point table and winning score ranges as your next step.</div>
               </a>
               <a href="/guides/boggle-solver/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
-                <div className="font-semibold text-primary">Boggle Solver &rarr;</div>
+                <div className="font-semibold text-primary">Word Grid Solver &rarr;</div>
                 <div className="text-sm text-text-muted">Check missed words after a game without interrupting fair play.</div>
               </a>
               <a href="/guides/word-grid-vs-boggle/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">

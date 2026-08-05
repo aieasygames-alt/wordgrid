@@ -32,7 +32,7 @@ const supportLinks = [
   { href: "/guides/boggle-rules-beginners", label: "Rules" },
   { href: "/guides/how-to-find-more-words", label: "Find More Words" },
   { href: "/guides/word-grid-strategies", label: "Strategy" },
-  { href: "/solver", label: "Solver" },
+  { href: "/solver", label: "Word Grid Solver" },
   { href: "/stats", label: "Stats" },
   { href: "/daily/archive", label: "Archive" },
 ];

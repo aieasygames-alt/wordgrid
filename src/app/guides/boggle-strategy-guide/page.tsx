@@ -5,7 +5,7 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 export const metadata: Metadata = {
   title: "Boggle Strategy Guide — Complete Competitive Playbook",
   description:
-    "Master Boggle with comprehensive competitive strategy. Learn advanced grid analysis, word optimization techniques, time management systems, and championship-level patterns from expert players.",
+    "Master Boggle strategy with grid analysis, word patterns, scoring priorities, time management, and competitive tactics for stronger games.",
   alternates: { canonical: "/guides/boggle-strategy-guide" },
   keywords: [
     "boggle strategy guide", "competitive boggle strategy", "boggle playbook",
@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-strategy-guide/`,
 };
 

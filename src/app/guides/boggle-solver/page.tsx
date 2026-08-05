@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Boggle Solver — Find All Words in Any Grid",
+  title: "Word Grid Solver — Find All Words in Any Boggle Grid",
   description:
-    "Free online Boggle solver to find all words in any square grid. Paste your letters and get instant solutions with word counts, scoring breakdown, and anagram analysis.",
+    "Free Word Grid Solver and Boggle solver for any square grid. Paste your letters and get instant solutions with word counts and scoring breakdowns.",
   alternates: { canonical: "/guides/boggle-solver" },
   keywords: [
-    "boggle solver", "boggle word finder", "boggle cheat", "boggle helper",
+    "word grid solver", "boggle solver", "boggle word finder", "boggle cheat", "boggle helper",
     "boggle grid solver", "boggle anagram solver", "boggle word search",
     "solve boggle puzzle", "boggle solution finder",
   ],
   openGraph: {
-    title: "Boggle Solver — Find All Words in Any Grid",
+    title: "Word Grid Solver — Find All Words in Any Boggle Grid",
     description:
-      "Free online Boggle solver and word finder. Paste any square grid and get instant solutions with scoring breakdown and word analysis.",
+      "Free online Word Grid Solver and Boggle word finder. Paste any square grid and get instant solutions with scoring breakdown and word analysis.",
   },
 };
 
@@ -23,7 +23,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Boggle Solver",
+  name: "Word Grid Solver",
   url: `${BASE_URL}/guides/boggle-solver/`,
   applicationCategory: "Game",
   operatingSystem: "Web",
@@ -33,14 +33,14 @@ const articleSchema = {
     priceCurrency: "USD",
   },
   description:
-    "Free online Boggle solver that finds all valid words in any square grid. Instant solutions with scoring breakdown, word counts, and anagram analysis.",
+    "Free online Word Grid Solver that finds all valid words in any Boggle-style square grid. Instant solutions with scoring breakdowns and word counts.",
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.8",
     ratingCount: "1250",
   },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
 };
 
 const faqSchema = {
@@ -126,7 +126,7 @@ export default function BoggleSolverGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Solver — Find All Words in Any Grid
+            Word Grid Solver — Find All Words in Any Boggle Grid
           </h1>
           <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
@@ -134,8 +134,8 @@ export default function BoggleSolverGuide() {
         <div className="space-y-6 text-text max-w-3xl">
           <section>
             <p className="leading-relaxed">
-              A <strong>Boggle solver</strong> finds every possible word in a
-              square grid instantly. Paste any Boggle grid and get a complete
+              A <strong>word grid solver</strong> finds every possible word in a
+              square grid instantly. Paste any Boggle-style grid and get a complete
               word list with scoring breakdown — perfect for analyzing games
               after you play, learning what you missed, and improving your
               skills.

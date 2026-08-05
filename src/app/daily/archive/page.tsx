@@ -5,12 +5,12 @@ import { formatArchiveDate, getRecentDailyArchive } from "@/lib/daily-archive";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Daily Archive — Recent WordGrid Boards",
+  title: "WordGrid Daily Archive: Recent Puzzle Boards",
   description:
     "Browse recent WordGrid daily boards. Review the last two weeks of grids, spot patterns, and jump back into today's puzzle.",
   alternates: { canonical: "/daily/archive" },
   openGraph: {
-    title: "Daily Archive — WordGrid",
+    title: "WordGrid Daily Archive: Recent Puzzle Boards",
     description:
       "Review recent daily WordGrid boards and return to today's board whenever you're ready.",
     url: `${BASE_URL}/daily/archive`,

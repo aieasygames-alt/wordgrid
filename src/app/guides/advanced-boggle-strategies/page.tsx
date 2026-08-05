@@ -5,7 +5,7 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 export const metadata: Metadata = {
   title: "Advanced Boggle Strategies — Expert Techniques",
   description:
-    "Master advanced Boggle strategies from expert players. Learn grid mapping algorithms, word optimization techniques, competitive time management, and pattern recognition systems for 60+ scores.",
+    "Advanced Boggle strategies for stronger scores: grid mapping, word optimization, time management, scoring patterns, and expert-level scanning.",
   alternates: { canonical: "/guides/advanced-boggle-strategies" },
   keywords: [
     "advanced boggle strategies", "boggle expert techniques", "boggle competitive play",
@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/advanced-boggle-strategies/`,
 };
 

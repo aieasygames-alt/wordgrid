@@ -5,7 +5,7 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 export const metadata: Metadata = {
   title: "Boggle Tips and Tricks — Quick Techniques to Find More Words",
   description:
-    "Practical Boggle tips and tricks to find more words instantly. Learn grid scanning techniques, letter pattern recognition, word extension strategies, and time-saving shortcuts from experienced players.",
+    "Use practical Boggle tips and tricks to find more words faster: grid scanning, letter patterns, word extensions, plurals, and time-saving shortcuts.",
   alternates: { canonical: "/guides/boggle-tips-tricks" },
   keywords: [
     "boggle tips and tricks", "boggle tricks", "boggle word finding tips",
@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-tips-tricks/`,
 };
 

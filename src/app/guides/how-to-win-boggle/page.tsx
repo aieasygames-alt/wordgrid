@@ -5,11 +5,11 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 export const metadata: Metadata = {
   title: "How to Win at Boggle — Proven Strategies to Score Higher",
   description:
-    "Learn how to win at Boggle with proven strategies from competitive players. Master word patterns, time management, grid scanning techniques, and scoring optimization to consistently beat opponents.",
+    "Learn how to win at Boggle with better word patterns, grid scanning, time management, scoring priorities, and practical competitive strategy.",
   alternates: { canonical: "/guides/how-to-win-boggle" },
   keywords: [
     "how to win at boggle", "winning boggle strategies", "boggle winning tips",
-    "how to get high score in boggle", "bobble champion strategies", "competitive boggle",
+    "how to get high score in boggle", "boggle champion strategies", "competitive boggle",
     "boggle scoring secrets", "how to beat friends at boggle",
   ],
   openGraph: {
@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/how-to-win-boggle/`,
 };
 

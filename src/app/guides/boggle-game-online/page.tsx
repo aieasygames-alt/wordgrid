@@ -5,7 +5,7 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 export const metadata: Metadata = {
   title: "Boggle Game Online — Free Play in Your Browser",
   description:
-    "Play the Boggle game online for free. No download, no sign-up. Classic Boggle plus larger practice grids in your browser. 3-minute rounds, same rules as the original board game.",
+    "Play the Boggle game online for free. No download or sign-up. Use classic 3-minute rules, larger practice grids, and Daily boards in your browser.",
   alternates: { canonical: "/guides/boggle-game-online" },
   keywords: [
     "boggle game online", "boggle online game", "boggle game online free",
@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-28",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-game-online/`,
 };
 

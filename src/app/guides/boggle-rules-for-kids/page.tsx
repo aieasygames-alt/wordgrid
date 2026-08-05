@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Rules for Kids — Simple Guide",
+  title: "Boggle Rules for Kids: Simple Guide for Children",
   description:
-    "Simple Boggle rules for kids and children. Easy-to-understand explanation with examples, tips for parents and teachers, and fun variations for young players.",
+    "Simple Boggle rules for kids with easy examples, parent and teacher tips, scoring basics, and fun variations for young players.",
   alternates: { canonical: "/guides/boggle-rules-for-kids" },
   keywords: [
     "boggle rules for kids", "boggle for children", "how to teach kids boggle",
@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-rules-for-kids/`,
 };
 

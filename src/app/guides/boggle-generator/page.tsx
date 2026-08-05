@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Boggle Generator — Create Custom Word Puzzles",
   description:
-    "Free Boggle generator to create custom square word puzzles. Design personalized grids for practice, teaching, or game nights with adjustable difficulty and letter distribution.",
+    "Create custom Boggle-style word puzzles for practice, teaching, or game night with adjustable board sizes and letter distribution tips.",
   alternates: { canonical: "/guides/boggle-generator" },
   keywords: [
     "boggle generator", "boggle puzzle maker", "custom boggle grid",

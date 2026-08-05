@@ -5,9 +5,9 @@ import SolverClient from "./SolverClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Boggle Solver — Find All Words in Any Grid",
+  title: "Word Grid Solver: Free Boggle Word Finder Online",
   description:
-    "Paste any square letter grid into the free Boggle solver. Find every valid word, compare scores, and review missed patterns to improve your game.",
+    "Use the free Word Grid Solver to find every valid word in any Boggle-style grid. Paste letters, compare scores, and review missed patterns after play.",
   alternates: { canonical: "/solver" },
   keywords: [
     "boggle solver",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     "word finder puzzle",
   ],
   openGraph: {
-    title: "Boggle Solver — Find All Words in Any Grid",
+    title: "Word Grid Solver: Free Boggle Word Finder Online",
     description:
-      "Paste a square grid, solve it instantly, and review the highest-value words and missed patterns.",
+      "Paste a square word grid, solve it instantly, and review the highest-value words and missed patterns.",
     url: `${BASE_URL}/solver`,
   },
 };
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "WordGrid Solver",
+  name: "Word Grid Solver",
   url: `${BASE_URL}/solver/`,
   applicationCategory: "Game",
   operatingSystem: "Web",
@@ -39,8 +39,8 @@ const softwareSchema = {
     priceCurrency: "USD",
   },
   description:
-    "Free online solver for square word grid puzzles with scoring breakdown and pattern review.",
-  dateModified: "2026-07-24",
+    "Free online word grid solver for square Boggle-style puzzles with scoring breakdown and pattern review.",
+  dateModified: "2026-08-05",
 };
 
 const faqSchema = {
@@ -101,10 +101,10 @@ export default function Page() {
           <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] items-start">
             <div>
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-                Boggle Solver for Any Square Grid
+                Word Grid Solver for Any Boggle-Style Board
               </h1>
               <p className="mt-4 text-base sm:text-lg text-text-muted max-w-2xl leading-relaxed">
-                Paste a board, hit solve, and get every valid word with score
+                Paste a word grid, hit solve, and get every valid word with score
                 ranking, length filters, and quick pattern review. It is the
                 fastest way to turn a finished game into a learning session.
               </p>

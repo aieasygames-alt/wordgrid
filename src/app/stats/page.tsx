@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import StatsClient from "./StatsClient";
 
 export const metadata: Metadata = {
-  title: "WordGrid Stats — Your Local Progress",
+  title: "WordGrid Stats: Local Scores, Streaks & History",
   description:
-    "See your WordGrid progress on this device: best scores, combo streaks, recent games, and daily board history.",
+    "See local WordGrid stats on this device: best scores, combo streaks, recent games, Daily board history, and progress over time.",
   alternates: { canonical: "/stats" },
   robots: {
     index: false,

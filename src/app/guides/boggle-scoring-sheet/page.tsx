@@ -5,7 +5,7 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 export const metadata: Metadata = {
   title: "Boggle Scoring Sheet — Points Table & Calculation Guide",
   description:
-    "Complete Boggle scoring reference with points table, calculation examples, and scoring strategies. Learn how points work, why longer words score more, and optimize your gameplay.",
+    "Use this Boggle scoring sheet to check point values, word-length rules, examples, winning score ranges, and strategy for higher scores.",
   alternates: { canonical: "/guides/boggle-scoring-sheet" },
   keywords: [
     "boggle scoring sheet", "boggle scoring table", "boggle points system",
@@ -30,7 +30,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-24",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-scoring-sheet/`,
 };
 

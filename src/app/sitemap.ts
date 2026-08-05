@@ -3,8 +3,11 @@ import { getDailyArchiveDates } from "@/lib/daily-archive";
 import { INDEXABLE_WORDS } from "@/lib/worddata";
 
 const BASE_URL = "https://wordgrid.games";
-const SITE_UPDATED = new Date("2026-07-24");
-const GUIDE_UPDATED = new Date("2026-07-24");
+const SITE_UPDATED = new Date("2026-08-05");
+const GUIDE_UPDATED = new Date("2026-08-05");
+const GUIDE_PREVIOUS = new Date("2026-07-24");
+const GUIDE_PATTERN_UPDATED = new Date("2026-07-09");
+const GUIDE_WORD_LIST_UPDATED = new Date("2026-07-13");
 const WORDS_UPDATED = new Date("2026-07-24");
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -18,17 +21,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/solver/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/guides/`, lastModified: GUIDE_UPDATED, changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/words/`, lastModified: WORDS_UPDATED, changeFrequency: "monthly", priority: 0.75 },
-    { url: `${BASE_URL}/guides/word-pattern-library/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.84 },
-    { url: `${BASE_URL}/guides/prefix-strategy/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.78 },
-    { url: `${BASE_URL}/guides/suffix-strategy/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.78 },
-    { url: `${BASE_URL}/guides/qu-strategy/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.78 },
-    { url: `${BASE_URL}/guides/how-to-find-more-words/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/guides/word-grid-strategies/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/word-pattern-library/`, lastModified: GUIDE_PATTERN_UPDATED, changeFrequency: "monthly", priority: 0.84 },
+    { url: `${BASE_URL}/guides/prefix-strategy/`, lastModified: GUIDE_PATTERN_UPDATED, changeFrequency: "monthly", priority: 0.78 },
+    { url: `${BASE_URL}/guides/suffix-strategy/`, lastModified: GUIDE_PATTERN_UPDATED, changeFrequency: "monthly", priority: 0.78 },
+    { url: `${BASE_URL}/guides/qu-strategy/`, lastModified: GUIDE_PATTERN_UPDATED, changeFrequency: "monthly", priority: 0.78 },
+    { url: `${BASE_URL}/guides/how-to-find-more-words/`, lastModified: GUIDE_PREVIOUS, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/word-grid-strategies/`, lastModified: GUIDE_PREVIOUS, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-rules-beginners/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/guides/word-grid-vs-boggle/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/word-grid-vs-boggle/`, lastModified: GUIDE_PREVIOUS, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/word-grid-vs-word-search/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.78 },
     { url: `${BASE_URL}/guides/play-word-grid-online/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/play-boggle-online-free/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/guides/boggle-word-game/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-word-game/`, lastModified: GUIDE_PREVIOUS, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-game-online/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-online-free/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/how-to-win-boggle/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
@@ -37,10 +41,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/guides/boggle-rules-printable/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-scoring-sheet/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-rules-for-kids/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/guides/boggle-variants/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/guides/boggle-variants/`, lastModified: GUIDE_PREVIOUS, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/advanced-boggle-strategies/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-word-lists/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.84 },
-    { url: `${BASE_URL}/guides/most-common-boggle-words/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.86 },
+    { url: `${BASE_URL}/guides/most-common-boggle-words/`, lastModified: GUIDE_WORD_LIST_UPDATED, changeFrequency: "monthly", priority: 0.86 },
     { url: `${BASE_URL}/guides/boggle-solver/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-generator/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/guides/boggle-dictionary/`, lastModified: GUIDE_UPDATED, changeFrequency: "monthly", priority: 0.83 },

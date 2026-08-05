@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Word Lists — Complete Reference",
+  title: "Boggle Word Lists by Letter: Complete Word Reference",
   description:
-    "Complete Boggle word lists organized by letter. High-frequency words, common patterns, and letter-specific vocabulary to improve your word-finding speed and score.",
+    "Browse Boggle word lists by letter with high-frequency words, common patterns, and vocabulary references to improve word-finding speed.",
   alternates: { canonical: "/guides/boggle-word-lists" },
   keywords: [
     "boggle word lists", "boggle words by letter", "boggle word list",
@@ -59,7 +59,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
-  dateModified: "2026-07-13",
+  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-word-lists/`,
 };
 

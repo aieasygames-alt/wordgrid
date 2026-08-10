@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideImage from "@/components/GuideImage";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
     description:
       "A simple comparison of word grid games, word search puzzles, and crosswords so you can pick the right online word puzzle.",
     url: `${BASE_URL}/guides/word-grid-vs-word-search/`,
+    images: ["/images/seo/word-grid-vs-word-search-crossword.webp"],
   },
 };
 
@@ -119,6 +121,12 @@ export default function WordGridVsWordSearchGuide() {
                 . If you are comparing rules, the sections below make the differences
                 clear.
               </p>
+              <GuideImage
+                src="/images/seo/word-grid-vs-word-search-crossword.webp"
+                alt="Comparison of word grid games, word search puzzles, and crossword puzzles"
+                caption="Word grids, word searches, and crosswords all use letters, but each puzzle asks for a different kind of thinking."
+                priority
+              />
             </section>
 
             <section className="mt-8 max-w-5xl">

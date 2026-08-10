@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideImage from "@/components/GuideImage";
 
 export const metadata: Metadata = {
   title: "Word Grid Solver — Find All Words in Any Boggle Grid",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
     title: "Word Grid Solver — Find All Words in Any Boggle Grid",
     description:
       "Free online Word Grid Solver and Boggle word finder. Paste any square grid and get instant solutions with scoring breakdown and word analysis.",
+    images: ["/images/seo/word-grid-solver-workflow.webp"],
   },
 };
 
@@ -177,6 +179,12 @@ export default function BoggleSolverGuide() {
               </Link>
               .
             </p>
+            <GuideImage
+              src="/images/seo/word-grid-solver-workflow.webp"
+              alt="Word grid solver workflow from entering a board to reviewing missed words"
+              caption="Use the solver after a round to turn missed answers into repeatable scanning habits."
+              priority
+            />
           </section>
 
           <section>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GuideImage from "@/components/GuideImage";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
     description:
       "A practical pattern library for spotting more words faster in word grid and Boggle-style puzzles.",
     url: `${BASE_URL}/guides/word-pattern-library`,
+    images: ["/images/seo/word-grid-pattern-library.webp"],
   },
 };
 
@@ -204,6 +206,13 @@ export default function WordPatternLibraryPage() {
             </div>
           </div>
         </section>
+
+        <GuideImage
+          src="/images/seo/word-grid-pattern-library.webp"
+          alt="Word grid pattern library showing prefixes, suffixes, Qu words, plurals, and long stems"
+          caption="Pattern scanning turns one promising tile cluster into several possible answers."
+          priority
+        />
 
         <nav className="rounded-3xl border border-border bg-bg/40 p-5 sm:p-6 mb-6">
           <div className="text-xs uppercase tracking-[0.2em] text-text-dim mb-3">On this page</div>

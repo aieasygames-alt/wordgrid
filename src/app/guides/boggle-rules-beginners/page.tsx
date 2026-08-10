@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import GuideImage from "@/components/GuideImage";
 
 export const metadata: Metadata = {
   title: "Boggle Rules for Beginners: How to Play Boggle",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
     title: "Boggle Rules for Beginners: How to Play Boggle",
     description:
       "Learn the rules of Boggle from scratch — the 4×4 grid, letter adjacency, valid words, and scoring. Free interactive examples included.",
+    images: ["/images/seo/boggle-rules-paths.webp"],
   },
 };
 
@@ -160,6 +162,12 @@ export default function BoggleRulesGuide() {
               </a>
               .
             </p>
+            <GuideImage
+              src="/images/seo/boggle-rules-paths.webp"
+              alt="Boggle rule diagram showing adjacent letter paths on a 4 by 4 word grid"
+              caption="Boggle words are built by tracing adjacent letters horizontally, vertically, or diagonally."
+              priority
+            />
           </section>
 
           {/* The Grid */}

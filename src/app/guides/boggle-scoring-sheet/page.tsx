@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
+import GuideImage from "@/components/GuideImage";
 
 export const metadata: Metadata = {
   title: "Boggle Scoring Sheet — Points Table & Calculation Guide",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
     title: "Boggle Scoring Sheet — Points Table & Calculation Guide",
     description:
       "Complete Boggle scoring guide with points table, calculation examples, and scoring strategies. Learn to optimize your score.",
+    images: ["/images/seo/boggle-scoring-sheet.webp"],
   },
 };
 
@@ -150,6 +152,12 @@ export default function BoggleScoringSheetGuide() {
               </Link>
               .
             </p>
+            <GuideImage
+              src="/images/seo/boggle-scoring-sheet.webp"
+              alt="Boggle scoring sheet showing points by word length"
+              caption="Boggle scoring rewards longer words, so one strong 5-letter word can beat several short finds."
+              priority
+            />
           </section>
 
           <section>

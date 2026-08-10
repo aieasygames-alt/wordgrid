@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Dictionary — Complete Word Lists & Vocabulary",
+  title: "Boggle Dictionary: Valid Words, Word Lists, and Lookup Rules",
   description:
-    "Explore a Boggle dictionary guide with valid-word rules, word lists, vocabulary tips, lookup context, and high-frequency words for gameplay.",
+    "Use this Boggle dictionary guide to learn valid-word rules, common word lists, lookup standards, and vocabulary patterns for better scores.",
   alternates: { canonical: "/guides/boggle-dictionary" },
   keywords: [
     "boggle dictionary", "boggle word list", "boggle vocabulary",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "boggle dictionary online", "boggle word checker",
   ],
   openGraph: {
-    title: "Boggle Dictionary — Complete Word Lists & Vocabulary",
+    title: "Boggle Dictionary: Valid Words, Word Lists, and Lookup Rules",
     description:
       "Complete Boggle dictionary with word lists, vocabulary references, and valid word guidelines. Lookup words and improve your gameplay vocabulary.",
   },
@@ -24,7 +24,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  headline: "Boggle Dictionary — Complete Word Lists & Vocabulary",
+  headline: "Boggle Dictionary: Valid Words, Word Lists, and Lookup Rules",
   description:
     "A comprehensive Boggle dictionary including word lists, vocabulary references, valid word guidelines, and word lookup for improving gameplay.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -115,7 +115,7 @@ export default function BoggleDictionaryGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Dictionary — Complete Word Lists & Vocabulary
+            Boggle Dictionary: Valid Words, Word Lists, and Lookup Rules
           </h1>
           <p className="text-text-muted">9 min read &middot; Updated July 2026</p>
         </header>
@@ -123,10 +123,15 @@ export default function BoggleDictionaryGuide() {
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
-              A <strong>Boggle dictionary</strong> defines valid words, provides
-              vocabulary references, and helps you expand your word-finding
-              repertoire. Understanding what words count and building your
-              vocabulary are keys to consistently high scores.
+              A <strong>Boggle dictionary</strong> answers the practical question:
+              does this word count? Use this page to understand valid-word rules,
+              compare dictionary standards, and build a playable vocabulary from
+              common Boggle word lists.
+            </p>
+            <p className="leading-relaxed mt-3">
+              For quick checking: valid Boggle words are usually standard English
+              dictionary entries, at least 3 letters long, with no proper nouns,
+              acronyms, abbreviations, hyphenated words, or apostrophes.
             </p>
             <p className="leading-relaxed mt-3">
               The practical order is: learn the{" "}

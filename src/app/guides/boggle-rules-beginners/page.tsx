@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import GuideImage from "@/components/GuideImage";
 
 export const metadata: Metadata = {
-  title: "Boggle Rules for Beginners: How to Play Boggle",
+  title: "Boggle Rules for Beginners: How to Play, Score, and Win",
   description:
-    "Learn Boggle rules step by step: the 4x4 grid, adjacent letters, valid words, Qu tile behavior, scoring, and free online examples.",
+    "Learn Boggle rules fast: how adjacent letters work, which words count, Qu tile rules, the 3-minute timer, scoring, and beginner examples.",
   alternates: { canonical: "/guides/boggle-rules-beginners" },
   keywords: [
     "rules of boggle", "boggle rules", "how to play boggle",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "boggle word game rules", "boggle game instructions",
   ],
   openGraph: {
-    title: "Boggle Rules for Beginners: How to Play Boggle",
+    title: "Boggle Rules for Beginners: How to Play, Score, and Win",
     description:
       "Learn the rules of Boggle from scratch — the 4×4 grid, letter adjacency, valid words, and scoring. Free interactive examples included.",
     images: ["/images/seo/boggle-rules-paths.webp"],
@@ -124,7 +124,7 @@ export default function BoggleRulesGuide() {
             <a href="/guides/" className="hover:text-text">Guides</a>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Rules for Beginners: How to Play Boggle
+            Boggle Rules for Beginners: How to Play, Score, and Win
           </h1>
           <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
@@ -138,6 +138,11 @@ export default function BoggleRulesGuide() {
               place to start. The game looks busier than it is: 16 letters in a
               4×4 grid, 3 minutes on the clock, and words built by connecting
               adjacent letters.
+            </p>
+            <p className="leading-relaxed mt-3">
+              Short version: find words of 3+ letters, move only to neighboring
+              tiles, never reuse the same tile inside one word, skip proper nouns
+              and abbreviations, and score more for longer words.
             </p>
             <p className="leading-relaxed mt-3">
               The good news? The rules are simpler than they look, and the core

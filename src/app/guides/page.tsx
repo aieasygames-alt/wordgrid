@@ -25,9 +25,9 @@ const GUIDES = [
   },
   {
     href: "/guides/boggle-rules-beginners",
-    title: "Boggle Rules for Beginners: How to Play Boggle",
+    title: "Boggle Rules for Beginners: How to Play, Score, and Win",
     description:
-      "Never played Boggle or a word grid game before? This guide walks you through every rule, step by step, with a real example board.",
+      "Never played Boggle or a word grid game before? Learn the rules, scoring, valid words, and Qu tile behavior with a real example board.",
     category: "Beginner",
     readTime: "8 min read",
     date: "2026-08-05",
@@ -178,9 +178,9 @@ const GUIDES = [
   },
   {
     href: "/guides/boggle-word-lists",
-    title: "Boggle Word Lists by Letter — Complete Reference",
+    title: "Boggle Word List: Common Words by Letter and Pattern",
     description:
-      "Complete Boggle word lists organized by letter. High-frequency words, common patterns, and letter-specific vocabulary to improve your word-finding speed and score.",
+      "Common Boggle words organized by starting letter, high-value endings, and reusable patterns to improve word-finding speed and score.",
     category: "Intermediate",
     readTime: "15 min read",
     date: "2026-08-05",

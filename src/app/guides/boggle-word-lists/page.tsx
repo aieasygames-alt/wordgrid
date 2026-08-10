@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Word Lists by Letter: Complete Word Reference",
+  title: "Boggle Word List: Common Words by Letter and Pattern",
   description:
-    "Browse Boggle word lists by letter with high-frequency words, common patterns, and vocabulary references to improve word-finding speed.",
+    "Browse a Boggle word list by starting letter, common pattern, and high-value ending so you can find more words faster in real boards.",
   alternates: { canonical: "/guides/boggle-word-lists" },
   keywords: [
     "boggle word lists", "boggle words by letter", "boggle word list",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "boggle word patterns", "boggle common words",
   ],
   openGraph: {
-    title: "Boggle Word Lists by Letter — Complete Reference",
+    title: "Boggle Word List: Common Words by Letter and Pattern",
     description:
       "Comprehensive Boggle word lists organized by letter with high-frequency words, common patterns, and letter-specific vocabulary for improving gameplay.",
   },
@@ -40,7 +40,7 @@ const WORD_LISTS = {
   O: ["OFF", "OFFICE", "OFFICER", "OFFICIAL", "OFTEN", "OH", "OIL", "OK", "OLD", "ON", "ONCE", "ONE", "ONLY", "ONTO", "OPEN", "OPERATION", "OPPORTUNITY", "OPTION", "OR", "ORDER", "ORGANIZATION", "OTHER", "OTHERS", "OUR", "OUT", "OUTSIDE", "OVER", "OWN", "OWNER"],
   P: ["PAGE", "PAIN", "PAINT", "PAINTING", "PAPER", "PARENT", "PART", "PARTICIPANT", "PARTICULAR", "PARTICULARLY", "PARTNER", "PARTY", "PASS", "PAST", "PATIENT", "PATTERN", "PAY", "PEACE", "PEOPLE", "PER", "PERFORM", "PERFORMANCE", "PERHAPS", "PERIOD", "PERSON", "PERSONAL", "PHONE", "PHYSICAL", "PICK", "PICTURE", "PIECE", "PLACE", "PLAN", "PLANT", "PLAY", "PLAYER", "POINT", "POLICE", "POLICY", "POLITICAL", "POLITICS", "POOR", "POPULAR", "POPULATION", "POSITION", "POSITIVE", "POSSIBLE", "POWER", "PRACTICE", "PREPARE", "PRESENT", "PRESIDENT", "PRESSURE", "PRETTY", "PREVENT", "PRICE", "PRIVATE", "PROBABLY", "PROBLEM", "PROCESS", "PRODUCE", "PRODUCT", "PRODUCTION", "PROFESSIONAL", "PROFESSOR", "PROGRAM", "PROJECT", "PROPERTY", "PROTECT", "PROVE", "PROVIDE", "PUBLIC", "PULL", "PURPOSE", "PUSH", "PUT"],
   Qu: ["QUALITY", "QUARTER", "QUESTION", "QUICKLY", "QUIET", "QUITE"],
-  R: ["RACE", "RADIO", "RAISE", "RANGE", "RATE", "RATHER", "REACh", "READ", "READER", "REALITY", "REALIZE", "REALLY", "REASON", "RECEIVE", "RECENT", "RECENTLY", "RECOGNIZE", "RECORD", "RED", "RELATION", "RELATIONSHIP", "RELIGIOUS", "REMAIN", "REMEMBER", "REMOVE", "REPORT", "REPRESENT", "REPUBLICAN", "REQUIRE", "RESEARCH", "RESOURCE", "RESPOND", "RESPONSE", "REST", "RESULT", "RETURN", "REVEAL", "RICH", "RIGHT", "RISE", "RISK", "ROAD", "ROCK", "ROLE", "ROOM", "RULE", "RUN"],
+  R: ["RACE", "RADIO", "RAISE", "RANGE", "RATE", "RATHER", "REACH", "READ", "READER", "REALITY", "REALIZE", "REALLY", "REASON", "RECEIVE", "RECENT", "RECENTLY", "RECOGNIZE", "RECORD", "RED", "RELATION", "RELATIONSHIP", "RELIGIOUS", "REMAIN", "REMEMBER", "REMOVE", "REPORT", "REPRESENT", "REPUBLICAN", "REQUIRE", "RESEARCH", "RESOURCE", "RESPOND", "RESPONSE", "REST", "RESULT", "RETURN", "REVEAL", "RICH", "RIGHT", "RISE", "RISK", "ROAD", "ROCK", "ROLE", "ROOM", "RULE", "RUN"],
   S: ["SAFE", "SAME", "SAVE", "SAY", "SCENE", "SCHOOL", "SCIENCE", "SCIENTIST", "SCORE", "SEA", "SEASON", "SEAT", "SECOND", "SECTION", "SECURITY", "SEE", "SEEK", "SEEM", "SELL", "SEND", "SENIOR", "SENSE", "SERIES", "SERIOUS", "SERVE", "SERVICE", "SET", "SEVEN", "SEVERAL", "SEX", "SEXUAL", "SHAKE", "SHARE", "SHE", "SHOOT", "SHOP", "SHORT", "SHOT", "SHOULD", "SHOULDER", "SHOW", "SIDE", "SIGN", "SIGNIFICANT", "SIMILAR", "SIMPLE", "SIMPLY", "SINCE", "SING", "SINGLE", "SISTER", "SIT", "SITE", "SITUATION", "SIX", "SIZE", "SKILL", "SKIN", "SMALL", "SMILE", "SO", "SOCIAL", "SOCIETY", "SOLDIER", "SOME", "SOMEBODY", "SOMEONE", "SOMETHING", "SOMETIMES", "SOMEWHAT", "SONG", "SOON", "SORT", "SOUND", "SOURCE", "SOUTH", "SOUTHERN", "SPACE", "SPEAK", "SPEAKER", "SPECIAL", "SPECIES", "SPECIFIC", "SPEECH", "SPEND", "SPORT", "SPRING", "STAFF", "STAGE", "STAND", "STANDARD", "STAR", "START", "STATE", "STATEMENT", "STATION", "STATISTICS", "STAY", "STEP", "STILL", "STOCK", "STOP", "STORE", "STORY", "STRATEGY", "STREET", "STRONG", "STRUCTURE", "STUDENT", "STUDY", "STUFF", "STYLE", "SUBJECT", "SUCCESS", "SUCCESSFUL", "SUCH", "SUDDENLY", "SUFFER", "SUGGEST", "SUMMER", "SUPPORT", "SURFACE", "SYSTEM"],
   T: ["TABLE", "TAKE", "TALK", "TASK", "TAX", "TEACH", "TEACHER", "TEACHING", "TEAM", "TECHNOLOGY", "TELEVISION", "TELL", "TEN", "TEND", "TERM", "TEST", "THAN", "THANK", "THAT", "THE", "THEIR", "THEM", "THEMSELVES", "THEN", "THEORY", "THERE", "THESE", "THEY", "THING", "THINK", "THIRD", "THIS", "THOSE", "THOUGH", "THOUGHT", "THOUSAND", "THREAT", "THREE", "THROUGH", "THROUGHOUT", "THROW", "THUS", "TIME", "TO", "TODAY", "TOGETHER", "TONIGHT", "TOO", "TOP", "TOTAL", "TOUGH", "TOWARD", "TOWN", "TRADE", "TRADITIONAL", "TRAINING", "TRAVEL", "TREAT", "TREATMENT", "TREE", "TRIAL", "TRIP", "TROUBLE", "TRUE", "TRUTH", "TRY", "TURN", "TV", "TWO", "TYPE"],
   U: ["UNDER", "UNDERSTAND", "UNIT", "UNITED", "UNIVERSITY", "UNLESS", "UNTIL", "UP", "UPON", "US", "USE", "USUALLY"],
@@ -53,7 +53,7 @@ const WORD_LISTS = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Boggle Word Lists by Letter — Complete Reference",
+  headline: "Boggle Word List: Common Words by Letter and Pattern",
   description:
     "Comprehensive Boggle word lists organized by letter with high-frequency words, common patterns, and letter-specific vocabulary for improving gameplay.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -136,7 +136,7 @@ export default function BoggleWordListsGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Word Lists by Letter — Complete Reference
+            Boggle Word List: Common Words by Letter and Pattern
           </h1>
           <p className="text-text-muted">15 min read &middot; Updated July 2026</p>
         </header>
@@ -144,9 +144,9 @@ export default function BoggleWordListsGuide() {
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
-              Building your <strong>Boggle vocabulary</strong> isn't about
-              memorizing the dictionary. It's about learning high-frequency
-              patterns and common words that appear regularly in grids.
+              This <strong>Boggle word list</strong> is built for fast practice:
+              scan common words by starting letter, then learn the endings and
+              word families that turn one board position into several answers.
             </p>
             <p className="leading-relaxed mt-3">
               These word lists are organized by letter and frequency to help you

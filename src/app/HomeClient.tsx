@@ -85,12 +85,12 @@ export default function HomeClient() {
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-start">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-              WordGrid: Play Word Grid Online Free
+              WordGrid: Free Online Word Grid Game
             </h1>
             <p className="text-base text-text-muted max-w-lg mx-auto lg:mx-0 mb-4">
-              Start WordGrid, a free word grid game in your browser. Connect adjacent
-              letters in a Boggle-style puzzle, choose timed or untimed play,
-              and come back for the shared Daily board. No download, no sign-up.
+              Play WordGrid instantly in your browser. Connect adjacent letters
+              on Boggle-style 4x4 boards, chase longer words, and choose Daily,
+              timed, or untimed Zen play. No download, no sign-up.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {primaryEntrances.map((entry) => (

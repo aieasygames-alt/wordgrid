@@ -141,8 +141,13 @@ export default function DailyClient() {
             WordGrid
           </a>
           <h1 className="mt-1 text-3xl sm:text-4xl font-bold tracking-tight">
-            Daily — {today}
+            Daily Word Grid Puzzle — {today}
           </h1>
+          <p className="mt-3 text-sm sm:text-base text-text-muted max-w-2xl mx-auto leading-relaxed">
+            Play today&apos;s free 4x4 WordGrid board. Everyone gets the same
+            Boggle-style puzzle and the same 3-minute timer, so your score is
+            easy to compare and review.
+          </p>
           <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
             {entryLinks.map((entry) => (
               <Link
@@ -189,6 +194,35 @@ export default function DailyClient() {
             />
           </aside>
         </div>
+
+        <section className="mt-10 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-bold">How the Daily Board Works</h2>
+            <p className="mt-3 text-sm text-text-muted leading-relaxed">
+              The Daily puzzle uses one shared 4x4 grid for the day. Find as
+              many valid words as you can before the timer ends, then come back
+              tomorrow for a fresh board.
+            </p>
+            <p className="mt-3 text-sm text-text-muted leading-relaxed">
+              If you want to practice without affecting your daily rhythm, open
+              a random board or use Zen mode.
+            </p>
+          </div>
+          <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-bold">After You Play</h2>
+            <div className="mt-4 grid gap-3">
+              <Link href="/daily/archive" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Browse previous daily boards
+              </Link>
+              <Link href="/guides/boggle-scoring-sheet" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Check the scoring guide
+              </Link>
+              <Link href="/solver" className="rounded-xl bg-primary/10 border border-primary/20 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+                Review a board with the solver
+              </Link>
+            </div>
+          </div>
+        </section>
       </article>
     </main>
   );

@@ -196,6 +196,36 @@ export default function BoggleWordListsGuide() {
             </Link>
           </section>
 
+          <section className="grid gap-3 sm:grid-cols-3">
+            <Link
+              href="/daily"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Test today&apos;s board</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Use the same Daily grid everyone sees and look for the listed patterns.
+              </p>
+            </Link>
+            <Link
+              href="/solver"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Review with solver</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Paste a board after playing and compare missed words against the lists.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-generator"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Generate boards</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Create fresh 4x4, 5x5, or 6x6 grids for repeated vocabulary practice.
+              </p>
+            </Link>
+          </section>
+
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
               How to Use These Word Lists

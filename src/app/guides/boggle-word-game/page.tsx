@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Boggle Word Game — Rules, Scoring & Free Online Play",
+  title: "Boggle Word Game: Rules, Scoring, and Free Online Play",
   description:
     "Master the Boggle word game. Learn the rules, how scoring works, and play free online instantly. 4×4 grid, 3-minute rounds, connect adjacent letters to find words.",
   alternates: { canonical: "/guides/boggle-word-game" },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "boggle word game strategy", "boggle word game tips",
   ],
   openGraph: {
-    title: "Boggle Word Game — Rules, Scoring & Free Online Play",
+    title: "Boggle Word Game: Rules, Scoring, and Free Online Play",
     description:
       "Complete guide to the Boggle word game — rules, scoring table, and where to play free online. Learn word-finding strategies and improve your score.",
   },
@@ -23,7 +23,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Boggle Word Game — Rules, Scoring & Free Online Play",
+  headline: "Boggle Word Game: Rules, Scoring, and Free Online Play",
   description:
     "A complete guide to the Boggle word game including rules, scoring system, and free online gameplay options.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -124,7 +124,7 @@ export default function BoggleWordGameGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Word Game — Rules, Scoring &amp; Free Online Play
+            Boggle Word Game: Rules, Scoring, and Free Online Play
           </h1>
           <p className="text-text-muted">7 min read &middot; Updated July 24, 2026</p>
         </header>
@@ -138,10 +138,20 @@ export default function BoggleWordGameGuide() {
               and where to start a round instantly.
             </p>
             <p className="leading-relaxed mt-3">
-              <Link href="/play" className="text-primary hover:underline">
-                Play the Boggle word game free online →
-              </Link>
+              This page is the overview: the short rules, the scoring table,
+              where to play online, and which deeper guide to open next.
             </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+                Play free online
+              </Link>
+              <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+                Read full rules
+              </Link>
+              <Link href="/guides/boggle-scoring-sheet" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+                Check scoring
+              </Link>
+            </div>
             <p className="leading-relaxed mt-3">
               New to the game? Start with{" "}
               <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">

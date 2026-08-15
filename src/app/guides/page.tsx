@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 const GUIDES = [
   {
     href: "/guides/play-word-grid-online",
-    title: "Play Word Grid Online — Free, No Download",
+    title: "Play Word Grid Online Free: Start Instantly, No Download",
     description:
-      "How to play word grid free in your browser — what a word grid puzzle is, how it works, and where to play instantly with standard or larger square grids.",
+      "Start a free word grid game in your browser, then learn the rules, Daily board, and solver workflow.",
     category: "Beginner",
     readTime: "4 min read",
     date: "2026-08-05",
@@ -79,9 +79,9 @@ const GUIDES = [
   },
   {
     href: "/guides/boggle-word-game",
-    title: "Boggle Word Game — Rules, Scoring & Free Online Play",
+    title: "Boggle Word Game: Rules, Scoring, and Free Online Play",
     description:
-      "Master the Boggle word game. Learn the rules, how scoring works, and play free online instantly on standard or larger grids.",
+      "Overview guide for the Boggle word game: short rules, scoring, free online play, and next-step resources.",
     category: "Beginner",
     readTime: "6 min read",
     date: "2026-06-28",
@@ -151,9 +151,9 @@ const GUIDES = [
   },
   {
     href: "/guides/boggle-rules-for-kids",
-    title: "Boggle Rules for Kids — Simple Guide for Children",
+    title: "Boggle Rules for Kids: Easy Rules for Children and Classrooms",
     description:
-      "Simple Boggle rules for kids and children. Easy-to-understand explanation with examples, tips for parents and teachers, and fun variations for young players.",
+      "Easy Boggle rules for kids, parents, and teachers with simple examples, classroom tips, scoring basics, and variations.",
     category: "Beginner",
     readTime: "7 min read",
     date: "2026-08-05",
@@ -232,27 +232,27 @@ const GUIDES = [
   },
   {
     href: "/guides/boggle-solver",
-    title: "Word Grid Solver — Find All Words in Any Boggle Grid",
+    title: "Boggle Solver: Find All Words in Any Word Grid",
     description:
-      "Free Word Grid Solver and Boggle solver for any square grid. Paste letters and get instant word lists, counts, and scoring breakdowns.",
+      "Use the free Boggle solver after a round to find every valid word, compare scores, and review missed patterns.",
     category: "Intermediate",
     readTime: "8 min read",
     date: "2026-08-05",
   },
   {
     href: "/guides/boggle-generator",
-    title: "Boggle Generator — Create Custom Word Puzzles",
+    title: "Boggle Generator: Create Free 4x4, 5x5, and 6x6 Boards",
     description:
-      "Free Boggle generator to create custom square word puzzles. Design personalized grids for practice, teaching, or game nights with adjustable difficulty and letter distribution.",
+      "Create free 4x4, 5x5, and 6x6 Boggle-style boards for practice, teaching, game nights, and solver review.",
     category: "Intermediate",
     readTime: "6 min read",
     date: "2026-08-05",
   },
   {
     href: "/guides/boggle-dictionary",
-    title: "Boggle Dictionary — Complete Word Lists & Vocabulary",
+    title: "Boggle Dictionary: Valid Words, Word Lists, and Lookup Rules",
     description:
-      "Complete Boggle dictionary with word lists, vocabulary references, and valid word guidelines. Lookup any word, explore high-frequency game vocabulary, and improve your word-finding skills.",
+      "Valid-word rules, lookup guidance, and vocabulary patterns for players using Boggle-style word grids.",
     category: "Intermediate",
     readTime: "9 min read",
     date: "2026-08-05",
@@ -260,6 +260,41 @@ const GUIDES = [
 ];
 
 const CATEGORIES = ["Beginner", "Intermediate", "Advanced"];
+
+const CLUSTERS = [
+  {
+    title: "Play",
+    links: [
+      { href: "/play", label: "Play word grid online free" },
+      { href: "/daily", label: "Daily word grid puzzle" },
+      { href: "/zen", label: "Zen practice mode" },
+    ],
+  },
+  {
+    title: "Rules",
+    links: [
+      { href: "/guides/boggle-rules-beginners", label: "Boggle rules for beginners" },
+      { href: "/guides/boggle-rules-for-kids", label: "Boggle rules for kids" },
+      { href: "/guides/boggle-rules-printable", label: "Printable Boggle rules" },
+    ],
+  },
+  {
+    title: "Solver",
+    links: [
+      { href: "/solver", label: "Live Boggle solver" },
+      { href: "/guides/boggle-solver", label: "How to use a solver" },
+      { href: "/guides/boggle-dictionary", label: "Boggle dictionary rules" },
+    ],
+  },
+  {
+    title: "Vocabulary",
+    links: [
+      { href: "/guides/boggle-word-lists", label: "Boggle word list" },
+      { href: "/guides/most-common-boggle-words", label: "Most common Boggle words" },
+      { href: "/guides/word-pattern-library", label: "Word pattern library" },
+    ],
+  },
+];
 
 export default function GuidesIndex() {
   const itemListSchema = {
@@ -292,6 +327,30 @@ export default function GuidesIndex() {
             first game to competitive-level strategy.
           </p>
         </header>
+
+        <section className="mb-10">
+          <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-3">
+            Guide Clusters
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {CLUSTERS.map((cluster) => (
+              <div key={cluster.title} className="rounded-xl border border-border bg-surface/50 p-4">
+                <h3 className="font-semibold text-primary">{cluster.title}</h3>
+                <div className="mt-3 grid gap-2">
+                  {cluster.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="rounded-lg bg-bg/60 px-3 py-2 text-sm font-semibold hover:bg-surface-hover transition"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section className="mb-10">
           <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-3">

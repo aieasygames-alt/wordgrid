@@ -257,8 +257,9 @@ export default function PlayClient() {
           Play Word Grid Online Free
         </h1>
         <p className="mt-3 text-sm sm:text-base text-text-muted max-w-xl mx-auto">
-          Start a free Boggle-style word grid puzzle in your browser. Pick timed
-          rounds, Zen practice, the shared Daily board, or a Challenge link.
+          Start a free Boggle-style word grid puzzle in your browser. Choose a
+          classic 4x4 board, practice on 5x5 or 6x6 grids, then switch between
+          timed rounds, Zen practice, Daily, or Challenge.
         </p>
         <div className="mt-4">{entryNav}</div>
         <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
@@ -333,17 +334,15 @@ export default function PlayClient() {
       <section className="mt-10 w-full max-w-7xl mx-auto space-y-10">
         <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-            <h2 className="text-2xl font-bold">Why This Play Page Matters</h2>
+            <h2 className="text-2xl font-bold">Play Instantly, Then Improve</h2>
             <p className="mt-3 text-sm text-text-muted leading-relaxed">
-              This is the direct play surface for searchers who want an instant
-              game, especially on Bing-style discovery where playable intent
-              often wins faster than a long guide.
+              The board is ready as soon as the page opens: no download, no
+              sign-up, and no setup screen. Use 4x4 for classic play, or larger
+              boards when you want more paths to explore.
             </p>
             <p className="mt-3 text-sm text-text-muted leading-relaxed">
-              For Google, the stronger path is usually to pair the live board
-              with supporting pages about rules, scoring, vocabulary, and
-              solver review. That is why this page links into the guide cluster
-              instead of standing alone.
+              After a round, the rules, scoring, dictionary, and solver pages
+              help turn missed words into sharper pattern recognition.
             </p>
           </div>
           <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">

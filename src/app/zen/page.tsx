@@ -66,6 +66,9 @@ export default function Page() {
                 <Link href="/guides/word-pattern-library" className="px-4 py-2 rounded-xl border border-border bg-transparent hover:bg-surface transition font-semibold text-text-muted hover:text-text">
                   Pattern Library
                 </Link>
+                <Link href="/solver" className="px-4 py-2 rounded-xl border border-border bg-transparent hover:bg-surface transition font-semibold text-text-muted hover:text-text">
+                  Solver Review
+                </Link>
               </div>
             </div>
 
@@ -125,6 +128,24 @@ export default function Page() {
           <Card title="Warm up" text="Get a feel for the board before the timer starts." />
           <Card title="Study patterns" text="Focus on prefixes, suffixes, Qu, and long word stems." />
           <Card title="Repeat boards" text="Use the same layout to measure your progress over time." />
+        </section>
+
+        <section className="mt-10 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <h2 className="text-2xl font-bold">Turn Practice Into Play</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <Link href="/play" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+              Play timed mode
+            </Link>
+            <Link href="/daily" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+              Open Daily
+            </Link>
+            <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+              Review rules
+            </Link>
+            <Link href="/solver" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+              Check the solver
+            </Link>
+          </div>
         </section>
       </article>
     </main>

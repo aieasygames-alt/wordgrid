@@ -204,6 +204,36 @@ export default function MostCommonBoggleWordsGuide() {
             </Link>
           </section>
 
+          <section className="grid gap-3 sm:grid-cols-3">
+            <Link
+              href="/daily"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Try the Daily</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Use one shared board to see which common words you spot under pressure.
+              </p>
+            </Link>
+            <Link
+              href="/solver"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Check missed words</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Review the board after playing and find common words you overlooked.
+              </p>
+            </Link>
+            <Link
+              href="/guides/boggle-generator"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <h2 className="font-semibold text-primary">Generate practice boards</h2>
+              <p className="mt-1 text-sm text-text-muted">
+                Create fresh boards when you want more repetitions with the same patterns.
+              </p>
+            </Link>
+          </section>
+
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
               Top 20 Most Common Boggle Words

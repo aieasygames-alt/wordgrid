@@ -3,9 +3,9 @@ import Link from "next/link";
 import GuideImage from "@/components/GuideImage";
 
 export const metadata: Metadata = {
-  title: "Word Grid Solver — Find All Words in Any Boggle Grid",
+  title: "Boggle Solver: Find All Words in Any Word Grid",
   description:
-    "Free Word Grid Solver and Boggle solver for any square grid. Paste your letters and get instant solutions with word counts and scoring breakdowns.",
+    "Use the free Boggle solver after a round to find every valid word in a word grid, compare scores, and review missed patterns.",
   alternates: { canonical: "/guides/boggle-solver" },
   keywords: [
     "word grid solver", "boggle solver", "boggle word finder", "boggle cheat", "boggle helper",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "solve boggle puzzle", "boggle solution finder",
   ],
   openGraph: {
-    title: "Word Grid Solver — Find All Words in Any Boggle Grid",
+    title: "Boggle Solver: Find All Words in Any Word Grid",
     description:
       "Free online Word Grid Solver and Boggle word finder. Paste any square grid and get instant solutions with scoring breakdown and word analysis.",
     images: ["/images/seo/word-grid-solver-workflow.webp"],
@@ -128,7 +128,7 @@ export default function BoggleSolverGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Word Grid Solver — Find All Words in Any Boggle Grid
+            Boggle Solver: Find All Words in Any Word Grid
           </h1>
           <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
@@ -136,12 +136,23 @@ export default function BoggleSolverGuide() {
         <div className="space-y-6 text-text max-w-3xl">
           <section>
             <p className="leading-relaxed">
-              A <strong>word grid solver</strong> finds every possible word in a
-              square grid instantly. Paste any Boggle-style grid and get a complete
-              word list with scoring breakdown — perfect for analyzing games
-              after you play, learning what you missed, and improving your
-              skills.
+              A <strong>Boggle solver</strong> finds every possible word in a
+              square word grid instantly. Paste any Boggle-style board and get
+              a complete word list with scoring breakdown — perfect for
+              analyzing games after you play, learning what you missed, and
+              improving your skills.
             </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/solver" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+                Open live solver
+              </Link>
+              <Link href="/play" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+                Play first
+              </Link>
+              <Link href="/daily" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+                Try Daily
+              </Link>
+            </div>
             <p className="leading-relaxed mt-3">
               <Link href="/solver" className="text-primary hover:underline">
                 Open the live solver
@@ -294,6 +305,12 @@ export default function BoggleSolverGuide() {
                 <div className="font-semibold text-primary">Check vocabulary patterns</div>
                 <p className="mt-1 text-sm text-text-muted">
                   Build the word families and valid-word instincts that help you miss fewer answers next time.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-word-lists/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Study word lists</div>
+                <p className="mt-1 text-sm text-text-muted">
+                  Pair solver results with common words by letter and high-value endings.
                 </p>
               </Link>
               <Link href="/solver" className="block rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">

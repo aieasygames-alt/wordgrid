@@ -5,9 +5,9 @@ import SolverClient from "./SolverClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Word Grid Solver: Free Boggle Word Finder Online",
+  title: "Boggle Solver: Free Word Grid Word Finder Online",
   description:
-    "Use the free Word Grid Solver to find every valid word in any Boggle-style grid. Paste letters, compare scores, and review missed patterns after play.",
+    "Use this free Boggle solver to find every valid word in any word grid. Paste letters, compare scores, and review missed patterns after play.",
   alternates: { canonical: "/solver" },
   keywords: [
     "boggle solver",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "word finder puzzle",
   ],
   openGraph: {
-    title: "Word Grid Solver: Free Boggle Word Finder Online",
+    title: "Boggle Solver: Free Word Grid Word Finder Online",
     description:
       "Paste a square word grid, solve it instantly, and review the highest-value words and missed patterns.",
     url: `${BASE_URL}/solver`,
@@ -101,12 +101,13 @@ export default function Page() {
           <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] items-start">
             <div>
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-                Word Grid Solver for Any Boggle-Style Board
+                Boggle Solver for Any Word Grid Board
               </h1>
               <p className="mt-4 text-base sm:text-lg text-text-muted max-w-2xl leading-relaxed">
-                Paste a word grid, hit solve, and get every valid word with score
-                ranking, length filters, and quick pattern review. It is the
-                fastest way to turn a finished game into a learning session.
+                Paste a Boggle-style word grid, hit solve, and get every valid
+                word with score ranking, length filters, and quick pattern
+                review. It is the fastest way to turn a finished game into a
+                learning session.
               </p>
               <p className="mt-4 text-sm sm:text-base text-text-muted max-w-2xl leading-relaxed">
                 The cleanest workflow is:{" "}
@@ -204,6 +205,22 @@ export default function Page() {
               Pair the solver with the daily challenge or a random board to
               build a sharper recognition habit.
             </p>
+          </div>
+        </section>
+        <section className="mt-12 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <h2 className="text-2xl font-semibold">What This Solver Is For</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["Boggle solver", "Find all valid words in a 4x4 Boggle-style board after a round."],
+              ["Word grid solver", "Check any square letter grid and sort answers by score."],
+              ["Word finder", "Spot longer words, prefixes, suffixes, and Qu paths you missed."],
+              ["Daily review", "Compare today's board with the full answer set after you play."],
+            ].map(([title, copy]) => (
+              <div key={title} className="rounded-2xl bg-bg/60 p-4">
+                <h3 className="font-semibold text-primary">{title}</h3>
+                <p className="mt-2 text-sm text-text-muted leading-relaxed">{copy}</p>
+              </div>
+            ))}
           </div>
         </section>
       </article>

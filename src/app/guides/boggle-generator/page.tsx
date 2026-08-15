@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Boggle Generator — Create Custom Word Puzzles",
+  title: "Boggle Generator: Create Free 4x4, 5x5, and 6x6 Boards",
   description:
-    "Create custom Boggle-style word puzzles for practice, teaching, or game night with adjustable board sizes and letter distribution tips.",
+    "Use this free Boggle generator guide to create 4x4, 5x5, and 6x6 word grids for practice, teaching, game nights, and solver review.",
   alternates: { canonical: "/guides/boggle-generator" },
   keywords: [
     "boggle generator", "boggle puzzle maker", "custom boggle grid",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "make your own boggle", "boggle game creator",
   ],
   openGraph: {
-    title: "Boggle Generator — Create Custom Word Puzzles",
+    title: "Boggle Generator: Create Free 4x4, 5x5, and 6x6 Boards",
     description:
       "Free Boggle generator to create custom square word puzzles. Design personalized grids for practice, teaching, or game nights with adjustable difficulty.",
   },
@@ -123,7 +123,7 @@ export default function BoggleGeneratorGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Generator — Create Custom Word Puzzles
+            Boggle Generator: Create Free 4x4, 5x5, and 6x6 Boards
           </h1>
           <p className="text-text-muted">6 min read &middot; Updated June 2026</p>
         </header>
@@ -136,10 +136,23 @@ export default function BoggleGeneratorGuide() {
               personalized grids with adjustable difficulty, control letter
               distribution, and print unlimited custom boards.
             </p>
-            <p className="leading-relaxed mt-3">
-              <Link href="/play" className="text-primary hover:underline">
-                Generate and play custom grids now →
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/play?size=4" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+                Generate 4x4 board
               </Link>
+              <Link href="/play?size=5" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+                Generate 5x5 board
+              </Link>
+              <Link href="/play?size=6" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+                Generate 6x6 board
+              </Link>
+            </div>
+            <p className="leading-relaxed mt-4">
+              After you play a generated board, open the{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                live Boggle solver
+              </Link>{" "}
+              to review every valid word and see which patterns you missed.
             </p>
             <p className="leading-relaxed mt-3">
               If you want to tune the practice effect, read{" "}
@@ -152,6 +165,24 @@ export default function BoggleGeneratorGuide() {
               </Link>
               .
             </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Fast Generator Options
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                ["4x4 classic", "/play?size=4", "Standard Boggle-style board for 3-minute rounds."],
+                ["5x5 practice", "/play?size=5", "More letters and longer paths for advanced scanning."],
+                ["6x6 challenge", "/play?size=6", "Large board for slower study and high-volume practice."],
+              ].map(([title, href, copy]) => (
+                <Link key={href} href={href} className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                  <h3 className="font-semibold text-primary">{title}</h3>
+                  <p className="mt-1 text-sm text-text-muted">{copy}</p>
+                </Link>
+              ))}
+            </div>
           </section>
 
           <section>

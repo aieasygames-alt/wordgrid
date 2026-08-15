@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Rules for Kids: Simple Guide for Children",
+  title: "Boggle Rules for Kids: Easy Rules for Children and Classrooms",
   description:
-    "Simple Boggle rules for kids with easy examples, parent and teacher tips, scoring basics, and fun variations for young players.",
+    "Easy Boggle rules for kids, parents, and teachers. Use simple examples, classroom tips, scoring basics, and fun variations for young players.",
   alternates: { canonical: "/guides/boggle-rules-for-kids" },
   keywords: [
     "boggle rules for kids", "boggle for children", "how to teach kids boggle",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "boggle classroom game", "teaching boggle to kids",
   ],
   openGraph: {
-    title: "Boggle Rules for Kids — Simple Guide for Children",
+    title: "Boggle Rules for Kids: Easy Rules for Children and Classrooms",
     description:
       "Simplified Boggle rules for kids with easy explanations, examples, and tips for parents and teachers. Fun word game for children.",
   },
@@ -24,7 +24,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Boggle Rules for Kids — Simple Guide for Children",
+  headline: "Boggle Rules for Kids: Easy Rules for Children and Classrooms",
   description:
     "A simplified guide to Boggle rules for children and young players, with easy explanations, examples, and tips for parents and teachers.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -115,7 +115,7 @@ export default function BoggleRulesForKidsGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Rules for Kids — Simple Guide for Children
+            Boggle Rules for Kids: Easy Rules for Children and Classrooms
           </h1>
           <p className="text-text-muted">8 min read &middot; Updated July 24, 2026</p>
         </header>
@@ -128,6 +128,17 @@ export default function BoggleRulesForKidsGuide() {
               easy explanations, examples, and fun variations perfect for young
               players, classrooms, and family game nights.
             </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+                Play a practice board
+              </Link>
+              <Link href="/guides/boggle-rules-printable" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+                Open printable rules
+              </Link>
+              <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+                Standard rules
+              </Link>
+            </div>
             <p className="leading-relaxed mt-3">
               Boggle helps kids build vocabulary, spelling skills, and pattern
               recognition — all while having fun racing against the clock.

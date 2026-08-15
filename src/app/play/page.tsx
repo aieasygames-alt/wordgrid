@@ -4,9 +4,9 @@ import PlayClient from "./PlayClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online Free — Instant Boggle-Style Game",
+  title: "Play Word Grid Online Free - Instant 4x4, 5x5, 6x6 Game",
   description:
-    "Play word grid online free instantly. No download, no sign-up. Connect letters in 4x4, 5x5, or 6x6 Boggle-style grids, with timed or Zen mode.",
+    "Play word grid online free instantly. No download or sign-up. Connect letters in 4x4, 5x5, or 6x6 Boggle-style grids with timed or Zen mode.",
   alternates: { canonical: "/play" },
   keywords: [
     "play boggle online free", "play boggle online", "boggle online free",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "word grid online", "word grid puzzle", "word grid game",
   ],
   openGraph: {
-    title: "Play Word Grid Online Free — Instant Boggle-Style Game",
+    title: "Play Word Grid Online Free - Instant 4x4, 5x5, 6x6 Game",
     description:
       "Play word grid online free in your browser. No download, no sign-up. Connect letters, find words, and beat the clock across multiple board sizes or practice in Zen mode.",
   },

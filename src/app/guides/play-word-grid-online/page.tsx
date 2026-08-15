@@ -3,16 +3,16 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online — Free, No Download",
+  title: "Play Word Grid Online Free: Start Instantly, No Download",
   description:
-    "Play word grid online for free in your browser. No download or sign-up. Connect adjacent letters, find words, and try Daily or practice boards.",
+    "Play word grid online free in your browser. Start instantly, connect adjacent letters, try Daily or practice boards, and learn the rules fast.",
   alternates: { canonical: "/guides/play-word-grid-online" },
   keywords: [
     "word grid online", "play word grid online", "word grid online free",
     "word grid game online", "free word grid online", "word grid puzzle online",
   ],
   openGraph: {
-    title: "Play Word Grid Online — Free, No Download Needed",
+    title: "Play Word Grid Online Free: Start Instantly, No Download",
     description:
       "Word grid is a free online word puzzle. Connect adjacent letters in square grids to find words. Play instantly — no download, no sign-up.",
   },
@@ -23,7 +23,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Play Word Grid Online — Free, No Download",
+  headline: "Play Word Grid Online Free: Start Instantly, No Download",
   description:
     "A guide to playing word grid online for free — what it is, how it works, and where to play instantly in your browser.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -106,7 +106,7 @@ export default function PlayWordGridOnlineGuide() {
             <a href="/guides/" className="hover:text-text">Guides</a>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Play Word Grid Online — Free, No Download
+            Play Word Grid Online Free: Start Instantly, No Download
           </h1>
           <p className="text-text-muted">5 min read &middot; Updated July 24, 2026</p>
         </header>
@@ -122,10 +122,22 @@ export default function PlayWordGridOnlineGuide() {
               download and no sign-up.
             </p>
             <p className="leading-relaxed mt-3">
-              <Link href="/play" className="text-primary hover:underline">
-                Play →
+              Choose your next step:
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+                Play word grid now
+              </Link>
+              <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+                Learn the rules first
+              </Link>
+            </div>
+            <p className="leading-relaxed mt-4">
+              You can also try the{" "}
+              <Link href="/daily" className="text-primary hover:underline">
+                Daily board
               </Link>{" "}
-              or read on to learn how it works.
+              when you want the same puzzle everyone else is playing today.
             </p>
             <p className="leading-relaxed mt-3">
               After your first round, the best next pages are the{" "}

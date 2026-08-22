@@ -5,9 +5,9 @@ import HomeClient from "./HomeClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "WordGrid - Play Free Online Word Grid & Boggle-Style Games",
+  title: "WordGrid: Free Online Word Grid Game, Daily Puzzle & Solver",
   description:
-    "Play WordGrid free online. Find words on Boggle-style 4x4 grids, try Daily, timed, and Zen modes, and start instantly with no download or sign-up.",
+    "Play WordGrid free online: find words on Boggle-style grids, try the Daily puzzle, practice in timed or Zen mode, and review boards with the solver.",
   alternates: { canonical: "/" },
   keywords: [
     "word grid", "word grid online", "word grid puzzle", "word grid game",
@@ -17,16 +17,16 @@ export const metadata: Metadata = {
     "daily word game", "free word game", "browser word game",
   ],
   openGraph: {
-    title: "WordGrid - Play Free Online Word Grid & Boggle-Style Games",
+    title: "WordGrid: Free Online Word Grid Game, Daily Puzzle & Solver",
     description:
-      "Play WordGrid online free in your browser. Connect letters, find words, and try timed, Zen, or Daily boards. No download needed.",
+      "Play WordGrid online free in your browser. Connect letters, find words, try Daily, timed, and Zen boards, then review missed words with the solver.",
     url: BASE_URL,
     images: [
       {
         url: "/share-card-bg.png",
         width: 1200,
         height: 630,
-        alt: "WordGrid — Play the free word grid puzzle game online",
+        alt: "WordGrid - play the free word grid puzzle game online",
       },
     ],
   },
@@ -75,7 +75,7 @@ export default function Home() {
         name: "What is WordGrid?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "WordGrid is a free online word puzzle game inspired by Boggle. You find words by connecting adjacent letters in square grids. You can play classic 4×4 boards or larger practice boards. Play directly in your browser — no download or sign-up needed.",
+          text: "WordGrid is a free online word grid game inspired by Boggle. You find words by connecting adjacent letters in square grids, play Daily or unlimited boards, and review missed words with a solver. It runs directly in your browser with no download or sign-up.",
         },
       },
       {
@@ -207,11 +207,11 @@ export default function Home() {
                 What is WordGrid?
               </summary>
               <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                WordGrid is a free online word puzzle game inspired by classic
-                Boggle. You find words by connecting adjacent letters in square
-                grids. You can play the standard board or switch to larger
-                practice grids. It plays right in your browser — no download or
-                sign-up needed.
+                WordGrid is a free online word grid game inspired by classic
+                Boggle. You connect adjacent letters to find words, play the
+                same Daily puzzle as everyone else, practice unlimited boards,
+                and review finished grids with a solver. It plays right in your
+                browser with no download or sign-up needed.
               </p>
             </details>
             <details className="bg-surface/50 rounded-xl p-4">
@@ -371,14 +371,14 @@ export default function Home() {
             </Link>
             <Link
               href="/guides/boggle-dictionary"
-              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+              className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-5 border border-primary/20"
             >
               <h3 className="font-semibold mb-1 text-primary">
-                Boggle Dictionary &rarr;
+                Boggle Dictionary Online &rarr;
               </h3>
               <p className="text-sm text-text-muted">
-                Learn what counts as a valid word and which vocabulary families
-                show up most often.
+                Check valid-word rules, study common word lists, and connect
+                dictionary practice with the solver after each round.
               </p>
             </Link>
             <Link
@@ -395,14 +395,14 @@ export default function Home() {
             </Link>
             <Link
               href="/solver"
-              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-5"
+              className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-5 border border-primary/20"
             >
               <h3 className="font-semibold mb-1 text-primary">
-                Word Grid Solver &rarr;
+                Boggle Solver Online &rarr;
               </h3>
               <p className="text-sm text-text-muted">
-                Review a finished board, find missed words, and turn results
-                into your next practice target.
+                Paste a finished word grid, find every valid word, compare
+                scores, and turn missed patterns into your next practice target.
               </p>
             </Link>
           </div>

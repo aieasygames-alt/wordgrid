@@ -5,9 +5,9 @@ import SolverClient from "./SolverClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Boggle Solver: Free Word Grid Word Finder Online",
+  title: "Boggle Solver Online: Free Word Grid Word Finder",
   description:
-    "Use this free Boggle solver to find every valid word in any word grid. Paste letters, compare scores, and review missed patterns after play.",
+    "Use this free online Boggle solver and word grid word finder to find every valid word, compare scores, and review missed patterns after play.",
   alternates: { canonical: "/solver" },
   keywords: [
     "boggle solver",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "word finder puzzle",
   ],
   openGraph: {
-    title: "Boggle Solver: Free Word Grid Word Finder Online",
+    title: "Boggle Solver Online: Free Word Grid Word Finder",
     description:
       "Paste a square word grid, solve it instantly, and review the highest-value words and missed patterns.",
     url: `${BASE_URL}/solver`,
@@ -101,13 +101,13 @@ export default function Page() {
           <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] items-start">
             <div>
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-                Boggle Solver for Any Word Grid Board
+                Boggle Solver Online for Any Word Grid Board
               </h1>
               <p className="mt-4 text-base sm:text-lg text-text-muted max-w-2xl leading-relaxed">
-                Paste a Boggle-style word grid, hit solve, and get every valid
-                word with score ranking, length filters, and quick pattern
-                review. It is the fastest way to turn a finished game into a
-                learning session.
+                Paste a Boggle-style word grid into this free online word
+                finder, hit solve, and get every valid word with score ranking,
+                length filters, and quick pattern review. It is the fastest way
+                to turn a finished game into a learning session.
               </p>
               <p className="mt-4 text-sm sm:text-base text-text-muted max-w-2xl leading-relaxed">
                 The cleanest workflow is:{" "}

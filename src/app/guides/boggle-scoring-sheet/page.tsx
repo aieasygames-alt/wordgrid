@@ -4,9 +4,9 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 import GuideImage from "@/components/GuideImage";
 
 export const metadata: Metadata = {
-  title: "Boggle Scoring Sheet — Points Table & Calculation Guide",
+  title: "Boggle Scoring Sheet: Points Chart, Rules & Examples",
   description:
-    "Use this Boggle scoring sheet to check point values, word-length rules, examples, winning score ranges, and strategy for higher scores.",
+    "Check the Boggle scoring sheet with point values by word length, score examples, winning ranges, and quick rules for higher-scoring boards.",
   alternates: { canonical: "/guides/boggle-scoring-sheet" },
   keywords: [
     "boggle scoring sheet", "boggle scoring table", "boggle points system",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "boggle scoring rules", "boggle point chart",
   ],
   openGraph: {
-    title: "Boggle Scoring Sheet — Points Table & Calculation Guide",
+    title: "Boggle Scoring Sheet: Points Chart, Rules & Examples",
     description:
       "Complete Boggle scoring guide with points table, calculation examples, and scoring strategies. Learn to optimize your score.",
     images: ["/images/seo/boggle-scoring-sheet.webp"],
@@ -26,7 +26,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Boggle Scoring Sheet — Points Table & Calculation Guide",
+  headline: "Boggle Scoring Sheet: Points Chart, Rules & Examples",
   description:
     "A comprehensive Boggle scoring guide including points table, calculation examples, scoring strategies, and optimization techniques for maximizing your score.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -117,7 +117,7 @@ export default function BoggleScoringSheetGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Scoring Sheet — Points Table & Calculation Guide
+            Boggle Scoring Sheet: Points Chart, Rules & Examples
           </h1>
           <p className="text-text-muted">7 min read &middot; Updated July 2026</p>
         </header>
@@ -129,6 +129,12 @@ export default function BoggleScoringSheetGuide() {
               between 25-point games and 60-point games. This guide shows
               exactly how points work, why longer words score more, and how to
               optimize your gameplay for maximum points.
+            </p>
+            <p className="leading-relaxed mt-3">
+              The short version: 3-letter words score 1 point, 4-letter words
+              score 2, 5-letter words score 4, and longer answers pull your
+              total up fast. Use the chart below as a quick Boggle points
+              reference before you play.
             </p>
             <p className="leading-relaxed mt-3">
               If you are still learning the basics, start with{" "}

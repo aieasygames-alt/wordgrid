@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Word List: Common Words by Letter and Pattern",
+  title: "Boggle Word List: Common Words by Letter, Pattern & Score",
   description:
-    "Browse a Boggle word list by starting letter, common pattern, and high-value ending so you can find more words faster in real boards.",
+    "Browse Boggle word lists by starting letter, common pattern, and high-value scoring ending so you can find more words faster in real boards.",
   alternates: { canonical: "/guides/boggle-word-lists" },
   keywords: [
     "boggle word lists", "boggle words by letter", "boggle word list",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "boggle word patterns", "boggle common words",
   ],
   openGraph: {
-    title: "Boggle Word List: Common Words by Letter and Pattern",
+    title: "Boggle Word List: Common Words by Letter, Pattern & Score",
     description:
       "Comprehensive Boggle word lists organized by letter with high-frequency words, common patterns, and letter-specific vocabulary for improving gameplay.",
   },
@@ -53,7 +53,7 @@ const WORD_LISTS = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Boggle Word List: Common Words by Letter and Pattern",
+  headline: "Boggle Word List: Common Words by Letter, Pattern & Score",
   description:
     "Comprehensive Boggle word lists organized by letter with high-frequency words, common patterns, and letter-specific vocabulary for improving gameplay.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -136,7 +136,7 @@ export default function BoggleWordListsGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Word List: Common Words by Letter and Pattern
+            Boggle Word List: Common Words by Letter, Pattern & Score
           </h1>
           <p className="text-text-muted">15 min read &middot; Updated July 2026</p>
         </header>
@@ -163,6 +163,14 @@ export default function BoggleWordListsGuide() {
                 how to find more words
               </Link>
               .
+            </p>
+            <p className="leading-relaxed mt-3">
+              After studying a letter group, play one board and then use the{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
+              </Link>{" "}
+              to check which listed words you missed. That feedback loop is more
+              useful than memorizing the full list in isolation.
             </p>
           </section>
 
@@ -253,6 +261,32 @@ export default function BoggleWordListsGuide() {
                   PLAYER → PLAYERS.
                 </li>
               </ol>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Best Lists to Study First
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <Link href="/guides/most-common-boggle-words" className="rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">
+                <h3 className="font-semibold text-primary">Top 100 words</h3>
+                <p className="mt-1 text-sm text-text-muted">
+                  The highest-frequency words for quick recognition.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-scoring-sheet" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <h3 className="font-semibold text-primary">High-score endings</h3>
+                <p className="mt-1 text-sm text-text-muted">
+                  Learn which longer words create the biggest point jumps.
+                </p>
+              </Link>
+              <Link href="/guides/boggle-tips-tricks" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <h3 className="font-semibold text-primary">Scanning shortcuts</h3>
+                <p className="mt-1 text-sm text-text-muted">
+                  Turn the list into diagonal, plural, and extension habits.
+                </p>
+              </Link>
             </div>
           </section>
 

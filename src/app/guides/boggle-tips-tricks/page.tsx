@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Tips and Tricks — Quick Techniques to Find More Words",
+  title: "Boggle Tips and Tricks: Find More Words Fast",
   description:
-    "Use practical Boggle tips and tricks to find more words faster: grid scanning, letter patterns, word extensions, plurals, and time-saving shortcuts.",
+    "Use practical Boggle tips and tricks to find more words fast: diagonal scanning, plurals, letter clusters, word extensions, and timing shortcuts.",
   alternates: { canonical: "/guides/boggle-tips-tricks" },
   keywords: [
     "boggle tips and tricks", "boggle tricks", "boggle word finding tips",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "boggle strategy tips", "boggle scanning techniques",
   ],
   openGraph: {
-    title: "Boggle Tips and Tricks — Quick Techniques to Find More Words",
+    title: "Boggle Tips and Tricks: Find More Words Fast",
     description:
       "Instant actionable Boggle tips: grid scanning patterns, letter shortcuts, word extension techniques, and time-saving tricks from competitive players.",
   },
@@ -24,7 +24,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Boggle Tips and Tricks — Quick Techniques to Find More Words",
+  headline: "Boggle Tips and Tricks: Find More Words Fast",
   description:
     "Practical Boggle tips and tricks for finding more words instantly, including grid scanning techniques, letter pattern shortcuts, and word extension strategies.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -115,7 +115,7 @@ export default function BoggleTipsTricksGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Tips and Tricks — Quick Techniques to Find More Words
+            Boggle Tips and Tricks: Find More Words Fast
           </h1>
           <p className="text-text-muted">7 min read &middot; Updated July 24, 2026</p>
         </header>
@@ -126,6 +126,11 @@ export default function BoggleTipsTricksGuide() {
               These <strong>Boggle tips and tricks</strong> will help you find
               more words in your very next game. No memorization required —
               just practical techniques you can use immediately.
+            </p>
+            <p className="leading-relaxed mt-3">
+              Start with three high-impact habits: scan diagonals, add plurals
+              whenever an S is reachable, and extend every base word into -ED,
+              -ER, -ING, or -S forms before moving on.
             </p>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">

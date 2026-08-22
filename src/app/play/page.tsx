@@ -81,6 +81,38 @@ export default function Page() {
     ],
   };
 
+  const modeListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "WordGrid play modes",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Timed word grid",
+        url: `${BASE_URL}/play/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Zen word grid",
+        url: `${BASE_URL}/zen/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Daily word grid",
+        url: `${BASE_URL}/daily/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Word grid solver",
+        url: `${BASE_URL}/solver/`,
+      },
+    ],
+  };
+
   return (
     <>
       <script
@@ -94,6 +126,10 @@ export default function Page() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(modeListSchema) }}
       />
       <PlayClient />
     </>

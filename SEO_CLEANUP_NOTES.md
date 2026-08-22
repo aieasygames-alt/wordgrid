@@ -71,3 +71,20 @@ site:wordgrid.clevergoat.com
 1. `npm run build`
 2. `npx wrangler pages deploy out`
 3. 在 Search Console → URL 检查 里提交 `/guides/play-word-grid-online/` 触发重新抓取
+
+## 2026-08-22 Coverage Drilldown 修复
+
+Search Console 的 Coverage 明细显示 `/words/` 词条页存在 186 个 `noindex` 和 67 个 404。根因是词条页只保留了很小的 `INDEXABLE_WORDS` 子集，同时 `_redirects` 中仍有大量历史规则把正常英文 `/words/<word>/` 301 到 `/words/`。
+
+本次修复：
+
+- 将 GSC 已发现的正常英文词条加入 `INDEXABLE_WORDS`，让它们导出为静态、可索引页面。
+- 删除 `_redirects` 中把 `/words/<word>/` 重定向到 `/words/` 的批量规则。
+- 保留音标误路径的 301 清理，例如 `/bɔːd/` 到 `/words/board/`。
+- 确认 sitemap 只输出 canonical 尾斜杠词条 URL。
+
+验证：
+
+- `npm run build` 通过，静态导出生成 327 个页面。
+- 抽查 `/words/rub/`、`/words/law/`、`/words/toy/`、`/words/dawn/`、`/words/fact/`、`/words/board/` 均存在，且 robots 为 `index, follow`。
+- Cloudflare Pages 部署成功：`https://2f2946f9.wordgrid-ajr.pages.dev`。

@@ -137,6 +137,17 @@ export default function BoggleOnlineFreeGuide() {
               </Link>
               .
             </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 p-4 font-semibold text-primary hover:bg-primary/15 transition">
+                Play instantly
+              </Link>
+              <Link href="/daily" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Daily board
+              </Link>
+              <Link href="/guides/play-boggle-online-free" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                No-download guide
+              </Link>
+            </div>
             <p className="leading-relaxed mt-3">
               If you want the rules refresher first, read{" "}
               <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">

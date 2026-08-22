@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Most Common Boggle Words — Top 100 High-Frequency List",
+  title: "Most Common Boggle Words: Top 100 List & Patterns",
   description:
-    "Top 100 most common Boggle words found in gameplay. High-frequency word list with bonus combinations, letter patterns, and expert strategies for instant recognition.",
+    "Study the top 100 most common Boggle words, high-frequency letter patterns, scoring opportunities, and practice links for instant recognition.",
   alternates: { canonical: "/guides/most-common-boggle-words" },
   keywords: [
     "most common boggle words", "boggle high frequency words", "boggle common words",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "boggle popular words", "boggle word patterns",
   ],
   openGraph: {
-    title: "Most Common Boggle Words — Top 100 High-Frequency List",
+    title: "Most Common Boggle Words: Top 100 List & Patterns",
     description:
       "Top 100 most common Boggle words found in gameplay with high-frequency patterns, bonus combinations, and expert strategies for instant word recognition.",
   },
@@ -41,7 +41,7 @@ const TOP_100_WORDS = [
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Most Common Boggle Words — Top 100 High-Frequency List",
+  headline: "Most Common Boggle Words: Top 100 List & Patterns",
   description:
     "Top 100 most common Boggle words with high-frequency patterns, bonus combinations, and expert strategies for instant word recognition and improved scoring.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -132,7 +132,7 @@ export default function MostCommonBoggleWordsGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Most Common Boggle Words — Top 100 High-Frequency List
+            Most Common Boggle Words: Top 100 List & Patterns
           </h1>
           <p className="text-text-muted">10 min read &middot; Updated July 2026</p>
         </header>
@@ -169,6 +169,14 @@ export default function MostCommonBoggleWordsGuide() {
               . If you want to turn recognition into points, use{" "}
               <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
                 the strategy guide
+              </Link>
+              .
+            </p>
+            <p className="leading-relaxed mt-3">
+              For best results, use this as a short practice loop: scan the top
+              words, play a board, then check missed common words with the{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                solver
               </Link>
               .
             </p>
@@ -250,6 +258,24 @@ export default function MostCommonBoggleWordsGuide() {
                   </div>
                 ))}
               </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Practice These Words in 3 Steps
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                ["Study", "/guides/boggle-word-lists", "Expand the top list into letter-by-letter vocabulary."],
+                ["Play", "/play", "Use the words on a fresh timed or Zen board."],
+                ["Review", "/solver", "Check which common words you missed after the round."],
+              ].map(([title, href, copy]) => (
+                <Link key={title} href={href} className="rounded-xl border border-border bg-surface/50 p-4 hover:bg-surface transition">
+                  <h3 className="font-semibold text-primary">{title}</h3>
+                  <p className="mt-1 text-sm text-text-muted leading-relaxed">{copy}</p>
+                </Link>
+              ))}
             </div>
           </section>
 

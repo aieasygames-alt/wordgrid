@@ -134,6 +134,17 @@ export default function PlayBoggleOnlineFreeGuide() {
                 Play free Boggle now →
               </Link>
             </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 p-4 font-semibold text-primary hover:bg-primary/15 transition">
+                Play now
+              </Link>
+              <Link href="/daily" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Try Daily
+              </Link>
+              <Link href="/solver" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Review with solver
+              </Link>
+            </div>
             <p className="leading-relaxed mt-3">
               If you want the full learning path after that first round, go next to the{" "}
               <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
@@ -332,7 +343,7 @@ export default function PlayBoggleOnlineFreeGuide() {
                 href="/play"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
-                Play
+                Play Free Boggle
               </Link>
               <Link
                 href="/daily"

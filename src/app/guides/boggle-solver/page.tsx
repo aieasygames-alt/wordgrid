@@ -3,9 +3,9 @@ import Link from "next/link";
 import GuideImage from "@/components/GuideImage";
 
 export const metadata: Metadata = {
-  title: "Boggle Solver: Find All Words in Any Word Grid",
+  title: "Boggle Solver Guide: Find All Words in a Word Grid",
   description:
-    "Use the free Boggle solver after a round to find every valid word in a word grid, compare scores, and review missed patterns.",
+    "Learn how to use a Boggle solver after a round to find all valid words, compare scores, study missed patterns, and improve your next word grid.",
   alternates: { canonical: "/guides/boggle-solver" },
   keywords: [
     "word grid solver", "boggle solver", "boggle word finder", "boggle cheat", "boggle helper",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "solve boggle puzzle", "boggle solution finder",
   ],
   openGraph: {
-    title: "Boggle Solver: Find All Words in Any Word Grid",
+    title: "Boggle Solver Guide: Find All Words in a Word Grid",
     description:
       "Free online Word Grid Solver and Boggle word finder. Paste any square grid and get instant solutions with scoring breakdown and word analysis.",
     images: ["/images/seo/word-grid-solver-workflow.webp"],
@@ -36,11 +36,6 @@ const articleSchema = {
   },
   description:
     "Free online Word Grid Solver that finds all valid words in any Boggle-style square grid. Instant solutions with scoring breakdowns and word counts.",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.8",
-    ratingCount: "1250",
-  },
   datePublished: "2026-06-29",
   dateModified: "2026-08-05",
 };
@@ -128,7 +123,7 @@ export default function BoggleSolverGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Solver: Find All Words in Any Word Grid
+            Boggle Solver Guide: Find All Words in a Word Grid
           </h1>
           <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
@@ -141,6 +136,14 @@ export default function BoggleSolverGuide() {
               a complete word list with scoring breakdown — perfect for
               analyzing games after you play, learning what you missed, and
               improving your skills.
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you want the tool itself, open the{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                free online Boggle solver
+              </Link>
+              . This guide explains when to use it, what the results mean, and
+              how to turn a solved board into better scanning habits.
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               <Link href="/solver" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
@@ -239,6 +242,25 @@ export default function BoggleSolverGuide() {
                 letter combinations, and vocabulary you didn't spot.
               </li>
             </ol>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Solver Review Loop
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                ["Play", "/play", "Finish a clean board without looking up answers."],
+                ["Score", "/guides/boggle-scoring-sheet", "Check whether missed words were low-value or high-value."],
+                ["Check", "/guides/boggle-dictionary", "Confirm what counts as a valid Boggle word."],
+                ["Solve", "/solver", "Find every word and choose one pattern to practice next."],
+              ].map(([title, href, copy]) => (
+                <Link key={title} href={href} className="rounded-xl border border-border bg-surface/50 p-4 hover:bg-surface transition">
+                  <h3 className="font-semibold text-primary">{title}</h3>
+                  <p className="mt-1 text-sm text-text-muted leading-relaxed">{copy}</p>
+                </Link>
+              ))}
+            </div>
           </section>
 
           <section>

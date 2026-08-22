@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Dictionary: Valid Words, Word Lists, and Lookup Rules",
+  title: "Boggle Dictionary Online: Valid Words, Word Lists & Checker",
   description:
-    "Use this Boggle dictionary guide to learn valid-word rules, common word lists, lookup standards, and vocabulary patterns for better scores.",
+    "Use this online Boggle dictionary guide to check valid-word rules, study common word lists, learn lookup standards, and build better word-grid vocabulary.",
   alternates: { canonical: "/guides/boggle-dictionary" },
   keywords: [
     "boggle dictionary", "boggle word list", "boggle vocabulary",
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     "boggle dictionary online", "boggle word checker",
   ],
   openGraph: {
-    title: "Boggle Dictionary: Valid Words, Word Lists, and Lookup Rules",
+    title: "Boggle Dictionary Online: Valid Words, Word Lists & Checker",
     description:
-      "Complete Boggle dictionary with word lists, vocabulary references, and valid word guidelines. Lookup words and improve your gameplay vocabulary.",
+      "Complete Boggle dictionary guide with valid-word rules, word lists, lookup standards, and vocabulary patterns for stronger gameplay.",
   },
 };
 
@@ -24,7 +24,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  headline: "Boggle Dictionary: Valid Words, Word Lists, and Lookup Rules",
+  headline: "Boggle Dictionary Online: Valid Words, Word Lists & Checker",
   description:
     "A comprehensive Boggle dictionary including word lists, vocabulary references, valid word guidelines, and word lookup for improving gameplay.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -115,7 +115,7 @@ export default function BoggleDictionaryGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Dictionary: Valid Words, Word Lists, and Lookup Rules
+            Boggle Dictionary Online: Valid Words, Word Lists & Checker
           </h1>
           <p className="text-text-muted">9 min read &middot; Updated July 2026</p>
         </header>
@@ -132,6 +132,13 @@ export default function BoggleDictionaryGuide() {
               For quick checking: valid Boggle words are usually standard English
               dictionary entries, at least 3 letters long, with no proper nouns,
               acronyms, abbreviations, hyphenated words, or apostrophes.
+            </p>
+            <p className="leading-relaxed mt-3">
+              If you searched for a <strong>Boggle word checker</strong> or{" "}
+              <strong>Boggle dictionary online</strong>, use this page as the
+              rule reference first: decide whether a word is eligible, then use
+              the related word lists and solver pages to study patterns after a
+              board is finished.
             </p>
             <p className="leading-relaxed mt-3">
               The practical order is: learn the{" "}
@@ -225,6 +232,35 @@ export default function BoggleDictionaryGuide() {
                 </div>
               </div>
             </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Quick Boggle Word Checker Rules
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                ["Length", "The word should be at least 3 letters long."],
+                ["Dictionary", "It should appear as a normal English dictionary entry."],
+                ["Fair play", "Check words after the round, not during competitive play."],
+              ].map(([title, copy]) => (
+                <div key={title} className="rounded-xl border border-border bg-surface/50 p-4">
+                  <h3 className="font-semibold text-primary">{title}</h3>
+                  <p className="mt-2 text-sm text-text-muted leading-relaxed">{copy}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-3 text-sm text-text-muted leading-relaxed">
+              For full-board review, open the{" "}
+              <Link href="/solver" className="text-primary hover:underline">
+                word grid solver
+              </Link>
+              . For vocabulary study, continue with{" "}
+              <Link href="/guides/boggle-word-lists" className="text-primary hover:underline">
+                Boggle word lists
+              </Link>
+              .
+            </p>
           </section>
 
           <section>

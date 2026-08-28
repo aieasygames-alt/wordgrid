@@ -182,13 +182,15 @@ seedFromDate("2026-06-19") → 数字种子
 | `/` | SSG (Server Component) | 1 |
 | `/play` | SSG + Client | 1 |
 | `/daily` | SSG + Client | 1 |
-| `/words/[word]` | SSG (构建时 fetch 释义) | 300 |
+| `/words/[word]` | SSG (精选可索引词页，默认不依赖远程 API) | 256 |
+| `/words/*-boggle-words` | SSG 词表聚合页 | 8 |
 | `/guides/*` | SSG | 2 |
 
 - Server Component 负责 metadata + JSON-LD
 - Client Component 负责游戏交互
-- 单词详情页在构建时从 Free Dictionary API 获取释义，直接嵌入 HTML
-- `HIGH_VALUE_WORDS` (300 词) 经过人工筛选，避免 thin content penalty
+- 单词详情页默认使用本地静态内容和玩法信息，远程释义为 opt-in
+- `INDEXABLE_WORDS` 是当前提交给 sitemap 的精选词页集合；不要盲目扩大薄词页
+- 词表聚合页优先承接 long-tail 查询，例如 3-letter words、Qu words、high-scoring words
 
 ### 5.7 JSON-LD 结构化数据
 
@@ -280,7 +282,7 @@ loadDictionary()
 
 ### 6.8 worddata.ts — 构建时 SEO 数据
 
-- `HIGH_VALUE_WORDS`: 300 个精选 3-5 字母常用英文词
+- `INDEXABLE_WORDS`: 精选可索引 3-5 字母常用英文词
 - `fetchWordData()`: 调用 Free Dictionary API，Next.js `revalidate` 缓存
 - `loadWordList()`: 从文件系统读取 words.txt (仅服务端)
 - 用于生成 `/words/[word]` 静态页面

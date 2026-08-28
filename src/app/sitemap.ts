@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getDailyArchiveDates } from "@/lib/daily-archive";
 import { INDEXABLE_WORDS } from "@/lib/worddata";
+import { WORD_LIST_PAGES } from "@/lib/word-lists";
 
 const BASE_URL = "https://wordgrid.games";
 const SITE_UPDATED = new Date("2026-08-05");
@@ -57,6 +58,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const wordListPages: MetadataRoute.Sitemap = WORD_LIST_PAGES.map((page) => ({
+    url: `${BASE_URL}/words/${page.slug}/`,
+    lastModified: GUIDE_UPDATED,
+    changeFrequency: "monthly",
+    priority: 0.82,
+  }));
+
   const archivePages: MetadataRoute.Sitemap = getDailyArchiveDates().map((date) => ({
     url: `${BASE_URL}/daily/archive/${date}/`,
     lastModified: SITE_UPDATED,
@@ -64,5 +72,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.72,
   }));
 
-  return [...staticPages, ...archivePages, ...wordPages];
+  return [...staticPages, ...archivePages, ...wordListPages, ...wordPages];
 }

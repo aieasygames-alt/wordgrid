@@ -32,7 +32,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
   return {
     title: `${formatArchiveDate(entry.date)} Daily Board — WordGrid`,
     description:
-      `Review the WordGrid daily board for ${formatArchiveDate(entry.date)}. See the grid, board traits, and a quick solving note.`,
+      `Review the WordGrid daily board for ${formatArchiveDate(entry.date)} with ${entry.totalWords} possible words, ${entry.totalPossibleScore} possible points, and the strongest word paths.`,
     alternates: { canonical: `/daily/archive/${entry.date}` },
     openGraph: {
       title: `${formatArchiveDate(entry.date)} Daily Board — WordGrid`,
@@ -59,6 +59,11 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
     name: `${formatArchiveDate(entry.date)} Daily Board`,
     url: `${BASE_URL}/daily/archive/${entry.date}`,
     description: entry.detail,
+    about: [
+      `${entry.totalWords} possible words`,
+      `${entry.totalPossibleScore} possible points`,
+      `${entry.bestWords[0]?.word || "word"} as a high-scoring answer`,
+    ],
   };
 
   return (
@@ -100,8 +105,8 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
               <div className="grid gap-4 sm:grid-cols-3">
                 <Metric label="Label" value={entry.label} />
-                <Metric label="Vowels" value={entry.vowels} />
-                <Metric label="Qu" value={entry.quCount || "0"} />
+                <Metric label="Words" value={entry.totalWords} />
+                <Metric label="Max score" value={entry.totalPossibleScore} />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Link href="/daily" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
@@ -162,6 +167,31 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
                 <MiniStat label="Repeated letters" value={entry.repeatedLetters} />
                 <MiniStat label="Vowel count" value={entry.vowels} />
                 <MiniStat label="Qu tiles" value={entry.quCount} />
+                <MiniStat label="Possible words" value={entry.totalWords} />
+                <MiniStat label="Possible score" value={entry.totalPossibleScore} />
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-lg shadow-black/10">
+              <h2 className="text-2xl font-semibold">Best words</h2>
+              <div className="mt-4 grid gap-2">
+                {entry.bestWords.slice(0, 8).map((item) => (
+                  <div key={item.word} className="flex items-center justify-between rounded-xl bg-bg/60 px-4 py-3">
+                    <span className="font-mono font-semibold">{item.word}</span>
+                    <span className="text-sm font-semibold text-primary">{item.score} pts</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-lg shadow-black/10">
+              <h2 className="text-2xl font-semibold">Longest finds</h2>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {entry.longestWords.map((word) => (
+                  <span key={word} className="rounded-xl bg-bg/60 px-3 py-2 font-mono text-sm font-semibold">
+                    {word}
+                  </span>
+                ))}
               </div>
             </div>
 

@@ -1,4 +1,7 @@
 import { generateGrid, seedFromDate, todayDateString, type Grid } from "@/lib/boggle";
+import { Trie } from "@/lib/dictionary";
+import { loadWordList } from "@/lib/worddata";
+import { solveBoard } from "@/lib/solver";
 
 export interface DailyArchiveEntry {
   date: string;
@@ -10,6 +13,10 @@ export interface DailyArchiveEntry {
   repeatedLetters: number;
   label: string;
   detail: string;
+  totalWords: number;
+  totalPossibleScore: number;
+  longestWords: string[];
+  bestWords: { word: string; score: number }[];
 }
 
 export const DAILY_ARCHIVE_DAYS = 30;
@@ -20,6 +27,38 @@ function shiftDate(dateStr: string, deltaDays: number): string {
   const date = new Date(`${dateStr}T00:00:00Z`);
   date.setUTCDate(date.getUTCDate() + deltaDays);
   return date.toISOString().slice(0, 10);
+}
+
+let archiveTrie: Trie | null = null;
+
+function getArchiveTrie(): Trie {
+  if (archiveTrie) return archiveTrie;
+  archiveTrie = new Trie();
+  for (const word of loadWordList()) {
+    archiveTrie.insert(word);
+  }
+  return archiveTrie;
+}
+
+function solveArchiveGrid(grid: Grid) {
+  const solved = solveBoard(grid, getArchiveTrie());
+  const totalPossibleScore = solved.reduce((sum, item) => sum + item.score, 0);
+  const longestLength = Math.max(...solved.map((item) => item.word.length), 0);
+  const longestWords = solved
+    .filter((item) => item.word.length === longestLength)
+    .map((item) => item.word)
+    .slice(0, 10);
+  const bestWords = solved.slice(0, 10).map((item) => ({
+    word: item.word,
+    score: item.score,
+  }));
+
+  return {
+    totalWords: solved.length,
+    totalPossibleScore,
+    longestWords,
+    bestWords,
+  };
 }
 
 function analyzeGrid(grid: Grid): Omit<DailyArchiveEntry, "date" | "seed" | "grid"> {
@@ -38,6 +77,7 @@ function analyzeGrid(grid: Grid): Omit<DailyArchiveEntry, "date" | "seed" | "gri
       repeatedLetters,
       label: "Qu board",
       detail: "Qu-heavy boards reward fast Q scanning and nearby vowel paths.",
+      ...solveArchiveGrid(grid),
     };
   }
 
@@ -49,6 +89,7 @@ function analyzeGrid(grid: Grid): Omit<DailyArchiveEntry, "date" | "seed" | "gri
       repeatedLetters,
       label: "Vowel-heavy",
       detail: "These boards usually reward quick word chaining and flexible endings.",
+      ...solveArchiveGrid(grid),
     };
   }
 
@@ -60,6 +101,7 @@ function analyzeGrid(grid: Grid): Omit<DailyArchiveEntry, "date" | "seed" | "gri
       repeatedLetters,
       label: "Consonant-heavy",
       detail: "Expect tighter paths, stronger prefix hunting, and more compact words.",
+      ...solveArchiveGrid(grid),
     };
   }
 
@@ -71,6 +113,7 @@ function analyzeGrid(grid: Grid): Omit<DailyArchiveEntry, "date" | "seed" | "gri
       repeatedLetters,
       label: "Pattern-heavy",
       detail: "Repeated letters tend to create familiar clusters and reusable word families.",
+      ...solveArchiveGrid(grid),
     };
   }
 
@@ -81,6 +124,7 @@ function analyzeGrid(grid: Grid): Omit<DailyArchiveEntry, "date" | "seed" | "gri
     repeatedLetters,
     label: "Balanced board",
     detail: "A well-rounded grid usually rewards a steady, systematic scan.",
+    ...solveArchiveGrid(grid),
   };
 }
 

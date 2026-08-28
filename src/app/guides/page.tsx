@@ -292,6 +292,8 @@ const CLUSTERS = [
       { href: "/guides/boggle-word-lists", label: "Boggle word list" },
       { href: "/guides/most-common-boggle-words", label: "Most common Boggle words" },
       { href: "/guides/word-pattern-library", label: "Word pattern library" },
+      { href: "/words/common-boggle-words", label: "Common Boggle words" },
+      { href: "/words/words-with-qu", label: "Words with Qu" },
     ],
   },
 ];
@@ -428,6 +430,24 @@ export default function GuidesIndex() {
               <div className="font-semibold text-primary">Boggle Word Lists</div>
               <p className="text-sm text-text-muted mt-1">
                 Letter-by-letter vocabulary reference for players building recognition.
+              </p>
+            </Link>
+            <Link
+              href="/words/common-boggle-words"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Common Boggle Words</div>
+              <p className="text-sm text-text-muted mt-1">
+                A focused study list grouped by length and score.
+              </p>
+            </Link>
+            <Link
+              href="/words/words-with-qu"
+              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
+            >
+              <div className="font-semibold text-primary">Boggle Words with Qu</div>
+              <p className="text-sm text-text-muted mt-1">
+                Qu tile patterns, examples, and score-aware practice.
               </p>
             </Link>
             <Link

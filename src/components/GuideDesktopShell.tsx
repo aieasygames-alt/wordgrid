@@ -41,6 +41,15 @@ export function GuideDesktopShell({ children, rail }: GuideDesktopShellProps) {
                   <a href="/guides/word-pattern-library/" className="block text-primary hover:underline">
                     Pattern library
                   </a>
+                  <a href="/words/common-boggle-words/" className="block text-primary hover:underline">
+                    Common Boggle words
+                  </a>
+                  <a href="/words/words-with-qu/" className="block text-primary hover:underline">
+                    Words with Qu
+                  </a>
+                  <a href="/words/high-scoring-boggle-words/" className="block text-primary hover:underline">
+                    High scoring words
+                  </a>
                 </div>
               </div>
               <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">

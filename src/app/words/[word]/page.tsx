@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { INDEXABLE_WORDS } from "@/lib/worddata";
 import { scoreWord } from "@/lib/boggle";
 
 const BASE_URL = "https://wordgrid.games";
+const VOWELS = new Set(["A", "E", "I", "O", "U"]);
 
 // Pre-generate only the curated word pages that should be indexable.
 export function generateStaticParams() {
@@ -44,6 +46,22 @@ export default async function Page({ params }: { params: { word: string } }) {
   const wordLower = word.toLowerCase();
   const wordUpper = word.toUpperCase();
   const points = scoreWord(wordUpper);
+  const letters = wordUpper.split("");
+  const vowelCount = letters.filter((letter) => VOWELS.has(letter)).length;
+  const hasQu = wordUpper.includes("QU");
+  const commonEndings = ["S", "ED", "ER", "ING", "LY"].filter((ending) =>
+    wordUpper.endsWith(ending)
+  );
+  const commonStarts = ["RE", "UN", "IN", "PRE", "CO"].filter((start) =>
+    wordUpper.startsWith(start)
+  );
+  const patternNotes = [
+    hasQu ? "Check Qu boards early because the Qu tile compresses two letters into one cell." : null,
+    commonStarts.length > 0 ? `${commonStarts.join(", ")} is a useful prefix cue when scanning from the front of a word.` : null,
+    commonEndings.length > 0 ? `${commonEndings.join(", ")} endings are worth checking around any nearby base word.` : null,
+    wordUpper.length >= 5 ? "This is a higher-value target, so it is worth scanning for before sweeping up every 3-letter word." : null,
+    wordUpper.length === 3 ? "Short words are useful anchors because they can often be extended into plural or suffix forms." : null,
+  ].filter(Boolean) as string[];
 
   // JSON-LD: Word page structured data
   const definedWordSchema = {
@@ -118,9 +136,9 @@ export default async function Page({ params }: { params: { word: string } }) {
                 reusing a tile.
               </p>
               <p className="text-text-muted leading-relaxed">
-                This page stays fully static so it can be generated reliably during a
-                site build. If a richer dictionary lookup is ever needed, it can be
-                enabled separately without affecting the default build.
+                In Boggle-style play, the word is most useful as a pattern to
+                recognize quickly: note its length, score value, vowels, and
+                whether it can be extended from nearby letters.
               </p>
             </div>
 
@@ -135,24 +153,71 @@ export default async function Page({ params }: { params: { word: string } }) {
                 <span className="text-primary font-semibold">{points} points</span> and
                 can be found by connecting adjacent letters in our word grid puzzles.
               </p>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <WordFact label="Length" value={`${wordUpper.length} letters`} />
+                <WordFact label="Vowels" value={vowelCount} />
+                <WordFact label="Pattern" value={hasQu ? "Qu word" : commonEndings[0] || commonStarts[0] || "Core word"} />
+              </div>
               <p className="text-text-muted text-sm leading-relaxed">
                 Looking to improve your word-finding skills? Check out our{" "}
-                <a
+                <Link
                   href="/guides/how-to-find-more-words"
                   className="text-primary hover:text-primary underline"
                 >
                   guide to finding more words
-                </a>{" "}
+                </Link>{" "}
                 or read about{" "}
-                <a
+                <Link
                   href="/guides/word-grid-strategies"
                   className="text-primary hover:text-primary underline"
                 >
                   scoring strategies
-                </a>
+                </Link>
                 .
               </p>
             </div>
+
+            <section className="mt-8 max-w-3xl rounded-3xl border border-border bg-surface/50 p-6">
+              <h2 className="text-lg font-semibold text-text">
+                How to Spot {wordUpper} on a Board
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                Start by locating the first letter, then check the eight
+                neighboring cells for the next letter. Keep the path flexible:
+                Boggle words can turn corners, move diagonally, and branch back
+                toward the center as long as no tile is reused.
+              </p>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-text-muted">
+                {(patternNotes.length > 0 ? patternNotes : [
+                  "Use this word as a recognition anchor, then look one tile beyond the path for extensions.",
+                  "If the final tile has an adjacent S, test a plural or verb form before moving on.",
+                ]).map((note) => (
+                  <li key={note}>{note}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="mt-8 max-w-3xl rounded-3xl border border-border bg-bg/40 p-6">
+              <h2 className="text-lg font-semibold text-text">
+                Related Study Lists
+              </h2>
+              <div className="mt-4 flex flex-wrap gap-2 text-sm">
+                <Link href={`/words/${wordUpper.length}-letter-boggle-words/`} className="rounded-xl bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">
+                  {wordUpper.length}-letter words
+                </Link>
+                <Link href="/words/common-boggle-words/" className="rounded-xl bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">
+                  Common words
+                </Link>
+                <Link href="/words/high-scoring-boggle-words/" className="rounded-xl bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">
+                  High scoring words
+                </Link>
+                {hasQu && (
+                  <Link href="/words/words-with-qu/" className="rounded-xl bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">
+                    Qu words
+                  </Link>
+                )}
+              </div>
+            </section>
 
             {relatedWords.length > 0 && (
               <div className="mt-8 max-w-3xl">
@@ -232,5 +297,14 @@ export default async function Page({ params }: { params: { word: string } }) {
         </div>
       </article>
     </main>
+  );
+}
+
+function WordFact({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div className="rounded-2xl bg-bg/60 p-4">
+      <div className="text-xs uppercase tracking-wide text-text-dim">{label}</div>
+      <div className="mt-1 font-semibold text-text">{value}</div>
+    </div>
   );
 }

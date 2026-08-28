@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "How to Win at Boggle — Proven Strategies to Score Higher",
+  title: "How to Win at Boggle: Score Higher with 6 Proven Strategies",
   description:
-    "Learn how to win at Boggle with better word patterns, grid scanning, time management, scoring priorities, and practical competitive strategy.",
+    "Learn how to win at Boggle with 6 proven strategies for higher scores: word patterns, grid scanning, time management, scoring priorities, and practice.",
   alternates: { canonical: "/guides/how-to-win-boggle" },
   keywords: [
     "how to win at boggle", "winning boggle strategies", "boggle winning tips",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "boggle scoring secrets", "how to beat friends at boggle",
   ],
   openGraph: {
-    title: "How to Win at Boggle — Proven Strategies to Score Higher",
+    title: "How to Win at Boggle: Score Higher with 6 Proven Strategies",
     description:
       "Master competitive Boggle with advanced strategies: word patterns, time management, grid scanning, and scoring optimization from experienced players.",
   },
@@ -24,7 +24,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "How to Win at Boggle — Proven Strategies to Score Higher",
+  headline: "How to Win at Boggle: Score Higher with 6 Proven Strategies",
   description:
     "A comprehensive guide to winning at Boggle with advanced strategies, word patterns, time management techniques, and competitive tips from experienced players.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -115,7 +115,7 @@ export default function HowToWinBoggleGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            How to Win at Boggle — Proven Strategies to Score Higher
+            How to Win at Boggle: Score Higher with 6 Proven Strategies
           </h1>
           <p className="text-text-muted">9 min read &middot; Updated July 24, 2026</p>
         </header>
@@ -133,6 +133,17 @@ export default function HowToWinBoggleGuide() {
               game — the same techniques that separate 25-point scores from
               60+ point champions.
             </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 p-4 font-semibold text-primary hover:bg-primary/15 transition">
+                Practice now
+              </Link>
+              <Link href="/guides/boggle-scoring-sheet" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Check scoring
+              </Link>
+              <Link href="/guides/boggle-tips-tricks" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Quick tips
+              </Link>
+            </div>
             <p className="leading-relaxed mt-3">
               If you want a tighter next step, move to{" "}
               <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">

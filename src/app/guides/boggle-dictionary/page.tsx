@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Dictionary Online: Valid Words, Word Lists & Checker",
+  title: "Boggle Dictionary Online: Check Valid Words & Word Lists",
   description:
-    "Use this online Boggle dictionary guide to check valid-word rules, study common word lists, learn lookup standards, and build better word-grid vocabulary.",
+    "Use this Boggle dictionary online guide to check if words count, learn valid-word rules, study common word lists, and review boards with a solver.",
   alternates: { canonical: "/guides/boggle-dictionary" },
   keywords: [
     "boggle dictionary", "boggle word list", "boggle vocabulary",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "boggle dictionary online", "boggle word checker",
   ],
   openGraph: {
-    title: "Boggle Dictionary Online: Valid Words, Word Lists & Checker",
+    title: "Boggle Dictionary Online: Check Valid Words & Word Lists",
     description:
       "Complete Boggle dictionary guide with valid-word rules, word lists, lookup standards, and vocabulary patterns for stronger gameplay.",
   },
@@ -24,7 +24,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  headline: "Boggle Dictionary Online: Valid Words, Word Lists & Checker",
+  headline: "Boggle Dictionary Online: Check Valid Words & Word Lists",
   description:
     "A comprehensive Boggle dictionary including word lists, vocabulary references, valid word guidelines, and word lookup for improving gameplay.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -38,6 +38,14 @@ const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
+    {
+      "@type": "Question",
+      name: "How do I check if a Boggle word is valid?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "To check if a Boggle word is valid, confirm that it is at least 3 letters long, appears in a normal English dictionary, is not a proper noun or abbreviation, and can be formed by connecting adjacent tiles without reusing a tile.",
+      },
+    },
     {
       "@type": "Question",
       name: "What words are allowed in Boggle?",
@@ -115,7 +123,7 @@ export default function BoggleDictionaryGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Dictionary Online: Valid Words, Word Lists & Checker
+            Boggle Dictionary Online: Check Valid Words & Word Lists
           </h1>
           <p className="text-text-muted">9 min read &middot; Updated July 2026</p>
         </header>
@@ -261,6 +269,31 @@ export default function BoggleDictionaryGuide() {
               </Link>
               .
             </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Check If a Boggle Word Counts
+            </h2>
+            <div className="rounded-xl border border-primary/20 bg-primary/10 p-4">
+              <p className="text-sm leading-relaxed">
+                Use this quick test after a round: is the word 3+ letters, does
+                it appear in a normal English dictionary, and did the path use
+                adjacent tiles without repeating a tile? If yes, it usually
+                counts in Boggle-style play.
+              </p>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/solver" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Check a full board
+              </Link>
+              <Link href="/guides/boggle-word-lists" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Browse word lists
+              </Link>
+              <Link href="/guides/most-common-boggle-words" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Study common words
+              </Link>
+            </div>
           </section>
 
           <section>

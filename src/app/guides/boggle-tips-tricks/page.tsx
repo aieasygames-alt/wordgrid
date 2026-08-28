@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Tips and Tricks: Find More Words Fast",
+  title: "Boggle Tips and Tricks: 10 Fast Ways to Find More Words",
   description:
-    "Use practical Boggle tips and tricks to find more words fast: diagonal scanning, plurals, letter clusters, word extensions, and timing shortcuts.",
+    "Use 10 practical Boggle tips and tricks to find more words fast: diagonal scanning, plurals, letter clusters, word extensions, and timing shortcuts.",
   alternates: { canonical: "/guides/boggle-tips-tricks" },
   keywords: [
     "boggle tips and tricks", "boggle tricks", "boggle word finding tips",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "boggle strategy tips", "boggle scanning techniques",
   ],
   openGraph: {
-    title: "Boggle Tips and Tricks: Find More Words Fast",
+    title: "Boggle Tips and Tricks: 10 Fast Ways to Find More Words",
     description:
       "Instant actionable Boggle tips: grid scanning patterns, letter shortcuts, word extension techniques, and time-saving tricks from competitive players.",
   },
@@ -24,7 +24,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Boggle Tips and Tricks: Find More Words Fast",
+  headline: "Boggle Tips and Tricks: 10 Fast Ways to Find More Words",
   description:
     "Practical Boggle tips and tricks for finding more words instantly, including grid scanning techniques, letter pattern shortcuts, and word extension strategies.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -115,7 +115,7 @@ export default function BoggleTipsTricksGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Tips and Tricks: Find More Words Fast
+            Boggle Tips and Tricks: 10 Fast Ways to Find More Words
           </h1>
           <p className="text-text-muted">7 min read &middot; Updated July 24, 2026</p>
         </header>
@@ -132,6 +132,17 @@ export default function BoggleTipsTricksGuide() {
               whenever an S is reachable, and extend every base word into -ED,
               -ER, -ING, or -S forms before moving on.
             </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 p-4 font-semibold text-primary hover:bg-primary/15 transition">
+                Try one tip now
+              </Link>
+              <Link href="/guides/most-common-boggle-words" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Learn common words
+              </Link>
+              <Link href="/solver" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
+                Review missed words
+              </Link>
+            </div>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
                 Try these tips now →

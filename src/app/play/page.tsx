@@ -4,19 +4,20 @@ import PlayClient from "./PlayClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online Free - Instant 4x4, 5x5, 6x6 Game",
+  title: "Play Word Grid Online Free — Timed Boggle Brain Game",
   description:
-    "Play word grid online free instantly. No download or sign-up. Connect letters in 4x4, 5x5, or 6x6 Boggle-style grids with timed or Zen mode.",
+    "Play a timed Boggle-style brain game online free. Connect letters in 4x4, 5x5, or 6x6 word grids with no download or sign-up.",
   alternates: { canonical: "/play" },
   keywords: [
     "play boggle online free", "play boggle online", "boggle online free",
     "free boggle online", "play free boggle", "boggle game online",
     "word grid online", "word grid puzzle", "word grid game",
+    "boggle timed game", "brain games word grid game",
   ],
   openGraph: {
-    title: "Play Word Grid Online Free - Instant 4x4, 5x5, 6x6 Game",
+    title: "Play Word Grid Online Free — Timed Boggle Brain Game",
     description:
-      "Play word grid online free in your browser. No download, no sign-up. Connect letters, find words, and beat the clock across multiple board sizes or practice in Zen mode.",
+      "Play a timed word grid brain game in your browser. No download, no sign-up. Connect letters, find words, and beat the clock.",
   },
 };
 
@@ -32,7 +33,7 @@ export default function Page() {
     playMode: ["SinglePlayer"],
     isAccessibleForFree: true,
     description:
-      "Free browser-based word grid game with timed rounds, Zen practice, and 4x4, 5x5, or 6x6 boards.",
+      "Free browser-based word grid brain game with timed Boggle-style rounds, Zen practice, and 4x4, 5x5, or 6x6 boards.",
     offers: {
       "@type": "Offer",
       price: "0",

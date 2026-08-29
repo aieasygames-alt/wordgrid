@@ -141,12 +141,12 @@ export default function DailyClient() {
             WordGrid
           </a>
           <h1 className="mt-1 text-3xl sm:text-4xl font-bold tracking-tight">
-            Daily Word Grid Puzzle — {today}
+            Daily Word Grid Puzzle — Today's Word Guessing Game
           </h1>
           <p className="mt-3 text-sm sm:text-base text-text-muted max-w-2xl mx-auto leading-relaxed">
-            Play today&apos;s free 4x4 WordGrid board. Everyone gets the same
-            Boggle-style puzzle and the same 3-minute timer, so your score is
-            easy to compare and review.
+            Play today&apos;s free 4x4 WordGrid board for {today}. Everyone gets
+            the same Boggle-style word guessing game and the same 3-minute
+            timer, so your score is easy to compare and review.
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
             {entryLinks.map((entry) => (

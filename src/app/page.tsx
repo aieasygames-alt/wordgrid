@@ -5,9 +5,9 @@ import HomeClient from "./HomeClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Play WordGrid Online Free: Word Grid Game, Daily & Solver",
+  title: "Word Grid Game Online Free — Daily Puzzle & Solver",
   description:
-    "Play WordGrid online free. Connect letters in Boggle-style word grids, try today's Daily puzzle, practice unlimited boards, and review with the solver.",
+    "Play a free word grid game online. Connect letters in Boggle-style boards, try today's Daily word puzzle, and review missed words with the solver.",
   alternates: { canonical: "/" },
   keywords: [
     "word grid", "word grid online", "word grid puzzle", "word grid game",
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     "daily word game", "free word game", "browser word game",
   ],
   openGraph: {
-    title: "Play WordGrid Online Free: Word Grid Game, Daily & Solver",
+    title: "Word Grid Game Online Free — Daily Puzzle & Solver",
     description:
-      "Play WordGrid online free in your browser. Connect letters, find words, try Daily and unlimited boards, then review missed words with the solver.",
+      "Play a free word grid game in your browser. Connect letters, find words, try Daily and unlimited boards, then review missed words with the solver.",
     url: BASE_URL,
     images: [
       {
@@ -39,7 +39,7 @@ export default function Home() {
     "@type": "WebSite",
     name: "WordGrid",
     url: BASE_URL,
-    description: "Play WordGrid online free: a Boggle-style word grid game with Daily, unlimited boards, and solver review",
+    description: "Play a free online word grid game with Daily puzzles, timed Boggle-style boards, and solver review",
     potentialAction: {
       "@type": "PlayGameAction",
       target: `${BASE_URL}/play`,
@@ -72,7 +72,7 @@ export default function Home() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "What is WordGrid?",
+        name: "What is a word grid game?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "WordGrid is a free online word grid game inspired by Boggle. You connect adjacent letters to find words, play today's Daily puzzle or unlimited boards, and review missed words with a solver. It runs directly in your browser with no download or sign-up.",

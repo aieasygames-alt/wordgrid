@@ -4,22 +4,23 @@ import DailyClient from "./DailyClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Daily Word Grid Puzzle - Play Today's Free Boggle-Style Board",
+  title: "Daily Word Grid Puzzle — Today's Free Word Guessing Game",
   description:
-    "Play today's free WordGrid Daily puzzle. Everyone gets the same Boggle-style 4x4 board, a 3-minute timer, streak tracking, and a fresh challenge every day.",
+    "Play today's free daily word guessing game. Connect letters in one shared 4x4 word grid puzzle with a 3-minute timer and streak tracking.",
   alternates: { canonical: "/daily" },
   keywords: [
     "daily word grid",
     "daily word puzzle",
+    "daily word guessing game",
     "daily boggle",
     "daily boggle puzzle",
     "word grid daily",
     "free daily word game",
   ],
   openGraph: {
-    title: "Daily Word Grid Puzzle - Play Today's Free Boggle-Style Board",
+    title: "Daily Word Grid Puzzle — Today's Free Word Guessing Game",
     description:
-      "Today's daily word grid puzzle. Same grid for everyone, 3-minute timer, streak tracking, and a fresh board every day.",
+      "Today's daily word guessing game. Same word grid for everyone, 3-minute timer, streak tracking, and a fresh board every day.",
   },
 };
 
@@ -35,7 +36,7 @@ export default function Page() {
     playMode: ["SinglePlayer"],
     isAccessibleForFree: true,
     description:
-      "A free daily word grid puzzle with one shared Boggle-style 4x4 board, a 3-minute timer, streak tracking, and a new challenge every day.",
+      "A free daily word guessing game with one shared Boggle-style 4x4 board, a 3-minute timer, streak tracking, and a new word grid puzzle every day.",
     offers: {
       "@type": "Offer",
       price: "0",

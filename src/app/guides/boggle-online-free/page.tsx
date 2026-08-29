@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Online Free — Play Instantly, No Download",
+  title: "Boggle Online Free Game — Play Now, No Download",
   description:
-    "Play Boggle online free in your browser. No download, no sign-up, no ads. Try classic 3-minute rounds, Daily boards, and larger practice grids.",
+    "Play a free Boggle online game instantly. No download, no sign-up, no ads. Try classic 3-minute rounds, Daily boards, and larger practice grids.",
   alternates: { canonical: "/guides/boggle-online-free" },
   keywords: [
     "boggle online free", "boggle online free game", "free boggle online",
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     "boggle online free no sign up", "boggle free online game",
   ],
   openGraph: {
-    title: "Boggle Online Free — Play Instantly, No Download Required",
+    title: "Boggle Online Free Game — Play Now, No Download",
     description:
-      "Classic Boggle gameplay, free in your browser. Standard and larger practice grids, 3-minute timer. No download, no sign-up, no ads.",
+      "Classic Boggle gameplay, free in your browser. Play now with a 3-minute timer, Daily board, and larger practice grids.",
   },
 };
 
@@ -24,13 +24,13 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Boggle Online Free — Play Instantly, No Download",
+  headline: "Boggle Online Free Game — Play Now, No Download",
   description:
     "How to play Boggle online for free with no download or sign-up. Classic word puzzle in your browser.",
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-28",
-  dateModified: "2026-08-05",
+  dateModified: "2026-08-29",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-online-free/`,
 };
 
@@ -115,21 +115,22 @@ export default function BoggleOnlineFreeGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Online Free — Play Instantly, No Download
+            Boggle Online Free Game — Play Now
           </h1>
-          <p className="text-text-muted">5 min read &middot; Updated July 24, 2026</p>
+          <p className="text-text-muted">5 min read &middot; Updated August 29, 2026</p>
         </header>
 
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
               If you searched <strong>Boggle online free</strong>, this is the
-              direct answer: you can play right now, in your browser, with no
-              download, no sign-up, no credit card, and no ads.
+              direct answer: you can play a free Boggle-style word game right
+              now, in your browser, with no download, no sign-up, no credit
+              card, and no ads.
             </p>
             <p className="leading-relaxed mt-3">
               <Link href="/play" className="text-primary hover:underline">
-                Play →
+                Play the free Boggle game now →
               </Link>{" "}
               or switch to{" "}
               <Link href="/guides/boggle-game-online" className="text-primary hover:underline">
@@ -139,13 +140,22 @@ export default function BoggleOnlineFreeGuide() {
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 p-4 font-semibold text-primary hover:bg-primary/15 transition">
-                Play instantly
+                Play free now
+                <span className="mt-1 block text-xs font-normal text-text-muted">
+                  Timed 4x4 board
+                </span>
               </Link>
               <Link href="/daily" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
                 Daily board
+                <span className="mt-1 block text-xs font-normal text-text-muted">
+                  Same grid for everyone
+                </span>
               </Link>
               <Link href="/guides/play-boggle-online-free" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
                 No-download guide
+                <span className="mt-1 block text-xs font-normal text-text-muted">
+                  Rules and setup
+                </span>
               </Link>
             </div>
             <p className="leading-relaxed mt-3">

@@ -4,8 +4,8 @@ import { INDEXABLE_WORDS } from "@/lib/worddata";
 import { WORD_LIST_PAGES } from "@/lib/word-lists";
 
 const BASE_URL = "https://wordgrid.games";
-const SITE_UPDATED = new Date("2026-08-05");
-const GUIDE_UPDATED = new Date("2026-08-05");
+const SITE_UPDATED = new Date("2026-08-29");
+const GUIDE_UPDATED = new Date("2026-08-29");
 const GUIDE_PREVIOUS = new Date("2026-07-24");
 const GUIDE_PATTERN_UPDATED = new Date("2026-07-09");
 const GUIDE_WORD_LIST_UPDATED = new Date("2026-07-13");

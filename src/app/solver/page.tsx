@@ -180,6 +180,12 @@ export default function Page() {
               <Link href="/guides/boggle-solver" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                 Solver Guide
               </Link>
+              <Link href="/boggle-solver" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Boggle Solver Online
+              </Link>
+              <Link href="/boggle-word-finder" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                Boggle Word Finder
+              </Link>
             </div>
           </div>
         </section>

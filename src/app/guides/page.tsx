@@ -282,6 +282,9 @@ const CLUSTERS = [
     title: "Solver",
     links: [
       { href: "/solver", label: "Live Boggle solver" },
+      { href: "/boggle-solver", label: "Boggle solver online" },
+      { href: "/word-grid-solver", label: "Word grid solver" },
+      { href: "/boggle-word-finder", label: "Boggle word finder" },
       { href: "/guides/boggle-solver", label: "How to use a solver" },
       { href: "/guides/boggle-dictionary", label: "Boggle dictionary rules" },
     ],

@@ -111,6 +111,12 @@ export default function Page() {
         name: "Word grid solver",
         url: `${BASE_URL}/solver/`,
       },
+      {
+        "@type": "ListItem",
+        position: 5,
+        name: "Boggle timed game",
+        url: `${BASE_URL}/boggle-timed-game/`,
+      },
     ],
   };
 

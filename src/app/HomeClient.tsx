@@ -42,6 +42,11 @@ export default function HomeClient() {
     { href: "/guides/boggle-rules-beginners", label: "Rules" },
     { href: "/stats", label: "Stats" },
   ];
+  const flowEntrances = [
+    { href: "/play", label: "Start with Play" },
+    { href: "/solver", label: "Review with Solver" },
+    { href: "/words", label: "Browse Words" },
+  ];
 
   const handleComplete = useCallback(
     (words: FoundWord[], total: number, trie: Trie | null, bestCombo: number) => {
@@ -114,6 +119,20 @@ export default function HomeClient() {
                 </Link>
               ))}
             </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+              {flowEntrances.map((entry, index) => (
+                <Link
+                  key={entry.href}
+                  href={entry.href}
+                  className="rounded-2xl border border-border bg-surface/50 p-4 text-left transition hover:bg-surface"
+                >
+                  <div className="text-xs font-semibold uppercase tracking-wide text-text-dim">
+                    Step {index + 1}
+                  </div>
+                  <div className="mt-1 font-semibold text-text">{entry.label}</div>
+                </Link>
+              ))}
+            </div>
           </div>
 
             <TodayTipCard
@@ -124,11 +143,13 @@ export default function HomeClient() {
             density="tight"
             actionsLayout="inline"
               showActionBox={false}
-              showGrid={false}
-              primaryHref="/daily"
-              primaryLabel="Open Daily"
-              secondaryHref="/words"
-              secondaryLabel="Open word list"
+            showGrid={false}
+            primaryHref="/daily"
+            primaryLabel="Open Daily"
+            secondaryHref="/words"
+            secondaryLabel="Open word list"
+            tertiaryHref="/solver"
+            tertiaryLabel="Open solver"
             />
         </div>
       </section>

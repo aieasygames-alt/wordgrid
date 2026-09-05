@@ -11,6 +11,8 @@ interface TodayTipCardProps {
   primaryLabel: string;
   secondaryHref?: string;
   secondaryLabel?: string;
+  tertiaryHref?: string;
+  tertiaryLabel?: string;
   compact?: boolean;
   layout?: "split" | "stack";
   density?: "normal" | "tight";
@@ -26,6 +28,8 @@ export default function TodayTipCard({
   primaryLabel,
   secondaryHref,
   secondaryLabel,
+  tertiaryHref,
+  tertiaryLabel,
   compact = false,
   layout = "split",
   density = "normal",
@@ -92,6 +96,14 @@ export default function TodayTipCard({
                 className={`inline-flex items-center justify-center rounded-xl bg-surface px-4 text-sm font-semibold text-text hover:bg-surface-hover transition ${compact ? (isTight ? "py-2" : "py-2.5") : "py-2.5"} ${actionsLayout === "inline" ? "flex-1 min-w-[132px]" : ""}`}
               >
                 {secondaryLabel}
+              </Link>
+            )}
+            {tertiaryHref && tertiaryLabel && (
+              <Link
+                href={tertiaryHref}
+                className={`inline-flex items-center justify-center rounded-xl border border-border bg-bg/70 px-4 text-sm font-semibold text-text-muted hover:bg-surface hover:text-text transition ${compact ? (isTight ? "py-2" : "py-2.5") : "py-2.5"} ${actionsLayout === "inline" ? "flex-1 min-w-[132px]" : ""}`}
+              >
+                {tertiaryLabel}
               </Link>
             )}
           </div>

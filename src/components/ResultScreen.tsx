@@ -474,6 +474,38 @@ export default function ResultScreen({
               </div>
             )}
 
+            {mode === "daily" && hasDictionary && (
+              <div className="mt-5 rounded-2xl border border-border bg-bg/60 p-4">
+                <div className="text-xs uppercase tracking-wide text-text-dim">
+                  Daily recap
+                </div>
+                <div className="mt-2 grid gap-3 sm:grid-cols-3">
+                  <div>
+                    <div className="text-sm font-semibold text-text">Best grabs</div>
+                    <p className="mt-1 text-sm text-text-muted">
+                      {bestFoundWord
+                        ? `${bestFoundWord.word} leads your score.`
+                        : "No scored word yet."}
+                    </p>
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-text">Missed shape</div>
+                    <p className="mt-1 text-sm text-text-muted">
+                      {topMissedCategory
+                        ? `You left ${topMissedCategory.count} ${topMissedCategory.label.toLowerCase()}.`
+                        : "You caught most of the obvious board shape."}
+                    </p>
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-text">Next step</div>
+                    <p className="mt-1 text-sm text-text-muted">
+                      Open the solver and then review a matching word list to lock in the pattern.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {hasDictionary && (
               <div className="mt-5">
                 <div className="h-3 w-full overflow-hidden rounded-full bg-surface">
@@ -575,6 +607,8 @@ export default function ResultScreen({
             primaryLabel="Study this pattern"
             secondaryHref="/play"
             secondaryLabel="Practice another round"
+            tertiaryHref="/solver"
+            tertiaryLabel="Review in solver"
             compact
           />
 

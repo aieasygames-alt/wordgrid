@@ -12,9 +12,12 @@ type WordListPageProps = {
   page: WordListPageData;
 };
 
+type WordPattern = "all" | "qu" | "ing" | "s" | "long" | "common";
+
 export default function WordListPage({ page }: WordListPageProps) {
   const [query, setQuery] = useState("");
   const [minLength, setMinLength] = useState<number | "all">("all");
+  const [pattern, setPattern] = useState<WordPattern>("all");
 
   const uniqueWords = page.words.filter(
     (word, index, words) => words.indexOf(word) === index
@@ -25,9 +28,21 @@ export default function WordListPage({ page }: WordListPageProps) {
     return uniqueWords.filter((word) => {
       const queryMatch = q ? word.includes(q) : true;
       const lengthMatch = minLength === "all" ? true : word.length >= minLength;
-      return queryMatch && lengthMatch;
+      const patternMatch =
+        pattern === "all"
+          ? true
+          : pattern === "qu"
+          ? word.includes("qu")
+          : pattern === "ing"
+          ? word.endsWith("ing")
+          : pattern === "s"
+          ? word.endsWith("s")
+          : pattern === "long"
+          ? word.length >= 5
+          : word.length <= 4;
+      return queryMatch && lengthMatch && patternMatch;
     });
-  }, [uniqueWords, query, minLength]);
+  }, [uniqueWords, query, minLength, pattern]);
 
   const grouped = useMemo(() => {
     const source = query.trim() || minLength !== "all" ? filteredWords : uniqueWords;
@@ -98,8 +113,31 @@ export default function WordListPage({ page }: WordListPageProps) {
               <option value="4">4+</option>
               <option value="5">5+</option>
               <option value="6">6+</option>
-            </select>
+              </select>
           </label>
+        </div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {[
+            ["all", "All"],
+            ["common", "Common"],
+            ["long", "Long"],
+            ["qu", "Qu"],
+            ["ing", "ING"],
+            ["s", "Ends in S"],
+          ].map(([value, label]) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => setPattern(value as WordPattern)}
+              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
+                pattern === value
+                  ? "bg-primary text-white"
+                  : "bg-bg/60 text-text-muted hover:bg-surface hover:text-text"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
           <span className="rounded-full bg-primary/15 px-3 py-1 text-xs font-semibold text-primary">
@@ -108,6 +146,17 @@ export default function WordListPage({ page }: WordListPageProps) {
           <Link href="/words" className="rounded-full bg-bg/60 px-3 py-1 text-xs font-semibold text-text-muted hover:text-text">
             Reset
           </Link>
+          <button
+            type="button"
+            onClick={() => {
+              setQuery("");
+              setMinLength("all");
+              setPattern("all");
+            }}
+            className="rounded-full bg-bg/60 px-3 py-1 text-xs font-semibold text-text-muted hover:text-text"
+          >
+            Clear filters
+          </button>
         </div>
       </section>
 

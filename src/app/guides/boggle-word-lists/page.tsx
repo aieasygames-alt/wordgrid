@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Word List: Common Words by Letter, Pattern & Score",
+  title: "Boggle Word Lists — Common Words by Letter and Pattern",
   description:
-    "Browse Boggle word lists by starting letter, common pattern, and high-value scoring ending so you can find more words faster in real boards.",
+    "Browse Boggle word lists by letter, pattern, and score to find better study words faster.",
   alternates: { canonical: "/guides/boggle-word-lists" },
   keywords: [
     "boggle word lists", "boggle words by letter", "boggle word list",
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     "boggle word patterns", "boggle common words",
   ],
   openGraph: {
-    title: "Boggle Word List: Common Words by Letter, Pattern & Score",
+    title: "Boggle Word Lists — Common Words by Letter and Pattern",
     description:
-      "Comprehensive Boggle word lists organized by letter with high-frequency words, common patterns, and letter-specific vocabulary for improving gameplay.",
+      "A practical word list hub organized by letter, pattern, and score.",
   },
 };
 
@@ -141,6 +141,27 @@ export default function BoggleWordListsGuide() {
           <p className="text-text-muted">15 min read &middot; Updated July 2026</p>
         </header>
 
+        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <Link href="/words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Search words</div>
+              <p className="mt-1 text-sm text-text-muted">Open the interactive word list.</p>
+            </Link>
+            <Link href="/words/common-boggle-words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Common words</div>
+              <p className="mt-1 text-sm text-text-muted">Jump into the practical study list.</p>
+            </Link>
+            <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Review solver</div>
+              <p className="mt-1 text-sm text-text-muted">Check missed words after a round.</p>
+            </Link>
+            <Link href="/play" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Play now</div>
+              <p className="mt-1 text-sm text-text-muted">Use the list in a live board.</p>
+            </Link>
+          </div>
+        </section>
+
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
@@ -202,6 +223,14 @@ export default function BoggleWordListsGuide() {
                 Try the patterns on a fresh board while they are easy to recall.
               </p>
             </Link>
+          </section>
+
+          <section className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Next step</h2>
+            <p className="text-sm text-text-muted leading-relaxed">
+              Use the interactive word list first, then come back here to organize
+              what you learned by letter, pattern, and score.
+            </p>
           </section>
 
           <section className="grid gap-3 sm:grid-cols-3">

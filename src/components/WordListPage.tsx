@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useMemo, useState } from "react";
 import { scoreWord } from "@/lib/boggle";
 import type { WordListPage as WordListPageData } from "@/lib/word-lists";
 import { INDEXABLE_WORDS } from "@/lib/indexable-words";
@@ -10,15 +13,32 @@ type WordListPageProps = {
 };
 
 export default function WordListPage({ page }: WordListPageProps) {
+  const [query, setQuery] = useState("");
+  const [minLength, setMinLength] = useState<number | "all">("all");
+
   const uniqueWords = page.words.filter(
     (word, index, words) => words.indexOf(word) === index
   );
-  const grouped = uniqueWords.reduce<Record<string, string[]>>((groups, word) => {
-    const length = `${word.length} letters`;
-    groups[length] = groups[length] || [];
-    groups[length].push(word);
-    return groups;
-  }, {});
+
+  const filteredWords = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return uniqueWords.filter((word) => {
+      const queryMatch = q ? word.includes(q) : true;
+      const lengthMatch = minLength === "all" ? true : word.length >= minLength;
+      return queryMatch && lengthMatch;
+    });
+  }, [uniqueWords, query, minLength]);
+
+  const grouped = useMemo(() => {
+    const source = query.trim() || minLength !== "all" ? filteredWords : uniqueWords;
+    return source.reduce<Record<string, string[]>>((groups, word) => {
+      const length = `${word.length} letters`;
+      groups[length] = groups[length] || [];
+      groups[length].push(word);
+      return groups;
+    }, {});
+  }, [filteredWords, uniqueWords, query, minLength]);
+
   const averageScore =
     uniqueWords.reduce((sum, word) => sum + scoreWord(word), 0) /
     Math.max(1, uniqueWords.length);
@@ -52,6 +72,44 @@ export default function WordListPage({ page }: WordListPageProps) {
           </div>
         </div>
       </header>
+
+      <section className="mb-8 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+        <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_180px]">
+          <label className="block">
+            <span className="mb-2 block text-sm font-semibold text-text-muted">Search words</span>
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Type a word or letters"
+              className="w-full rounded-xl border border-border bg-bg/60 px-4 py-3 text-text outline-none transition placeholder:text-text-dim focus:border-primary"
+            />
+          </label>
+          <label className="block">
+            <span className="mb-2 block text-sm font-semibold text-text-muted">Minimum length</span>
+            <select
+              value={minLength}
+              onChange={(event) =>
+                setMinLength(event.target.value === "all" ? "all" : Number(event.target.value))
+              }
+              className="w-full rounded-xl border border-border bg-bg/60 px-4 py-3 text-text outline-none transition focus:border-primary"
+            >
+              <option value="all">All</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+              <option value="5">5+</option>
+              <option value="6">6+</option>
+            </select>
+          </label>
+        </div>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <span className="rounded-full bg-primary/15 px-3 py-1 text-xs font-semibold text-primary">
+            {filteredWords.length} results
+          </span>
+          <Link href="/words" className="rounded-full bg-bg/60 px-3 py-1 text-xs font-semibold text-text-muted hover:text-text">
+            Reset
+          </Link>
+        </div>
+      </section>
 
       <section className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
         <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">

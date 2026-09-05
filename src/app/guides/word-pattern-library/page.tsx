@@ -174,11 +174,11 @@ export default function WordPatternLibraryPage() {
                 <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
                   Play
                 </Link>
+                <Link href="/words" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+                  Words
+                </Link>
                 <Link href="/solver" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                   Open solver
-                </Link>
-                <Link href="/daily/archive" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
-                  Review archive
                 </Link>
               </div>
             </div>
@@ -234,6 +234,28 @@ export default function WordPatternLibraryPage() {
               <p className="mt-3 text-sm text-text-muted leading-relaxed">{pattern.detail}</p>
             </article>
           ))}
+        </section>
+
+        <section className="mt-8 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <h2 className="text-2xl font-semibold">Pattern drill shortcuts</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <Link href="/guides/prefix-strategy" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Prefixes</div>
+              <p className="mt-1 text-sm text-text-muted">RE, UN, IN, PRE</p>
+            </Link>
+            <Link href="/guides/suffix-strategy" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Suffixes</div>
+              <p className="mt-1 text-sm text-text-muted">ING, ED, ER, LY</p>
+            </Link>
+            <Link href="/guides/qu-strategy" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Qu</div>
+              <p className="mt-1 text-sm text-text-muted">QUI, QUA, QUE, QUO</p>
+            </Link>
+            <Link href="/words/words-with-qu" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Qu words</div>
+              <p className="mt-1 text-sm text-text-muted">Study the live list</p>
+            </Link>
+          </div>
         </section>
 
         <section className="mt-8 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">

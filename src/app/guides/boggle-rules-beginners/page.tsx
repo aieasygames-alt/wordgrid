@@ -129,6 +129,27 @@ export default function BoggleRulesGuide() {
           <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
 
+        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <a href="/play/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Play now</div>
+              <p className="mt-1 text-sm text-text-muted">Try the rules on a live board.</p>
+            </a>
+            <a href="/words/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Study words</div>
+              <p className="mt-1 text-sm text-text-muted">Learn words and scoring cues.</p>
+            </a>
+            <a href="/solver/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Use solver</div>
+              <p className="mt-1 text-sm text-text-muted">Check a finished board after play.</p>
+            </a>
+            <a href="/guides/boggle-scoring-sheet/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Scoring sheet</div>
+              <p className="mt-1 text-sm text-text-muted">Jump to points and examples.</p>
+            </a>
+          </div>
+        </section>
+
         <div className="space-y-6 text-text">
           {/* Intro */}
           <section>
@@ -173,6 +194,17 @@ export default function BoggleRulesGuide() {
               caption="Boggle words are built by tracing adjacent letters horizontally, vertically, or diagonally."
               priority
             />
+          </section>
+
+          <section className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              After you learn the rules
+            </h2>
+            <p className="text-sm text-text-muted leading-relaxed">
+              The fastest way to make the rules stick is to play one board, open
+              the solver, and then study the most common words and pattern
+              library pages.
+            </p>
           </section>
 
           {/* The Grid */}

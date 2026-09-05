@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Word Grid Strategies — Score Higher Every Game",
+  title: "Word Grid Strategies — Score Higher, Faster",
   description:
-    "Advanced strategies for word grid and Boggle-style puzzles. Learn scoring optimization, time management, and word patterns to maximize your score.",
+    "Advanced word grid strategy for faster scoring, better time management, and stronger pattern scanning.",
   alternates: { canonical: "/guides/word-grid-strategies" },
   openGraph: {
-    title: "Word Grid Strategies — Score Higher Every Game",
+    title: "Word Grid Strategies — Score Higher, Faster",
     description:
-      "Scoring curve analysis, time management, and word families to maximize your score.",
+      "Scoring curve analysis, time management, and word families for stronger play.",
   },
 };
 
@@ -50,7 +50,7 @@ export default function Guide2() {
       <article className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
           <div>
-            <header className="mb-8">
+        <header className="mb-8">
               <nav className="text-sm text-text-dim flex items-center gap-2">
                 <a href="/" className="hover:text-text">Home</a>
                 <span>/</span>
@@ -61,6 +61,27 @@ export default function Guide2() {
               </h1>
               <p className="text-text-muted">5 min read &middot; Updated July 24, 2026</p>
             </header>
+
+            <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                <Link href="/play" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+                  <div className="font-semibold text-primary">Play</div>
+                  <p className="mt-1 text-sm text-text-muted">Try the strategy on a live board.</p>
+                </Link>
+                <Link href="/words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+                  <div className="font-semibold text-primary">Words</div>
+                  <p className="mt-1 text-sm text-text-muted">Study common and high-value words.</p>
+                </Link>
+                <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+                  <div className="font-semibold text-primary">Solver</div>
+                  <p className="mt-1 text-sm text-text-muted">Review missed patterns after play.</p>
+                </Link>
+                <Link href="/guides/most-common-boggle-words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+                  <div className="font-semibold text-primary">Common words</div>
+                  <p className="mt-1 text-sm text-text-muted">Use frequency to guide scanning.</p>
+                </Link>
+              </div>
+            </section>
 
             <section className="space-y-6 text-text max-w-3xl">
               <p className="leading-relaxed">
@@ -204,6 +225,14 @@ export default function Guide2() {
                 </a>
               </div>
             </div>
+
+            <section className="mt-8 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 max-w-4xl">
+              <h2 className="text-2xl font-semibold text-primary mb-3">Next step</h2>
+              <p className="text-sm text-text-muted leading-relaxed">
+                If the scoring curve makes sense, move into the common words page
+                and the pattern library so your scanning choices get more automatic.
+              </p>
+            </section>
 
             <div className="mt-8 border-t border-border pt-6 max-w-4xl">
               <h2 className="text-lg font-semibold mb-3">Best Next Pages</h2>

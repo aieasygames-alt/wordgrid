@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How to Find More Words in Word Grid Puzzles",
+  title: "How to Find More Words in Word Grid Puzzles — Quick Techniques",
   description:
-    "Learn proven techniques to spot more words in word grid puzzles. Master prefix/suffix scanning, pattern recognition, and adjacency strategies.",
+    "Learn quick techniques to spot more words in word grid puzzles with prefix, suffix, and adjacency scanning.",
   alternates: { canonical: "/guides/how-to-find-more-words" },
   openGraph: {
-    title: "How to Find More Words in Word Grid Puzzles",
+    title: "How to Find More Words in Word Grid Puzzles — Quick Techniques",
     description:
-      "Six proven techniques to spot more words — prefix scanning, plurals, Qu strategy, and more.",
+      "Six quick techniques to spot more words, including prefix scanning, plurals, and Qu strategy.",
   },
 };
 
@@ -62,6 +62,27 @@ export default function Guide1() {
           <p className="text-text-muted">6 min read &middot; Updated July 24, 2026</p>
         </header>
 
+        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <Link href="/play" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Play</div>
+              <p className="mt-1 text-sm text-text-muted">Try the tactics on a live board.</p>
+            </Link>
+            <Link href="/words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Words</div>
+              <p className="mt-1 text-sm text-text-muted">Search the vocabulary you find.</p>
+            </Link>
+            <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Solver</div>
+              <p className="mt-1 text-sm text-text-muted">Review missed paths afterward.</p>
+            </Link>
+            <Link href="/guides/word-pattern-library" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Patterns</div>
+              <p className="mt-1 text-sm text-text-muted">Turn tips into repeatable habits.</p>
+            </Link>
+          </div>
+        </section>
+
         <div className="prose prose-invert max-w-none space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
@@ -101,6 +122,14 @@ export default function Guide1() {
                 solver
               </Link>
               .
+            </p>
+          </section>
+
+          <section className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Do this next</h2>
+            <p className="text-sm text-text-muted leading-relaxed">
+              Use one tactic in a timed board, then verify it with the solver and
+              the common words list. That loop is what makes the tips stick.
             </p>
           </section>
 

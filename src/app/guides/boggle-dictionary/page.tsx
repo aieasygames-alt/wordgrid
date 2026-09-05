@@ -3,9 +3,9 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Boggle Dictionary Online: Check Valid Words & Word Lists",
+  title: "Boggle Dictionary Online: Valid Words, Word Lists & Study",
   description:
-    "Use this Boggle dictionary online guide to check if words count, learn valid-word rules, study common word lists, and review boards with a solver.",
+    "Check valid Boggle words, study common word lists, and jump into solver and word-list tools from one dictionary hub.",
   alternates: { canonical: "/guides/boggle-dictionary" },
   keywords: [
     "boggle dictionary", "boggle word list", "boggle vocabulary",
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     "boggle dictionary online", "boggle word checker",
   ],
   openGraph: {
-    title: "Boggle Dictionary Online: Check Valid Words & Word Lists",
+    title: "Boggle Dictionary Online: Valid Words, Word Lists & Study",
     description:
-      "Complete Boggle dictionary guide with valid-word rules, word lists, lookup standards, and vocabulary patterns for stronger gameplay.",
+      "A practical dictionary hub for valid words, word lists, lookup rules, and study paths.",
   },
 };
 
@@ -24,9 +24,9 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  headline: "Boggle Dictionary Online: Check Valid Words & Word Lists",
+  headline: "Boggle Dictionary Online: Valid Words, Word Lists & Study",
   description:
-    "A comprehensive Boggle dictionary including word lists, vocabulary references, valid word guidelines, and word lookup for improving gameplay.",
+    "A practical Boggle dictionary including word lists, vocabulary references, valid word guidelines, and study paths.",
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-29",
@@ -123,7 +123,7 @@ export default function BoggleDictionaryGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Dictionary Online: Check Valid Words & Word Lists
+            Boggle Dictionary Online: Valid Words, Word Lists & Study
           </h1>
           <p className="text-text-muted">9 min read &middot; Updated July 2026</p>
         </header>
@@ -133,8 +133,7 @@ export default function BoggleDictionaryGuide() {
             <p className="leading-relaxed">
               A <strong>Boggle dictionary</strong> answers the practical question:
               does this word count? Use this page to understand valid-word rules,
-              compare dictionary standards, and build a playable vocabulary from
-              common Boggle word lists.
+              compare dictionary standards, and move into word-list study.
             </p>
             <p className="leading-relaxed mt-3">
               For quick checking: valid Boggle words are usually standard English
@@ -144,9 +143,9 @@ export default function BoggleDictionaryGuide() {
             <p className="leading-relaxed mt-3">
               If you searched for a <strong>Boggle word checker</strong> or{" "}
               <strong>Boggle dictionary online</strong>, use this page as the
-              rule reference first: decide whether a word is eligible, then use
-              the related word lists and solver pages to study patterns after a
-              board is finished.
+              rule reference first: decide whether a word is eligible, then move
+              into the related word lists and solver pages to study patterns
+              after a board is finished.
             </p>
             <p className="leading-relaxed mt-3">
               The practical order is: learn the{" "}
@@ -178,7 +177,7 @@ export default function BoggleDictionaryGuide() {
 
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
-              How This Dictionary Helps You Win More Boards
+              How This Dictionary Helps You Study Faster
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
               <Link href="/guides/boggle-rules-beginners/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
@@ -204,6 +203,30 @@ export default function BoggleDictionaryGuide() {
                 <p className="mt-1 text-sm text-text-muted">
                   Turn missed words from a finished board into your next study list.
                 </p>
+              </Link>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Fast study paths
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <Link href="/words" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Word list</div>
+                <p className="mt-1 text-sm text-text-muted">Search words, scores, and patterns.</p>
+              </Link>
+              <Link href="/words/common-boggle-words/" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Common words</div>
+                <p className="mt-1 text-sm text-text-muted">Memorize the most reusable answers.</p>
+              </Link>
+              <Link href="/words/words-with-qu/" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Qu words</div>
+                <p className="mt-1 text-sm text-text-muted">Practice the special Qu tile quickly.</p>
+              </Link>
+              <Link href="/solver" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
+                <div className="font-semibold text-primary">Solver</div>
+                <p className="mt-1 text-sm text-text-muted">Review a finished board and study misses.</p>
               </Link>
             </div>
           </section>

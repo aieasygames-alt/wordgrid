@@ -6,14 +6,14 @@ import { WORD_LIST_PAGES } from "@/lib/word-lists";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "WordGrid Word List — Definitions, Scores & Game Words",
+  title: "Word Grid Word List — Search, Study, and Score",
   description:
-    "Browse common WordGrid words with meanings, word lengths, and scoring notes. Learn high-value words to spot faster in word grid and Boggle-style puzzles.",
+    "Search curated Word Grid words, browse pattern-based word lists, and jump to high-value word pages.",
   alternates: { canonical: "/words" },
   openGraph: {
-    title: "WordGrid Word List — Definitions, Scores & Game Words",
+    title: "Word Grid Word List — Search, Study, and Score",
     description:
-      "A focused list of common WordGrid words with meanings, lengths, and game scoring notes.",
+      "A searchable Word Grid word list with patterns, scores, and quick links to related study pages.",
     url: `${BASE_URL}/words`,
   },
 };
@@ -32,6 +32,13 @@ const groupedWords = INDEXABLE_WORDS.reduce<Record<string, string[]>>((groups, w
   groups[letter].push(word);
   return groups;
 }, {});
+
+const lengthBuckets = [
+  { label: "3 letters", href: "/words/3-letter-boggle-words/", count: INDEXABLE_WORDS.filter((word) => word.length === 3).length },
+  { label: "4 letters", href: "/words/4-letter-boggle-words/", count: INDEXABLE_WORDS.filter((word) => word.length === 4).length },
+  { label: "5 letters", href: "/words/5-letter-boggle-words/", count: INDEXABLE_WORDS.filter((word) => word.length === 5).length },
+  { label: "Qu words", href: "/words/words-with-qu/", count: INDEXABLE_WORDS.filter((word) => word.includes("qu")).length },
+];
 
 export default function WordsIndex() {
   const itemListSchema = {
@@ -58,39 +65,49 @@ export default function WordsIndex() {
           <div>
             <header className="mb-8">
               <Link href="/" className="text-sm text-text-dim hover:text-text">
-                &larr; WordGrid
+                WordGrid
               </Link>
               <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight">
                 Word List
               </h1>
               <p className="mt-4 max-w-3xl text-text-muted leading-relaxed">
-                Browse common words that appear in WordGrid puzzles. Each word page
-                includes a definition, word length, score value, and related words
-                to help you recognize patterns faster during a round.
+                Search curated words, jump into pattern lists, and open individual
+                word pages to study score value and recognition cues.
               </p>
             </header>
 
-            <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 mb-8">
-              <div className="bg-surface/50 rounded-2xl p-4">
-                <div className="text-2xl font-bold text-primary">
-                  {INDEXABLE_WORDS.length}
+            <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4 mb-8">
+              {[
+                ["Curated words", `${INDEXABLE_WORDS.length}`],
+                ["Pattern lists", `${WORD_LIST_PAGES.length}`],
+                ["Fast study", "Search + jump"],
+                ["Scoring", "1-8 pts"],
+              ].map(([label, value]) => (
+                <div key={label} className="bg-surface/50 rounded-2xl p-4">
+                  <div className="text-2xl font-bold text-primary">{value}</div>
+                  <div className="text-xs text-text-muted uppercase">{label}</div>
                 </div>
-                <div className="text-xs text-text-muted uppercase">words</div>
-              </div>
-              <div className="bg-surface/50 rounded-2xl p-4">
-                <div className="text-2xl font-bold text-primary">3-5</div>
-                <div className="text-xs text-text-muted uppercase">letters</div>
-              </div>
-              <div className="bg-surface/50 rounded-2xl p-4 col-span-2 sm:col-span-1">
-                <div className="text-2xl font-bold text-primary">1-4</div>
-                <div className="text-xs text-text-muted uppercase">points</div>
+              ))}
+            </section>
+
+            <section className="mb-10 rounded-3xl border border-border bg-surface/40 p-5 sm:p-6">
+              <h2 className="text-xl font-semibold mb-4">Quick study paths</h2>
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                {lengthBuckets.map((bucket) => (
+                  <Link
+                    key={bucket.href}
+                    href={bucket.href}
+                    className="rounded-2xl bg-bg/60 p-4 hover:bg-surface transition"
+                  >
+                    <div className="font-semibold text-primary">{bucket.label}</div>
+                    <div className="mt-1 text-sm text-text-muted">{bucket.count} pages</div>
+                  </Link>
+                ))}
               </div>
             </section>
 
             <section className="mb-10">
-              <h2 className="text-2xl font-semibold mb-4">
-                Boggle Word Lists by Pattern
-              </h2>
+              <h2 className="text-2xl font-semibold mb-4">Pattern Lists</h2>
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 {WORD_LIST_PAGES.map((page) => (
                   <Link
@@ -111,9 +128,17 @@ export default function WordsIndex() {
             </section>
 
             <section className="mb-10">
-              <h2 className="text-2xl font-semibold mb-4">
-                Common WordGrid Words
-              </h2>
+              <div className="flex items-end justify-between gap-4 mb-4">
+                <div>
+                  <h2 className="text-2xl font-semibold">Common Words</h2>
+                  <p className="text-sm text-text-muted mt-1">
+                    Open a word page to study length, score, and related patterns.
+                  </p>
+                </div>
+                <Link href="/guides/boggle-dictionary" className="text-sm text-primary hover:underline">
+                  Dictionary guide
+                </Link>
+              </div>
               <div className="space-y-8">
                 {Object.entries(groupedWords).map(([letter, words]) => (
                   <div key={letter}>
@@ -136,7 +161,7 @@ export default function WordsIndex() {
                             </span>
                           </div>
                           <p className="text-xs text-text-muted mt-1">
-                            {word.length} letters &middot; definition and game notes
+                            {word.length} letters · definition and game notes
                           </p>
                         </Link>
                       ))}
@@ -144,21 +169,6 @@ export default function WordsIndex() {
                   </div>
                 ))}
               </div>
-            </section>
-
-            <section className="mb-10 bg-surface/50 rounded-3xl p-5 sm:p-6">
-              <h2 className="text-xl font-semibold mb-2">
-                How to Use This List
-              </h2>
-              <p className="text-sm text-text-muted leading-relaxed mb-3">
-                Short common words keep a game moving, but 5-letter words are where
-                scoring starts to climb. Practice spotting endings, repeated letter
-                pairs, and words that can be extended from a 3-letter base into a
-                higher-value answer.
-              </p>
-              <Link href="/guides/how-to-find-more-words" className="text-sm text-primary hover:text-primary underline">
-                Learn word-finding techniques
-              </Link>
             </section>
 
             <nav className="flex gap-3 flex-wrap">
@@ -169,34 +179,40 @@ export default function WordsIndex() {
                 Play
               </Link>
               <Link
+                href="/solver"
+                className="px-5 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
+              >
+                Solve
+              </Link>
+              <Link
                 href="/guides"
                 className="px-5 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
-                Read Guides
+                Learn
               </Link>
             </nav>
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-8">
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
-              <h2 className="text-2xl font-bold">Browse smarter</h2>
+              <h2 className="text-2xl font-bold">Study smarter</h2>
               <p className="mt-3 text-sm text-text-muted leading-relaxed">
-                Use this list as a study sheet on desktop. Open one word page, then
-                jump to related entries to see how a stem stretches across the list.
+                Use the list as a quick lookup table, then jump to the related
+                word page or guide to study why the word matters in play.
               </p>
             </div>
 
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">Fast links</h2>
               <div className="mt-4 grid gap-2">
-                <Link href="/play" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
-                  Start a game
+                <Link href="/words/common-boggle-words/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Common Boggle words
                 </Link>
-                <Link href="/daily" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
-                  Open Daily
+                <Link href="/words/words-with-qu/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  Words with Qu
                 </Link>
-                <Link href="/solver" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
-                  Review a board
+                <Link href="/words/high-scoring-boggle-words/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                  High scoring words
                 </Link>
               </div>
             </div>
@@ -204,9 +220,9 @@ export default function WordsIndex() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">What this page covers</h2>
               <ul className="mt-4 space-y-3 text-sm text-text-muted leading-relaxed">
-                <li>• Common game words grouped by first letter</li>
-                <li>• Length-based scoring hints for faster scanning</li>
-                <li>• Click-through detail pages for related terms</li>
+                <li>Common game words grouped by first letter</li>
+                <li>Pattern lists for faster scanning</li>
+                <li>Click-through study pages for related terms</li>
               </ul>
             </div>
           </aside>

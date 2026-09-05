@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Word Grid Guides — Rules, Strategy, Solver & Tips",
+  title: "Word Grid Learn — Rules, Strategy, Solver & Tips",
   description:
-    "Master word grid puzzles with guides for rules, Boggle-style strategy, the Word Grid Solver, scoring, word-finding techniques, and online play.",
+    "Learn Word Grid rules, strategy, solver review, scoring, and word patterns with a guided path from beginner to advanced play.",
   alternates: { canonical: "/guides" },
   openGraph: {
-    title: "Word Grid Guides — Rules, Strategy, Solver & Tips",
+    title: "Word Grid Learn — Rules, Strategy, Solver & Tips",
     description:
-      "Learn how to find more words, score higher, and master word grid puzzles with our complete strategy guide collection.",
+      "A learning hub for rules, strategy, solver review, scoring, and word patterns.",
   },
 };
 
@@ -326,16 +326,16 @@ export default function GuidesIndex() {
           <Link href="/" className="text-sm text-text-dim hover:text-text">
             &larr; WordGrid
           </Link>
-          <h1 className="text-4xl font-bold mt-4 mb-2">Word Grid Guides</h1>
+          <h1 className="text-4xl font-bold mt-4 mb-2">Learn</h1>
           <p className="text-text-muted">
-            Everything you need to get better at word grid puzzles — from your
-            first game to competitive-level strategy.
+            Start with rules, move into pattern study, and use the solver to
+            review finished boards.
           </p>
         </header>
 
         <section className="mb-10">
           <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-3">
-            Guide Clusters
+            Learning Path
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {CLUSTERS.map((cluster) => (
@@ -359,7 +359,7 @@ export default function GuidesIndex() {
 
         <section className="mb-10">
           <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-3">
-            Best Matches for Searchers
+            Best Matches
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             <Link

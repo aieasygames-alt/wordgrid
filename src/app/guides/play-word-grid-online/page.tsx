@@ -3,18 +3,18 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online Free: Start Instantly, No Download",
+  title: "Play Word Grid Online Free — Start Instantly",
   description:
-    "Play word grid online free in your browser. Start instantly, connect adjacent letters, try Daily or practice boards, and learn the rules fast.",
+    "Play word grid online free in your browser. Start instantly with Daily, practice boards, and quick rule links.",
   alternates: { canonical: "/guides/play-word-grid-online" },
   keywords: [
     "word grid online", "play word grid online", "word grid online free",
     "word grid game online", "free word grid online", "word grid puzzle online",
   ],
   openGraph: {
-    title: "Play Word Grid Online Free: Start Instantly, No Download",
+    title: "Play Word Grid Online Free — Start Instantly",
     description:
-      "Word grid is a free online word puzzle. Connect adjacent letters in square grids to find words. Play instantly — no download, no sign-up.",
+      "A free online word puzzle with instant play, no download, and no sign-up.",
   },
 };
 
@@ -111,6 +111,27 @@ export default function PlayWordGridOnlineGuide() {
           <p className="text-text-muted">5 min read &middot; Updated July 24, 2026</p>
         </header>
 
+        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <Link href="/play" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Play now</div>
+              <p className="mt-1 text-sm text-text-muted">Open the live game.</p>
+            </Link>
+            <Link href="/daily" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Daily</div>
+              <p className="mt-1 text-sm text-text-muted">Try the shared daily board.</p>
+            </Link>
+            <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Solver</div>
+              <p className="mt-1 text-sm text-text-muted">Review a finished board after play.</p>
+            </Link>
+            <Link href="/guides/boggle-rules-beginners" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Rules</div>
+              <p className="mt-1 text-sm text-text-muted">Learn the basics before you start.</p>
+            </Link>
+          </div>
+        </section>
+
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
@@ -153,6 +174,14 @@ export default function PlayWordGridOnlineGuide() {
                 solver
               </Link>
               .
+            </p>
+          </section>
+
+          <section className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Best next move</h2>
+            <p className="text-sm text-text-muted leading-relaxed">
+              Start the game, then move into rules or solver review depending on
+              whether you want to learn or improve.
             </p>
           </section>
 

@@ -14,9 +14,9 @@ export function GuideDesktopShell({ children, rail }: GuideDesktopShellProps) {
           {rail ?? (
             <>
               <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
-                <h2 className="text-2xl font-bold">Play after reading</h2>
+                <h2 className="text-2xl font-bold">Use what you learn</h2>
                 <p className="mt-3 text-sm text-text-muted leading-relaxed">
-                  Use the guide, then test the idea on a fresh board while the
+                  Finish the guide, then test the idea on a fresh board while the
                   pattern is still in your head.
                 </p>
                 <a

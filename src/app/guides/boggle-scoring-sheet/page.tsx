@@ -122,6 +122,27 @@ export default function BoggleScoringSheetGuide() {
           <p className="text-text-muted">7 min read &middot; Updated July 2026</p>
         </header>
 
+        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <Link href="/play/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Play now</div>
+              <p className="mt-1 text-sm text-text-muted">Use the scoring sheet in a live round.</p>
+            </Link>
+            <Link href="/words/high-scoring-boggle-words/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">High scoring words</div>
+              <p className="mt-1 text-sm text-text-muted">See what longer answers look like.</p>
+            </Link>
+            <Link href="/solver/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Review solver</div>
+              <p className="mt-1 text-sm text-text-muted">Check the board after play.</p>
+            </Link>
+            <Link href="/guides/word-grid-strategies/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Strategy guide</div>
+              <p className="mt-1 text-sm text-text-muted">Move from points to better decisions.</p>
+            </Link>
+          </div>
+        </section>
+
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
@@ -164,6 +185,16 @@ export default function BoggleScoringSheetGuide() {
               caption="Boggle scoring rewards longer words, so one strong 5-letter word can beat several short finds."
               priority
             />
+          </section>
+
+          <section className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-semibold text-primary mb-3">
+              Turn points into a plan
+            </h2>
+            <p className="text-sm text-text-muted leading-relaxed">
+              Once scoring clicks, use the word list and pattern library to hunt
+              longer paths first. That is where the score jumps live.
+            </p>
           </section>
 
           <section>

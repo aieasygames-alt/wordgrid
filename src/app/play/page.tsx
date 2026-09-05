@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PlayClient from "./PlayClient";
 
 const BASE_URL = "https://wordgrid.games";
@@ -138,6 +139,26 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(modeListSchema) }}
       />
+      <section className="mx-auto max-w-7xl px-4 pt-8">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <Link href="/daily" className="rounded-2xl bg-surface/50 p-4 hover:bg-surface transition">
+            <div className="font-semibold text-primary">Daily</div>
+            <p className="mt-1 text-sm text-text-muted">Play the shared daily board.</p>
+          </Link>
+          <Link href="/solver" className="rounded-2xl bg-surface/50 p-4 hover:bg-surface transition">
+            <div className="font-semibold text-primary">Solver</div>
+            <p className="mt-1 text-sm text-text-muted">Review missed words after a round.</p>
+          </Link>
+          <Link href="/words" className="rounded-2xl bg-surface/50 p-4 hover:bg-surface transition">
+            <div className="font-semibold text-primary">Words</div>
+            <p className="mt-1 text-sm text-text-muted">Search words and study scores.</p>
+          </Link>
+          <Link href="/guides" className="rounded-2xl bg-surface/50 p-4 hover:bg-surface transition">
+            <div className="font-semibold text-primary">Learn</div>
+            <p className="mt-1 text-sm text-text-muted">Open rules, patterns, and strategy.</p>
+          </Link>
+        </div>
+      </section>
       <PlayClient />
     </>
   );

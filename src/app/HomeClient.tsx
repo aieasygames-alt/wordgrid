@@ -35,12 +35,12 @@ export default function HomeClient() {
     { href: "/challenge", label: "Challenge" },
   ];
   const secondaryEntrances = [
-    { href: "/guides/boggle-rules-beginners", label: "Rules" },
+    { href: "/words", label: "Word List" },
+    { href: "/solver", label: "Solve" },
+    { href: "/guides", label: "Learn" },
     { href: "/guides/word-pattern-library", label: "Pattern Library" },
-    { href: "/solver", label: "Word Grid Solver" },
-    { href: "/guides/word-grid-vs-word-search", label: "Compare Puzzles" },
+    { href: "/guides/boggle-rules-beginners", label: "Rules" },
     { href: "/stats", label: "Stats" },
-    { href: "/daily/archive", label: "Archive" },
   ];
 
   const handleComplete = useCallback(
@@ -85,13 +85,12 @@ export default function HomeClient() {
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-start">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-              Free Word Grid Game Online
+              Play, Solve, and Learn Word Grid
             </h1>
             <p className="text-base text-text-muted max-w-lg mx-auto lg:mx-0 mb-4">
-              Play WordGrid instantly in your browser. Connect adjacent letters
-              on Boggle-style 4x4 boards, chase longer words, and choose a
-              Daily word puzzle, timed brain game, or untimed Zen practice. No
-              download, no sign-up.
+              Play WordGrid instantly in your browser. Start a board, solve a
+              finished grid, or study word lists and guides without leaving the
+              site.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {primaryEntrances.map((entry) => (
@@ -117,20 +116,20 @@ export default function HomeClient() {
             </div>
           </div>
 
-          <TodayTipCard
-            tip={todayTip}
-            grid={grid}
+            <TodayTipCard
+              tip={todayTip}
+              grid={grid}
             compact
             layout="split"
             density="tight"
             actionsLayout="inline"
-            showActionBox={false}
-            showGrid={false}
-            primaryHref="/daily"
-            primaryLabel="Open Daily"
-            secondaryHref="/guides/word-pattern-library"
-            secondaryLabel="Open pattern library"
-          />
+              showActionBox={false}
+              showGrid={false}
+              primaryHref="/daily"
+              primaryLabel="Open Daily"
+              secondaryHref="/words"
+              secondaryLabel="Open word list"
+            />
         </div>
       </section>
 

@@ -26,7 +26,7 @@ const entryLinks = [
   { href: "/challenge", label: "Challenge" },
 ];
 
-const supportLinks = [
+  const supportLinks = [
   { href: "/guides/play-word-grid-online", label: "Play Guide" },
   { href: "/guides/play-boggle-online-free", label: "Free Boggle" },
   { href: "/guides/boggle-rules-beginners", label: "Rules" },
@@ -158,9 +158,9 @@ export default function PlayClient() {
             Play Word Grid Online Free
           </div>
           <p className="mt-3 text-sm sm:text-base text-text-muted max-w-xl mx-auto">
-            Pick the next step from the same four entry points: Play, Zen,
-            Daily, or Challenge. The board controls stay below, so the page
-            reads in one clear order.
+            Pick the next step from Play, Zen, Daily, Challenge, or the word
+            study tools. The board controls stay below, so the page reads in
+            one clear order.
           </p>
           <div className="mt-4">{entryNav}</div>
           <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
@@ -242,6 +242,13 @@ export default function PlayClient() {
           <Link href="/solver" className="rounded-2xl border border-primary/20 bg-primary/10 p-4 font-semibold text-primary hover:bg-primary/15 transition">
             Review with solver
           </Link>
+        </section>
+        <section className="mt-4 w-full max-w-5xl rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <h2 className="text-2xl font-semibold">What to do after this round</h2>
+          <p className="mt-2 text-sm text-text-muted leading-relaxed">
+            If you want to keep improving, open the solver, check the word list,
+            and then replay with the same patterns in mind.
+          </p>
         </section>
       </main>
     );

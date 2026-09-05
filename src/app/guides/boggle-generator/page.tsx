@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Boggle Generator: Create Free 4x4, 5x5, and 6x6 Boards",
+  title: "Boggle Generator — Create Free Practice Boards",
   description:
-    "Use this free Boggle generator guide to create 4x4, 5x5, and 6x6 word grids for practice, teaching, game nights, and solver review.",
+    "Create free practice boards for Boggle-style play, teaching, and solver review.",
   alternates: { canonical: "/guides/boggle-generator" },
   keywords: [
     "boggle generator", "boggle puzzle maker", "custom boggle grid",
@@ -12,9 +12,9 @@ export const metadata: Metadata = {
     "make your own boggle", "boggle game creator",
   ],
   openGraph: {
-    title: "Boggle Generator: Create Free 4x4, 5x5, and 6x6 Boards",
+    title: "Boggle Generator — Create Free Practice Boards",
     description:
-      "Free Boggle generator to create custom square word puzzles. Design personalized grids for practice, teaching, or game nights with adjustable difficulty.",
+      "Create custom square word puzzles for practice and review.",
   },
 };
 
@@ -128,6 +128,27 @@ export default function BoggleGeneratorGuide() {
           <p className="text-text-muted">6 min read &middot; Updated June 2026</p>
         </header>
 
+        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <Link href="/play?size=4" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">4x4 board</div>
+              <p className="mt-1 text-sm text-text-muted">Start the classic size.</p>
+            </Link>
+            <Link href="/play?size=5" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">5x5 board</div>
+              <p className="mt-1 text-sm text-text-muted">Practice with more letters.</p>
+            </Link>
+            <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Solver</div>
+              <p className="mt-1 text-sm text-text-muted">Review a generated board after play.</p>
+            </Link>
+            <Link href="/guides/word-grid-strategies" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Strategy</div>
+              <p className="mt-1 text-sm text-text-muted">Use generator boards for drills.</p>
+            </Link>
+          </div>
+        </section>
+
         <div className="space-y-6 text-text max-w-3xl">
           <section>
             <p className="leading-relaxed">
@@ -164,6 +185,14 @@ export default function BoggleGeneratorGuide() {
                 Most Common Boggle Words
               </Link>
               .
+            </p>
+          </section>
+
+          <section className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Use it as a drill</h2>
+            <p className="text-sm text-text-muted leading-relaxed">
+              Generate a board, play it once, then use the solver and word list to
+              turn misses into a focused practice set.
             </p>
           </section>
 

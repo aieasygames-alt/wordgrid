@@ -3,9 +3,9 @@ import Link from "next/link";
 import GuideImage from "@/components/GuideImage";
 
 export const metadata: Metadata = {
-  title: "Boggle Solver Guide: Find All Words in a Word Grid",
+  title: "Boggle Solver Guide — Find All Words Fast",
   description:
-    "Learn how to use a Boggle solver after a round to find all valid words, compare scores, study missed patterns, and improve your next word grid.",
+    "Learn how to use a Boggle solver after a round to find every word, compare scores, and study missed patterns.",
   alternates: { canonical: "/guides/boggle-solver" },
   keywords: [
     "word grid solver", "boggle solver", "boggle word finder", "boggle cheat", "boggle helper",
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     "solve boggle puzzle", "boggle solution finder",
   ],
   openGraph: {
-    title: "Boggle Solver Guide: Find All Words in a Word Grid",
+    title: "Boggle Solver Guide — Find All Words Fast",
     description:
-      "Free online Word Grid Solver and Boggle word finder. Paste any square grid and get instant solutions with scoring breakdown and word analysis.",
+      "A practical guide to using the solver after a round for fast review and pattern study.",
     images: ["/images/seo/word-grid-solver-workflow.webp"],
   },
 };
@@ -128,6 +128,27 @@ export default function BoggleSolverGuide() {
           <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
 
+        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Open solver</div>
+              <p className="mt-1 text-sm text-text-muted">Use the live tool now.</p>
+            </Link>
+            <Link href="/play" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Play first</div>
+              <p className="mt-1 text-sm text-text-muted">Finish a board before review.</p>
+            </Link>
+            <Link href="/words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Words</div>
+              <p className="mt-1 text-sm text-text-muted">Search the missed answers.</p>
+            </Link>
+            <Link href="/guides/most-common-boggle-words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+              <div className="font-semibold text-primary">Common words</div>
+              <p className="mt-1 text-sm text-text-muted">Focus your review on frequent finds.</p>
+            </Link>
+          </div>
+        </section>
+
         <div className="space-y-6 text-text max-w-3xl">
           <section>
             <p className="leading-relaxed">
@@ -199,6 +220,14 @@ export default function BoggleSolverGuide() {
               caption="Use the solver after a round to turn missed answers into repeatable scanning habits."
               priority
             />
+          </section>
+
+          <section className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Review loop</h2>
+            <p className="text-sm text-text-muted leading-relaxed">
+              The best solver habit is simple: play first, solve later, then study
+              the words and patterns you keep missing.
+            </p>
           </section>
 
           <section>

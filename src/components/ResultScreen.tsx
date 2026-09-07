@@ -776,6 +776,17 @@ export default function ResultScreen({
             </div>
           )}
 
+          {hasDictionary && trainingHint && (
+            <div className="w-full rounded-2xl border border-primary/20 bg-primary/10 p-4 sm:p-5">
+              <div className="text-xs font-semibold uppercase tracking-wide text-primary">Next practice</div>
+              <div className="mt-2 font-semibold text-text">{trainingHint.label}</div>
+              <p className="mt-1 text-sm text-text-muted leading-relaxed">{trainingHint.detail}</p>
+              <a href="/guides/word-pattern-library" className="mt-3 inline-flex rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-hover">
+                Study this pattern
+              </a>
+            </div>
+          )}
+
           {previewUrl && (
             <div className="w-full">
               <div className="mb-1 text-xs text-text-dim">Preview (long-press to save):</div>

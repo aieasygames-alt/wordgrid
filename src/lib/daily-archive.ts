@@ -17,6 +17,7 @@ export interface DailyArchiveEntry {
   totalPossibleScore: number;
   longestWords: string[];
   bestWords: { word: string; score: number }[];
+  wordLengthCounts: { length: number; count: number }[];
 }
 
 export const DAILY_ARCHIVE_DAYS = 30;
@@ -52,12 +53,20 @@ function solveArchiveGrid(grid: Grid) {
     word: item.word,
     score: item.score,
   }));
+  const lengthCounts = new Map<number, number>();
+  for (const item of solved) {
+    lengthCounts.set(item.word.length, (lengthCounts.get(item.word.length) || 0) + 1);
+  }
+  const wordLengthCounts = [...lengthCounts.entries()]
+    .sort(([a], [b]) => a - b)
+    .map(([length, count]) => ({ length, count }));
 
   return {
     totalWords: solved.length,
     totalPossibleScore,
     longestWords,
     bestWords,
+    wordLengthCounts,
   };
 }
 

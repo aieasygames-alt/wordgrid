@@ -203,6 +203,28 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
             </div>
 
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-lg shadow-black/10">
+              <h2 className="text-2xl font-semibold">Word length profile</h2>
+              <p className="mt-2 text-sm text-text-muted leading-relaxed">
+                Use the distribution to decide whether to practice quick grabs
+                or longer scoring paths on the next board.
+              </p>
+              <div className="mt-4 space-y-2">
+                {entry.wordLengthCounts.map((item) => {
+                  const width = entry.totalWords > 0 ? Math.max(8, Math.round((item.count / entry.totalWords) * 100)) : 8;
+                  return (
+                    <div key={item.length} className="flex items-center gap-3 text-sm">
+                      <span className="w-12 text-text-muted">{item.length} letters</span>
+                      <div className="h-2 flex-1 rounded-full bg-bg/70 overflow-hidden">
+                        <div className="h-full rounded-full bg-primary" style={{ width: `${width}%` }} />
+                      </div>
+                      <span className="w-8 text-right font-semibold text-text">{item.count}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-lg shadow-black/10">
               <h2 className="text-2xl font-semibold">Longest finds</h2>
               <div className="mt-4 flex flex-wrap gap-2">
                 {entry.longestWords.map((word) => (

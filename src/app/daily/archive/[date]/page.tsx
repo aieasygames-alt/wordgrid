@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import TrackedReplayLink from "@/components/TrackedReplayLink";
 import { notFound } from "next/navigation";
 import {
   DAILY_ARCHIVE_DAYS,
@@ -121,9 +122,9 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
                 <Metric label="Max score" value={entry.totalPossibleScore} />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link href={replayPath} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                <TrackedReplayLink href={replayPath} date={entry.date} source="archive_detail_header" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
                   Replay this board
-                </Link>
+                </TrackedReplayLink>
                 <Link href={challengePath} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                   Challenge a friend
                 </Link>
@@ -251,9 +252,9 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
                 then compare your score or review every valid word.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link href={replayPath} className="rounded-xl bg-primary px-4 py-2 font-semibold text-white hover:bg-primary-hover transition">
+                <TrackedReplayLink href={replayPath} date={entry.date} source="archive_detail_practice" className="rounded-xl bg-primary px-4 py-2 font-semibold text-white hover:bg-primary-hover transition">
                   Start replay
-                </Link>
+                </TrackedReplayLink>
                 <Link href={solverPath} className="rounded-xl bg-surface px-4 py-2 font-semibold hover:bg-surface-hover transition">
                   Open Solver
                 </Link>

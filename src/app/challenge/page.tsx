@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ChallengeClient from "./ChallengeClient";
+import GuideActionBar from "@/components/GuideActionBar";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -20,24 +22,12 @@ export default function Page() {
   return (
     <main className="min-h-screen px-4 py-8 sm:py-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          <a href="/play" className="rounded-2xl bg-surface/50 p-4 hover:bg-surface transition">
-            <div className="font-semibold text-primary">Play</div>
-            <p className="mt-1 text-sm text-text-muted">Start a fresh board.</p>
-          </a>
-          <a href="/daily" className="rounded-2xl bg-surface/50 p-4 hover:bg-surface transition">
-            <div className="font-semibold text-primary">Daily</div>
-            <p className="mt-1 text-sm text-text-muted">Use the shared daily grid.</p>
-          </a>
-          <a href="/solver" className="rounded-2xl bg-surface/50 p-4 hover:bg-surface transition">
-            <div className="font-semibold text-primary">Solver</div>
-            <p className="mt-1 text-sm text-text-muted">Review what you missed.</p>
-          </a>
-          <a href="/stats" className="rounded-2xl bg-surface/50 p-4 hover:bg-surface transition">
-            <div className="font-semibold text-primary">Stats</div>
-            <p className="mt-1 text-sm text-text-muted">Check your local progress.</p>
-          </a>
-        </div>
+        <GuideActionBar
+          primary={{ href: "/play", label: "Play a fresh board", detail: "Start a new WordGrid round." }}
+          secondary={{ href: "/daily", label: "Use today&apos;s board", detail: "Everyone gets the same Daily grid." }}
+          tertiary={{ href: "/solver", label: "Review a board", detail: "Find missed words after a challenge." }}
+          quaternary={{ href: "/stats", label: "Check your stats", detail: "See local scores and streaks." }}
+        />
         <ChallengeClient />
       </div>
     </main>

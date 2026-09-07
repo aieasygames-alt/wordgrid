@@ -145,13 +145,23 @@ export default function DailyArchivePage() {
               </div>
 
               <div className="mt-5 flex items-center justify-between gap-3">
-                <span className="text-xs text-text-dim">Open the full daily breakdown</span>
-                <Link
-                  href={`/daily/archive/${entry.date}`}
-                  className="inline-flex items-center rounded-xl bg-surface px-4 py-2 text-sm font-semibold hover:bg-surface-hover transition"
-                >
-                  View details
-                </Link>
+                <span className="text-xs text-text-dim">Review, replay, or share this board</span>
+                <div className="flex flex-wrap justify-end gap-2">
+                  <Link
+                    href={`/daily/archive/${entry.date}`}
+                    className="inline-flex items-center rounded-xl bg-surface px-4 py-2 text-sm font-semibold hover:bg-surface-hover transition"
+                  >
+                    View details
+                  </Link>
+                  {index === 0 && (
+                    <Link
+                      href="/daily"
+                      className="inline-flex items-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover transition"
+                    >
+                      Play today
+                    </Link>
+                  )}
+                </div>
               </div>
             </article>
           ))}

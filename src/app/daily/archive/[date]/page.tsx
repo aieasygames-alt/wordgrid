@@ -8,6 +8,7 @@ import {
   getDailyArchiveEntry,
   getRecentDailyArchive,
 } from "@/lib/daily-archive";
+import { buildBoardUrl } from "@/lib/board-link";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -52,6 +53,17 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
   const index = archive.findIndex((item) => item.date === entry.date);
   const newer = index > 0 ? archive[index - 1] : null;
   const older = index >= 0 && index < archive.length - 1 ? archive[index + 1] : null;
+  const replayPath = buildBoardUrl("/play", entry.grid, {
+    mode: "timed",
+    source: "daily-archive",
+    date: entry.date,
+  });
+  const challengePath = buildBoardUrl("/challenge", entry.grid, {
+    mode: "daily",
+    date: entry.date,
+    max: entry.totalPossibleScore,
+  });
+  const solverPath = buildBoardUrl("/solver", entry.grid);
 
   const detailSchema = {
     "@context": "https://schema.org",
@@ -109,8 +121,14 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
                 <Metric label="Max score" value={entry.totalPossibleScore} />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link href="/daily" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
-                  Daily
+                <Link href={replayPath} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                  Replay this board
+                </Link>
+                <Link href={challengePath} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+                  Challenge a friend
+                </Link>
+                <Link href={solverPath} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+                  Review in Solver
                 </Link>
                 <Link href="/daily/archive" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                   Back to archive
@@ -202,6 +220,22 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
                 <li>Look for extension patterns around the most repeated letters.</li>
                 <li>Use the solver when you want the full answer set, then return here to study the board layout.</li>
               </ul>
+            </div>
+
+            <div className="rounded-3xl border border-primary/20 bg-primary/10 p-5 sm:p-6">
+              <h2 className="text-2xl font-semibold text-primary">Play this exact board</h2>
+              <p className="mt-2 text-sm text-text-muted leading-relaxed">
+                Replay the archived grid with the standard three-minute timer,
+                then compare your score or review every valid word.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link href={replayPath} className="rounded-xl bg-primary px-4 py-2 font-semibold text-white hover:bg-primary-hover transition">
+                  Start replay
+                </Link>
+                <Link href={solverPath} className="rounded-xl bg-surface px-4 py-2 font-semibold hover:bg-surface-hover transition">
+                  Open Solver
+                </Link>
+              </div>
             </div>
 
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-lg shadow-black/10">

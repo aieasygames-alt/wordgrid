@@ -36,6 +36,7 @@ export default function HomeClient() {
     { href: "/play", label: "Play Free" },
     { href: "/zen", label: "Zen" },
     { href: "/daily", label: "Daily" },
+    { href: "/weekly", label: "Weekly" },
     { href: "/challenge", label: "Challenge" },
   ];
   const secondaryEntrances = [

@@ -143,6 +143,7 @@ export default function DailyClient() {
     { href: "/play", label: "Play" },
     { href: "/zen", label: "Zen" },
     { href: "/daily", label: "Daily" },
+    { href: "/weekly", label: "Weekly" },
     { href: "/challenge", label: "Challenge" },
     { href: "/daily/archive", label: "Archive" },
     { href: "/solver", label: "Word Grid Solver" },

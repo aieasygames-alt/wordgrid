@@ -24,6 +24,7 @@ const entryLinks = [
   { href: "/play", label: "Play" },
   { href: "/zen", label: "Zen" },
   { href: "/daily", label: "Daily" },
+  { href: "/weekly", label: "Weekly" },
   { href: "/challenge", label: "Challenge" },
 ];
 
@@ -95,7 +96,7 @@ export default function PlayClient() {
   };
 
   const entryNav = (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
       {entryLinks.map((entry) => (
         <Link
           key={entry.href}
@@ -190,6 +191,7 @@ export default function PlayClient() {
             </button>
             <button
               onClick={() => {
+                trackEvent("board_size_change", { board_size: 4 });
                 const s = Math.floor(Math.random() * 1e9);
                 setBoardSize(4);
                 setSeed(s);
@@ -202,7 +204,7 @@ export default function PlayClient() {
             </button>
             <button
               onClick={() => {
-                trackEvent("board_size_change", { board_size: 4 });
+                trackEvent("board_size_change", { board_size: 5 });
                 const s = Math.floor(Math.random() * 1e9);
                 setBoardSize(5);
                 setSeed(s);
@@ -215,7 +217,7 @@ export default function PlayClient() {
             </button>
             <button
               onClick={() => {
-                trackEvent("board_size_change", { board_size: 5 });
+                trackEvent("board_size_change", { board_size: 6 });
                 const s = Math.floor(Math.random() * 1e9);
                 setBoardSize(6);
                 setSeed(s);
@@ -281,7 +283,7 @@ export default function PlayClient() {
         <div className="mt-4">{entryNav}</div>
         <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
           <button
-            onClick={() => setSessionMode("timed")}
+            onClick={() => { setSessionMode("timed"); trackEvent("mode_switch", { mode: "timed" }); }}
             className={`px-3 py-1.5 rounded-full transition ${
               sessionMode === "timed" ? "bg-primary text-white" : "bg-surface/70 hover:bg-surface"
             }`}
@@ -298,7 +300,7 @@ export default function PlayClient() {
           </button>
           <button
               onClick={() => {
-                trackEvent("board_size_change", { board_size: 6 });
+                trackEvent("board_size_change", { board_size: 4 });
               const s = Math.floor(Math.random() * 1e9);
               setBoardSize(4);
               setSeed(s);
@@ -311,6 +313,7 @@ export default function PlayClient() {
           </button>
           <button
             onClick={() => {
+              trackEvent("board_size_change", { board_size: 5 });
               const s = Math.floor(Math.random() * 1e9);
               setBoardSize(5);
               setSeed(s);
@@ -323,6 +326,7 @@ export default function PlayClient() {
           </button>
           <button
             onClick={() => {
+              trackEvent("board_size_change", { board_size: 6 });
               const s = Math.floor(Math.random() * 1e9);
               setBoardSize(6);
               setSeed(s);

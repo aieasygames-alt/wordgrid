@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/play/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE_URL}/zen/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.82 },
     { url: `${BASE_URL}/daily/`, lastModified: SITE_UPDATED, changeFrequency: "daily", priority: 0.9 },
+    { url: `${BASE_URL}/weekly/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.82 },
     { url: `${BASE_URL}/challenge/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.72 },
     { url: `${BASE_URL}/boggle-solver/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.84 },
     { url: `${BASE_URL}/word-grid-solver/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.84 },

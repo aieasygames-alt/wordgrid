@@ -265,6 +265,14 @@ export default function ResultScreen({
     };
   }, [hasDictionary, missedWords.length, topMissedCategory]);
 
+  const trainingHref = useMemo(() => {
+    if (!topMissedCategory) return "/weekly";
+    if (topMissedCategory.id === "qu") return "/guides/qu-strategy";
+    if (topMissedCategory.id === "prefix") return "/guides/prefix-strategy";
+    if (topMissedCategory.id === "suffix") return "/guides/suffix-strategy";
+    return "/weekly";
+  }, [topMissedCategory]);
+
   const percentage = maxPossible > 0 ? Math.round((totalScore / maxPossible) * 100) : 0;
 
   const achievements = useMemo<Achievement[]>(() => {
@@ -781,8 +789,12 @@ export default function ResultScreen({
               <div className="text-xs font-semibold uppercase tracking-wide text-primary">Next practice</div>
               <div className="mt-2 font-semibold text-text">{trainingHint.label}</div>
               <p className="mt-1 text-sm text-text-muted leading-relaxed">{trainingHint.detail}</p>
-              <a href="/guides/word-pattern-library" className="mt-3 inline-flex rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-hover">
-                Study this pattern
+              <a
+                href={trainingHref}
+                onClick={() => trackEvent("training_recommendation_open", { focus: topMissedCategory?.id ?? "general", destination: trainingHref })}
+                className="mt-3 inline-flex rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-hover"
+              >
+                Practice this focus
               </a>
             </div>
           )}

@@ -50,6 +50,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
   const [gameOver, setGameOver] = useState(false);
   const [muted, setMuted] = useState(false);
   const [duration, setDuration] = useState(initialDuration ?? 180);
+  const [durationReady, setDurationReady] = useState(false);
   const [showDurationPicker, setShowDurationPicker] = useState(false);
   const [combo, setCombo] = useState(0);
   const [bestCombo, setBestCombo] = useState(0);
@@ -63,6 +64,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
   const bestComboRef = useRef(0);
   const boardRef = useRef<HTMLDivElement | null>(null);
   const comboBurstTimerRef = useRef<number | null>(null);
+  const gameStartTrackedRef = useRef(false);
 
   // Keep refs in sync
   useEffect(() => { foundWordsRef.current = foundWords; }, [foundWords]);
@@ -74,10 +76,12 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
   useEffect(() => {
     if (typeof initialDuration === "number") {
       setDuration(initialDuration);
+      setDurationReady(true);
       return;
     }
     const saved = localStorage.getItem(DURATION_KEY);
     if (saved) setDuration(parseInt(saved, 10));
+    setDurationReady(true);
   }, [initialDuration]);
 
   useEffect(() => {
@@ -94,11 +98,13 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
   }, []);
 
   useEffect(() => {
+    if (!durationReady || gameStartTrackedRef.current) return;
+    gameStartTrackedRef.current = true;
     trackEvent("game_start", {
       mode: duration === 0 ? "zen" : "timed",
       board_size: boardSize,
     });
-  }, [boardSize, duration]);
+  }, [boardSize, duration, durationReady]);
 
   useEffect(() => {
     setMuted(localStorage.getItem(MUTE_KEY) === "1");

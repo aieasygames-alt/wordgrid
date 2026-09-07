@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { decodeBoard, buildBoardUrl } from "@/lib/board-link";
 import { Grid } from "@/lib/boggle";
+import { trackEvent } from "@/lib/analytics";
 
 type ChallengeMeta = {
   score: number | null;
@@ -67,10 +68,11 @@ export default function ChallengeClient() {
       session: params.get("session"),
       date: params.get("date"),
     });
+    if (parsedGrid) trackEvent("challenge_open", { board_size: parsedGrid.length, source: params.get("mode") ?? "shared" });
   }, []);
 
   const playHref = useMemo(
-    () => (grid ? buildBoardUrl("/play", grid, { mode: meta.session ?? undefined }) : "/play"),
+    () => (grid ? buildBoardUrl("/play", grid, { mode: meta.session ?? undefined, source: "challenge" }) : "/play"),
     [grid, meta.session]
   );
   const solverHref = useMemo(
@@ -116,7 +118,7 @@ export default function ChallengeClient() {
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                <Link href={playHref} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                <Link href={playHref} onClick={() => trackEvent("challenge_start", { board_size: boardSize })} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
                   Play
                 </Link>
                 <Link href={solverHref} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
@@ -226,7 +228,7 @@ export default function ChallengeClient() {
                 preview and then jump into the solver once you finish.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link href={playHref} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                <Link href={playHref} onClick={() => trackEvent("challenge_start", { board_size: boardSize })} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
                   Play
                 </Link>
                 <Link href={solverHref} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">

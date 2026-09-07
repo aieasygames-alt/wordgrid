@@ -9,6 +9,7 @@ import { generateGrid, generateSizedGrid, Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
 import { decodeBoard } from "@/lib/board-link";
 import { getBoardActionTip } from "@/lib/daily-tip";
+import { trackEvent } from "@/lib/analytics";
 
 interface GameResult {
   words: { word: string; score: number }[];
@@ -47,6 +48,7 @@ export default function PlayClient() {
   const [result, setResult] = useState<GameResult | null>(null);
   const [boardSize, setBoardSize] = useState(4);
   const [sessionMode, setSessionMode] = useState<"timed" | "zen">("timed");
+  const [entrySource, setEntrySource] = useState<string | null>(null);
   const boardTip = useMemo(() => getBoardActionTip(grid), [grid]);
   const gameKey = useMemo(
     () => `${sessionMode}-${boardSize}-${grid.flat().map((cell) => cell.letter).join("")}`,
@@ -65,6 +67,7 @@ export default function PlayClient() {
     if (modeParam === "zen") {
       setSessionMode("zen");
     }
+    setEntrySource(params.get("source"));
     const boardParam = params.get("board");
     if (!boardParam && Number.isFinite(sizeParam) && sizeParam >= 4) {
       const nextSeed = Math.floor(Math.random() * 1e9);
@@ -88,6 +91,7 @@ export default function PlayClient() {
     setSeed(s);
     setGrid(boardSize === 4 ? generateGrid(s) : generateSizedGrid(s, boardSize));
     setResult(null);
+    trackEvent("new_game", { mode: sessionMode, board_size: boardSize });
   };
 
   const entryNav = (
@@ -169,7 +173,7 @@ export default function PlayClient() {
           <div className="mt-4">{entryNav}</div>
           <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
             <button
-              onClick={() => setSessionMode("timed")}
+              onClick={() => { setSessionMode("timed"); trackEvent("mode_switch", { mode: "timed" }); }}
               className={`px-3 py-1.5 rounded-full transition ${
                 sessionMode === "timed" ? "bg-primary text-white" : "bg-surface/70 hover:bg-surface"
               }`}
@@ -177,7 +181,7 @@ export default function PlayClient() {
               Timed
             </button>
             <button
-              onClick={() => setSessionMode("zen")}
+              onClick={() => { setSessionMode("zen"); trackEvent("mode_switch", { mode: "zen" }); }}
               className={`px-3 py-1.5 rounded-full transition ${
                 sessionMode === "zen" ? "bg-primary text-white" : "bg-surface/70 hover:bg-surface"
               }`}
@@ -198,6 +202,7 @@ export default function PlayClient() {
             </button>
             <button
               onClick={() => {
+                trackEvent("board_size_change", { board_size: 4 });
                 const s = Math.floor(Math.random() * 1e9);
                 setBoardSize(5);
                 setSeed(s);
@@ -210,6 +215,7 @@ export default function PlayClient() {
             </button>
             <button
               onClick={() => {
+                trackEvent("board_size_change", { board_size: 5 });
                 const s = Math.floor(Math.random() * 1e9);
                 setBoardSize(6);
                 setSeed(s);
@@ -283,7 +289,7 @@ export default function PlayClient() {
             Timed
           </button>
           <button
-            onClick={() => setSessionMode("zen")}
+              onClick={() => { setSessionMode("zen"); trackEvent("mode_switch", { mode: "zen" }); }}
             className={`px-3 py-1.5 rounded-full transition ${
               sessionMode === "zen" ? "bg-primary text-white" : "bg-surface/70 hover:bg-surface"
             }`}
@@ -291,7 +297,8 @@ export default function PlayClient() {
             Zen
           </button>
           <button
-            onClick={() => {
+              onClick={() => {
+                trackEvent("board_size_change", { board_size: 6 });
               const s = Math.floor(Math.random() * 1e9);
               setBoardSize(4);
               setSeed(s);
@@ -336,7 +343,10 @@ export default function PlayClient() {
             grid={grid}
             initialDuration={sessionMode === "zen" ? 0 : 180}
             onComplete={(words, total, trie, bestCombo) =>
-              setResult({ words, total, grid, trie, bestCombo, sessionMode })
+              {
+                if (entrySource === "challenge") trackEvent("challenge_complete", { board_size: grid.length, score: total });
+                setResult({ words, total, grid, trie, bestCombo, sessionMode });
+              }
             }
           />
         </div>

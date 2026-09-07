@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { DailyMission } from "@/lib/daily-missions";
+import { trackEvent } from "@/lib/analytics";
 
 interface DailyMissionPanelProps {
   missions: DailyMission[];
@@ -19,6 +20,15 @@ export default function DailyMissionPanel({
   initialCollapsed = false,
 }: DailyMissionPanelProps) {
   const [expanded, setExpanded] = useState(!initialCollapsed);
+  const trackedRef = useRef(new Set<string>());
+
+  useEffect(() => {
+    missions.filter((mission) => mission.completed).forEach((mission) => {
+      if (trackedRef.current.has(mission.id)) return;
+      trackedRef.current.add(mission.id);
+      trackEvent("daily_mission_complete", { mission_id: mission.id });
+    });
+  }, [missions]);
 
   if (!missions.length) return null;
 

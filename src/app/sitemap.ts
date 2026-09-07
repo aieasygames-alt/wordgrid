@@ -14,6 +14,10 @@ const WORDS_UPDATED = new Date("2026-07-24");
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE_URL}/about/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.35 },
+    { url: `${BASE_URL}/contact/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.3 },
+    { url: `${BASE_URL}/privacy/`, lastModified: SITE_UPDATED, changeFrequency: "yearly", priority: 0.25 },
+    { url: `${BASE_URL}/terms/`, lastModified: SITE_UPDATED, changeFrequency: "yearly", priority: 0.25 },
     { url: `${BASE_URL}/play/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE_URL}/zen/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.82 },
     { url: `${BASE_URL}/daily/`, lastModified: SITE_UPDATED, changeFrequency: "daily", priority: 0.9 },

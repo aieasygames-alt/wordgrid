@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import CookieBanner from "@/components/CookieBanner";
+import SiteFooter from "@/components/SiteFooter";
 
 const GA_ID = "G-MLZV98LG8Z";
 
@@ -106,7 +107,7 @@ export default function RootLayout({
         <script id="consent-default" dangerouslySetInnerHTML={{ __html: consentScript }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>{children}<SiteFooter /></ThemeProvider>
         <CookieBanner />
         {/* Google Analytics (GA4) */}
         <Script

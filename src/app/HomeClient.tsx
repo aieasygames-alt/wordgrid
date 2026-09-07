@@ -6,6 +6,7 @@ import ResultScreen from "@/components/ResultScreen";
 import Link from "next/link";
 import { generateGrid, Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
+import { trackEvent } from "@/lib/analytics";
 
 interface FoundWord {
   word: string;
@@ -74,7 +75,12 @@ export default function HomeClient() {
         <p className="mx-auto mt-2 max-w-xl text-sm text-text-muted">Connect adjacent letters, find as many words as you can, then review the board after the clock ends.</p>
       </section>
       <div className="mb-6">
-        <GameBoard grid={grid} onComplete={handleComplete} />
+        <GameBoard
+          grid={grid}
+          startPaused
+          onStart={() => trackEvent("homepage_game_start_click", { board_size: grid.length })}
+          onComplete={handleComplete}
+        />
       </div>
       <section className="grid gap-3 sm:grid-cols-3">
         <Link href="/daily" className="border border-border bg-surface/50 p-4 transition hover:bg-surface">

@@ -16,6 +16,8 @@ interface FoundWord {
 interface GameBoardProps {
   grid: Grid;
   initialDuration?: number;
+  startPaused?: boolean;
+  onStart?: () => void;
   onComplete?: (
     words: FoundWord[],
     totalScore: number,
@@ -37,7 +39,7 @@ const DURATION_OPTIONS = [
   { label: "Zen", value: 0 },
 ];
 
-export default function GameBoard({ grid, initialDuration, onComplete }: GameBoardProps) {
+export default function GameBoard({ grid, initialDuration, startPaused = false, onStart, onComplete }: GameBoardProps) {
   const boardSize = grid.length;
   const [selected, setSelected] = useState<CellPos[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -48,6 +50,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
   const [trie, setTrie] = useState<Trie | null>(null);
   const [dictError, setDictError] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [hasStarted, setHasStarted] = useState(!startPaused);
   const [muted, setMuted] = useState(false);
   const [duration, setDuration] = useState(initialDuration ?? 180);
   const [durationReady, setDurationReady] = useState(false);
@@ -98,13 +101,13 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
   }, []);
 
   useEffect(() => {
-    if (!durationReady || gameStartTrackedRef.current) return;
+    if (!durationReady || !hasStarted || gameStartTrackedRef.current) return;
     gameStartTrackedRef.current = true;
     trackEvent("game_start", {
       mode: duration === 0 ? "zen" : "timed",
       board_size: boardSize,
     });
-  }, [boardSize, duration, durationReady]);
+  }, [boardSize, duration, durationReady, hasStarted]);
 
   useEffect(() => {
     setMuted(localStorage.getItem(MUTE_KEY) === "1");
@@ -226,7 +229,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
 
   const handlePointerDown = (e: React.PointerEvent, r: number, c: number) => {
     if (e.button !== 0 && e.pointerType === "mouse") return;
-    if (gameOver) return;
+    if (gameOver || !hasStarted) return;
     e.preventDefault();
     setIsDragging(true);
     setSelected([{ row: r, col: c }]);
@@ -236,7 +239,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
 
   const handlePointerMove = useCallback(
     (e: PointerEvent) => {
-      if (!isDragging || gameOver) return;
+      if (!isDragging || gameOver || !hasStarted) return;
       const pos = getCellAt(e.clientX, e.clientY);
       if (!pos) return;
 
@@ -259,7 +262,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
         }
       }
     },
-    [isDragging, selected, getCellAt, gameOver, playSound]
+    [isDragging, selected, getCellAt, gameOver, hasStarted, playSound]
   );
 
   // P0-2: Submit on pointer up
@@ -329,6 +332,11 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
     setShowDurationPicker(false);
   };
 
+  const startGame = () => {
+    setHasStarted(true);
+    onStart?.();
+  };
+
   const totalScore = foundWords.reduce((s, w) => s + w.score, 0);
   const viewportSmall = viewportWidth < 640;
   const viewportWide = viewportWidth >= 1200;
@@ -391,7 +399,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
           <div className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-2 rounded-xl border border-border bg-surface/60 p-2 sm:p-3">
             <div className="flex items-center gap-1.5">
               {duration > 0 ? (
-                <Timer seconds={duration} onExpire={finishGame} paused={gameOver} />
+                <Timer seconds={duration} onExpire={finishGame} paused={gameOver || !hasStarted} />
               ) : (
                 <div className="flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-2xl font-bold bg-surface text-text">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -400,7 +408,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
                   <span>∞</span>
                 </div>
               )}
-              {!gameOver && (
+              {!gameOver && hasStarted && (
                 <div className="relative">
                   <button
                     onClick={() => setShowDurationPicker(!showDurationPicker)}
@@ -501,7 +509,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
           <div
             ref={boardRef}
             id="game-board"
-            className={`relative grid touch-none select-none transition-all duration-300 ${
+            className={`relative grid touch-none select-none transition-all duration-300 ${!hasStarted ? "opacity-70" : ""} ${
               comboBurst === 5
                 ? "scale-[1.03] drop-shadow-[0_0_28px_rgba(74,222,128,0.32)]"
                 : comboBurst === 3
@@ -516,6 +524,15 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
             role="grid"
             aria-label={`${boardSize} by ${boardSize} letter grid`}
           >
+            {!hasStarted && (
+              <div className="absolute inset-0 z-30 flex items-center justify-center rounded-xl bg-bg/65 p-5 text-center backdrop-blur-[1px]">
+                <div>
+                  <div className="text-sm font-semibold text-text">Your board is ready</div>
+                  <p className="mt-1 text-xs text-text-muted">The timer starts when you are ready.</p>
+                  <button onClick={startGame} className="mt-4 rounded-xl bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary-hover">Start game</button>
+                </div>
+              </div>
+            )}
             {comboBurst && (
               <div
                 className={`pointer-events-none absolute -inset-3 rounded-3xl opacity-80 blur-md ${

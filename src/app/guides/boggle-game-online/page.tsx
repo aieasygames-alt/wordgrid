@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
+import GuideActionBar from "@/components/GuideActionBar";
 
 export const metadata: Metadata = {
   title: "Boggle Game Online — Free Play in Your Browser",
@@ -119,6 +120,13 @@ export default function BoggleGameOnlineGuide() {
           </h1>
           <p className="text-text-muted">6 min read &middot; Updated July 24, 2026</p>
         </header>
+
+        <GuideActionBar
+          primary={{ href: "/play", label: "Play Boggle online", detail: "Open a free board in your browser." }}
+          secondary={{ href: "/daily", label: "Try today&apos;s Daily", detail: "Play the same shared board as everyone else." }}
+          tertiary={{ href: "/guides/boggle-rules-beginners", label: "Learn the rules", detail: "Get the 4x4 rules and scoring basics." }}
+          quaternary={{ href: "/solver", label: "Review after play", detail: "Find missed words when the round ends." }}
+        />
 
         <div className="space-y-6 text-text">
           <section>

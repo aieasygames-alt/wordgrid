@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import GuideImage from "@/components/GuideImage";
+import GuideActionBar from "@/components/GuideActionBar";
 
 export const metadata: Metadata = {
   title: "Boggle Rules for Beginners: How to Play, Score, and Win",
@@ -129,26 +131,12 @@ export default function BoggleRulesGuide() {
           <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
 
-        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <a href="/play/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Play now</div>
-              <p className="mt-1 text-sm text-text-muted">Try the rules on a live board.</p>
-            </a>
-            <a href="/words/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Study words</div>
-              <p className="mt-1 text-sm text-text-muted">Learn words and scoring cues.</p>
-            </a>
-            <a href="/solver/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Use solver</div>
-              <p className="mt-1 text-sm text-text-muted">Check a finished board after play.</p>
-            </a>
-            <a href="/guides/boggle-scoring-sheet/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Scoring sheet</div>
-              <p className="mt-1 text-sm text-text-muted">Jump to points and examples.</p>
-            </a>
-          </div>
-        </section>
+        <GuideActionBar
+          primary={{ href: "/play", label: "Play the rules", detail: "Try a live board while the basics are fresh." }}
+          secondary={{ href: "/guides/boggle-scoring-sheet", label: "Learn scoring", detail: "See points by word length with examples." }}
+          tertiary={{ href: "/words", label: "Study words", detail: "Build vocabulary and spot useful patterns." }}
+          quaternary={{ href: "/solver", label: "Review a board", detail: "Use Solver after you finish playing." }}
+        />
 
         <div className="space-y-6 text-text">
           {/* Intro */}

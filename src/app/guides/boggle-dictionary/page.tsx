@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
+import GuideActionBar from "@/components/GuideActionBar";
 
 export const metadata: Metadata = {
   title: "Boggle Dictionary Online: Valid Words, Word Lists & Study",
@@ -127,6 +128,13 @@ export default function BoggleDictionaryGuide() {
           </h1>
           <p className="text-text-muted">9 min read &middot; Updated July 2026</p>
         </header>
+
+        <GuideActionBar
+          primary={{ href: "/solver", label: "Check a board", detail: "Find every valid word after a round." }}
+          secondary={{ href: "/play", label: "Practice now", detail: "Use the rules in a live WordGrid board." }}
+          tertiary={{ href: "/guides/boggle-word-lists", label: "Study word lists", detail: "Browse words by letter and pattern." }}
+          quaternary={{ href: "/guides/boggle-scoring-sheet", label: "Review scoring", detail: "See how word length affects points." }}
+        />
 
         <div className="space-y-6 text-text">
           <section>

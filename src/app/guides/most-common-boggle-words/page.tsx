@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
+import GuideActionBar from "@/components/GuideActionBar";
 
 export const metadata: Metadata = {
   title: "Most Common Boggle Words: Top 100 List & Patterns",
@@ -137,26 +138,12 @@ export default function MostCommonBoggleWordsGuide() {
           <p className="text-text-muted">10 min read &middot; Updated July 2026</p>
         </header>
 
-        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <Link href="/words/common-boggle-words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Common words list</div>
-              <p className="mt-1 text-sm text-text-muted">Open the word-study page.</p>
-            </Link>
-            <Link href="/words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Search words</div>
-              <p className="mt-1 text-sm text-text-muted">Look up score and patterns.</p>
-            </Link>
-            <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Review solver</div>
-              <p className="mt-1 text-sm text-text-muted">Check missed common words after play.</p>
-            </Link>
-            <Link href="/play" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Play a board</div>
-              <p className="mt-1 text-sm text-text-muted">Use the list in a live round.</p>
-            </Link>
-          </div>
-        </section>
+        <GuideActionBar
+          primary={{ href: "/play", label: "Play a board", detail: "Use common words in a live round." }}
+          secondary={{ href: "/daily", label: "Try today&apos;s Daily", detail: "See which patterns appear under pressure." }}
+          tertiary={{ href: "/solver", label: "Review Solver", detail: "Check common words you missed." }}
+          quaternary={{ href: "/words/common-boggle-words", label: "Study the list", detail: "Open the focused word-study page." }}
+        />
 
         <div className="space-y-6 text-text">
           <section>

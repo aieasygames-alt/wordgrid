@@ -90,12 +90,12 @@ export default function HomeClient() {
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-start">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-              Play, Solve, and Learn Word Grid
+              Play Word Grid Online Free
             </h1>
             <p className="text-base text-text-muted max-w-lg mx-auto lg:mx-0 mb-4">
-              Play WordGrid instantly in your browser. Start a board, solve a
-              finished grid, or study word lists and guides without leaving the
-              site.
+              Find words in a free Boggle-style grid game. Start instantly in
+              your browser with no download or sign-up, then review the board
+              with Daily, Solver, and word study tools.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {primaryEntrances.map((entry) => (

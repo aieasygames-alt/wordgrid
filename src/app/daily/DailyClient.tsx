@@ -119,6 +119,14 @@ export default function DailyClient() {
           bestCombo={result.bestCombo}
           onPlayAgain={() => (window.location.href = "/play")}
         />
+        <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
+          <Link href="/daily/archive" className="rounded-xl bg-surface px-4 py-2 font-semibold hover:bg-surface-hover transition">
+            Browse Daily Archive
+          </Link>
+          <Link href="/solver" className="rounded-xl bg-surface px-4 py-2 font-semibold hover:bg-surface-hover transition">
+            Review Another Board
+          </Link>
+        </div>
       </main>
     );
   }

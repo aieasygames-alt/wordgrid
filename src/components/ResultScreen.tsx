@@ -791,6 +791,43 @@ export default function ResultScreen({
         </div>
       )}
 
+      <section className="w-full rounded-2xl border border-border bg-surface/40 p-4 sm:p-5">
+        <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">
+          Keep playing
+        </h3>
+        <p className="mt-2 text-sm text-text-muted">
+          Review this board, compare a shared challenge, or start the next daily puzzle.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <a
+            href={solverUrl}
+            className="rounded-xl bg-primary px-5 py-3 font-semibold transition hover:bg-primary-hover"
+          >
+            Review in Solver
+          </a>
+          <a
+            href={challengeUrl}
+            className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
+          >
+            Open Challenge
+          </a>
+          {mode !== "daily" && (
+            <a
+              href="/daily"
+              className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
+            >
+              Play Today&apos;s Daily
+            </a>
+          )}
+          <a
+            href="/stats"
+            className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
+          >
+            View Stats
+          </a>
+        </div>
+      </section>
+
       <div className="flex flex-wrap gap-3">
         {onPlayAgain && (
           <button
@@ -800,12 +837,6 @@ export default function ResultScreen({
             {mode === "daily" ? "Play Random" : "New Game"}
           </button>
         )}
-        <a
-          href="/daily"
-          className="rounded-xl bg-surface px-6 py-3 font-semibold transition hover:bg-surface-hover"
-        >
-          Daily
-        </a>
         <a
           href="/"
           className="rounded-xl bg-surface px-6 py-3 font-semibold transition hover:bg-surface-hover"

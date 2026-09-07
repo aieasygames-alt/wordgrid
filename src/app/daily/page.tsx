@@ -4,9 +4,9 @@ import DailyClient from "./DailyClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Daily Word Grid Puzzle — Today's Free Challenge",
+  title: "Daily Word Grid Puzzle — Today's Free 4x4 Board",
   description:
-    "Play today's free daily word grid challenge with a shared 4x4 board, 3-minute timer, and streak tracking.",
+    "Play today's free shared 4x4 word grid with a 3-minute timer. Everyone gets the same Daily board, with streak tracking and a new puzzle each day.",
   alternates: { canonical: "/daily" },
   keywords: [
     "daily word grid",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "free daily word game",
   ],
   openGraph: {
-    title: "Daily Word Grid Puzzle — Today's Free Challenge",
+    title: "Daily Word Grid Puzzle — Today's Free 4x4 Board",
     description:
       "Today's shared word grid challenge with a 3-minute timer and fresh board every day.",
   },

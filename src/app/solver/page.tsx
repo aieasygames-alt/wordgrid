@@ -5,9 +5,9 @@ import SolverClient from "./SolverClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Word Grid Finder & Boggle Solver — Find Every Word",
+  title: "Boggle Solver — Free Word Grid Finder Online",
   description:
-    "Use this free word grid finder and Boggle solver to find every valid word, compare scores, and review missed patterns after play.",
+    "Use this free Boggle solver to find every valid word in a Boggle-style grid, compare scores, and review missed patterns after you play.",
   alternates: { canonical: "/solver" },
   keywords: [
     "boggle solver",
@@ -101,11 +101,11 @@ export default function Page() {
           <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] items-start">
             <div>
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-                Word Grid Finder and Boggle Solver
+                Boggle Solver and Word Grid Finder
               </h1>
               <p className="mt-4 text-base sm:text-lg text-text-muted max-w-2xl leading-relaxed">
-                Paste any Boggle-style word grid into this free word grid
-                finder, hit solve, and get every valid word with score ranking,
+                Paste any Boggle-style word grid into this free Boggle solver,
+                hit solve, and get every valid word with score ranking,
                 length filters, and quick pattern review. It is the fastest way
                 to turn a finished game into a learning session.
               </p>

@@ -33,6 +33,12 @@ type MissedCategory = {
   detail: string;
 };
 
+type Achievement = {
+  id: string;
+  label: string;
+  detail: string;
+};
+
 const PREFIX_PATTERNS = [
   "RE",
   "UN",
@@ -261,6 +267,23 @@ export default function ResultScreen({
 
   const percentage = maxPossible > 0 ? Math.round((totalScore / maxPossible) * 100) : 0;
 
+  const achievements = useMemo<Achievement[]>(() => {
+    const items: Achievement[] = [];
+    if (hasDictionary && percentage >= 75) {
+      items.push({ id: "perfect-scan", label: "Perfect Scan", detail: `${percentage}% of the board score found.` });
+    }
+    if (longestFoundWord && longestFoundWord.word.length >= 7) {
+      items.push({ id: "long-word", label: "Long Word", detail: `${longestFoundWord.word} was your longest find.` });
+    }
+    if (foundWords.some((word) => word.word.toUpperCase().includes("QU"))) {
+      items.push({ id: "qu-hunter", label: "Qu Hunter", detail: "You found a word using the Qu tile." });
+    }
+    if (bestCombo && bestCombo >= 4) {
+      items.push({ id: "combo", label: `${bestCombo}x Combo`, detail: "You built a strong run of consecutive finds." });
+    }
+    return items;
+  }, [bestCombo, foundWords, hasDictionary, longestFoundWord, percentage]);
+
   const dailyMissions = useMemo(
     () => (mode === "daily" && hasDictionary ? buildDailyMissions(allWords, foundWords, bestCombo ?? 0) : []),
     [mode, hasDictionary, allWords, foundWords, bestCombo]
@@ -285,6 +308,10 @@ export default function ResultScreen({
         : `Words found: ${foundWords.length}`,
     ];
 
+    if (achievements.length > 0) {
+      lines.push(`Achievements: ${achievements.map((achievement) => achievement.label).join(", ")}`);
+    }
+
     if (streak && streak >= 2) {
       lines.push(`🔥 ${streak}-day streak`);
     }
@@ -307,7 +334,7 @@ export default function ResultScreen({
       lines.push("");
     }
     return lines.join("\n");
-  }, [mode, sessionMode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords, foundSet, streak, hasDictionary, bestCombo, challengeUrl]);
+  }, [mode, sessionMode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords, foundSet, streak, hasDictionary, bestCombo, challengeUrl, achievements]);
 
   const handleShare = async () => {
     trackEvent("share_result", { mode, result_type: "text", board_size: grid.length });
@@ -451,6 +478,22 @@ export default function ResultScreen({
           ? "Zen Complete"
           : "Game Over"}
       </h2>
+
+      {achievements.length > 0 && (
+        <section className="w-full rounded-2xl border border-primary/20 bg-primary/10 p-4 sm:p-5">
+          <div className="text-xs font-semibold uppercase tracking-wide text-primary">
+            Board achievements
+          </div>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {achievements.map((achievement) => (
+              <div key={achievement.id} className="rounded-xl bg-bg/50 p-3">
+                <div className="font-semibold text-text">{achievement.label}</div>
+                <p className="mt-1 text-xs leading-relaxed text-text-muted">{achievement.detail}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
         <div className="flex flex-col gap-6">

@@ -3,12 +3,9 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import GameBoard from "@/components/GameBoard";
 import ResultScreen from "@/components/ResultScreen";
-import ThemeToggle from "@/components/ThemeToggle";
-import TodayTipCard from "@/components/TodayTipCard";
 import Link from "next/link";
 import { generateGrid, Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
-import { getTodayActionTip } from "@/lib/daily-tip";
 
 interface FoundWord {
   word: string;
@@ -31,27 +28,6 @@ export default function HomeClient() {
   }, []);
   const grid = useMemo(() => generateGrid(seed), [seed]);
   const [result, setResult] = useState<GameResult | null>(null);
-  const todayTip = useMemo(() => getTodayActionTip(), []);
-  const primaryEntrances = [
-    { href: "/play", label: "Play Free" },
-    { href: "/zen", label: "Zen" },
-    { href: "/daily", label: "Daily" },
-    { href: "/weekly", label: "Weekly" },
-    { href: "/challenge", label: "Challenge" },
-  ];
-  const secondaryEntrances = [
-    { href: "/words", label: "Word List" },
-    { href: "/solver", label: "Solve" },
-    { href: "/guides", label: "Learn" },
-    { href: "/guides/word-pattern-library", label: "Pattern Library" },
-    { href: "/guides/boggle-rules-beginners", label: "Rules" },
-    { href: "/stats", label: "Stats" },
-  ];
-  const flowEntrances = [
-    { href: "/play", label: "Start with Play" },
-    { href: "/solver", label: "Review with Solver" },
-    { href: "/words", label: "Browse Words" },
-  ];
 
   const handleComplete = useCallback(
     (words: FoundWord[], total: number, trie: Trie | null, bestCombo: number) => {
@@ -82,87 +58,38 @@ export default function HomeClient() {
     );
   }
 
-  // Default: hero + game visible immediately
+  // Default: game-first lobby with secondary modes kept out of the primary path.
   return (
-    <>
-      {/* Top bar with theme toggle */}
-      <div className="flex justify-end mb-4">
-        <ThemeToggle />
-      </div>
-
-      {/* Hero text */}
-      <section className="mb-6">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-start">
-          <div className="text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-              Play Word Grid Online Free
-            </h1>
-            <p className="text-base text-text-muted max-w-lg mx-auto lg:mx-0 mb-4">
-              Find words in a free Boggle-style grid game. Start instantly in
-              your browser with no download or sign-up, then review the board
-              with Daily, Solver, and word study tools.
-            </p>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {primaryEntrances.map((entry) => (
-                <Link
-                  key={entry.href}
-                  href={entry.href}
-                  className="px-5 py-3 bg-surface hover:bg-surface-hover transition rounded-xl text-sm font-semibold text-center active:scale-[0.98]"
-                >
-                  {entry.label}
-                </Link>
-              ))}
-            </div>
-            <div className="mt-5 flex flex-wrap justify-center lg:justify-start gap-2 text-sm">
-              {secondaryEntrances.map((entry) => (
-                <Link
-                  key={entry.href}
-                  href={entry.href}
-                  className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition"
-                >
-                  {entry.label}
-                </Link>
-              ))}
-            </div>
-            <div className="mt-5 grid gap-3 sm:grid-cols-3">
-              {flowEntrances.map((entry, index) => (
-                <Link
-                  key={entry.href}
-                  href={entry.href}
-                  className="rounded-2xl border border-border bg-surface/50 p-4 text-left transition hover:bg-surface"
-                >
-                  <div className="text-xs font-semibold uppercase tracking-wide text-text-dim">
-                    Step {index + 1}
-                  </div>
-                  <div className="mt-1 font-semibold text-text">{entry.label}</div>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-            <TodayTipCard
-              tip={todayTip}
-              grid={grid}
-            compact
-            layout="split"
-            density="tight"
-            actionsLayout="inline"
-              showActionBox={false}
-            showGrid={false}
-            primaryHref="/daily"
-            primaryLabel="Open Daily"
-            secondaryHref="/words"
-            secondaryLabel="Open word list"
-            tertiaryHref="/solver"
-            tertiaryLabel="Open solver"
-            />
+    <main className="mx-auto w-full max-w-6xl px-4 py-5 sm:py-8">
+      <header className="mb-5 flex items-center justify-between gap-4">
+        <Link href="/" className="text-lg font-bold tracking-tight">WordGrid</Link>
+        <div className="flex items-center gap-2 text-sm">
+          <Link href="/daily" className="rounded-lg bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">Daily</Link>
+          <Link href="/weekly" className="rounded-lg bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">Weekly</Link>
         </div>
+      </header>
+      <section className="mb-5 text-center">
+        <div className="text-xs font-semibold uppercase tracking-wide text-primary">Free browser word game</div>
+        <h1 className="mt-2 text-2xl font-bold sm:text-3xl">Play this board</h1>
+        <p className="mx-auto mt-2 max-w-xl text-sm text-text-muted">Connect adjacent letters, find as many words as you can, then review the board after the clock ends.</p>
       </section>
-
-      {/* Game board — visible immediately */}
-      <div className="mb-8">
+      <div className="mb-6">
         <GameBoard grid={grid} onComplete={handleComplete} />
       </div>
-    </>
+      <section className="grid gap-3 sm:grid-cols-3">
+        <Link href="/daily" className="border border-border bg-surface/50 p-4 transition hover:bg-surface">
+          <div className="text-xs font-semibold uppercase tracking-wide text-primary">Daily</div>
+          <div className="mt-1 font-semibold">Shared board, new each day</div>
+        </Link>
+        <Link href="/weekly" className="border border-border bg-surface/50 p-4 transition hover:bg-surface">
+          <div className="text-xs font-semibold uppercase tracking-wide text-primary">Weekly</div>
+          <div className="mt-1 font-semibold">One themed board all week</div>
+        </Link>
+        <Link href="/solver" className="border border-border bg-surface/50 p-4 transition hover:bg-surface">
+          <div className="text-xs font-semibold uppercase tracking-wide text-primary">Improve</div>
+          <div className="mt-1 font-semibold">Review a finished board</div>
+        </Link>
+      </section>
+    </main>
   );
 }

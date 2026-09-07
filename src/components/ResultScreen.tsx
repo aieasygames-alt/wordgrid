@@ -130,7 +130,7 @@ export default function ResultScreen({
   bestCombo,
   onPlayAgain,
 }: ResultScreenProps) {
-  const [showMissed, setShowMissed] = useState(true);
+  const [showMissed, setShowMissed] = useState(false);
   const [copied, setCopied] = useState(false);
   const [challengeCopied, setChallengeCopied] = useState(false);
   const [reviewCopied, setReviewCopied] = useState(false);
@@ -479,13 +479,29 @@ export default function ResultScreen({
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-6">
       <Confetti fire={fireConfetti} />
-      <h2 className="text-center text-3xl font-bold">
-        {mode === "daily"
-          ? `Daily — ${dateLabel}`
-          : sessionMode === "zen"
-          ? "Zen Complete"
-          : "Game Over"}
-      </h2>
+      <section className="text-center">
+        <div className="text-xs font-semibold uppercase tracking-wide text-primary">Round complete</div>
+        <h2 className="mt-2 text-3xl font-bold">
+          {mode === "daily" ? `Daily — ${dateLabel}` : sessionMode === "zen" ? "Zen Complete" : "Game Over"}
+        </h2>
+        <div className="mt-3 text-5xl font-bold tabular-nums text-primary">{totalScore}</div>
+        <p className="mt-1 text-sm text-text-muted">
+          {bestFoundWord ? `Best word: ${bestFoundWord.word}` : "Your next board is ready whenever you are."}
+          {hasDictionary ? ` · ${percentage}% of available score` : ""}
+        </p>
+        <div className="mt-5 flex flex-wrap justify-center gap-3">
+          {onPlayAgain && (
+            <button onClick={onPlayAgain} className="rounded-xl bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary-hover">
+              {mode === "daily" ? "Play Random" : "Play Again"}
+            </button>
+          )}
+          {trainingHint && (
+            <a href={trainingHref} onClick={() => trackEvent("training_recommendation_open", { focus: topMissedCategory?.id ?? "general", destination: trainingHref })} className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover">
+              Practice {topMissedCategory?.label ?? "this focus"}
+            </a>
+          )}
+        </div>
+      </section>
 
       {achievements.length > 0 && (
         <section className="w-full rounded-2xl border border-primary/20 bg-primary/10 p-4 sm:p-5">
@@ -785,17 +801,10 @@ export default function ResultScreen({
           )}
 
           {hasDictionary && trainingHint && (
-            <div className="w-full rounded-2xl border border-primary/20 bg-primary/10 p-4 sm:p-5">
+            <div className="w-full border-l-2 border-primary bg-primary/5 px-4 py-3">
               <div className="text-xs font-semibold uppercase tracking-wide text-primary">Next practice</div>
-              <div className="mt-2 font-semibold text-text">{trainingHint.label}</div>
+              <div className="mt-1 font-semibold text-text">{trainingHint.label}</div>
               <p className="mt-1 text-sm text-text-muted leading-relaxed">{trainingHint.detail}</p>
-              <a
-                href={trainingHref}
-                onClick={() => trackEvent("training_recommendation_open", { focus: topMissedCategory?.id ?? "general", destination: trainingHref })}
-                className="mt-3 inline-flex rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-hover"
-              >
-                Practice this focus
-              </a>
             </div>
           )}
 

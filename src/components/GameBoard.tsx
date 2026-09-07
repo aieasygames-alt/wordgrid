@@ -371,7 +371,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
   const renderedBoardSize = tileSize * boardSize + gap * (boardSize - 1);
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full max-w-4xl mx-auto">
+    <div className="flex flex-col items-center gap-3 w-full max-w-4xl mx-auto">
       {comboBurst && (
         <div
           className={`pointer-events-none fixed left-1/2 top-20 z-50 -translate-x-1/2 rounded-full px-5 py-2 text-sm font-black uppercase tracking-[0.3em] text-white shadow-2xl ${
@@ -387,9 +387,9 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
 
       <div className="w-full lg:grid lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-5 lg:items-start">
         <div className="flex flex-col items-center gap-4 w-full">
-          {/* Top bar: timer + score + mute */}
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-2">
+          {/* A compact game HUD keeps the board, score, and timer within one glance. */}
+          <div className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-2 rounded-xl border border-border bg-surface/60 p-2 sm:p-3">
+            <div className="flex items-center gap-1.5">
               {duration > 0 ? (
                 <Timer seconds={duration} onExpire={finishGame} paused={gameOver} />
               ) : (
@@ -405,7 +405,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
                   <button
                     onClick={() => setShowDurationPicker(!showDurationPicker)}
                     aria-label="Change timer"
-                    className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center bg-surface hover:bg-surface-hover rounded-lg transition text-xs text-text-muted"
+                    className="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center bg-bg/60 hover:bg-surface-hover rounded-lg transition text-xs text-text-muted"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -430,8 +430,11 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
               )}
             </div>
 
-            <div className="flex items-center gap-3">
-              <ThemeToggle />
+            <div className="text-center">
+              <div className="text-[10px] font-semibold uppercase tracking-wide text-text-muted">Found</div>
+              <div className="mt-0.5 text-sm font-semibold tabular-nums text-text">{foundWords.length} words{combo > 1 ? ` · x${combo}` : ""}</div>
+            </div>
+            <div className="flex items-center justify-end gap-1.5">
               <div className={`text-right transition-all duration-300 ${comboBurst ? "scale-110" : ""}`}>
                 <div
                   className={`text-2xl font-bold tabular-nums transition-all duration-300 ${
@@ -451,7 +454,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
               <button
                 onClick={toggleMute}
                 aria-label={muted ? "Unmute" : "Mute"}
-                className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-surface hover:bg-surface-hover rounded-xl transition"
+                className="p-2.5 min-w-[40px] min-h-[40px] flex items-center justify-center bg-bg/60 hover:bg-surface-hover rounded-lg transition"
               >
                 {muted ? (
                   <svg className="w-5 h-5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -467,10 +470,10 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
           </div>
 
           {/* Current word display */}
-          <div className="h-10 lg:h-8 flex items-center justify-center" aria-live="polite" aria-atomic="true">
+          <div className="h-12 flex items-center justify-center" aria-live="polite" aria-atomic="true">
             <div className="flex flex-col items-center gap-0.5">
               <span
-                className={`text-3xl lg:text-2xl font-bold tracking-widest min-w-[120px] text-center transition-colors duration-200 ${
+                className={`rounded-full px-4 py-1 text-2xl font-bold tracking-[0.22em] min-w-[150px] text-center transition-colors duration-200 ${
                   flash === "correct"
                     ? "text-success"
                     : flash === "wrong"
@@ -478,7 +481,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
                     : "text-primary"
                 }`}
               >
-                {currentWord || <span className="text-text-muted text-lg lg:text-base font-normal">Drag to select</span>}
+                {currentWord || <span className="text-text-muted text-sm font-semibold tracking-normal">Drag across letters</span>}
               </span>
               <span
                 className={`min-h-4 text-xs font-semibold uppercase tracking-[0.24em] transition-all duration-300 ${

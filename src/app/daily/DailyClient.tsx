@@ -19,6 +19,7 @@ import { recordDailyPlay, type StreakData } from "@/lib/streak";
 import { getTodayActionTip } from "@/lib/daily-tip";
 import TodayTipCard from "@/components/TodayTipCard";
 import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
 
 interface GameResult {
   words: { word: string; score: number }[];
@@ -85,6 +86,13 @@ export default function DailyClient() {
     trie: Trie | null,
     bestCombo: number
   ) => {
+    trackEvent("game_complete", {
+      mode: "daily",
+      board_size: grid.length,
+      score: total,
+      words_found: words.length,
+      daily_date: today,
+    });
     const streak = recordDailyPlay();
     setResult({ words, total, grid, trie, streak, dateLabel: today, bestCombo });
     if (typeof window !== "undefined") {

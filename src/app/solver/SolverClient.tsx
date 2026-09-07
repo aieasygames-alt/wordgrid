@@ -7,6 +7,7 @@ import { decodeBoard } from "@/lib/board-link";
 import { loadDictionary, Trie } from "@/lib/dictionary";
 import { solveBoard, type SolvedWord } from "@/lib/solver";
 import { INDEXABLE_WORDS } from "@/lib/indexable-words";
+import { trackEvent } from "@/lib/analytics";
 
 type CellValue = string;
 
@@ -177,6 +178,7 @@ export default function SolverClient() {
     }
 
     const next = gridToValues(parsed);
+    trackEvent("solver_review_start", { source: "shared_board", board_size: parsed.length });
     setValues(next);
     setActiveBoardName("Shared challenge");
     setSolvedWords([]);
@@ -198,6 +200,11 @@ export default function SolverClient() {
         const activeTrie = trie || (await loadDictionary());
         setTrie(activeTrie);
         const solved = solveBoard(valuesToGrid(nextValues), activeTrie);
+        trackEvent("solver_solve", {
+          board_size: nextValues.length,
+          words_found: solved.length,
+          source: label,
+        });
         setSolvedWords(solved);
         setActiveBoardName(label);
       } catch {

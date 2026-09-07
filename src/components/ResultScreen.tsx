@@ -13,6 +13,7 @@ import { buildBoardUrl } from "@/lib/board-link";
 import Confetti from "./Confetti";
 import DailyMissionPanel from "./DailyMissionPanel";
 import TodayTipCard from "./TodayTipCard";
+import { trackEvent } from "@/lib/analytics";
 
 interface FoundWord {
   word: string;
@@ -309,6 +310,7 @@ export default function ResultScreen({
   }, [mode, sessionMode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords, foundSet, streak, hasDictionary, bestCombo, challengeUrl]);
 
   const handleShare = async () => {
+    trackEvent("share_result", { mode, result_type: "text", board_size: grid.length });
     try {
       if (navigator.share) {
         await navigator.share({ text: shareText });
@@ -323,6 +325,7 @@ export default function ResultScreen({
   };
 
   const handleCopyChallenge = async () => {
+    trackEvent("share_result", { mode, result_type: "challenge_link", board_size: grid.length });
     try {
       await navigator.clipboard.writeText(challengeUrl);
       setChallengeCopied(true);
@@ -370,6 +373,7 @@ export default function ResultScreen({
   };
 
   const handleShareCard = async () => {
+    trackEvent("share_result", { mode, result_type: "image", board_size: grid.length });
     setCardLoading(true);
     try {
         await shareCardImage({
@@ -801,12 +805,14 @@ export default function ResultScreen({
         <div className="mt-4 flex flex-wrap gap-3">
           <a
             href={solverUrl}
+            onClick={() => trackEvent("result_next_action", { action: "solver", mode, board_size: grid.length })}
             className="rounded-xl bg-primary px-5 py-3 font-semibold transition hover:bg-primary-hover"
           >
             Review in Solver
           </a>
           <a
             href={challengeUrl}
+            onClick={() => trackEvent("result_next_action", { action: "challenge", mode, board_size: grid.length })}
             className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
           >
             Open Challenge
@@ -814,6 +820,7 @@ export default function ResultScreen({
           {mode !== "daily" && (
             <a
               href="/daily"
+              onClick={() => trackEvent("result_next_action", { action: "daily", mode, board_size: grid.length })}
               className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
             >
               Play Today&apos;s Daily
@@ -821,6 +828,7 @@ export default function ResultScreen({
           )}
           <a
             href="/stats"
+            onClick={() => trackEvent("result_next_action", { action: "stats", mode, board_size: grid.length })}
             className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
           >
             View Stats

@@ -6,6 +6,7 @@ import { loadDictionary, Trie } from "@/lib/dictionary";
 import { sounds } from "@/lib/sounds";
 import Timer from "./Timer";
 import ThemeToggle from "./ThemeToggle";
+import { trackEvent } from "@/lib/analytics";
 
 interface FoundWord {
   word: string;
@@ -83,6 +84,13 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
       .then(setTrie)
       .catch(() => setDictError(true));
   }, []);
+
+  useEffect(() => {
+    trackEvent("game_start", {
+      mode: duration === 0 ? "zen" : "timed",
+      board_size: boardSize,
+    });
+  }, [boardSize, duration]);
 
   useEffect(() => {
     setMuted(localStorage.getItem(MUTE_KEY) === "1");
@@ -285,8 +293,15 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
     playSound(sounds.gameEnd);
     const current = foundWordsRef.current;
     const total = current.reduce((s, w) => s + w.score, 0);
+    trackEvent("game_complete", {
+      mode: duration === 0 ? "zen" : "timed",
+      board_size: boardSize,
+      score: total,
+      words_found: current.length,
+      duration_seconds: duration,
+    });
     onComplete?.(current, total, trieRef.current, bestComboRef.current);
-  }, [onComplete, playSound]);
+  }, [boardSize, duration, onComplete, playSound]);
 
   const toggleMute = () => {
     const next = !muted;

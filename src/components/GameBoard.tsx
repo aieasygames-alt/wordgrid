@@ -525,11 +525,11 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
             aria-label={`${boardSize} by ${boardSize} letter grid`}
           >
             {!hasStarted && (
-              <div className="absolute inset-0 z-30 flex items-center justify-center rounded-xl bg-bg/65 p-5 text-center backdrop-blur-[1px]">
+              <div className="absolute inset-0 z-40 flex items-center justify-center rounded-xl bg-bg/65 p-5 text-center backdrop-blur-[1px]">
                 <div>
                   <div className="text-sm font-semibold text-text">Your board is ready</div>
                   <p className="mt-1 text-xs text-text-muted">The timer starts when you are ready.</p>
-                  <button onClick={startGame} className="mt-4 rounded-xl bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary-hover">Start game</button>
+                  <button onClick={startGame} className="relative z-50 mt-4 rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-hover">Start game</button>
                 </div>
               </div>
             )}
@@ -584,6 +584,7 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
                     flex items-center justify-center
                     rounded-xl text-2xl sm:text-3xl font-bold
                     transition-all duration-100 cursor-pointer relative z-30
+                    ${!hasStarted ? "pointer-events-none" : ""}
                     ${cell.letter === "Qu" ? "text-xl sm:text-2xl" : ""}
                     ${
                       isCellSelected(r, c)

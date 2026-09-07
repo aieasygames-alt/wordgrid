@@ -53,6 +53,7 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
   const [showDurationPicker, setShowDurationPicker] = useState(false);
   const [combo, setCombo] = useState(0);
   const [bestCombo, setBestCombo] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(1024);
   const cellRefs = useRef<(HTMLDivElement | null)[][]>([]);
   const completedRef = useRef(false);
   const foundWordsRef = useRef<FoundWord[]>([]);
@@ -78,6 +79,13 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
     const saved = localStorage.getItem(DURATION_KEY);
     if (saved) setDuration(parseInt(saved, 10));
   }, [initialDuration]);
+
+  useEffect(() => {
+    const updateViewport = () => setViewportWidth(window.innerWidth);
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
 
   useEffect(() => {
     loadDictionary()
@@ -316,8 +324,8 @@ export default function GameBoard({ grid, initialDuration, onComplete }: GameBoa
   };
 
   const totalScore = foundWords.reduce((s, w) => s + w.score, 0);
-  const viewportSmall = typeof window !== "undefined" && window.innerWidth < 640;
-  const viewportWide = typeof window !== "undefined" && window.innerWidth >= 1200;
+  const viewportSmall = viewportWidth < 640;
+  const viewportWide = viewportWidth >= 1200;
   const tileSize =
     boardSize <= 4
       ? viewportSmall

@@ -38,7 +38,11 @@ const entryLinks = [
 ];
 
 export default function PlayClient() {
-  const [seed, setSeed] = useState(() => Math.floor(Math.random() * 1e9));
+  // A stable first render avoids hydration mismatches before randomizing play.
+  const [seed, setSeed] = useState(20260907);
+  useEffect(() => {
+    setSeed(Math.floor(Math.random() * 1e9));
+  }, []);
   const [grid, setGrid] = useState<Grid>(() => generateGrid(seed));
   const [result, setResult] = useState<GameResult | null>(null);
   const [boardSize, setBoardSize] = useState(4);

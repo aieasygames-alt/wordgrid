@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import GameBoard from "@/components/GameBoard";
 import ResultScreen from "@/components/ResultScreen";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -24,7 +24,11 @@ interface GameResult {
 }
 
 export default function HomeClient() {
-  const [seed, setSeed] = useState(() => Math.floor(Math.random() * 2 ** 31));
+  // Keep the server and first client render identical; randomize after mount.
+  const [seed, setSeed] = useState(20260907);
+  useEffect(() => {
+    setSeed(Math.floor(Math.random() * 2 ** 31));
+  }, []);
   const grid = useMemo(() => generateGrid(seed), [seed]);
   const [result, setResult] = useState<GameResult | null>(null);
   const todayTip = useMemo(() => getTodayActionTip(), []);

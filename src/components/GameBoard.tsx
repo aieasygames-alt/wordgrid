@@ -237,6 +237,31 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
     playSound(sounds.select);
   };
 
+  const handleCellClick = (r: number, c: number) => {
+    if (gameOver || !hasStarted) return;
+    const current = selectedRef.current;
+    const last = current[current.length - 1];
+    if (!last) {
+      setSelected([{ row: r, col: c }]);
+      return;
+    }
+    const dr = Math.abs(r - last.row);
+    const dc = Math.abs(c - last.col);
+    if (dr <= 1 && dc <= 1 && dr + dc > 0 && !current.some((cell) => cell.row === r && cell.col === c)) {
+      setSelected([...current, { row: r, col: c }]);
+    }
+  };
+
+  const handleCellKeyDown = (e: React.KeyboardEvent, r: number, c: number) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleCellClick(r, c);
+    } else if (e.key === "Backspace") {
+      e.preventDefault();
+      setSelected((current) => current.slice(0, -1));
+    }
+  };
+
   const handlePointerMove = useCallback(
     (e: PointerEvent) => {
       if (!isDragging || gameOver || !hasStarted) return;
@@ -576,10 +601,12 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
                     cellRefs.current[r][c] = el;
                   }}
                   onPointerDown={(e) => handlePointerDown(e, r, c)}
+                  onClick={() => handleCellClick(r, c)}
+                  onKeyDown={(e) => handleCellKeyDown(e, r, c)}
                   role="gridcell"
                   aria-label={`Row ${r + 1} column ${c + 1}, letter ${cell.letter}`}
                   aria-selected={isCellSelected(r, c)}
-                  tabIndex={-1}
+                  tabIndex={hasStarted ? 0 : -1}
                   className={`
                     flex items-center justify-center
                     rounded-xl text-2xl sm:text-3xl font-bold

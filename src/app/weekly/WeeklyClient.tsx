@@ -7,6 +7,7 @@ import { getWeeklyChallenge } from "@/lib/weekly-challenge";
 import type { Trie } from "@/lib/dictionary";
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import DailyStatusBar from "@/components/DailyStatusBar";
 
 type Result = { words: { word: string; score: number }[]; total: number; trie: Trie | null; bestCombo: number };
 
@@ -42,6 +43,7 @@ export default function WeeklyClient() {
           <h1 className="mt-2 text-3xl font-bold sm:text-4xl">{challenge.title}</h1>
           <p className="mt-3 text-text-muted">{challenge.detail} The board stays the same all week, so you can compare runs and share the challenge.</p>
         </header>
+        <DailyStatusBar mode="weekly" />
         <GameBoard
           grid={challenge.grid}
           initialDuration={180}

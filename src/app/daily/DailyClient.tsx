@@ -20,6 +20,7 @@ import { getTodayActionTip } from "@/lib/daily-tip";
 import TodayTipCard from "@/components/TodayTipCard";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
+import DailyStatusBar from "@/components/DailyStatusBar";
 
 interface GameResult {
   words: { word: string; score: number }[];
@@ -182,6 +183,7 @@ export default function DailyClient() {
             ))}
           </div>
         </header>
+        <DailyStatusBar mode="daily" />
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
           <section className="space-y-5">

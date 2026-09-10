@@ -14,6 +14,7 @@ import Confetti from "./Confetti";
 import DailyMissionPanel from "./DailyMissionPanel";
 import TodayTipCard from "./TodayTipCard";
 import { trackEvent } from "@/lib/analytics";
+import { loadGameHistory, summarizeGameHistory } from "@/lib/game-history";
 
 interface FoundWord {
   word: string;
@@ -274,6 +275,10 @@ export default function ResultScreen({
   }, [topMissedCategory]);
 
   const percentage = maxPossible > 0 ? Math.round((totalScore / maxPossible) * 100) : 0;
+  const personalAverage = useMemo(() => {
+    if (typeof window === "undefined") return 0;
+    return summarizeGameHistory(loadGameHistory()).averageScore;
+  }, []);
 
   const achievements = useMemo<Achievement[]>(() => {
     const items: Achievement[] = [];
@@ -489,6 +494,11 @@ export default function ResultScreen({
           {bestFoundWord ? `Best word: ${bestFoundWord.word}` : "Your next board is ready whenever you are."}
           {hasDictionary ? ` · ${percentage}% of available score` : ""}
         </p>
+        {personalAverage > 0 && (
+          <div className={`mt-2 text-sm font-semibold ${totalScore >= personalAverage ? "text-success" : "text-text-muted"}`}>
+            {totalScore >= personalAverage ? `Above your ${personalAverage.toFixed(0)}-point average` : `Your average is ${personalAverage.toFixed(0)} points`}
+          </div>
+        )}
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           {onPlayAgain && (
             <button onClick={onPlayAgain} className="rounded-xl bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary-hover">

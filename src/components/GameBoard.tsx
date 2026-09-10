@@ -259,6 +259,12 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
     } else if (e.key === "Backspace") {
       e.preventDefault();
       setSelected((current) => current.slice(0, -1));
+    } else if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+      e.preventDefault();
+      const nextRow = Math.max(0, Math.min(boardSize - 1, r + (e.key === "ArrowUp" ? -1 : e.key === "ArrowDown" ? 1 : 0)));
+      const nextCol = Math.max(0, Math.min(boardSize - 1, c + (e.key === "ArrowLeft" ? -1 : e.key === "ArrowRight" ? 1 : 0)));
+      const next = document.querySelector<HTMLElement>(`[aria-label="Row ${nextRow + 1} column ${nextCol + 1}, letter ${grid[nextRow][nextCol].letter}"]`);
+      next?.focus();
     }
   };
 

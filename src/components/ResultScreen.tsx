@@ -15,6 +15,8 @@ import DailyMissionPanel from "./DailyMissionPanel";
 import TodayTipCard from "./TodayTipCard";
 import { trackEvent } from "@/lib/analytics";
 import { loadGameHistory, summarizeGameHistory } from "@/lib/game-history";
+import MissedWordPathPreview from "./MissedWordPathPreview";
+import ProgressiveHint from "./ProgressiveHint";
 
 interface FoundWord {
   word: string;
@@ -789,6 +791,13 @@ export default function ResultScreen({
                     )}
                   </div>
                 </div>
+                {bestMissedWords.length > 0 && (
+                  <div className="rounded-xl bg-surface/60 p-3">
+                    <div className="mb-2 text-xs uppercase tracking-wide text-text-muted">Progressive hint</div>
+                    <p className="mb-2 text-xs text-text-muted">Start with length, then reveal the first letter only if you need it.</p>
+                    <ProgressiveHint word={bestMissedWords[0]} />
+                  </div>
+                )}
                 <div className="rounded-xl bg-surface/60 p-3">
                   <div className="mb-1 text-xs uppercase tracking-wide text-text-muted">
                     Next focus
@@ -816,6 +825,10 @@ export default function ResultScreen({
               <div className="mt-1 font-semibold text-text">{trainingHint.label}</div>
               <p className="mt-1 text-sm text-text-muted leading-relaxed">{trainingHint.detail}</p>
             </div>
+          )}
+
+          {hasDictionary && bestMissedWords.length > 0 && (
+            <MissedWordPathPreview grid={grid} words={bestMissedWords} />
           )}
 
           {previewUrl && (

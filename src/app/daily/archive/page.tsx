@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { formatArchiveDate, getRecentDailyArchive } from "@/lib/daily-archive";
+import { buildBoardUrl } from "@/lib/board-link";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -105,7 +106,7 @@ export default function DailyArchivePage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="text-xs uppercase tracking-[0.2em] text-text-dim">
-                    {index === 0 ? "Latest board" : `Day -${index}`}
+                    {index === 0 ? "Today" : index === 1 ? "Yesterday" : "Past board"}
                   </div>
                   <h2 className="mt-1 text-xl font-bold text-text">
                     {formatArchiveDate(entry.date)}
@@ -159,6 +160,14 @@ export default function DailyArchivePage() {
                       className="inline-flex items-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover transition"
                     >
                       Play today
+                    </Link>
+                  )}
+                  {index === 1 && (
+                    <Link
+                      href={buildBoardUrl("/play", entry.grid, { mode: "timed", source: "daily-archive", date: entry.date })}
+                      className="inline-flex items-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover transition"
+                    >
+                      Replay yesterday
                     </Link>
                   )}
                 </div>

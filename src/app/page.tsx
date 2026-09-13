@@ -6,12 +6,12 @@ const BASE_URL = "https://wordgrid.games";
 export const metadata: Metadata = {
   title: "Play Word Grid Online Free — WordGrid Game",
   description:
-    "Play WordGrid free online. Find words in Boggle-style grids with no download or sign-up, then review your score with Daily and Solver tools.",
+    "Play WordGrid free online with friends. Find words in Boggle-style grids, share the same board, compare scores, and review your game with no download or sign-up.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Play Word Grid Online Free — WordGrid Game",
     description:
-      "A Word Grid platform for playing boards, solving puzzles, and learning word patterns.",
+      "A free Word Grid platform for playing boards with friends, comparing scores, solving puzzles, and learning word patterns.",
     url: BASE_URL,
     images: [
       {
@@ -54,7 +54,7 @@ export default function Home() {
     applicationCategory: "Game",
     gamePlatform: "Web browser",
     genre: ["Word game", "Puzzle game"],
-    playMode: "SinglePlayer",
+    playMode: ["SinglePlayer", "MultiPlayer"],
     isAccessibleForFree: true,
     description: "A free browser word grid game where players connect adjacent letters to form words.",
     dateModified: modified,
@@ -67,6 +67,7 @@ export default function Home() {
       { "@type": "Question", name: "How do you play WordGrid?", acceptedAnswer: { "@type": "Answer", text: "Connect adjacent letters horizontally, vertically, or diagonally to make words. Each tile can be used once per word. Submit words before the timer ends." } },
       { "@type": "Question", name: "Is WordGrid free to play?", acceptedAnswer: { "@type": "Answer", text: "Yes. WordGrid runs in a browser with no download or account required." } },
       { "@type": "Question", name: "What can I do after a round?", acceptedAnswer: { "@type": "Answer", text: "Review missed words, open the solver for the same board, share a challenge link, or play the Daily and Weekly boards." } },
+      { "@type": "Question", name: "Can I play WordGrid with friends?", acceptedAnswer: { "@type": "Answer", text: "Yes. Finish a round, save your name and score, then share the challenge link. Friends can play the same board and compare scores on the shared challenge page." } },
     ],
   };
 

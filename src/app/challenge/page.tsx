@@ -6,9 +6,9 @@ import GuideActionBar from "@/components/GuideActionBar";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "WordGrid Challenge — Share and Beat the Same Grid",
+  title: "Play WordGrid With Friends — Share and Beat the Same Grid",
   description:
-    "Open a shared WordGrid board, compare scores, challenge friends, and review the grid with the solver after play.",
+    "Play WordGrid with friends online. Share the same board, compare scores across devices, and review missed words after the challenge.",
   alternates: { canonical: "/challenge" },
   openGraph: {
     title: "WordGrid Challenge — Share and Beat the Same Grid",

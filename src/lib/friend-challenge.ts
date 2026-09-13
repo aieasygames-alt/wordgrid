@@ -50,7 +50,7 @@ export function challengeBoardKey(grid: { letter: string }[][]): string {
 }
 
 export function encodeChallengeEntries(entries: FriendChallengeEntry[]): string {
-  return encodeURIComponent(entries.slice(0, 10).map((entry) => [entry.name, entry.score, entry.found].map(String).join("~")).join("|"));
+  return encodeURIComponent(entries.slice(0, 10).map((entry) => [entry.name.replace(/[|~]/g, ""), entry.score, entry.found].map(String).join("~")).join("|"));
 }
 
 export function decodeChallengeEntries(value: string | null): FriendChallengeEntry[] {

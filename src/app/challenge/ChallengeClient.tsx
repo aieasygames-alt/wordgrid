@@ -5,7 +5,7 @@ import Link from "next/link";
 import { decodeBoard, buildBoardUrl } from "@/lib/board-link";
 import { Grid } from "@/lib/boggle";
 import { trackEvent } from "@/lib/analytics";
-import { challengeBoardKey, decodeChallengeEntries, getChallengeEntries, getChallengeName, recordChallengeEntry, saveChallengeName, FriendChallengeEntry } from "@/lib/friend-challenge";
+import { challengeBoardKey, decodeChallengeEntries, encodeChallengeEntries, getChallengeEntries, getChallengeName, recordChallengeEntry, saveChallengeName, FriendChallengeEntry } from "@/lib/friend-challenge";
 
 type ChallengeMeta = {
   score: number | null;
@@ -111,6 +111,25 @@ export default function ChallengeClient() {
     setSaved(true);
     setTimeout(() => setSaved(false), 2200);
     trackEvent("friend_challenge_score_saved", { board_size: boardSize });
+  };
+
+  const shareUrl = useMemo(() => {
+    if (typeof window === "undefined" || !grid) return "";
+    const url = new URL(window.location.href);
+    url.searchParams.set("scores", encodeChallengeEntries(entries));
+    return url.toString();
+  }, [entries, grid]);
+
+  const copyScoreboardLink = async () => {
+    if (!shareUrl) return;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2200);
+      trackEvent("friend_challenge_scoreboard_shared", { board_size: boardSize, entries: entries.length });
+    } catch {
+      // Clipboard may be unavailable.
+    }
   };
 
   return (
@@ -264,6 +283,11 @@ export default function ChallengeClient() {
                   </div>
                 ))}
               </div>
+              {entries.length > 0 && (
+                <button onClick={copyScoreboardLink} className="mt-4 w-full rounded-xl bg-surface px-4 py-2 text-sm font-semibold hover:bg-surface-hover">
+                  {saved ? "Scoreboard link copied" : "Copy scoreboard link"}
+                </button>
+              )}
             </div>
 
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">

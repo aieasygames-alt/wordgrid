@@ -67,3 +67,25 @@ export function decodeChallengeEntries(value: string | null): FriendChallengeEnt
     return [];
   }
 }
+
+export async function fetchRemoteChallengeEntries(boardKey: string): Promise<FriendChallengeEntry[]> {
+  try {
+    const response = await fetch(`/api/challenge?board=${encodeURIComponent(boardKey)}`);
+    if (!response.ok) return [];
+    const data = await response.json() as { entries?: FriendChallengeEntry[] };
+    return Array.isArray(data.entries) ? data.entries : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function submitRemoteChallengeEntry(boardKey: string, entry: FriendChallengeEntry): Promise<FriendChallengeEntry[]> {
+  try {
+    const response = await fetch("/api/challenge", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ board: boardKey, name: entry.name, score: entry.score, found: entry.found }) });
+    if (!response.ok) return [];
+    const data = await response.json() as { entries?: FriendChallengeEntry[] };
+    return Array.isArray(data.entries) ? data.entries : [];
+  } catch {
+    return [];
+  }
+}

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { decodeBoard, buildBoardUrl } from "@/lib/board-link";
 import { Grid } from "@/lib/boggle";
 import { trackEvent } from "@/lib/analytics";
-import { challengeBoardKey, decodeChallengeEntries, encodeChallengeEntries, getChallengeEntries, getChallengeName, recordChallengeEntry, saveChallengeName, FriendChallengeEntry } from "@/lib/friend-challenge";
+import { challengeBoardKey, decodeChallengeEntries, encodeChallengeEntries, fetchRemoteChallengeEntries, getChallengeEntries, getChallengeName, recordChallengeEntry, saveChallengeName, submitRemoteChallengeEntry, FriendChallengeEntry } from "@/lib/friend-challenge";
 
 type ChallengeMeta = {
   score: number | null;
@@ -73,13 +73,21 @@ export default function ChallengeClient() {
       date: params.get("date"),
     });
     if (parsedGrid) {
-      const localEntries = getChallengeEntries(challengeBoardKey(parsedGrid));
+      const boardKey = challengeBoardKey(parsedGrid);
+      const localEntries = getChallengeEntries(boardKey);
       const sharedEntries = decodeChallengeEntries(params.get("scores"));
       setEntries([...sharedEntries, ...localEntries].reduce<FriendChallengeEntry[]>((all, entry) => {
         if (all.some((item) => item.name.toLowerCase() === entry.name.toLowerCase() && item.score === entry.score)) return all;
         return [...all, entry];
       }, []).sort((a, b) => b.score - a.score || b.found - a.found));
       setName(getChallengeName());
+      fetchRemoteChallengeEntries(boardKey).then((remoteEntries) => {
+        if (remoteEntries.length === 0) return;
+        setEntries((current) => [...remoteEntries, ...current].reduce<FriendChallengeEntry[]>((all, entry) => {
+          if (all.some((item) => item.name.toLowerCase() === entry.name.toLowerCase() && item.score === entry.score)) return all;
+          return [...all, entry];
+        }, []).sort((a, b) => b.score - a.score || b.found - a.found));
+      });
     }
     if (parsedGrid) trackEvent("challenge_open", { board_size: parsedGrid.length, source: params.get("mode") ?? "shared" });
   }, []);
@@ -102,12 +110,16 @@ export default function ChallengeClient() {
     if (!grid || meta.score === null) return;
     const playerName = name.trim() || "You";
     saveChallengeName(playerName);
-    setEntries(recordChallengeEntry(challengeBoardKey(grid), {
+    const entry = {
       name: playerName,
       score: meta.score,
       found: meta.found || 0,
       playedAt: new Date().toISOString(),
-    }));
+    };
+    setEntries(recordChallengeEntry(challengeBoardKey(grid), entry));
+    submitRemoteChallengeEntry(challengeBoardKey(grid), entry).then((remoteEntries) => {
+      if (remoteEntries.length > 0) setEntries(remoteEntries);
+    });
     setSaved(true);
     setTimeout(() => setSaved(false), 2200);
     trackEvent("friend_challenge_score_saved", { board_size: boardSize });

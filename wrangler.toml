@@ -1,3 +1,10 @@
 name = "wordgrid"
 compatibility_date = "2025-01-01"
 pages_build_output_dir = "./out"
+
+# Optional: bind a D1 database to enable the cross-device scoreboard.
+# Create it with `wrangler d1 create wordgrid-challenges`, then fill in database_id.
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "wordgrid-challenges"
+# database_id = "replace-with-database-id"

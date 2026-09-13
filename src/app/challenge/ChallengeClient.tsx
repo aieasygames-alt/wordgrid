@@ -5,6 +5,7 @@ import Link from "next/link";
 import { decodeBoard, buildBoardUrl } from "@/lib/board-link";
 import { Grid } from "@/lib/boggle";
 import { trackEvent } from "@/lib/analytics";
+import { challengeBoardKey, getChallengeEntries, getChallengeName, recordChallengeEntry, saveChallengeName, FriendChallengeEntry } from "@/lib/friend-challenge";
 
 type ChallengeMeta = {
   score: number | null;
@@ -51,6 +52,9 @@ export default function ChallengeClient() {
     session: null,
     date: null,
   });
+  const [entries, setEntries] = useState<FriendChallengeEntry[]>([]);
+  const [name, setName] = useState("");
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -68,6 +72,10 @@ export default function ChallengeClient() {
       session: params.get("session"),
       date: params.get("date"),
     });
+    if (parsedGrid) {
+      setEntries(getChallengeEntries(challengeBoardKey(parsedGrid)));
+      setName(getChallengeName());
+    }
     if (parsedGrid) trackEvent("challenge_open", { board_size: parsedGrid.length, source: params.get("mode") ?? "shared" });
   }, []);
 
@@ -85,6 +93,20 @@ export default function ChallengeClient() {
   const remainingToMax =
     meta.score !== null && meta.max !== null ? Math.max(0, meta.max - meta.score) : null;
   const sessionLabel = formatSession(meta.session);
+  const saveLocalScore = () => {
+    if (!grid || meta.score === null) return;
+    const playerName = name.trim() || "You";
+    saveChallengeName(playerName);
+    setEntries(recordChallengeEntry(challengeBoardKey(grid), {
+      name: playerName,
+      score: meta.score,
+      found: meta.found || 0,
+      playedAt: new Date().toISOString(),
+    }));
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2200);
+    trackEvent("friend_challenge_score_saved", { board_size: boardSize });
+  };
 
   return (
     <main className="min-h-screen px-4 py-8 sm:py-12 overflow-hidden">
@@ -218,6 +240,25 @@ export default function ChallengeClient() {
                 <li>2. Try to beat the target score without peeking.</li>
                 <li>3. Use the solver after the run to review missed patterns.</li>
               </ul>
+            </div>
+
+            <div className="rounded-3xl border border-primary/20 bg-primary/10 p-5 sm:p-6">
+              <h2 className="text-2xl font-bold">Friend score board</h2>
+              <p className="mt-2 text-sm text-text-muted">Scores are saved in this browser. Share the link above so friends can play the same grid.</p>
+              {meta.score !== null && (
+                <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                  <input value={name} onChange={(event) => setName(event.target.value)} maxLength={24} placeholder="Your name" aria-label="Your challenge name" className="min-w-0 flex-1 rounded-xl border border-border bg-bg/70 px-3 py-2 text-sm outline-none focus:border-primary" />
+                  <button onClick={saveLocalScore} className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover">{saved ? "Score saved" : "Save score"}</button>
+                </div>
+              )}
+              <div className="mt-4 space-y-2">
+                {entries.length === 0 ? <p className="text-sm text-text-muted">No scores saved here yet.</p> : entries.slice(0, 10).map((entry, index) => (
+                  <div key={`${entry.name}-${entry.playedAt}`} className="flex items-center justify-between rounded-xl bg-bg/60 px-3 py-2 text-sm">
+                    <span className="font-semibold"><span className="mr-2 text-text-dim">{index + 1}</span>{entry.name}</span>
+                    <span className="font-bold text-primary">{entry.score} <span className="text-xs font-normal text-text-muted">({entry.found} words)</span></span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">

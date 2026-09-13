@@ -17,6 +17,7 @@ import { trackEvent } from "@/lib/analytics";
 import { loadGameHistory, summarizeGameHistory } from "@/lib/game-history";
 import MissedWordPathPreview from "./MissedWordPathPreview";
 import ProgressiveHint from "./ProgressiveHint";
+import { challengeBoardKey, getChallengeName, recordChallengeEntry, saveChallengeName } from "@/lib/friend-challenge";
 
 interface FoundWord {
   word: string;
@@ -137,6 +138,8 @@ export default function ResultScreen({
   const [copied, setCopied] = useState(false);
   const [challengeCopied, setChallengeCopied] = useState(false);
   const [reviewCopied, setReviewCopied] = useState(false);
+  const [challengeName, setChallengeName] = useState("");
+  const [challengeSaved, setChallengeSaved] = useState(false);
   const [fireConfetti, setFireConfetti] = useState(false);
   const [cardLoading, setCardLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -223,6 +226,24 @@ export default function ResultScreen({
         : challengePath,
     [challengePath]
   );
+
+  useEffect(() => {
+    setChallengeName(getChallengeName());
+  }, []);
+
+  const saveFriendChallenge = () => {
+    const name = challengeName.trim() || "You";
+    saveChallengeName(name);
+    recordChallengeEntry(challengeBoardKey(grid), {
+      name,
+      score: totalScore,
+      found: foundWords.length,
+      playedAt: new Date().toISOString(),
+    });
+    setChallengeSaved(true);
+    setTimeout(() => setChallengeSaved(false), 2200);
+    trackEvent("friend_challenge_score_saved", { board_size: grid.length });
+  };
   const solverUrl = useMemo(
     () =>
       typeof window !== "undefined"
@@ -659,6 +680,24 @@ export default function ResultScreen({
             >
               Stats
               </a>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-primary/20 bg-primary/10 p-4 sm:p-5">
+            <div className="text-xs font-semibold uppercase tracking-wide text-primary">Challenge a friend</div>
+            <p className="mt-1 text-sm text-text-muted">Save your score, then send the challenge link so a friend can play the exact same board.</p>
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+              <input
+                value={challengeName}
+                onChange={(event) => setChallengeName(event.target.value)}
+                maxLength={24}
+                placeholder="Your name"
+                aria-label="Your challenge name"
+                className="min-w-0 flex-1 rounded-xl border border-border bg-bg/70 px-3 py-2 text-sm outline-none focus:border-primary"
+              />
+              <button onClick={saveFriendChallenge} className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover">
+                {challengeSaved ? "Score saved" : "Save score"}
+              </button>
             </div>
           </div>
 

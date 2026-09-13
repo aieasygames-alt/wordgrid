@@ -17,7 +17,7 @@ import { trackEvent } from "@/lib/analytics";
 import { loadGameHistory, summarizeGameHistory } from "@/lib/game-history";
 import MissedWordPathPreview from "./MissedWordPathPreview";
 import ProgressiveHint from "./ProgressiveHint";
-import { challengeBoardKey, getChallengeName, recordChallengeEntry, saveChallengeName } from "@/lib/friend-challenge";
+import { challengeBoardKey, encodeChallengeEntries, getChallengeName, recordChallengeEntry, saveChallengeName } from "@/lib/friend-challenge";
 
 interface FoundWord {
   word: string;
@@ -219,13 +219,13 @@ export default function ResultScreen({
     [grid, totalScore, foundWords.length, maxPossible, mode, sessionMode, dateLabel]
   );
   const solverPath = useMemo(() => buildBoardUrl("/solver", grid), [grid]);
-  const challengeUrl = useMemo(
-    () =>
-      typeof window !== "undefined"
-        ? new URL(challengePath, window.location.origin).toString()
-        : challengePath,
-    [challengePath]
-  );
+  const challengeUrl = useMemo(() => {
+    if (typeof window === "undefined") return challengePath;
+    const url = new URL(challengePath, window.location.origin);
+    const name = getChallengeName() || "You";
+    url.searchParams.set("scores", encodeChallengeEntries([{ name, score: totalScore, found: foundWords.length, playedAt: "shared" }]));
+    return url.toString();
+  }, [challengePath, totalScore, foundWords.length]);
 
   useEffect(() => {
     setChallengeName(getChallengeName());

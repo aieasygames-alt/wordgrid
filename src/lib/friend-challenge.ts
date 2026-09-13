@@ -48,3 +48,22 @@ export function recordChallengeEntry(boardKey: string, entry: FriendChallengeEnt
 export function challengeBoardKey(grid: { letter: string }[][]): string {
   return grid.flat().map((cell) => cell.letter.toUpperCase()).join(".");
 }
+
+export function encodeChallengeEntries(entries: FriendChallengeEntry[]): string {
+  return encodeURIComponent(entries.slice(0, 10).map((entry) => [entry.name, entry.score, entry.found].map(String).join("~")).join("|"));
+}
+
+export function decodeChallengeEntries(value: string | null): FriendChallengeEntry[] {
+  if (!value) return [];
+  try {
+    return decodeURIComponent(value).split("|").map((item) => {
+      const [name, score, found] = item.split("~");
+      const parsedScore = Number(score);
+      const parsedFound = Number(found);
+      if (!name || !Number.isFinite(parsedScore) || !Number.isFinite(parsedFound)) return null;
+      return { name: name.slice(0, 24), score: parsedScore, found: parsedFound, playedAt: "shared" };
+    }).filter((entry): entry is FriendChallengeEntry => Boolean(entry));
+  } catch {
+    return [];
+  }
+}

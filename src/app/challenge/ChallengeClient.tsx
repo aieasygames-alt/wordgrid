@@ -5,7 +5,7 @@ import Link from "next/link";
 import { decodeBoard, buildBoardUrl } from "@/lib/board-link";
 import { Grid } from "@/lib/boggle";
 import { trackEvent } from "@/lib/analytics";
-import { challengeBoardKey, getChallengeEntries, getChallengeName, recordChallengeEntry, saveChallengeName, FriendChallengeEntry } from "@/lib/friend-challenge";
+import { challengeBoardKey, decodeChallengeEntries, getChallengeEntries, getChallengeName, recordChallengeEntry, saveChallengeName, FriendChallengeEntry } from "@/lib/friend-challenge";
 
 type ChallengeMeta = {
   score: number | null;
@@ -73,7 +73,12 @@ export default function ChallengeClient() {
       date: params.get("date"),
     });
     if (parsedGrid) {
-      setEntries(getChallengeEntries(challengeBoardKey(parsedGrid)));
+      const localEntries = getChallengeEntries(challengeBoardKey(parsedGrid));
+      const sharedEntries = decodeChallengeEntries(params.get("scores"));
+      setEntries([...sharedEntries, ...localEntries].reduce<FriendChallengeEntry[]>((all, entry) => {
+        if (all.some((item) => item.name.toLowerCase() === entry.name.toLowerCase() && item.score === entry.score)) return all;
+        return [...all, entry];
+      }, []).sort((a, b) => b.score - a.score || b.found - a.found));
       setName(getChallengeName());
     }
     if (parsedGrid) trackEvent("challenge_open", { board_size: parsedGrid.length, source: params.get("mode") ?? "shared" });

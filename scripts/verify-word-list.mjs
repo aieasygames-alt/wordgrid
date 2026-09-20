@@ -181,6 +181,7 @@ const currentRulesPages = [
   "src/app/guides/boggle-rules-for-kids/page.tsx",
   "src/app/guides/boggle-solver/page.tsx",
   "src/app/guides/word-grid-vs-boggle/page.tsx",
+  "src/app/guides/boggle-generator/page.tsx",
 ];
 
 const unsupportedClaims = [
@@ -194,6 +195,7 @@ const unsupportedClaims = [
   "5 minutes",
   "2-letter words",
   "standard Boggle scoring",
+  "100-200",
   "7 letters",
   "7+",
   "8+ letters",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import GuideActionBar from "@/components/GuideActionBar";
 
 export const metadata: Metadata = {
   title: "Word Grid vs Boggle: What's the Difference?",
@@ -36,8 +37,8 @@ const breadcrumbSchema = {
 };
 
 const keyPoints = [
-  ["Grid size", "4×4 board", "4×4 board plus larger practice grids"],
-  ["Timer", "3 minutes", "3, 5, or Zen"],
+  ["Grid size", "4×4 board", "4×4, 5×5, or 6×6 board"],
+  ["Pacing", "Fixed round", "Timed or Zen practice"],
   ["Mode", "Physical board game", "Browser game"],
   ["Daily play", "No", "Yes"],
   ["Setup", "Shake and settle dice", "Instant"],
@@ -69,6 +70,13 @@ export default function WordGridVsBoggleGuide() {
               </h1>
               <p className="text-text-muted">5 min read · Updated July 24, 2026</p>
             </header>
+
+            <GuideActionBar
+              primary={{ href: "/play", label: "Play WordGrid", detail: "Start a fresh board." }}
+              secondary={{ href: "/daily", label: "Play Daily", detail: "Try today's shared board." }}
+              tertiary={{ href: "/solver", label: "Open solver", detail: "Review a finished board." }}
+              quaternary={{ href: "/guides/boggle-rules-beginners/", label: "Read rules", detail: "Check valid paths and scoring." }}
+            />
 
             <section className="space-y-6 text-text max-w-3xl">
               <p className="leading-relaxed">
@@ -167,8 +175,9 @@ export default function WordGridVsBoggleGuide() {
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Flexible pacing</h3>
                     <p className="leading-relaxed text-text-muted">
-                      You can keep the classic 3-minute pace, slow down with 5 minutes,
-                      or practice in Zen mode without a clock.
+                      WordGrid offers Timed practice when you want a clock and Zen
+                      practice when you want to trace routes without one. You can
+                      also choose a 4×4, 5×5, or 6×6 board before you begin.
                     </p>
                   </div>
                 </div>

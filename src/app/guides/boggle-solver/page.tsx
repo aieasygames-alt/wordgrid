@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GuideImage from "@/components/GuideImage";
+import GuideActionBar from "@/components/GuideActionBar";
 
 export const metadata: Metadata = {
   title: "Boggle Solver Guide — Find All Words Fast",
@@ -49,7 +50,7 @@ const faqSchema = {
       name: "How does a Boggle solver work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A Boggle solver works by taking a square grid of letters and systematically checking all possible letter combinations against a dictionary. It uses algorithms to find valid words following Boggle rules: adjacent connections only, minimum 3 letters, no repeated tiles. The solver generates a complete list of all possible words with their scores, typically finding 100-200 words on a standard board and more on larger boards.",
+        text: "WordGrid's solver accepts 4×4, 5×5, and 6×6 square grids. It checks adjacent paths against the current WordGrid dictionary, requires at least 3 letters, and does not reuse tiles. Results show valid words and their current WordGrid scores.",
       },
     },
     {
@@ -65,7 +66,7 @@ const faqSchema = {
       name: "How many words can a Boggle solver find?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A Boggle solver typically finds 100-200 words in a standard 4×4 grid, depending on letter distribution. Larger boards can produce even more. The solver identifies every valid word following standard Boggle rules, including many words human players miss.",
+        text: "The number of words depends on the letters and board size. WordGrid's solver supports 4×4, 5×5, and 6×6 grids, and lists every route that is valid in the current WordGrid dictionary.",
       },
     },
     {
@@ -73,7 +74,7 @@ const faqSchema = {
       name: "What is the best Boggle solver?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The best Boggle solvers are accurate, fast, and free. WordGrid's solver uses a comprehensive English dictionary, standard Boggle scoring rules, and provides detailed breakdowns including word counts by length, point distribution, and missed word analysis. For learning purposes, solvers that show what you missed rather than just giving answers are most valuable.",
+        text: "A useful solver should be accurate, fast, and clear about the rules it applies. WordGrid's free solver uses the current WordGrid dictionary and scoring, supports 4×4, 5×5, and 6×6 boards, and is best used after a round to study missed routes.",
       },
     },
     {
@@ -127,6 +128,13 @@ export default function BoggleSolverGuide() {
           </h1>
           <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
         </header>
+
+        <GuideActionBar
+          primary={{ href: "/solver", label: "Open solver", detail: "Enter a 4×4, 5×5, or 6×6 board." }}
+          secondary={{ href: "/play", label: "Play first", detail: "Finish a clean practice board." }}
+          tertiary={{ href: "/daily", label: "Try Daily", detail: "Review today's shared board." }}
+          quaternary={{ href: "/guides/boggle-dictionary/", label: "Check dictionary", detail: "Learn what the solver accepts." }}
+        />
 
         <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -251,8 +259,8 @@ export default function BoggleSolverGuide() {
             </h2>
             <ol className="space-y-3 ml-4 list-decimal">
               <li>
-                <strong>Play your game first.</strong> Complete a full 3-minute
-                round on your own to build your skills.
+                <strong>Play your game first.</strong> Finish a Timed or Zen
+                practice board on your own before you review it.
               </li>
               <li>
                 <strong>Note your grid.</strong> Write down or screenshot the
@@ -300,9 +308,9 @@ export default function BoggleSolverGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Complete Word List</h3>
                 <p className="text-sm leading-relaxed">
-                  Every valid word in the grid, typically 100-200 words depending
-                  on letter distribution. Organized by length and point value for
-                  easy analysis.
+                  Every valid WordGrid word found from the submitted board,
+                  organized by length and point value for easy analysis. The total
+                  depends on the letters and board size.
                 </p>
               </div>
 
@@ -404,10 +412,8 @@ export default function BoggleSolverGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Diagonal Scanning Practice</h3>
                 <p className="text-sm leading-relaxed">
-                  Solvers reveal how many diagonal words you missed. Most players
-                  find 40% more words when they systematically check diagonals.
-                  Use solver data to identify this weakness and improve scanning
-                  coverage.
+                  Solvers reveal which diagonal words you missed. Use the routes
+                  to identify this weakness and improve your scanning coverage.
                 </p>
               </div>
 
@@ -447,8 +453,8 @@ export default function BoggleSolverGuide() {
                   against a comprehensive English dictionary
                 </li>
                 <li>
-                  <strong>Scoring calculation:</strong> Apply standard Boggle
-                  scoring rules (3 letters = 1 point, 4 = 2, 5 = 4, etc.)
+                  <strong>Scoring calculation:</strong> Apply current WordGrid
+                  scoring: 3 letters = 1 point, 4 = 2, 5 = 4, and 6 = 6.
                 </li>
                 <li>
                   <strong>Result organization:</strong> Sort by length, score, and
@@ -498,7 +504,7 @@ export default function BoggleSolverGuide() {
                 <h3 className="font-semibold mb-2">Essential Features</h3>
                 <ul className="space-y-1">
                   <li>• Accurate dictionary</li>
-                  <li>• Standard scoring rules</li>
+                  <li>• Current scoring rules</li>
                   <li>• Complete word list</li>
                   <li>• Fast processing</li>
                   <li>• Easy input method</li>
@@ -528,10 +534,10 @@ export default function BoggleSolverGuide() {
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   A Boggle solver takes a square grid and systematically checks
-                  all possible letter combinations against a dictionary. It follows
-                  Boggle rules: adjacent connections only, minimum 3 letters, no
-                  repeated tiles. Typically finds 100-200 words on a standard grid
-                  and more on larger grids.
+                  all possible letter combinations against the current WordGrid
+                  dictionary. It follows adjacent paths, requires at least 3
+                  letters, and does not reuse tiles. It supports 4×4, 5×5, and
+                  6×6 grids.
                 </p>
               </details>
               <details className="bg-surface/50 rounded-xl p-4">
@@ -550,9 +556,9 @@ export default function BoggleSolverGuide() {
                   How many words can a Boggle solver find?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  A Boggle solver typically finds 100-200 words in a standard 4×4
-                  grid. Larger grids can yield more words. The solver identifies
-                  every valid word following standard Boggle rules.
+                  The result count depends on the letters and board size. The
+                  WordGrid solver supports 4×4, 5×5, and 6×6 grids and identifies
+                  every route valid in the current WordGrid dictionary.
                 </p>
               </details>
               <details className="bg-surface/50 rounded-xl p-4">

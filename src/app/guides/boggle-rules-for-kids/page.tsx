@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
+import GuideActionBar from "@/components/GuideActionBar";
 
 export const metadata: Metadata = {
   title: "Boggle Rules for Kids: Easy Rules for Children and Classrooms",
@@ -43,7 +44,7 @@ const faqSchema = {
       name: "How do you explain Boggle rules to kids?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Explain Boggle to kids in 4 simple steps: 1) Look at a grid of letters, 2) Connect touching letters to make words, 3) Words must be 3 letters or longer, 4) Find as many words as you can in 3 minutes. Use physical gestures to show how letters can connect up, down, sideways, and diagonal. Start with practice rounds without scoring.",
+        text: "Explain WordGrid to kids in 4 simple steps: 1) Look at the letter grid, 2) Connect touching letters to make words, 3) Words must be 3 letters or longer, 4) Start in Zen mode and find words together. Use physical gestures to show how letters can connect up, down, sideways, and diagonal. Add Timed practice only when the child is ready.",
       },
     },
     {
@@ -51,7 +52,7 @@ const faqSchema = {
       name: "What age is Boggle appropriate for?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Boggle is appropriate for ages 8 and up. Younger players (ages 6-7) can play with simplified rules: longer time limit (5 minutes), accepting 2-letter words, and focusing on finding any words rather than scoring. The game helps build vocabulary, spelling skills, and pattern recognition.",
+        text: "WordGrid works well for children who can read and form short words. Start younger players in Zen mode, work cooperatively, and count discoveries rather than points. Keep the same 3-letter minimum and valid-path rules so their practice matches the game.",
       },
     },
     {
@@ -67,7 +68,7 @@ const faqSchema = {
       name: "How do you make Boggle easier for kids?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Make Boggle easier for kids by: extending time to 5 minutes, allowing 2-letter words, removing scoring (just count words), playing cooperatively instead of competitively, and using visual aids like letter flashcards. Start with simple grids and gradually increase difficulty.",
+        text: "Make WordGrid easier for kids by choosing Zen mode, using a 4×4 board, counting words instead of points, playing cooperatively, and using visual aids such as letter flashcards. Keep the 3-letter minimum and do not reuse a tile so children learn the real game rules.",
       },
     },
     {
@@ -120,6 +121,13 @@ export default function BoggleRulesForKidsGuide() {
           <p className="text-text-muted">8 min read &middot; Updated July 24, 2026</p>
         </header>
 
+        <GuideActionBar
+          primary={{ href: "/play", label: "Start Zen practice", detail: "Play without a clock." }}
+          secondary={{ href: "/daily", label: "Try Daily", detail: "Use one shared board." }}
+          tertiary={{ href: "/guides/boggle-rules-printable/", label: "Printable rules", detail: "Keep the path rules nearby." }}
+          quaternary={{ href: "/solver", label: "Review a board", detail: "Find routes after play." }}
+        />
+
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
@@ -141,7 +149,7 @@ export default function BoggleRulesForKidsGuide() {
             </div>
             <p className="leading-relaxed mt-3">
               Boggle helps kids build vocabulary, spelling skills, and pattern
-              recognition — all while having fun racing against the clock.
+              recognition — all while discovering words at their own pace.
             </p>
             <p className="leading-relaxed mt-3">
               For the standard adult rules and scoring reference, move next to{" "}
@@ -166,9 +174,9 @@ export default function BoggleRulesForKidsGuide() {
             <div className="bg-surface/50 rounded-xl p-4 border-l-4 border-primary">
               <ol className="space-y-3 list-decimal ml-4">
                 <li>
-                  <strong>Look at the letter grid.</strong> You'll see 16
-                  letters arranged in 4 rows of 4. It looks like a big square
-                  full of letters!
+                  <strong>Look at the letter grid.</strong> Choose a 4×4 board
+                  for a compact first practice grid. It looks like a big square
+                  full of letters.
                 </li>
                 <li>
                   <strong>Connect touching letters.</strong> Letters can connect
@@ -177,12 +185,13 @@ export default function BoggleRulesForKidsGuide() {
                 </li>
                 <li>
                   <strong>Spell words.</strong> Connect letters to make words.
-                  Each word must be <strong>3 letters or longer</strong>. No
-                  2-letter words like "AT" or "GO."
+                  Each word must be <strong>3 letters or longer</strong>. Do not
+                  reuse a tile in the same word.
                 </li>
                 <li>
-                  <strong>Beat the clock.</strong> You have 3 minutes to find as
-                  many words as you can. Longer words are worth more points!
+                  <strong>Start in Zen.</strong> Find words together without a
+                  clock. When that feels easy, try Timed mode and use the current
+                  score table: 3 letters = 1, 4 = 2, 5 = 4, and 6 = 6.
                 </li>
               </ol>
             </div>
@@ -198,8 +207,8 @@ export default function BoggleRulesForKidsGuide() {
                   <h3 className="font-semibold mb-2">Ages 6-7</h3>
                   <ul className="space-y-1">
                     <li>• Play with simplified rules</li>
-                    <li>• Use 5-minute timer</li>
-                    <li>• Allow 2-letter words</li>
+                    <li>• Choose Zen mode</li>
+                    <li>• Keep the 3-letter minimum</li>
                     <li>• Focus on fun, not scoring</li>
                   </ul>
                 </div>
@@ -207,7 +216,7 @@ export default function BoggleRulesForKidsGuide() {
                   <h3 className="font-semibold mb-2">Ages 8+</h3>
                   <ul className="space-y-1">
                     <li>• Ready for standard rules</li>
-                    <li>• 3-minute timer works well</li>
+                    <li>• Try Timed mode when ready</li>
                     <li>• Can understand scoring</li>
                     <li>• Competitive play fun</li>
                   </ul>
@@ -235,7 +244,7 @@ export default function BoggleRulesForKidsGuide() {
                 <h3 className="font-semibold mb-2">First Game Strategy</h3>
                 <ul className="space-y-1 text-sm">
                   <li>• Skip scoring — just count words found</li>
-                  <li>• Extend time to 5 minutes if needed</li>
+                  <li>• Choose Zen mode for unhurried practice</li>
                   <li>• Play cooperatively: work together to find words</li>
                   <li>• Celebrate every word discovery enthusiastically</li>
                 </ul>
@@ -267,7 +276,8 @@ export default function BoggleRulesForKidsGuide() {
                   <ul className="space-y-1">
                     <li>• 3 letters = 1 point</li>
                     <li>• 4 letters = 2 points</li>
-                    <li>• 5+ letters = 3 points</li>
+                    <li>• 5 letters = 4 points</li>
+                    <li>• 6 letters = 6 points</li>
                   </ul>
                   <p className="text-xs text-text-muted mt-2">
                     Easy to remember and calculate quickly.
@@ -381,7 +391,7 @@ export default function BoggleRulesForKidsGuide() {
                 <ul className="space-y-1 text-sm">
                   <li>• Project the grid on a whiteboard</li>
                   <li>• Students play with paper/pencil or devices</li>
-                  <li>• Use 5-minute timer for first rounds</li>
+                  <li>• Begin in Zen mode for first rounds</li>
                   <li>• Have students share favorite words found</li>
                 </ul>
               </div>
@@ -389,8 +399,8 @@ export default function BoggleRulesForKidsGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Differentiation</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>• Advanced students: standard rules, 3 minutes</li>
-                  <li>• Struggling students: allow 2-letter words, 5 minutes</li>
+                  <li>• Advanced students: use Timed mode</li>
+                  <li>• Struggling students: use Zen and work in pairs</li>
                   <li>• ELL students: partner with native speakers</li>
                   <li>• All students: focus on fun over perfection</li>
                 </ul>
@@ -427,9 +437,8 @@ export default function BoggleRulesForKidsGuide() {
                 <h3 className="font-semibold mb-2">Issue: "This is too hard!"</h3>
                 <p className="text-sm leading-relaxed">
                   <strong>Solution:</strong> Switch to cooperative mode — play
-                  together to find words. Extend the timer. Allow 2-letter
-                  words temporarily. Focus on the fun of discovery, not
-                  competition.
+                  together to find words. Switch to Zen mode. Focus on the fun
+                  of discovery, not competition.
                 </p>
               </div>
 
@@ -458,8 +467,8 @@ export default function BoggleRulesForKidsGuide() {
                   Explain Boggle to kids in 4 steps: 1) Look at a grid of
                   letters, 2) Connect touching letters to make words (up, down,
                   sideways, diagonal), 3) Words must be 3 letters or longer,
-                  4) Find as many words as you can in 3 minutes. Use gestures
-                  and start with practice rounds without scoring.
+                  4) Start in Zen mode and find words together. Use gestures
+                  and begin with practice rounds without scoring.
                 </p>
               </details>
               <details className="bg-surface/50 rounded-xl p-4">
@@ -467,9 +476,9 @@ export default function BoggleRulesForKidsGuide() {
                   What age is Boggle appropriate for?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Boggle is appropriate for ages 8 and up with standard rules.
-                  Younger players (6-7) can play with simplified rules: 5-minute
-                  timer, allow 2-letter words, no scoring. The game builds
+                  WordGrid works well for children who can read and form short
+                  words. Younger players can begin in Zen mode, work with a
+                  partner, and count words rather than points. The game builds
                   vocabulary and spelling skills.
                 </p>
               </details>
@@ -489,10 +498,10 @@ export default function BoggleRulesForKidsGuide() {
                   How do you make Boggle easier for kids?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Make Boggle easier by: extending time to 5 minutes, allowing
-                  2-letter words, removing scoring (just count words), playing
-                  cooperatively, and using visual aids. Start with simple grids
-                  and gradually increase difficulty.
+                  Make WordGrid easier by choosing Zen mode, using a 4×4 board,
+                  counting words rather than points, playing cooperatively, and
+                  using visual aids. Keep the 3-letter minimum and gradually
+                  increase difficulty.
                 </p>
               </details>
             </div>

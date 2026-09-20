@@ -63,7 +63,37 @@ const commonPracticeWords = [
   "square",
   "unique",
 ];
-const missingWords = [...expectedWords, ...commonPracticeWords].filter((word) => !words.has(word));
+const strategyGuideWords = [
+  "cat",
+  "cats",
+  "dog",
+  "dogs",
+  "play",
+  "plays",
+  "played",
+  "player",
+  "replay",
+  "quit",
+  "quite",
+  "quick",
+  "quest",
+  "quote",
+  "quiz",
+  "equal",
+  "the",
+  "and",
+  "ear",
+  "eat",
+  "east",
+  "care",
+  "earn",
+  "action",
+  "garden",
+  "square",
+];
+const missingWords = [...expectedWords, ...commonPracticeWords, ...strategyGuideWords].filter(
+  (word) => !words.has(word)
+);
 
 if (missingWords.length > 0) {
   throw new Error(`Scoring examples missing from the WordGrid word list: ${missingWords.join(", ")}`);
@@ -81,6 +111,26 @@ const unlistedExamples = commonPracticeWords.filter((word) => !commonWordsPage.i
 
 if (unlistedExamples.length > 0) {
   throw new Error(`Common-words examples missing from the page: ${unlistedExamples.join(", ")}`);
+}
+
+const strategyPages = [
+  "src/app/guides/boggle-strategy-guide/page.tsx",
+  "src/app/guides/boggle-tips-tricks/page.tsx",
+  "src/app/guides/how-to-win-boggle/page.tsx",
+];
+const nonWordTokens = new Set(["JSON", "FAQ"]);
+
+for (const page of strategyPages) {
+  const source = readFileSync(new URL(`../${page}`, import.meta.url), "utf8");
+  const uppercaseExamples = new Set(source.match(/\b[A-Z]{3,}\b/g) ?? []);
+  const missingExamples = [...uppercaseExamples]
+    .filter((word) => !nonWordTokens.has(word))
+    .map((word) => word.toLowerCase())
+    .filter((word) => !words.has(word));
+
+  if (missingExamples.length > 0) {
+    throw new Error(`${page} contains examples outside the current word list: ${missingExamples.join(", ")}`);
+  }
 }
 
 const currentRulesPages = [
@@ -102,5 +152,5 @@ for (const page of currentRulesPages) {
 }
 
 console.log(
-  `Verified ${expectedWords.length + commonPracticeWords.length} guide examples against ${words.size} WordGrid words.`
+  `Verified ${expectedWords.length + commonPracticeWords.length + strategyGuideWords.length} guide examples against ${words.size} WordGrid words.`
 );

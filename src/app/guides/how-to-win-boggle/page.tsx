@@ -1,562 +1,132 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
-
-export const metadata: Metadata = {
-  title: "How to Win at Boggle: Score Higher with 6 Proven Strategies",
-  description:
-    "Learn how to win at Boggle with 6 proven strategies for higher scores: word patterns, grid scanning, time management, scoring priorities, and practice.",
-  alternates: { canonical: "/guides/how-to-win-boggle" },
-  keywords: [
-    "how to win at boggle", "winning boggle strategies", "boggle winning tips",
-    "how to get high score in boggle", "boggle champion strategies", "competitive boggle",
-    "boggle scoring secrets", "how to beat friends at boggle",
-  ],
-  openGraph: {
-    title: "How to Win at Boggle: Score Higher with 6 Proven Strategies",
-    description:
-      "Master competitive Boggle with advanced strategies: word patterns, time management, grid scanning, and scoring optimization from experienced players.",
-  },
-};
+import GuideActionBar from "@/components/GuideActionBar";
 
 const BASE_URL = "https://wordgrid.games";
 
-const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "How to Win at Boggle: Score Higher with 6 Proven Strategies",
+export const metadata: Metadata = {
+  title: "How to Win at Boggle: A WordGrid Scoring Strategy",
   description:
-    "A comprehensive guide to winning at Boggle with advanced strategies, word patterns, time management techniques, and competitive tips from experienced players.",
-  author: { "@type": "Organization", name: "WordGrid" },
-  publisher: { "@type": "Organization", name: "WordGrid" },
-  datePublished: "2026-06-29",
-  dateModified: "2026-08-05",
-  mainEntityOfPage: `${BASE_URL}/guides/how-to-win-boggle/`,
+    "Improve your WordGrid score with a repeatable Boggle-style routine: find legal routes, pursue clear 5-6 letter paths, collect short words, and review misses.",
+  alternates: { canonical: `${BASE_URL}/guides/how-to-win-boggle/` },
+  keywords: ["how to win at boggle", "boggle scoring strategy", "word grid score", "boggle winning tips"],
+  openGraph: {
+    title: "How to Win at Boggle: A WordGrid Scoring Strategy",
+    description: "A practical score-building routine based on current WordGrid rules.",
+    url: `${BASE_URL}/guides/how-to-win-boggle/`,
+  },
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "How do you win at Boggle?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "To win at Boggle, focus on finding longer words (5+ letters) which score significantly more points than short words. Master common word patterns like -ING, -TION, -NESS, and prefixes like RE-, UN-, PRE-. Use systematic grid scanning rather than random searching, and prioritize quality over quantity — one 6-letter word beats six 3-letter words.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is a winning score in Boggle?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "A winning Boggle score depends on the specific grid and player skill level, but generally: 25-35 points is beginner level, 35-50 is intermediate, 50+ is advanced, and 60+ is expert/champion level. In competitive play, scores of 70+ are possible on exceptional grids. For Daily, beating the average score puts you in the top half of players.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How do competitive Boggle players scan the grid?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Competitive players use systematic scanning patterns: horizontal row-by-row scanning, vertical column scanning, and diagonal pattern recognition. They look for common letter clusters like TH, HE, IN, ER, and word endings like -ED, -ING, -TION. Many start by finding the 'anchor letters' — S, R, T, N, E which appear most frequently in English words.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What are the best Boggle strategies for beginners?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Best beginner Boggle strategies: 1) Hunt for 3-letter words first to build momentum, 2) Always check plurals (add S to words you find), 3) Look for common prefixes (RE-, UN-) and suffixes (-ING, -ED), 4) Don't ignore diagonal connections, 5) Practice recognizing high-value letter combinations like QU, TH, HE. Focus on speed over perfection initially.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How can I improve my Boggle score quickly?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "To quickly improve your Boggle score: 1) Memorize the 50 most common Boggle words, 2) Learn common word patterns (consonant clusters, vowel combinations), 3) Practice on Daily boards to build pattern recognition, 4) Focus on 5+ letter words which score disproportionately higher, 5) Use the full 3 minutes — many beginners stop searching too early.",
-      },
-    },
-  ],
-};
+const routines = [
+  ["Find a clear route", "Start with visible clusters and trace every tile. A good-looking word is only useful when the route is adjacent, continuous, and non-repeating."],
+  ["Take the available length", "A 5-letter word is worth 4 points and a 6-letter word is worth 6 points. Search for those routes when the board suggests them, without skipping easy shorter words."],
+  ["Collect dependable short words", "3-letter words score 1 point and 4-letter words score 2. They are a practical fallback when a longer route does not resolve."],
+  ["Test extensions", "From CAT, test CATS. From PLAY, test PLAYS, PLAYED, PLAYER, and REPLAY only where adjacent tiles make a legal path."],
+  ["Check Qu deliberately", "Treat a Qu tile as QU and inspect nearby routes for QUIT, QUITE, QUICK, QUEST, QUOTE, QUIZ, or EQUAL."],
+  ["Learn from missed routes", "Use the solver after a board. One missed route is a concrete pattern to look for next time."],
+] as const;
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Word Grid", item: `${BASE_URL}/` },
-    { "@type": "ListItem", position: 2, name: "Guides", item: `${BASE_URL}/guides/` },
-    { "@type": "ListItem", position: 3, name: "How to Win at Boggle" },
-  ],
-};
+const faqItems = [
+  {
+    question: "What score should I aim for in WordGrid?",
+    answer:
+      "There is no universal winning score because each board creates a different set of valid routes. Compare your own results over time and focus on finding one more valid route per board.",
+  },
+  {
+    question: "Do longer words always matter more?",
+    answer:
+      "Longer words are worth more in the current rules, but a route must be legal and present in the dictionary. Take clear 5- and 6-letter opportunities, then collect reliable short words.",
+  },
+  {
+    question: "How can I improve without memorizing unsupported words?",
+    answer:
+      "Practice with verified words, play a board, and review missed routes with the solver. The dictionary checker can confirm uncertain candidates before you build them into a habit.",
+  },
+];
 
 export default function HowToWinBoggleGuide() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "How to Win at Boggle: A WordGrid Scoring Strategy",
+    description: metadata.description,
+    url: `${BASE_URL}/guides/how-to-win-boggle/`,
+    mainEntity: {
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
+  };
+
   return (
-    <main className="min-h-screen px-4 py-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <main className="min-h-screen px-4 py-8">
+        <GuideDesktopShell>
+          <header className="mb-8">
+            <nav className="mb-4 flex items-center gap-2 text-sm text-text-dim">
+              <Link href="/" className="hover:text-text">Word Grid</Link>
+              <span>/</span>
+              <Link href="/guides/" className="hover:text-text">Guides</Link>
+            </nav>
+            <h1 className="text-4xl font-bold">How to win at Boggle-style WordGrid</h1>
+            <p className="mt-3 max-w-3xl leading-relaxed text-text-muted">
+              Higher scores come from a calm, repeatable search process. Focus on valid board routes and the point
+              table rather than a fixed score target or a memorized list of words the game may not accept.
+            </p>
+          </header>
 
-      <GuideDesktopShell>
-        <header className="mb-8">
-          <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
-            <Link href="/" className="hover:text-text">Word Grid</Link>
-            <span>/</span>
-            <Link href="/guides/" className="hover:text-text">Guides</Link>
-          </nav>
-          <h1 className="text-4xl font-bold mb-2">
-            How to Win at Boggle: Score Higher with 6 Proven Strategies
-          </h1>
-          <p className="text-text-muted">9 min read &middot; Updated July 24, 2026</p>
-        </header>
+          <GuideActionBar
+            primary={{ href: "/play", label: "Practice now", detail: "Use the routine on a fresh board" }}
+            secondary={{ href: "/guides/boggle-scoring-sheet", label: "Check scoring", detail: "See 3-6 letter points" }}
+            tertiary={{ href: "/guides/boggle-dictionary", label: "Check a word", detail: "Confirm the current word list" }}
+            quaternary={{ href: "/solver", label: "Review routes", detail: "Find valid words you missed" }}
+          />
 
-        <div className="space-y-6 text-text">
-          <section>
-            <p className="leading-relaxed">
-              Want to <strong>win at Boggle</strong> consistently? It's not just
-              about having a big vocabulary. The best players combine pattern
-              recognition, systematic grid scanning, and strategic time
-              management to find 50% more words than average players.
-            </p>
-            <p className="leading-relaxed mt-3">
-              This guide breaks down exactly how competitive players approach the
-              game — the same techniques that separate 25-point scores from
-              60+ point champions.
-            </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 p-4 font-semibold text-primary hover:bg-primary/15 transition">
-                Practice now
-              </Link>
-              <Link href="/guides/boggle-scoring-sheet" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
-                Check scoring
-              </Link>
-              <Link href="/guides/boggle-tips-tricks" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
-                Quick tips
-              </Link>
-            </div>
-            <p className="leading-relaxed mt-3">
-              If you want a tighter next step, move to{" "}
-              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
-                the WordGrid strategies guide
-              </Link>{" "}
-              or{" "}
-              <Link href="/guides/advanced-boggle-strategies" className="text-primary hover:underline">
-                advanced Boggle strategies
-              </Link>
-              .
-            </p>
-            <p className="leading-relaxed mt-3">
-              To turn these ideas into real score gains, pair this page with the{" "}
-              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
-                scoring sheet
-              </Link>
-              ,{" "}
-              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
-                dictionary guide
-              </Link>
-              , and{" "}
-              <Link href="/solver" className="text-primary hover:underline">
-                solver
-              </Link>
-              .
-            </p>
-          </section>
+          <div className="space-y-4 text-text">
+            {routines.map(([title, detail], index) => (
+              <section key={title} className="rounded-lg border border-border bg-surface/50 p-5">
+                <p className="text-sm font-semibold text-primary">Strategy {index + 1}</p>
+                <h2 className="mt-1 text-2xl font-semibold">{title}</h2>
+                <p className="mt-3 leading-relaxed text-text-muted">{detail}</p>
+              </section>
+            ))}
 
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              What Counts as Winning in Boggle?
-            </h2>
-            <p className="leading-relaxed mb-3">
-              Score ranges by skill level:
-            </p>
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-2 text-text-muted">Score Range</th>
-                  <th className="text-left py-2 text-text-muted">Level</th>
-                </tr>
-              </thead>
-              <tbody>
+            <section className="mt-8 rounded-lg border border-border bg-surface/50 p-5">
+              <h2 className="text-2xl font-semibold text-primary">Current WordGrid scoring</h2>
+              <div className="mt-4 grid gap-3 sm:grid-cols-4">
                 {[
-                  ["25-35 points", "Beginner"],
-                  ["35-50 points", "Intermediate"],
-                  ["50-60 points", "Advanced"],
-                  ["60-70 points", "Expert"],
-                  ["70+ points", "Champion"],
-                ].map(([score, level]) => (
-                  <tr key={score} className="border-b border-surface">
-                    <td className="py-2">{score}</td>
-                    <td className="py-2">{level}</td>
-                  </tr>
+                  ["3 letters", "1 point"],
+                  ["4 letters", "2 points"],
+                  ["5 letters", "4 points"],
+                  ["6 letters", "6 points"],
+                ].map(([length, points]) => (
+                  <div key={length} className="rounded-lg border border-border p-4">
+                    <p className="text-sm text-text-muted">{length}</p>
+                    <p className="mt-1 text-xl font-bold text-primary">{points}</p>
+                  </div>
                 ))}
-              </tbody>
-            </table>
-            <p className="leading-relaxed mt-3">
-              In the Daily board, beating the average score typically puts you
-              in the top 50% of players. The top 10% consistently score 55+.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Strategy 1: Hunt for Length, Not Quantity
-            </h2>
-            <p className="leading-relaxed">
-              The biggest mistake beginners make: chasing every 3-letter word
-              they can find. Here's why that's wrong:
-            </p>
-            <div className="my-4 bg-surface/50 rounded-xl p-4 border-l-4 border-primary">
-              <p className="text-sm leading-relaxed">
-                <strong>Scoring math:</strong> One 5-letter word = 4 points.
-                Four 3-letter words = 4 points. Same time investment, same
-                reward — but the 5-letter word is often easier to spot once you
-                train your brain.
-              </p>
-            </div>
-            <p className="leading-relaxed mt-3">
-              <strong>Winning approach:</strong> Scan specifically for word
-              patterns that indicate length:
-            </p>
-            <ul className="space-y-1 ml-4 mt-2 list-disc">
-              <li><strong>-TION</strong> words (ACTION, MOTION, NOTION)</li>
-              <li><strong>-NESS</strong> words (HAPPINESS, DARKNESS)</li>
-              <li><strong>-ING</strong> words (PLAYING, THINKING)</li>
-              <li><strong>PRE-</strong> words (PREDICT, PREVENT)</li>
-              <li><strong>UN-</strong> words (UNTIL, UNLESS)</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Strategy 2: Systematic Grid Scanning
-            </h2>
-            <p className="leading-relaxed">
-              Random eye movement = missed words. Competitive players scan in
-              patterns:
-            </p>
-            <ol className="space-y-2 ml-4 mt-3 list-decimal">
-              <li>
-                <strong>Horizontal rows.</strong> Left to right, right to left.
-                Look for letter clusters.
-              </li>
-              <li>
-                <strong>Vertical columns.</strong> Top to bottom, bottom to top.
-                Vertical connections are easy to miss.
-              </li>
-              <li>
-                <strong>Diagonal patterns.</strong> Most beginners ignore
-                diagonals. Champions live there.
-              </li>
-              <li>
-                <strong>Anchor letters.</strong> S, R, T, N, E, A appear in the
-                most English words. Build around them.
-              </li>
-            </ol>
-            <p className="leading-relaxed mt-3">
-              Spend the first 30 seconds purely on scanning. Don't submit
-              words yet. Just map the grid mentally.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Strategy 3: Master Common Letter Clusters
-            </h2>
-            <p className="leading-relaxed mb-3">
-              English is pattern-based. These letter combinations appear in
-              thousands of words:
-            </p>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <h3 className="font-semibold mb-2">Common Pairs</h3>
-                <ul className="space-y-1">
-                  <li>TH — THE, THIS, THAT</li>
-                  <li>HE — HELD, HELLO, HELP</li>
-                  <li>IN — INTO, TIME, FIND</li>
-                  <li>ER — HERE, THERE, WERE</li>
-                  <li>AN — AND, THAN, MANY</li>
-                </ul>
               </div>
-              <div>
-                <h3 className="font-semibold mb-2">High-Value Combos</h3>
-                <ul className="space-y-1">
-                  <li>QU — QUICK, QUEST, QUOTE</li>
-                  <li>TION — ACTION, MOTION</li>
-                  <li>NESS — KINDNESS, SADNESS</li>
-                  <li>ING — PLAYING, FINDING</li>
-                  <li>PRE — PREDICT, PREVENT</li>
-                </ul>
-              </div>
-            </div>
-          </section>
+            </section>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Strategy 4: The Plural Multiplier
-            </h2>
-            <p className="leading-relaxed">
-              This is the easiest way to add 30-50% more words with minimal
-              effort:
-            </p>
-            <div className="my-4 bg-surface/50 rounded-xl p-4">
-              <p className="text-sm leading-relaxed">
-                <strong>The rule:</strong> Every time you find a noun, mentally
-                add <strong>S</strong> and check if it's a valid word. CAT →
-                CATS. DOG → DOGS. PLAYER → PLAYERS.
-              </p>
-              <p className="text-sm text-text-muted mt-2">
-                If there's an S reachable from your word, you've just doubled
-                your find with 1 second of extra effort.
-              </p>
-            </div>
-            <p className="leading-relaxed">
-              Advanced version: Also check -ED, -ER, -EST. PLAY → PLAYED →
-              PLAYER. FAST → FASTER → FASTEST.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Strategy 5: Time Management for Maximum Score
-            </h2>
-            <p className="leading-relaxed mb-3">
-              How to use your 3 minutes like a champion:
-            </p>
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-2 text-text-muted">Time</th>
-                  <th className="text-left py-2 text-text-muted">Focus</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ["0-30 seconds", "Pure scanning. Map the grid. No submissions."],
-                  ["30-90 seconds", "Submit 5+ letter words. Maximum points."],
-                  ["90-150 seconds", "Medium words (4 letters). Plurals."],
-                  ["150-180 seconds", "Quick 3-letter words. Final sweep."],
-                ].map(([time, focus]) => (
-                  <tr key={time} className="border-b border-surface">
-                    <td className="py-2">{time}</td>
-                    <td className="py-2">{focus}</td>
-                  </tr>
+            <section className="mt-8">
+              <h2 className="mb-3 text-2xl font-semibold text-primary">Questions about scoring higher</h2>
+              <div className="divide-y divide-border rounded-lg border border-border bg-surface/50">
+                {faqItems.map((item) => (
+                  <details key={item.question} className="p-5">
+                    <summary className="cursor-pointer font-semibold">{item.question}</summary>
+                    <p className="mt-3 leading-relaxed text-text-muted">{item.answer}</p>
+                  </details>
                 ))}
-              </tbody>
-            </table>
-            <p className="leading-relaxed mt-3">
-              Most beginners do this backwards — they grab 3-letter words
-              immediately, then spend the last minute hunting for longer words.
-              Champions prioritize high-value words first.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Strategy 6: Practice Patterns, Not Just Words
-            </h2>
-            <p className="leading-relaxed">
-              The difference between 35-point players and 60-point players:
-              pattern recognition speed.
-            </p>
-            <p className="leading-relaxed mt-3">
-              Instead of memorizing word lists, memorize <strong>structures</strong>:
-            </p>
-            <ul className="space-y-2 ml-4 mt-2 list-disc">
-              <li>
-                <strong>Consonant clusters:</strong> STR, SPR, SCR, THR, CHR,
-                BL, CL, FL, GL, PL, SL
-              </li>
-              <li>
-                <strong>Vowel combinations:</strong> EA, EE, IE, OA, OO, OU,
-                AI, EI, IO
-              </li>
-              <li>
-                <strong>Endings:</strong> -TION, -NESS, -MENT, -ANCE, -ENCE,
-                -ABLE, -IBLE
-              </li>
-              <li>
-                <strong>Prefixes:</strong> PRE-, PRO-, RE-, UN-, IN-, IM-, DIS-
-              </li>
-            </ul>
-            <p className="leading-relaxed mt-3">
-              When you see these patterns, your brain should instantly generate
-              candidate words. That's how champions find 10+ words in the same
-                time beginners find 5.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Quick Wins: Instant Score Improvements
-            </h2>
-            <ul className="space-y-2 ml-4 list-disc">
-              <li>
-                <strong>Always check diagonals.</strong> 40% of players miss
-                diagonal words.
-              </li>
-              <li>
-                <strong>Use the full 3 minutes.</strong> Most beginners stop at
-                2:00. Keep searching.
-              </li>
-              <li>
-                <strong>Look for QU first.</strong> It's rare but high-value.
-                QUICK, QUEST, QUOTE, QUIZ.
-              </li>
-              <li>
-                <strong>Check your own words for extensions.</strong> PLAY →
-                PLAYER → PLAYED → PLAYING.
-              </li>
-              <li>
-                <strong>Practice daily.</strong> Play the Daily board every
-                day. Pattern recognition compounds.
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-4">
-              <details className="bg-surface/50 rounded-xl p-4" open>
-                <summary className="font-semibold cursor-pointer">
-                  How do you win at Boggle?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  To win at Boggle, focus on finding longer words (5+ letters)
-                  which score significantly more points. Master common word
-                  patterns like -ING, -TION, -NESS, and prefixes like RE-, UN-.
-                  Use systematic grid scanning and prioritize quality over
-                  quantity.
-                </p>
-              </details>
-              <details className="bg-surface/50 rounded-xl p-4">
-                <summary className="font-semibold cursor-pointer">
-                  What is a winning score in Boggle?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  A winning Boggle score: 25-35 for beginners, 35-50
-                  intermediate, 50+ advanced, 60+ expert, and 70+ champion
-                  level. In the Daily board, beating the average puts you in
-                  the top half of players.
-                </p>
-              </details>
-              <details className="bg-surface/50 rounded-xl p-4">
-                <summary className="font-semibold cursor-pointer">
-                  How can I improve my Boggle score quickly?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  To quickly improve: 1) Memorize the 50 most common Boggle
-                  words, 2) Learn common word patterns, 3) Practice on Daily
-                  boards, 4) Focus on 5+ letter words, 5) Use the full 3
-                  minutes instead of stopping early.
-                </p>
-              </details>
-              <details className="bg-surface/50 rounded-xl p-4">
-                <summary className="font-semibold cursor-pointer">
-                  What strategies do competitive Boggle players use?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Competitive players use systematic scanning patterns, look for
-                  common letter clusters (TH, HE, IN, ER), prioritize longer
-                  words over short ones, always check plurals and word
-                  extensions, and practice pattern recognition daily.
-                </p>
-              </details>
-            </div>
-          </section>
-
-          <div className="mt-8 p-6 bg-indigo-900/30 rounded-xl border border-indigo-800/50">
-            <h2 className="text-xl font-semibold text-primary mb-2">
-              Practice Winning Strategies
-            </h2>
-            <p className="text-text mb-4">
-              The best way to improve: play daily. Pattern recognition builds
-              over time. Start a Daily board now.
-            </p>
-            <div className="flex gap-3 flex-wrap">
-              <Link
-                href="/play"
-                className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
-              >
-                Play
-              </Link>
-              <Link
-                href="/daily"
-                className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
-              >
-                Daily
-              </Link>
-            </div>
+              </div>
+            </section>
           </div>
-
-          <div className="mt-8 border-t border-border pt-6">
-            <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
-            <div className="space-y-3">
-              <Link
-                href="/guides/most-common-boggle-words/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Most Common Boggle Words →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Build speed by recognizing the highest-frequency words first.
-                </div>
-              </Link>
-              <Link
-                href="/guides/boggle-tips-tricks/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Boggle Tips and Tricks →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Practical techniques for spotting more words faster.
-                </div>
-              </Link>
-              <Link
-                href="/guides/word-grid-strategies/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Word Grid Strategies: Score Higher Every Game →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Advanced scoring strategy and time management breakdown.
-                </div>
-              </Link>
-              <Link
-                href="/play"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Play →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Put the winning tactics into a live round right away.
-                </div>
-              </Link>
-              <Link
-                href="/guides/"
-                className="block text-sm text-text-dim hover:text-text"
-              >
-                Browse all guides →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </GuideDesktopShell>
-    </main>
+        </GuideDesktopShell>
+      </main>
+    </>
   );
 }

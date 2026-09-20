@@ -151,6 +151,8 @@ const strategyPages = [
   "src/app/guides/boggle-strategy-guide/page.tsx",
   "src/app/guides/boggle-tips-tricks/page.tsx",
   "src/app/guides/how-to-win-boggle/page.tsx",
+  "src/app/guides/advanced-boggle-strategies/page.tsx",
+  "src/app/guides/how-to-find-more-words/page.tsx",
 ];
 const nonWordTokens = new Set(["JSON", "FAQ"]);
 

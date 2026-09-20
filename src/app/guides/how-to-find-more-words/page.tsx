@@ -1,320 +1,110 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideDesktopShell } from "@/components/GuideDesktopShell";
+import GuideActionBar from "@/components/GuideActionBar";
+
+const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "How to Find More Words in Word Grid Puzzles — Quick Techniques",
+  title: "How to Find More Words in Word Grid Puzzles",
   description:
-    "Learn quick techniques to spot more words in word grid puzzles with prefix, suffix, and adjacency scanning.",
-  alternates: { canonical: "/guides/how-to-find-more-words" },
+    "Find more WordGrid words with a practical six-step scan: explore every direction, test legal extensions, use Qu paths, and review missed routes.",
+  alternates: { canonical: `${BASE_URL}/guides/how-to-find-more-words/` },
   openGraph: {
-    title: "How to Find More Words in Word Grid Puzzles — Quick Techniques",
-    description:
-      "Six quick techniques to spot more words, including prefix scanning, plurals, and Qu strategy.",
+    title: "How to Find More Words in Word Grid Puzzles",
+    description: "Six practical habits for finding more valid routes in WordGrid.",
+    url: `${BASE_URL}/guides/how-to-find-more-words/`,
   },
 };
 
-const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "How to Find More Words in Word Grid Puzzles",
-  description:
-    "Six proven techniques to spot more words in word grid puzzles.",
-  author: { "@type": "Organization", name: "WordGrid" },
-  publisher: { "@type": "Organization", name: "WordGrid" },
-  datePublished: "2026-06-19",
-  dateModified: "2026-07-24",
-  mainEntityOfPage: "https://wordgrid.games/guides/how-to-find-more-words/",
-};
+const methods = [
+  ["Scan one starting tile at a time", "Choose a starting tile and explore all of its neighbors before jumping to another part of the board. This makes turns and diagonals easier to notice."],
+  ["Reuse a letter pattern, not a route", "Pairs like TH, EA, ER, and Qu are useful starting cues. Each word still needs a new adjacent route with no repeated tile."],
+  ["Test a legal extension", "After CAT, look for CATS. After PLAY, look for PLAYS, PLAYED, PLAYER, or REPLAY only when the full route is available."],
+  ["Inspect Qu branches", "A Qu tile supplies QU in one cell. Check nearby paths for QUIT, QUITE, QUICK, QUEST, QUOTE, QUIZ, and EQUAL."],
+  ["Balance length and certainty", "A 5-letter word is worth 4 points and a 6-letter word is worth 6 points. Prioritize a clear longer route, then collect reliable 3- and 4-letter words."],
+  ["Review one missed route", "Use the solver after play and choose one route you missed. Practicing a single shape is more useful than memorizing an unverified list."],
+] as const;
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Word Grid", item: "https://wordgrid.games/" },
-    { "@type": "ListItem", position: 2, name: "Guides", item: "https://wordgrid.games/guides/" },
-    { "@type": "ListItem", position: 3, name: "How to Find More Words" },
-  ],
-};
+const faqItems = [
+  { question: "Do diagonal routes count?", answer: "Yes. A WordGrid word can move horizontally, vertically, or diagonally to an adjacent tile, without reusing a tile." },
+  { question: "Should I submit short words or wait for long ones?", answer: "Do both. Take a clear 5- or 6-letter route when you see it, then use short valid words to build a dependable score." },
+  { question: "How can I check whether a word counts?", answer: "The dictionary checker verifies whether it is in WordGrid's current list. The board still must provide a legal adjacent route." },
+];
 
-export default function Guide1() {
+export default function HowToFindMoreWordsGuide() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "How to Find More Words in Word Grid Puzzles",
+    description: metadata.description,
+    url: `${BASE_URL}/guides/how-to-find-more-words/`,
+    mainEntity: {
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
+  };
+
   return (
-    <main className="min-h-screen px-4 py-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <article className="mx-auto max-w-7xl">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
-          <div>
-        <header className="mb-8">
-          <nav className="text-sm text-text-dim flex items-center gap-2">
-            <a href="/" className="hover:text-text">Home</a>
-            <span>/</span>
-            <a href="/guides/" className="hover:text-text">Guides</a>
-          </nav>
-          <h1 className="text-4xl font-bold mt-4 mb-2">
-            How to Find More Words in Word Grid Puzzles
-          </h1>
-          <p className="text-text-muted">6 min read &middot; Updated July 24, 2026</p>
-        </header>
-
-        <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <Link href="/play" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Play</div>
-              <p className="mt-1 text-sm text-text-muted">Try the tactics on a live board.</p>
-            </Link>
-            <Link href="/words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Words</div>
-              <p className="mt-1 text-sm text-text-muted">Search the vocabulary you find.</p>
-            </Link>
-            <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Solver</div>
-              <p className="mt-1 text-sm text-text-muted">Review missed paths afterward.</p>
-            </Link>
-            <Link href="/guides/word-pattern-library" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
-              <div className="font-semibold text-primary">Patterns</div>
-              <p className="mt-1 text-sm text-text-muted">Turn tips into repeatable habits.</p>
-            </Link>
-          </div>
-        </section>
-
-        <div className="prose prose-invert max-w-none space-y-6 text-text">
-          <section>
-            <p className="leading-relaxed">
-              If you want to test these techniques immediately, jump into{" "}
-              <Link href="/play" className="text-primary hover:underline">
-                /play
-              </Link>
-              . If you want the word-frequency page that already earned clicks,
-              read{" "}
-              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
-                Most Common Boggle Words
-              </Link>
-              .
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <main className="min-h-screen px-4 py-8">
+        <GuideDesktopShell>
+          <header className="mb-8">
+            <nav className="mb-4 flex items-center gap-2 text-sm text-text-dim">
+              <Link href="/" className="hover:text-text">WordGrid</Link>
+              <span>/</span>
+              <Link href="/guides/" className="hover:text-text">Guides</Link>
+            </nav>
+            <h1 className="text-4xl font-bold">How to find more words in WordGrid</h1>
+            <p className="mt-3 max-w-3xl leading-relaxed text-text-muted">
+              Finding more words is a repeatable route-scanning skill. The six habits below keep your search grounded
+              in the current dictionary and the board rules rather than guesswork.
             </p>
-            <p className="leading-relaxed mt-3">
-              Once you can spot more words reliably, the next step is{" "}
-              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
-                Word Grid Strategies
-              </Link>{" "}
-              for scoring and{" "}
-              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
-                the rules page
-              </Link>{" "}
-              if you want a reset.
-            </p>
-            <p className="leading-relaxed mt-3">
-              For the full review loop, add the{" "}
-              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
-                scoring sheet
-              </Link>
-              ,{" "}
-              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
-                dictionary guide
-              </Link>
-              , and{" "}
-              <Link href="/solver" className="text-primary hover:underline">
-                solver
-              </Link>
-              .
-            </p>
-          </section>
+          </header>
 
-          <section className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-            <h2 className="text-2xl font-semibold text-primary mb-3">Do this next</h2>
-            <p className="text-sm text-text-muted leading-relaxed">
-              Use one tactic in a timed board, then verify it with the solver and
-              the common words list. That loop is what makes the tips stick.
-            </p>
-          </section>
+          <GuideActionBar
+            primary={{ href: "/play", label: "Play a board", detail: "Try one habit immediately" }}
+            secondary={{ href: "/solver", label: "Review routes", detail: "Spot paths you missed" }}
+            tertiary={{ href: "/guides/boggle-dictionary", label: "Check a word", detail: "Confirm current entries" }}
+            quaternary={{ href: "/guides/most-common-boggle-words", label: "Practice words", detail: "Study verified examples" }}
+          />
 
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              1. Scan by Starting Letter
-            </h2>
-            <p className="leading-relaxed">
-              Instead of randomly scanning the grid, pick one letter as your anchor
-              and systematically explore all adjacent combinations. Start with rare
-              letters like <strong>Q, Z, J, X</strong> — words containing these are
-              often higher value and easier to spot because there are fewer of them.
-            </p>
-          </section>
+          <div className="space-y-4 text-text">
+            {methods.map(([title, detail], index) => (
+              <section key={title} className="rounded-lg border border-border bg-surface/50 p-5">
+                <p className="text-sm font-semibold text-primary">Method {index + 1}</p>
+                <h2 className="mt-1 text-2xl font-semibold">{title}</h2>
+                <p className="mt-3 leading-relaxed text-text-muted">{detail}</p>
+              </section>
+            ))}
 
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              2. Look for Common Prefixes and Suffixes
-            </h2>
-            <p className="leading-relaxed mb-3">Train yourself to recognize these patterns:</p>
-            <ul className="space-y-1 ml-4">
-              <li><strong>Prefixes:</strong> RE-, UN-, IN-, DIS-, OVER-, OUT-</li>
-              <li><strong>Suffixes:</strong> -ING, -ED, -ER, -EST, -LY, -TION</li>
-              <li><strong>Endings:</strong> -E, -S, -Y (can turn a 3-letter word into 4-5)</li>
-            </ul>
-            <p className="leading-relaxed mt-3">
-              If you found &ldquo;PLAY&rdquo;, immediately check if PLAYING, PLAYED, PLAYS,
-              or PLAYER are also on the board.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              3. The &ldquo;Qu&rdquo; Strategy
-            </h2>
-            <p className="leading-relaxed">
-              The Qu tile counts as a single cell but produces two letters. Look for
-              words that commonly pair with QU: QUIT, QUEST, QUIET, QUOTE, EQUATION.
-              Since Qu is rare, these words are often missed by other players.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              4. Go for Length Over Quantity
-            </h2>
-            <p className="leading-relaxed">
-              In WordGrid scoring, longer words are exponentially more valuable:
-              a 5-letter word (4 pts) is worth as much as four 3-letter words.
-              A 7-letter word (8 pts) beats eight 3-letter words. Once you spot a
-              4-letter base, always check if you can extend it.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              5. Plurals Are Free Points
-            </h2>
-            <p className="leading-relaxed">
-              If you found a noun, check if an S is adjacent — that&apos;s an instant
-              extra point for the plural form. CAT → CATS, DOG → DOGS, STAR → STARS.
-              This is the single easiest way to boost your score.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              6. Diagonal Awareness
-            </h2>
-            <p className="leading-relaxed">
-              Many players only scan horizontally and vertically. Remember: in
-              WordGrid, diagonals count! Practice seeing 8 directions from each cell.
-              Diagonal words are often the ones your opponents miss.
-            </p>
-          </section>
-
-          <div className="mt-8 p-6 bg-indigo-900/30 rounded-xl border border-indigo-800/50">
-            <h2 className="text-xl font-semibold text-primary mb-2">
-              Ready to Practice?
-            </h2>
-            <p className="text-text mb-4">
-              Put these strategies to work in a real game.
-            </p>
-            <div className="flex gap-3">
-              <a
-                href="/play"
-                className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
-              >
-                Play
-              </a>
-              <a
-                href="/daily"
-                className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
-              >
-                Daily
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-8 border-t border-border pt-6">
-            <h2 className="text-lg font-semibold mb-3">Next Pages</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/guides/word-grid-strategies" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
-                <div className="font-semibold text-primary">Word Grid Strategies</div>
-                <p className="text-sm text-text-muted mt-1">
-                  Learn how to convert these tips into points and better timing.
-                </p>
-              </Link>
-              <Link href="/guides/most-common-boggle-words" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
-                <div className="font-semibold text-primary">Most Common Boggle Words</div>
-                <p className="text-sm text-text-muted mt-1">
-                  Repeated patterns and high-frequency words to memorize visually.
-                </p>
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-8 border-t border-border pt-6">
-            <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
-            <div className="space-y-3">
-              <Link href="/guides/most-common-boggle-words/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
-                <div className="font-semibold text-primary">Most Common Boggle Words &rarr;</div>
-                <div className="text-sm text-text-muted">Use the high-frequency list to train faster recognition.</div>
-              </Link>
-              <a href="/guides/word-grid-strategies/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
-                <div className="font-semibold text-primary">Word Grid Strategies: Score Higher Every Game &rarr;</div>
-                <div className="text-sm text-text-muted">Scoring curve analysis, time management, and word families.</div>
-              </a>
-              <a href="/guides/boggle-rules-beginners/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
-                <div className="font-semibold text-primary">Boggle Rules: A Complete Beginner&apos;s Guide &rarr;</div>
-                <div className="text-sm text-text-muted">New to word grid games? Start here for the full rules breakdown.</div>
-              </a>
-              <a href="/play/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
-                <div className="font-semibold text-primary">Play &rarr;</div>
-                <div className="text-sm text-text-muted">Practice these techniques in a live round.</div>
-              </a>
-              <a href="/guides/" className="block text-sm text-text-dim hover:text-text">
-                Browse all guides &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-          </div>
-
-          <aside className="space-y-4 lg:sticky lg:top-8">
-            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
-              <h2 className="text-2xl font-bold">Find more words faster</h2>
-              <p className="mt-3 text-sm text-text-muted leading-relaxed">
-                Keep the right-side rail visible on desktop so the six techniques and
-                the practice links stay in one reading flow.
+            <section className="mt-8 rounded-lg border border-border bg-surface/50 p-5">
+              <h2 className="text-2xl font-semibold text-primary">Practice loop</h2>
+              <p className="mt-3 leading-relaxed text-text-muted">
+                Pick one method, play a fresh board, then use the solver to inspect missed legal paths. Carry only one
+                newly noticed shape into the next round so it becomes automatic.
               </p>
-            </div>
+            </section>
 
-            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-              <h2 className="text-lg font-semibold text-text">Practice now</h2>
-              <div className="mt-4 grid gap-2">
-                <a href="/play/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
-                  Play now
-                </a>
-                <a href="/daily/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
-                  Daily board
-                </a>
-                <a href="/guides/word-grid-strategies/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
-                  Score higher
-                </a>
+            <section className="mt-8">
+              <h2 className="mb-3 text-2xl font-semibold text-primary">Questions about finding more words</h2>
+              <div className="divide-y divide-border rounded-lg border border-border bg-surface/50">
+                {faqItems.map((item) => (
+                  <details key={item.question} className="p-5">
+                    <summary className="cursor-pointer font-semibold">{item.question}</summary>
+                    <p className="mt-3 leading-relaxed text-text-muted">{item.answer}</p>
+                  </details>
+                ))}
               </div>
-            </div>
-
-            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-              <h2 className="text-lg font-semibold text-text">Next reads</h2>
-              <div className="mt-4 grid gap-2">
-                <a href="/guides/most-common-boggle-words/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
-                  Common words
-                </a>
-                <a href="/guides/boggle-rules-beginners/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
-                  Rules refresher
-                </a>
-                <a href="/guides/word-grid-vs-boggle/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
-                  Compare with Boggle
-                </a>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </article>
-    </main>
+            </section>
+          </div>
+        </GuideDesktopShell>
+      </main>
+    </>
   );
 }

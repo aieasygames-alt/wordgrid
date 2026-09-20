@@ -69,7 +69,7 @@ const faqSchema = {
       name: "How long do you have in Boggle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A standard game of Boggle lasts 3 minutes. Online variants like WordGrid also offer 5-minute and untimed Zen modes, but the Daily always uses the classic 3-minute clock so every player has the same experience.",
+        text: "WordGrid timed rounds last 3 minutes. You can also use untimed practice, while the Daily uses the same 3-minute clock for every player.",
       },
     },
     {
@@ -318,8 +318,8 @@ export default function BoggleRulesGuide() {
             </h2>
             <p className="leading-relaxed mb-3">
               Points scale with word length, and longer words are worth
-              dramatically more per letter. Here&apos;s the standard scoring
-              table used in WordGrid (and most Boggle variants):
+              dramatically more per letter. Here&apos;s the current scoring
+              table used in WordGrid:
             </p>
             <table className="w-full text-sm">
               <thead>
@@ -335,10 +335,6 @@ export default function BoggleRulesGuide() {
                   [4, 2, "PLAY, STAR, WORD"],
                   [5, 4, "QUEST, TRAIN, BOARD"],
                   [6, 6, "PLAYER, GARDEN, ACTION"],
-                  [7, 8, "PLAYING, STARTED"],
-                  [8, 11, "EQUATION, FORMATION"],
-                  [9, 13, "DIRECTION"],
-                  ["10+", "15+", "OPERATION (+2 per extra letter)"],
                 ].map(([len, pts, example]) => (
                   <tr key={String(len)} className="border-b border-surface">
                     <td className="py-2">{len} letters</td>
@@ -355,8 +351,8 @@ export default function BoggleRulesGuide() {
               words once they spot something longer.
             </p>
             <p className="leading-relaxed mt-3">
-              For words of 8 letters or more, each additional letter adds 2 more
-              points. These are rare but game-changing when you find them.
+              The current WordGrid word list contains words through 6 letters.
+              The table above is the point system players can use today.
             </p>
             <p className="leading-relaxed mt-3">
               If you want the full points table with examples and winning score
@@ -378,9 +374,9 @@ export default function BoggleRulesGuide() {
               hits zero, the round is over and your final score is tallied.
             </p>
             <p className="leading-relaxed mt-3">
-              In WordGrid, you can also choose a 5-minute mode or a no-timer
-              &ldquo;Zen&rdquo; mode if you just want to relax and find words at
-              your own pace. But if you&apos;re playing the Daily board,
+              In WordGrid, you can also choose no-timer &ldquo;Zen&rdquo; practice if
+              you just want to relax and find words at your own pace. But if
+              you&apos;re playing the Daily board,
               everyone gets the same 3-minute clock.
             </p>
           </section>

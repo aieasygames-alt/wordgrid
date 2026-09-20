@@ -294,8 +294,7 @@ export default function BoggleGameOnlineGuide() {
                   [4, 2, "PLAY, WORD, GAME"],
                   [5, 4, "SCORE, BOARD, QUICK"],
                   [6, 6, "PLAYER, GARDEN"],
-                  [7, 8, "PLAYING, STARTED"],
-                  ["8+", "11+", "QUESTION, FORMATION"],
+                  ["7+", "8+", "Reserved for future WordGrid word-list expansion"],
                 ].map(([len, pts, example]) => (
                   <tr key={String(len)} className="border-b border-surface">
                     <td className="py-2">{len} letters</td>
@@ -350,8 +349,8 @@ export default function BoggleGameOnlineGuide() {
                 own best.
               </li>
               <li>
-                <strong>Timed Rounds:</strong> Classic 3-minute clock, plus a
-                5-minute option for a more relaxed pace.
+                <strong>Timed Rounds:</strong> Classic 3-minute clock for a
+                focused round.
               </li>
               <li>
                 <strong>Zen Mode:</strong> No timer at all. Just search for

@@ -269,9 +269,6 @@ export default function PlayBoggleOnlineFreeGuide() {
                   ["4 letters", "2 points"],
                   ["5 letters", "4 points"],
                   ["6 letters", "6 points"],
-                  ["7 letters", "8 points"],
-                  ["8 letters", "11 points"],
-                  ["9+ letters", "13+ points"],
                 ].map(([len, pts]) => (
                   <tr key={len} className="border-b border-surface">
                     <td className="py-2">{len}</td>
@@ -332,7 +329,7 @@ export default function PlayBoggleOnlineFreeGuide() {
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   Standard games are 3 minutes — the same as classic Boggle.
-                  Practice mode also offers 5-minute and untimed Zen modes.
+                  Practice mode also offers untimed Zen mode.
                 </p>
               </details>
             </div>

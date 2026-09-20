@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "boggle scoring rules", "boggle point chart",
   ],
   openGraph: {
-    title: "Boggle Scoring Sheet: Points Chart, Rules & Examples",
+    title: "WordGrid Points & Scoring Chart",
     description:
       "Complete Boggle scoring guide with points table, calculation examples, and scoring strategies. Learn to optimize your score.",
     images: ["/images/seo/boggle-scoring-sheet.webp"],
@@ -26,7 +26,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Boggle Scoring Sheet: Points Chart, Rules & Examples",
+  headline: "WordGrid Points & Scoring Chart",
   description:
     "A comprehensive Boggle scoring guide including points table, calculation examples, scoring strategies, and optimization techniques for maximizing your score.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -45,7 +45,7 @@ const faqSchema = {
       name: "How does Boggle scoring work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Boggle scoring is based on word length: 3-letter words = 1 point, 4-letter words = 2 points, 5-letter words = 4 points, 6-letter words = 6 points, 7-letter words = 8 points, and 8+ letter words = 11+ points. The scoring system heavily rewards longer words — a single 5-letter word is worth as much as four 3-letter words.",
+        text: "WordGrid scores words by length: 3 letters = 1 point, 4 letters = 2 points, 5 letters = 4 points, and 6 letters = 6 points. Longer words score more, so a 5-letter word is worth as much as four 3-letter words.",
       },
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: "What is the scoring chart for Boggle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The Boggle scoring chart by word length: 3 letters = 1 point, 4 letters = 2 points, 5 letters = 4 points, 6 letters = 6 points, 7 letters = 8 points, 8 letters = 11 points, 9 letters = 13 points, 10+ letters = 15+ points (2 additional points per extra letter beyond 8).",
+        text: "The current WordGrid scoring chart is: 3 letters = 1 point, 4 letters = 2 points, 5 letters = 4 points, and 6 letters = 6 points. The current word list contains words through 6 letters.",
       },
     },
     {
@@ -69,7 +69,7 @@ const faqSchema = {
       name: "What is a winning Boggle score?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Winning Boggle scores by level: 25-35 points for beginners, 35-50 points for intermediate players, 50-60 points for advanced players, 60-70 points for experts, and 70+ points for champions. In the Daily board, beating the average score typically puts you in the top half of players.",
+        text: "There is no universal winning WordGrid score. Board difficulty varies, so compare your score against the same Daily or shared challenge board.",
       },
     },
     {
@@ -146,10 +146,9 @@ export default function BoggleScoringSheetGuide() {
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
-              Understanding <strong>Boggle scoring</strong> is the difference
-              between 25-point games and 60-point games. This guide shows
-              exactly how points work, why longer words score more, and how to
-              optimize your gameplay for maximum points.
+              Understanding <strong>WordGrid scoring</strong> helps you decide
+              when to extend a word instead of collecting another short one. This
+              guide shows the current point system and how to use it in a round.
             </p>
             <p className="leading-relaxed mt-3">
               The short version: 3-letter words score 1 point, 4-letter words
@@ -294,8 +293,8 @@ export default function BoggleScoringSheetGuide() {
                   <li>PLAY (4 letters) = 2 points</li>
                   <li>BOARD (5 letters) = 4 points</li>
                   <li>PLAYER (6 letters) = 6 points</li>
-                  <li>PLAYING (7 letters) = 8 points</li>
-                  <li><strong>Total: 20 points</strong></li>
+                  <li>GARDEN (6 letters) = 6 points</li>
+                  <li><strong>Total: 18 points</strong></li>
                 </ul>
               </div>
 
@@ -315,7 +314,7 @@ export default function BoggleScoringSheetGuide() {
 
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
-              Winning Score Ranges by Level
+              Compare Scores Fairly
             </h2>
             <table className="w-full text-sm">
               <thead>
@@ -327,11 +326,8 @@ export default function BoggleScoringSheetGuide() {
               </thead>
               <tbody>
                 {[
-                  ["25-35 points", "Beginner", "Finding mostly 3-4 letter words"],
-                  ["35-50 points", "Intermediate", "Mix of lengths, some 5-6 letter words"],
-                  ["50-60 points", "Advanced", "Consistently finding 5+ letter words"],
-                  ["60-70 points", "Expert", "Regular 6-8 letter words, strong patterns"],
-                  ["70+ points", "Champion", "Exceptional 8+ letter words, mastery"],
+                  ["Same board", "Useful comparison", "Compare your Daily or Challenge score with another player on the exact grid."],
+                  ["Different boards", "Not comparable", "Letter layouts change the number and quality of available words."],
                 ].map(([score, level, description]) => (
                   <tr key={score} className="border-b border-surface">
                     <td className="py-2">{score}</td>
@@ -369,9 +365,9 @@ export default function BoggleScoringSheetGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Strategy 3: Word Extensions</h3>
                 <p className="text-sm leading-relaxed">
-                  When you find a word, check for extensions. PLAY (4 letters, 2
-                  points) → PLAYED (6 letters, 6 points) → PLAYING (7 letters, 8
-                  points). One base word can generate multiple high-value words.
+                  When you find a word, check nearby tiles for a playable ending.
+                  A 4-letter word is worth 2 points, while a 5-letter extension is
+                  worth 4. One base word can reveal multiple valid answers.
                 </p>
               </div>
 
@@ -396,10 +392,6 @@ export default function BoggleScoringSheetGuide() {
                 [4, 2, "2×"],
                 [5, 4, "4×"],
                 [6, 6, "6×"],
-                [7, 8, "8×"],
-                [8, 11, "11×"],
-                [9, 13, "13×"],
-                ["10+", "15+", "Jackpot"],
               ].map(([len, pts, mult]) => (
                 <div key={String(len)} className="bg-surface/50 rounded-xl p-3 text-center">
                   <div className="text-xs text-text-dim">{len} letters</div>
@@ -426,10 +418,6 @@ export default function BoggleScoringSheetGuide() {
                     <li>4 → 2</li>
                     <li>5 → 4</li>
                     <li>6 → 6</li>
-                    <li>7 → 8</li>
-                    <li>8 → 11</li>
-                    <li>9 → 13</li>
-                    <li>10+ → 15+</li>
                   </ul>
                 </div>
                 <div>
@@ -488,10 +476,9 @@ export default function BoggleScoringSheetGuide() {
                   How does Boggle scoring work?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Boggle scoring is based on word length: 3 letters = 1 point,
-                  4 letters = 2 points, 5 letters = 4 points, 6 letters = 6
-                  points, 7 letters = 8 points, 8+ letters = 11+ points.
-                  Longer words are worth significantly more.
+                  WordGrid scores 3 letters at 1 point, 4 letters at 2, 5
+                  letters at 4, and 6 letters at 6. Longer available answers
+                  are worth more, so extensions are useful when the board allows them.
                 </p>
               </details>
               <details className="bg-surface/50 rounded-xl p-4">
@@ -499,10 +486,9 @@ export default function BoggleScoringSheetGuide() {
                   What is the scoring chart for Boggle?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Boggle scoring chart: 3 letters = 1 point, 4 = 2 points, 5 =
-                  4 points, 6 = 6 points, 7 = 8 points, 8 = 11 points, 9 =
-                  13 points, 10+ = 15+ points (2 additional points per extra
-                  letter).
+                  WordGrid scoring chart: 3 letters = 1 point, 4 = 2 points,
+                  5 = 4 points, and 6 = 6 points. The current WordGrid word
+                  list contains words through 6 letters.
                 </p>
               </details>
               <details className="bg-surface/50 rounded-xl p-4">
@@ -521,9 +507,9 @@ export default function BoggleScoringSheetGuide() {
                   What is a winning Boggle score?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Winning Boggle scores: 25-35 for beginners, 35-50
-                  intermediate, 50-60 advanced, 60-70 expert, 70+ champion.
-                  Beating the Daily average puts you in the top half.
+                  Compare scores only on the same board. The Daily and shared
+                  challenge boards give everyone the same grid, making score
+                  comparisons meaningful.
                 </p>
               </details>
             </div>

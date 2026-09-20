@@ -45,7 +45,7 @@ const faqSchema = {
       name: "How do I check if a Boggle word is valid?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "To check if a Boggle word is valid, confirm that it is at least 3 letters long, appears in a normal English dictionary, is not a proper noun or abbreviation, and can be formed by connecting adjacent tiles without reusing a tile.",
+        text: "Use the WordGrid checker on this page. A valid WordGrid word must be at least 3 letters long, be present in the WordGrid word list, and be traceable through adjacent tiles without repeating a tile.",
       },
     },
     {
@@ -53,23 +53,23 @@ const faqSchema = {
       name: "What words are allowed in Boggle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Boggle allows words that are at least 3 letters long, appear in standard English dictionaries, and are not proper nouns (names of people/places like Paris, Google), abbreviations (TV, ASAP), or foreign words commonly used in English. Different dictionaries may vary slightly on specific words. Common words like THE, AND, THAT, HAVE, FOR, NOT, YOU, THIS always count.",
+        text: "WordGrid accepts words that are at least 3 letters long and appear in its built-in word list. A word must also follow a legal path on the board, with adjacent tiles and no repeated tile.",
       },
     },
     {
       "@type": "Question",
-      name: "How many words are in a Boggle dictionary?",
+      name: "How many words are in the WordGrid word list?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A standard Boggle dictionary contains approximately 80,000-100,000 valid English words meeting Boggle criteria (3+ letters, standard dictionary words, not proper nouns or abbreviations). Online versions may have 50,000-200,000 words depending on inclusiveness. Tournament dictionaries typically use 80,000-100,000 words as the standard.",
+        text: "WordGrid currently validates against a built-in list of more than 55,000 words. It is a gameplay word list rather than a claim that every entry in a general-purpose dictionary is playable.",
       },
     },
     {
       "@type": "Question",
-      name: "What dictionary does Boggle use?",
+      name: "What word list does WordGrid use?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Boggle typically uses standard comprehensive English dictionaries like Merriam-Webster, Oxford English Dictionary, or Collins. Online versions often use open-source dictionaries like WordNet or SCOWL. Tournament play uses approved word lists to avoid disputes. The key is consistency — all players must agree on which dictionary source defines valid words.",
+        text: "WordGrid uses one built-in word list for gameplay. Use the checker on this page to confirm whether a word is in that list, then confirm that it can be traced legally on the board.",
       },
     },
     {
@@ -82,10 +82,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "What is the Boggle official word list?",
+      name: "Does a checked word automatically score in a round?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "There is no single 'official' Boggle word list. Different editions and online versions use different dictionaries. Tournament play typically uses approved word lists agreed upon by organizers. For casual play, any standard English dictionary works. Consistency matters more than the specific source — all players should agree on word validity rules beforehand.",
+        text: "No. The checker only confirms that a word is in WordGrid's word list. It must still be at least 3 letters and traceable through adjacent tiles without reusing a tile on the board you are playing.",
       },
     },
   ],

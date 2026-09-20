@@ -50,7 +50,7 @@ const faqSchema = {
       name: "How do you score in the Boggle word game?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Boggle scoring is based on word length: 3-letter words = 1 point, 4-letter = 2 points, 5-letter = 4 points, 6-letter = 6 points, 7-letter = 8 points, and 8+ letters = 11+ points. The scoring system heavily rewards longer words — a single 5-letter word is worth as much as four 3-letter words.",
+        text: "WordGrid scores words by length: 3 letters = 1 point, 4 letters = 2 points, 5 letters = 4 points, and 6 letters = 6 points. A 5-letter word is worth as much as four 3-letter words.",
       },
     },
     {
@@ -309,8 +309,6 @@ export default function BoggleWordGameGuide() {
                   [4, 2, "2× baseline"],
                   [5, 4, "4× baseline"],
                   [6, 6, "6× baseline"],
-                  [7, 8, "8× baseline"],
-                  ["8+", "11+", "Jackpot"],
                 ].map(([len, pts, value]) => (
                   <tr key={String(len)} className="border-b border-surface">
                     <td className="py-2">{len} letters</td>
@@ -433,9 +431,9 @@ export default function BoggleWordGameGuide() {
                   How do you score in Boggle?
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Boggle scoring by word length: 3 letters = 1 point, 4 = 2
-                  points, 5 = 4 points, 6 = 6 points, 7 = 8 points, 8+ = 11+
-                  points. Longer words are worth significantly more.
+                  WordGrid scoring by word length: 3 letters = 1 point, 4 = 2
+                  points, 5 = 4 points, and 6 = 6 points. Longer available
+                  words are worth more.
                 </p>
               </details>
               <details className="bg-surface/50 rounded-xl p-4">

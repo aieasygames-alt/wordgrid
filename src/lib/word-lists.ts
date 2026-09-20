@@ -1,5 +1,6 @@
 import { scoreWord } from "./boggle";
 import { INDEXABLE_WORDS } from "./indexable-words";
+import { isCurrentWord } from "./current-word-list";
 
 export type WordListSlug =
   | "3-letter-boggle-words"
@@ -71,6 +72,12 @@ const S_ENDING_WORDS = [
   "doors", "drops", "facts", "farms", "files", "forms", "games", "words",
 ];
 
+// The game dictionary currently includes words from 3 through 6 letters only.
+// Keep curated pattern lists inside that same playable vocabulary.
+function playable(words: string[]) {
+  return words.filter((word) => word.length >= 3 && word.length <= 6 && isCurrentWord(word));
+}
+
 function byLength(length: number) {
   return INDEXABLE_WORDS.filter((word) => word.length === length);
 }
@@ -78,8 +85,8 @@ function byLength(length: number) {
 function highScoringWords() {
   return [
     ...INDEXABLE_WORDS.filter((word) => word.length >= 5),
-    ...QU_WORDS,
-    ...ING_WORDS.filter((word) => word.length >= 5),
+    ...playable(QU_WORDS),
+    ...playable(ING_WORDS).filter((word) => word.length >= 5),
   ]
     .filter((word, index, words) => words.indexOf(word) === index)
     .sort((a, b) => scoreWord(b) - scoreWord(a) || a.localeCompare(b));
@@ -132,7 +139,7 @@ export const WORD_LIST_PAGES: WordListPage[] = [
       "Qu is special in Boggle because one tile gives you the Q and U together. A Qu board can feel awkward until you learn the common branches.",
     searchIntent: "Players want to know which Qu words are worth checking when a board contains the Qu tile.",
     patternTip: "Start with QUI-, QUA-, QUE-, and QUO-, then check whether nearby vowels can support a longer route.",
-    words: QU_WORDS,
+    words: playable(QU_WORDS),
   },
   {
     slug: "words-ending-in-ing",
@@ -144,7 +151,7 @@ export const WORD_LIST_PAGES: WordListPage[] = [
       "ING endings are powerful because they turn ordinary stems into longer, higher-value answers. If the board has I-N-G connected, inspect every nearby verb-like stem.",
     searchIntent: "Players are studying suffix patterns that create longer Boggle answers.",
     patternTip: "Find the ING chain first, then work backward into playable stems around the I.",
-    words: ING_WORDS,
+    words: playable(ING_WORDS),
   },
   {
     slug: "words-ending-in-s",
@@ -156,7 +163,7 @@ export const WORD_LIST_PAGES: WordListPage[] = [
       "An S tile can quietly raise your score. Many short nouns and verbs become a second valid answer when S is adjacent to the end of the path.",
     searchIntent: "Players want quick plural and verb-ending examples for timed play.",
     patternTip: "Every time you find a noun-like word, ask whether a nearby S creates a legal extension.",
-    words: S_ENDING_WORDS,
+    words: playable(S_ENDING_WORDS),
   },
   {
     slug: "high-scoring-boggle-words",
@@ -180,7 +187,7 @@ export const WORD_LIST_PAGES: WordListPage[] = [
       "Common Boggle words make the board feel less random. Memorizing a focused list helps you recognize short anchors and extend them into better answers.",
     searchIntent: "Players want a practical vocabulary list before playing or reviewing with a solver.",
     patternTip: "Learn short anchors first, then practice turning them into 4- and 5-letter answers.",
-    words: COMMON_BOGGLE_WORDS,
+    words: playable(COMMON_BOGGLE_WORDS),
   },
 ];
 

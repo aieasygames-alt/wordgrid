@@ -202,9 +202,11 @@ export default async function Page({ params }: { params: { word: string } }) {
                 Related Study Lists
               </h2>
               <div className="mt-4 flex flex-wrap gap-2 text-sm">
-                <Link href={`/words/${wordUpper.length}-letter-boggle-words/`} className="rounded-xl bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">
-                  {wordUpper.length}-letter words
-                </Link>
+                {wordUpper.length <= 5 ? (
+                  <Link href={`/words/${wordUpper.length}-letter-boggle-words/`} className="rounded-xl bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">
+                    {wordUpper.length}-letter words
+                  </Link>
+                ) : null}
                 <Link href="/words/common-boggle-words/" className="rounded-xl bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">
                   Common words
                 </Link>

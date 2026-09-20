@@ -225,7 +225,7 @@ export default function WordListPage({ page }: WordListPageProps) {
       <section className="mt-10 rounded-3xl border border-border bg-bg/40 p-5 sm:p-6">
         <h2 className="text-2xl font-semibold">Next Practice Step</h2>
         <p className="mt-3 max-w-3xl text-text-muted leading-relaxed">
-          Pick five words from this page, play a timed board, then open the
+          Pick five words from this page, play a fresh board, then open the
           solver to see whether those patterns appeared in places you missed.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">

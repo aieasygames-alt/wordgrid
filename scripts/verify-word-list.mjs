@@ -109,6 +109,34 @@ if (solverClient.includes('"7"') || solverClient.includes("7+ letters") || solve
   throw new Error("The solver must not expose 7+ letter controls or statistics while the current dictionary ends at 6 letters.");
 }
 
+const wordListSource = readFileSync(new URL("../src/lib/word-lists.ts", import.meta.url), "utf8");
+const currentWordListSource = readFileSync(new URL("../src/lib/current-word-list.ts", import.meta.url), "utf8");
+
+if (!wordListSource.includes("isCurrentWord(word)")) {
+  throw new Error("Curated word-list pages must filter examples against the current game dictionary.");
+}
+
+if (!currentWordListSource.includes('"public", "data", "words.txt"')) {
+  throw new Error("The server word-list source must read the same public dictionary used by the game.");
+}
+
+const staticWordListExamples = [
+  "quieter",
+  "question",
+  "finding",
+  "playing",
+  "writing",
+];
+const accidentallyPlayable = staticWordListExamples.filter((word) => words.has(word));
+
+if (accidentallyPlayable.length > 0) {
+  throw new Error(`Update word-list assertions: these examples are now playable: ${accidentallyPlayable.join(", ")}`);
+}
+
+if (!wordListSource.includes("word.length <= 6 && isCurrentWord(word)")) {
+  throw new Error("Curated word-list examples must remain within the current 3-6 letter dictionary range.");
+}
+
 const commonWordsPage = readFileSync(
   new URL("../src/app/guides/most-common-boggle-words/page.tsx", import.meta.url),
   "utf8"

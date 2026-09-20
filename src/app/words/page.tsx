@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { INDEXABLE_WORDS } from "@/lib/worddata";
-import { WORD_LIST_PAGES } from "@/lib/word-lists";
+import { WORD_LIST_PAGES, getWordListPage } from "@/lib/word-lists";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -23,7 +23,7 @@ function getPoints(length: number) {
   if (length === 4) return 2;
   if (length === 5) return 4;
   if (length === 6) return 6;
-  return 8;
+  return 0;
 }
 
 const groupedWords = INDEXABLE_WORDS.reduce<Record<string, string[]>>((groups, word) => {
@@ -37,7 +37,8 @@ const lengthBuckets = [
   { label: "3 letters", href: "/words/3-letter-boggle-words/", count: INDEXABLE_WORDS.filter((word) => word.length === 3).length },
   { label: "4 letters", href: "/words/4-letter-boggle-words/", count: INDEXABLE_WORDS.filter((word) => word.length === 4).length },
   { label: "5 letters", href: "/words/5-letter-boggle-words/", count: INDEXABLE_WORDS.filter((word) => word.length === 5).length },
-  { label: "Qu words", href: "/words/words-with-qu/", count: INDEXABLE_WORDS.filter((word) => word.includes("qu")).length },
+  { label: "6 letter targets", href: "/words/high-scoring-boggle-words/", count: "6 pts" },
+  { label: "Qu words", href: "/words/words-with-qu/", count: getWordListPage("words-with-qu")!.words.length },
 ];
 
 export default function WordsIndex() {
@@ -81,7 +82,7 @@ export default function WordsIndex() {
                 ["Curated words", `${INDEXABLE_WORDS.length}`],
                 ["Pattern lists", `${WORD_LIST_PAGES.length}`],
                 ["Fast study", "Search + jump"],
-                ["Scoring", "1-8 pts"],
+                ["Scoring", "1-6 pts"],
               ].map(([label, value]) => (
                 <div key={label} className="bg-surface/50 rounded-2xl p-4">
                   <div className="text-2xl font-bold text-primary">{value}</div>
@@ -100,7 +101,9 @@ export default function WordsIndex() {
                     className="rounded-2xl bg-bg/60 p-4 hover:bg-surface transition"
                   >
                     <div className="font-semibold text-primary">{bucket.label}</div>
-                    <div className="mt-1 text-sm text-text-muted">{bucket.count} pages</div>
+                    <div className="mt-1 text-sm text-text-muted">
+                      {typeof bucket.count === "number" ? `${bucket.count} pages` : bucket.count}
+                    </div>
                   </Link>
                 ))}
               </div>

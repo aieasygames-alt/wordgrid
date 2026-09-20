@@ -4,9 +4,9 @@ import GuideImage from "@/components/GuideImage";
 import GuideActionBar from "@/components/GuideActionBar";
 
 export const metadata: Metadata = {
-  title: "Boggle Rules for Beginners: How to Play, Score, and Win",
+  title: "Boggle Rules for Beginners — How to Play WordGrid",
   description:
-    "Learn Boggle rules fast: how adjacent letters work, which words count, Qu tile rules, the 3-minute timer, scoring, and beginner examples.",
+    "Learn the WordGrid Boggle-style rules: adjacent letters, valid words, the Qu tile, 3-minute timer, and scoring basics with examples.",
   alternates: { canonical: "/guides/boggle-rules-beginners" },
   keywords: [
     "rules of boggle", "boggle rules", "how to play boggle",

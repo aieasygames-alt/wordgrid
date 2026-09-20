@@ -4,9 +4,9 @@ import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 import GuideImage from "@/components/GuideImage";
 
 export const metadata: Metadata = {
-  title: "Boggle Scoring Sheet: Points Chart, Rules & Examples",
+  title: "Boggle Points & Scoring Chart — WordGrid Rules",
   description:
-    "Check the Boggle scoring sheet with point values by word length, score examples, winning ranges, and quick rules for higher-scoring boards.",
+    "See WordGrid's Boggle-style points chart by word length, with scoring examples and a clear reference for every round.",
   alternates: { canonical: "/guides/boggle-scoring-sheet" },
   keywords: [
     "boggle scoring sheet", "boggle scoring table", "boggle points system",
@@ -117,7 +117,7 @@ export default function BoggleScoringSheetGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Scoring Sheet: Points Chart, Rules & Examples
+            Boggle Points & Scoring Chart
           </h1>
           <p className="text-text-muted">7 min read &middot; Updated July 2026</p>
         </header>
@@ -199,11 +199,12 @@ export default function BoggleScoringSheetGuide() {
 
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">
-              Boggle Scoring Table (Official)
+              WordGrid Points Table
             </h2>
             <div className="bg-surface/50 rounded-xl p-4 border border-border">
               <p className="text-sm text-text-dim mb-3">
-                Points are awarded based on word length:
+                WordGrid uses this Boggle-style scoring system. It rewards longer
+                words more heavily than classic Boggle does:
               </p>
               <table className="w-full text-sm">
                 <thead>
@@ -221,10 +222,7 @@ export default function BoggleScoringSheetGuide() {
                     [4, 2, "PLAY, WORD, GAME"],
                     [5, 4, "SCORE, QUICK, BOARD"],
                     [6, 6, "PLAYER, GARDEN"],
-                    [7, 8, "PLAYING, STARTED"],
-                    [8, 11, "QUESTION, FORMATION"],
-                    [9, 13, "EDUCATION"],
-                    ["10+", "15+", "ELECTRICITY (+2 per extra letter)"],
+                    ["7+", "8+", "Formula supports longer words when available"],
                   ].map(([len, pts, example]) => (
                     <tr key={String(len)} className="border-b border-surface">
                       <td className="py-2 font-semibold">{len} letters</td>
@@ -235,6 +233,21 @@ export default function BoggleScoringSheetGuide() {
                 </tbody>
               </table>
             </div>
+            <p className="mt-3 text-xs leading-relaxed text-text-dim">
+              The current WordGrid word list contains words up to 6 letters, so
+              7+ scoring is retained for future word-list expansions rather than
+              today&apos;s playable boards.
+            </p>
+          </section>
+
+          <section className="rounded-xl border border-border bg-surface/50 p-5">
+            <h2 className="text-xl font-semibold text-primary mb-2">Classic Boggle reference</h2>
+            <p className="text-sm leading-relaxed text-text-muted">
+              Classic Boggle scoring is different: 3-4 letters score 1 point,
+              5 scores 2, 6 scores 3, 7 scores 5, and 8+ scores 11. Use the
+              table above when playing WordGrid; use classic scoring only when
+              your group has agreed to the traditional rules.
+            </p>
           </section>
 
           <section>
@@ -289,12 +302,12 @@ export default function BoggleScoringSheetGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Example 3: Advanced Game</h3>
                 <ul className="space-y-1 text-sm">
-                  <li>QUESTION (8 letters) = 11 points</li>
-                  <li>FORMATION (8 letters) = 11 points</li>
-                  <li>EDUCATION (9 letters) = 13 points</li>
-                  <li>PLAYERS (7 letters) = 8 points</li>
+                  <li>GARDEN (6 letters) = 6 points</li>
+                  <li>PLAYER (6 letters) = 6 points</li>
                   <li>QUICK (5 letters) = 4 points</li>
-                  <li><strong>Total: 47 points</strong></li>
+                  <li>PLAY (4 letters) = 2 points</li>
+                  <li>CAT (3 letters) = 1 point</li>
+                  <li><strong>Total: 19 points</strong></li>
                 </ul>
               </div>
             </div>

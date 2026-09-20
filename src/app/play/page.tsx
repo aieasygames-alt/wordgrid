@@ -5,9 +5,9 @@ import PlayClient from "./PlayClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online Free — Instant Boggle Game",
+  title: "Play Boggle-Style Word Grid Online Free — Instant Game",
   description:
-    "Play a free Boggle-style word grid game instantly in your browser. Try 4x4, 5x5, or 6x6 boards, timed or Zen mode, with no download or sign-up.",
+    "Play a free Boggle-style 4x4 word grid instantly. Choose timed or unlimited practice, challenge friends on the same board, with no download or sign-up.",
   alternates: { canonical: "/play" },
   keywords: [
     "play boggle online free", "play boggle online", "boggle online free",

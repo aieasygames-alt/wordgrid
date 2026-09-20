@@ -4,9 +4,9 @@ import HomeClient from "./HomeClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online Free — WordGrid Game",
+  title: "Play Word Grid Online Free — Instant Boggle-Style Game",
   description:
-    "Play WordGrid free online with friends. Find words in Boggle-style grids, share the same board, compare scores, and review your game with no download or sign-up.",
+    "Play a free Boggle-style word grid game instantly. No download or sign-up: choose a timed board, challenge friends on the same grid, then review missed words.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Play Word Grid Online Free — WordGrid Game",

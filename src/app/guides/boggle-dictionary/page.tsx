@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 import GuideActionBar from "@/components/GuideActionBar";
+import BoggleWordChecker from "@/components/BoggleWordChecker";
 
 export const metadata: Metadata = {
-  title: "Boggle Dictionary Online: Valid Words, Word Lists & Study",
+  title: "Boggle Dictionary & Word Checker — Valid Words | WordGrid",
   description:
-    "Check valid Boggle words, study common word lists, and jump into solver and word-list tools from one dictionary hub.",
+    "Check whether a word is valid in WordGrid, learn Boggle word rules, and study practical word lists after a round.",
   alternates: { canonical: "/guides/boggle-dictionary" },
   keywords: [
     "boggle dictionary", "boggle word list", "boggle vocabulary",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     "boggle dictionary online", "boggle word checker",
   ],
   openGraph: {
-    title: "Boggle Dictionary Online: Valid Words, Word Lists & Study",
+    title: "Boggle Dictionary & Word Checker — Valid Words",
     description:
       "A practical dictionary hub for valid words, word lists, lookup rules, and study paths.",
   },
@@ -25,7 +26,7 @@ const BASE_URL = "https://wordgrid.games";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  headline: "Boggle Dictionary Online: Valid Words, Word Lists & Study",
+  headline: "Boggle Dictionary & Word Checker: Valid Words",
   description:
     "A practical Boggle dictionary including word lists, vocabulary references, valid word guidelines, and study paths.",
   author: { "@type": "Organization", name: "WordGrid" },
@@ -124,14 +125,14 @@ export default function BoggleDictionaryGuide() {
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
           <h1 className="text-4xl font-bold mb-2">
-            Boggle Dictionary Online: Valid Words, Word Lists & Study
+            Boggle Dictionary & Word Checker
           </h1>
           <p className="text-text-muted">9 min read &middot; Updated July 2026</p>
         </header>
 
         <GuideActionBar
-          primary={{ href: "/solver", label: "Check a board", detail: "Find every valid word after a round." }}
-          secondary={{ href: "/play", label: "Practice now", detail: "Use the rules in a live WordGrid board." }}
+          primary={{ href: "/play", label: "Play a board", detail: "Start a free WordGrid round in your browser." }}
+          secondary={{ href: "/solver", label: "Review a board", detail: "Find every valid word after a round." }}
           tertiary={{ href: "/guides/boggle-word-lists", label: "Study word lists", detail: "Browse words by letter and pattern." }}
           quaternary={{ href: "/guides/boggle-scoring-sheet", label: "Review scoring", detail: "See how word length affects points." }}
         />
@@ -139,21 +140,20 @@ export default function BoggleDictionaryGuide() {
         <div className="space-y-6 text-text">
           <section>
             <p className="leading-relaxed">
-              A <strong>Boggle dictionary</strong> answers the practical question:
-              does this word count? Use this page to understand valid-word rules,
-              compare dictionary standards, and move into word-list study.
+              Need to know whether a word counts in WordGrid? Use the checker below
+              for the same word list that validates WordGrid rounds, then use the
+              rules and study paths to understand why it counts.
             </p>
             <p className="leading-relaxed mt-3">
-              For quick checking: valid Boggle words are usually standard English
-              dictionary entries, at least 3 letters long, with no proper nouns,
-              acronyms, abbreviations, hyphenated words, or apostrophes.
+              A valid WordGrid word must be at least 3 letters long, appear in the
+              WordGrid word list, and be traceable through adjacent tiles without
+              reusing a tile. The checker confirms the word-list portion; the board
+              still determines whether that word can be played in a specific round.
             </p>
             <p className="leading-relaxed mt-3">
-              If you searched for a <strong>Boggle word checker</strong> or{" "}
-              <strong>Boggle dictionary online</strong>, use this page as the
-              rule reference first: decide whether a word is eligible, then move
-              into the related word lists and solver pages to study patterns
-              after a board is finished.
+              Use this as a post-game <strong>Boggle word checker</strong>. It is
+              designed for learning, settling a casual question, and reviewing a
+              finished board rather than looking up words during a live challenge.
             </p>
             <p className="leading-relaxed mt-3">
               The practical order is: learn the{" "}
@@ -182,6 +182,8 @@ export default function BoggleDictionaryGuide() {
               .
             </p>
           </section>
+
+          <BoggleWordChecker />
 
           <section>
             <h2 className="text-2xl font-semibold text-primary mb-3">

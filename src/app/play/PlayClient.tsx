@@ -22,7 +22,7 @@ interface GameResult {
 
 const entryLinks = [
   { href: "/play", label: "Play" },
-  { href: "/zen", label: "Zen" },
+  { href: "/zen", label: "Unlimited" },
   { href: "/daily", label: "Daily" },
   { href: "/weekly", label: "Weekly" },
   { href: "/challenge", label: "Challenge" },
@@ -167,7 +167,7 @@ export default function PlayClient() {
             Play Word Grid Online Free
           </div>
           <p className="mt-3 text-sm sm:text-base text-text-muted max-w-xl mx-auto">
-            Pick the next step from Play, Zen, Daily, Challenge, or the word
+            Pick the next step from Play, unlimited practice, Daily, Challenge, or the word
             study tools. The board controls stay below, so the page reads in
             one clear order.
           </p>
@@ -187,7 +187,7 @@ export default function PlayClient() {
                 sessionMode === "zen" ? "bg-primary text-white" : "bg-surface/70 hover:bg-surface"
               }`}
             >
-              Zen
+              Unlimited
             </button>
             <button
               onClick={() => {
@@ -278,7 +278,7 @@ export default function PlayClient() {
         <p className="mt-3 text-sm sm:text-base text-text-muted max-w-xl mx-auto">
           Start a free Boggle-style word grid puzzle in your browser. Choose a
           classic 4x4 board, practice on 5x5 or 6x6 grids, then switch between
-          timed rounds, Zen practice, Daily, or Challenge.
+          timed rounds, unlimited practice, Daily, or a friend challenge.
         </p>
         <div className="mt-4">{entryNav}</div>
         <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
@@ -398,9 +398,9 @@ export default function PlayClient() {
             </p>
           </div>
           <div className="rounded-2xl border border-border bg-surface/50 p-5">
-            <h2 className="font-semibold text-primary">Zen mode</h2>
+            <h2 className="font-semibold text-primary">Unlimited practice</h2>
             <p className="mt-2 text-sm text-text-muted leading-relaxed">
-              Slow practice with no clock, useful for learning new families and
+              Zen mode has no clock, useful for learning new families and
               scanning patterns without rushing.
             </p>
           </div>

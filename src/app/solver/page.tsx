@@ -7,8 +7,8 @@ const BASE_URL = "https://wordgrid.games";
 export const metadata: Metadata = {
   title: "Boggle Solver — Free Word Grid Finder Online",
   description:
-    "Use this free Boggle solver to find every valid word in a Boggle-style grid, compare scores, and review missed patterns after you play.",
-  alternates: { canonical: "/solver" },
+    "Use this free Boggle solver to review valid words in 4x4, 5x5, or 6x6 Boggle-style grids, compare scores, and study missed routes after play.",
+  alternates: { canonical: `${BASE_URL}/solver/` },
   keywords: [
     "boggle solver",
     "word grid solver",
@@ -19,10 +19,10 @@ export const metadata: Metadata = {
     "word finder puzzle",
   ],
   openGraph: {
-    title: "Word Grid Finder & Boggle Solver — Find Every Word",
+    title: "Word Grid Finder & Boggle Solver - Review Valid Routes",
     description:
-      "Paste a square word grid, solve it instantly, and review the highest-value words and missed patterns.",
-    url: `${BASE_URL}/solver`,
+      "Paste a 4x4, 5x5, or 6x6 square grid and review valid words, scores, and missed routes.",
+    url: `${BASE_URL}/solver/`,
   },
 };
 
@@ -39,7 +39,7 @@ const softwareSchema = {
     priceCurrency: "USD",
   },
   description:
-    "Free online word grid solver for square Boggle-style puzzles with scoring breakdown and pattern review.",
+    "Free online word grid solver for 4x4, 5x5, and 6x6 Boggle-style puzzles with scoring breakdown and route review.",
   dateModified: "2026-08-05",
 };
 
@@ -52,7 +52,7 @@ const faqSchema = {
       name: "How do I use the Boggle solver?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Enter or paste a square letter grid, then click Solve. The solver finds every valid word, sorts them by score, and highlights the highest-value options first.",
+        text: "Enter or paste a 4x4, 5x5, or 6x6 square letter grid, then click Solve. The solver returns dictionary words with adjacent, non-repeating routes and sorts them by score.",
       },
     },
     {
@@ -68,7 +68,7 @@ const faqSchema = {
       name: "Does the solver work on daily boards?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. You can load today's daily board or paste the grid from any round to see the full solution set and scoring breakdown.",
+        text: "Yes. You can load today's daily board or paste a supported square grid from a round to see valid results and their score breakdown.",
       },
     },
   ],
@@ -104,10 +104,9 @@ export default function Page() {
                 Boggle Solver and Word Grid Finder
               </h1>
               <p className="mt-4 text-base sm:text-lg text-text-muted max-w-2xl leading-relaxed">
-                Paste any Boggle-style word grid into this free Boggle solver,
-                hit solve, and get every valid word with score ranking,
-                length filters, and quick pattern review. It is the fastest way
-                to turn a finished game into a learning session.
+                Paste a 4x4, 5x5, or 6x6 Boggle-style word grid into this free
+                solver. It returns valid dictionary routes with score ranking,
+                length filters, and pattern review for a finished game.
               </p>
               <p className="mt-4 text-sm sm:text-base text-text-muted max-w-2xl leading-relaxed">
                 The cleanest workflow is:{" "}
@@ -141,9 +140,9 @@ export default function Page() {
                 Why this page helps
               </div>
               <ul className="mt-3 space-y-3 text-sm text-text-muted leading-relaxed">
-                <li>Find every word in any board after you play.</li>
+                <li>Review valid words in a supported square board after you play.</li>
                 <li>Compare score density and high-value words at a glance.</li>
-                <li>Use the daily board or any custom layout as input.</li>
+                <li>Use the daily board or a 4x4, 5x5, or 6x6 custom layout as input.</li>
               </ul>
               <div className="mt-4 rounded-2xl bg-bg/60 p-4 text-sm text-text-muted leading-relaxed">
                 Open the solver after a round, not during it. That keeps the
@@ -218,7 +217,7 @@ export default function Page() {
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               ["Boggle solver", "Find all valid words in a 4x4 Boggle-style board after a round."],
-              ["Word grid solver", "Check any square letter grid and sort answers by score."],
+              ["Word grid solver", "Check 4x4, 5x5, or 6x6 letter grids and sort valid answers by score."],
               ["Word finder", "Spot longer words, prefixes, suffixes, and Qu paths you missed."],
               ["Daily review", "Compare today's board with the full answer set after you play."],
             ].map(([title, copy]) => (

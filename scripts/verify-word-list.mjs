@@ -103,6 +103,12 @@ if ([...words].some((word) => word.length > 6)) {
   throw new Error("The scoring page must be updated before the word list expands past 6 letters.");
 }
 
+const solverClient = readFileSync(new URL("../src/app/solver/SolverClient.tsx", import.meta.url), "utf8");
+
+if (solverClient.includes('"7"') || solverClient.includes("7+ letters") || solverClient.includes("7 + letters")) {
+  throw new Error("The solver must not expose 7+ letter controls or statistics while the current dictionary ends at 6 letters.");
+}
+
 const commonWordsPage = readFileSync(
   new URL("../src/app/guides/most-common-boggle-words/page.tsx", import.meta.url),
   "utf8"

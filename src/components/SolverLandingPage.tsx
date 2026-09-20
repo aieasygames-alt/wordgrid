@@ -8,6 +8,7 @@ interface SolverLandingPageProps {
   useCases: string[];
   steps: string[];
   related: { href: string; label: string }[];
+  supportedBoards: string;
 }
 
 export default function SolverLandingPage({
@@ -18,6 +19,7 @@ export default function SolverLandingPage({
   useCases,
   steps,
   related,
+  supportedBoards,
 }: SolverLandingPageProps) {
   return (
     <main className="min-h-screen px-4 py-8 sm:py-12">
@@ -38,6 +40,10 @@ export default function SolverLandingPage({
               </h1>
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-text-muted sm:text-lg">
                 {intro}
+              </p>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-text-dim">
+                Supports {supportedBoards}. A result is valid only when its letters form an adjacent route without
+                reusing a tile and the word appears in the current WordGrid dictionary.
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
                 <Link href="/solver" className="rounded-xl bg-primary px-5 py-3 font-semibold shadow-lg shadow-primary/20 transition hover:bg-primary-hover">

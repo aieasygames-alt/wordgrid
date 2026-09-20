@@ -18,7 +18,7 @@ type PatternInsight = {
 
 const INDEXABLE_WORD_SET = new Set(INDEXABLE_WORDS);
 const DEFAULT_SAMPLE = generateGrid(seedFromDate(todayDateString()));
-const LENGTH_FILTERS = ["all", "3", "4", "5", "6", "7"] as const;
+const LENGTH_FILTERS = ["all", "3", "4", "5", "6"] as const;
 type LengthFilter = (typeof LENGTH_FILTERS)[number];
 
 function gridToValues(grid: Grid): CellValue[][] {
@@ -126,7 +126,7 @@ function buildInsight(words: SolvedWord[]): PatternInsight | null {
 function filterWords(words: SolvedWord[], filter: LengthFilter, search: string): SolvedWord[] {
   const query = search.trim().toUpperCase();
   return words.filter((word) => {
-    const lengthMatch = filter === "all" ? true : word.word.length === Number(filter) || (filter === "7" && word.word.length >= 7);
+    const lengthMatch = filter === "all" ? true : word.word.length === Number(filter);
     const searchMatch = query ? word.word.includes(query) : true;
     return lengthMatch && searchMatch;
   });
@@ -267,7 +267,7 @@ export default function SolverClient() {
   const lengthBuckets = useMemo(() => {
     const buckets = new Map<number, number>();
     for (const word of solvedWords) {
-      const len = word.word.length >= 7 ? 7 : word.word.length;
+      const len = word.word.length;
       buckets.set(len, (buckets.get(len) || 0) + 1);
     }
     return buckets;
@@ -482,7 +482,7 @@ export default function SolverClient() {
                   filter === item ? "bg-primary text-white" : "bg-bg/70 hover:bg-surface-hover"
                 }`}
               >
-                {item === "all" ? "All words" : item === "7" ? "7+ letters" : `${item} letters`}
+                {item === "all" ? "All words" : `${item} letters`}
               </button>
             ))}
           </div>
@@ -553,14 +553,14 @@ export default function SolverClient() {
         <div className="rounded-3xl border border-border bg-surface/50 p-5">
           <h3 className="font-semibold text-primary">Length breakdown</h3>
           <div className="mt-3 space-y-3">
-            {[3, 4, 5, 6, 7].map((len) => {
+            {[3, 4, 5, 6].map((len) => {
               const count = lengthBuckets.get(len) || 0;
               const maxCount = Math.max(...[...lengthBuckets.values()], 1);
               const width = `${Math.max(8, (count / maxCount) * 100)}%`;
               return (
                 <div key={len}>
                   <div className="flex items-center justify-between text-xs text-text-dim mb-1">
-                    <span>{len}+ letters</span>
+                    <span>{len} letters</span>
                     <span>{count}</span>
                   </div>
                   <div className="h-2 rounded-full bg-bg/70 overflow-hidden">

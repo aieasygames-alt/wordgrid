@@ -4,14 +4,14 @@ import SolverLandingPage from "@/components/SolverLandingPage";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Boggle Solver Online — Find All Words in a Grid",
+  title: "Boggle Solver Online - Review a 4x4 Word Grid",
   description:
-    "Use the free Boggle solver online to find all valid words in any 4x4 word grid, compare scores, and review missed paths after play.",
-  alternates: { canonical: "/boggle-solver" },
+    "Use the free Boggle solver online to review valid words in a 4x4 WordGrid board, compare scores, and study missed routes after play.",
+  alternates: { canonical: `${BASE_URL}/boggle-solver/` },
   openGraph: {
-    title: "Boggle Solver Online — Find All Words in a Grid",
+    title: "Boggle Solver Online - Review a 4x4 Word Grid",
     description:
-      "Solve any Boggle-style grid after a round and review every valid word by score and length.",
+      "Review a finished 4x4 Boggle-style grid by score and length.",
     url: `${BASE_URL}/boggle-solver/`,
   },
 };
@@ -20,7 +20,7 @@ export default function Page() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "Boggle Solver Online",
+    name: "WordGrid Boggle Solver",
     url: `${BASE_URL}/boggle-solver/`,
     applicationCategory: "GameApplication",
     operatingSystem: "Web",
@@ -33,17 +33,17 @@ export default function Page() {
       <SolverLandingPage
         eyebrow="Boggle solver"
         title="Boggle Solver Online"
-        intro="Use this free Boggle solver after a round to find every valid word in a 4x4 grid. Paste the letters, solve the board, and study the highest-value paths you missed."
+        intro="Use this free Boggle solver after a round to review valid words in a 4x4 grid. Paste the letters, solve the board, and study the highest-value paths you missed."
         primaryIntent="Players who searched for a Boggle solver and want a direct way to check all possible words."
         useCases={[
           "Review a finished 4x4 Boggle-style board.",
-          "Sort answers by score, length, and pattern.",
+          "Sort answers by score and length.",
           "Study missed words before the next timed game.",
         ]}
         steps={[
           "Play a board first so the review stays useful.",
           "Open the live solver and enter the letters row by row.",
-          "Check high-scoring words before reading the full answer list.",
+          "Check high-scoring words before reading the full result list.",
           "Practice the missed prefixes, suffixes, and Qu paths on a new board.",
         ]}
         related={[
@@ -52,6 +52,7 @@ export default function Page() {
           { href: "/guides/boggle-rules-beginners", label: "Boggle rules" },
           { href: "/words/high-scoring-boggle-words", label: "High scoring words" },
         ]}
+        supportedBoards="a 4x4 board, with optional 5x5 and 6x6 modes in the live solver"
       />
     </>
   );

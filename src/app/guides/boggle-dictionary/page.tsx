@@ -5,97 +5,75 @@ import GuideActionBar from "@/components/GuideActionBar";
 import BoggleWordChecker from "@/components/BoggleWordChecker";
 
 export const metadata: Metadata = {
-  title: "Boggle Dictionary & Word Checker — Valid Words | WordGrid",
+  title: "Boggle Dictionary and Word Checker - Valid Words",
   description:
-    "Check whether a word is valid in WordGrid, learn Boggle word rules, and study practical word lists after a round.",
+    "Check whether a 3-6 letter word is in the current WordGrid dictionary, then review the path and score rules for a finished board.",
   alternates: { canonical: "/guides/boggle-dictionary" },
   keywords: [
-    "boggle dictionary", "boggle word list", "boggle vocabulary",
-    "boggle valid words", "boggle word lookup", "boggle word reference",
-    "boggle dictionary online", "boggle word checker",
+    "boggle dictionary",
+    "boggle word checker",
+    "boggle valid words",
+    "boggle word list",
+    "word grid dictionary",
   ],
   openGraph: {
-    title: "Boggle Dictionary & Word Checker — Valid Words",
+    title: "Boggle Dictionary and Word Checker - Valid Words",
     description:
-      "A practical dictionary hub for valid words, word lists, lookup rules, and study paths.",
+      "Check the current WordGrid dictionary and learn what else a word needs to count on a board.",
   },
 };
 
 const BASE_URL = "https://wordgrid.games";
 
+const faqItems = [
+  {
+    question: "How do I check if a WordGrid word is valid?",
+    answer:
+      "Use the checker on this page. A word must be in the current WordGrid list, contain 3 to 6 letters, and follow a legal adjacent path on the board without reusing a tile.",
+  },
+  {
+    question: "How many words are in the WordGrid dictionary?",
+    answer:
+      "WordGrid currently validates against a built-in gameplay list of more than 55,000 words. It is a game-specific list, not a claim that every general-dictionary entry is playable.",
+  },
+  {
+    question: "Does a checked word automatically score in a round?",
+    answer:
+      "No. A checker result only confirms dictionary membership. The word still needs a legal adjacent route in the exact board you are playing, and it must not reuse a tile.",
+  },
+  {
+    question: "When should I use the word checker?",
+    answer:
+      "Use it after a Timed, Zen, or Daily board to settle a question and study vocabulary. For a full-board review, use the solver after you have finished playing.",
+  },
+] as const;
+
 const articleSchema = {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  headline: "Boggle Dictionary & Word Checker: Valid Words",
+  "@type": "Article",
+  headline: "Boggle Dictionary and Word Checker: Valid Words",
   description:
-    "A practical Boggle dictionary including word lists, vocabulary references, valid word guidelines, and study paths.",
+    "A current WordGrid dictionary checker with rules for valid paths, word length, and post-game review.",
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
-  datePublished: "2026-06-29",
-  dateModified: "2026-08-05",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-dictionary/`,
 };
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "How do I check if a Boggle word is valid?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Use the WordGrid checker on this page. A valid WordGrid word must be at least 3 letters long, be present in the WordGrid word list, and be traceable through adjacent tiles without repeating a tile.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What words are allowed in Boggle?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "WordGrid accepts words that are at least 3 letters long and appear in its built-in word list. A word must also follow a legal path on the board, with adjacent tiles and no repeated tile.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How many words are in the WordGrid word list?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "WordGrid currently validates against a built-in list of more than 55,000 words. It is a gameplay word list rather than a claim that every entry in a general-purpose dictionary is playable.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What word list does WordGrid use?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "WordGrid uses one built-in word list for gameplay. Use the checker on this page to confirm whether a word is in that list, then confirm that it can be traced legally on the board.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Can you look up words in Boggle?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "During competitive play, you cannot use external dictionaries or word lookup tools — this would be cheating. However, for learning and practice, word lookups are excellent for vocabulary building. Use dictionaries after games to learn new words you missed, study word patterns, and expand your vocabulary for future games.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Does a checked word automatically score in a round?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No. The checker only confirms that a word is in WordGrid's word list. It must still be at least 3 letters and traceable through adjacent tiles without reusing a tile on the board you are playing.",
-      },
-    },
-  ],
+  mainEntity: faqItems.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: { "@type": "Answer", text: answer },
+  })),
 };
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Word Grid", item: `${BASE_URL}/` },
+    { "@type": "ListItem", position: 1, name: "WordGrid", item: `${BASE_URL}/` },
     { "@type": "ListItem", position: 2, name: "Guides", item: `${BASE_URL}/guides/` },
     { "@type": "ListItem", position: 3, name: "Boggle Dictionary" },
   ],
@@ -104,590 +82,88 @@ const breadcrumbSchema = {
 export default function BoggleDictionaryGuide() {
   return (
     <main className="min-h-screen px-4 py-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <GuideDesktopShell>
         <header className="mb-8">
-          <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
-            <Link href="/" className="hover:text-text">Word Grid</Link>
+          <nav className="mb-4 flex items-center gap-2 text-sm text-text-dim">
+            <Link href="/" className="hover:text-text">WordGrid</Link>
             <span>/</span>
             <Link href="/guides/" className="hover:text-text">Guides</Link>
           </nav>
-          <h1 className="text-4xl font-bold mb-2">
-            Boggle Dictionary & Word Checker
-          </h1>
-          <p className="text-text-muted">9 min read &middot; Updated July 2026</p>
+          <h1 className="mb-2 text-4xl font-bold">Boggle dictionary and word checker</h1>
+          <p className="text-text-muted">Check a word against the current WordGrid list, then verify its route on the board.</p>
         </header>
 
         <GuideActionBar
-          primary={{ href: "/play", label: "Play a board", detail: "Start a free WordGrid round in your browser." }}
-          secondary={{ href: "/solver", label: "Review a board", detail: "Find every valid word after a round." }}
-          tertiary={{ href: "/guides/boggle-word-lists", label: "Study word lists", detail: "Browse words by letter and pattern." }}
-          quaternary={{ href: "/guides/boggle-scoring-sheet", label: "Review scoring", detail: "See how word length affects points." }}
+          primary={{ href: "/play", label: "Play a board", detail: "Start Timed or Zen practice." }}
+          secondary={{ href: "/solver", label: "Review a board", detail: "Find missed routes after play." }}
+          tertiary={{ href: "/words", label: "Browse words", detail: "Study current word lists." }}
+          quaternary={{ href: "/guides/boggle-scoring-sheet/", label: "See scoring", detail: "Check the 1/2/4/6 point table." }}
         />
 
-        <div className="space-y-6 text-text">
-          <section>
-            <p className="leading-relaxed">
-              Need to know whether a word counts in WordGrid? Use the checker below
-              for the same word list that validates WordGrid rounds, then use the
-              rules and study paths to understand why it counts.
+        <div className="max-w-3xl space-y-8 text-text">
+          <section className="space-y-3 leading-relaxed">
+            <p>
+              This <strong>Boggle word checker</strong> uses the same built-in
+              WordGrid word list that validates current rounds. It is useful for
+              reviewing a finished board, learning a word you missed, or settling
+              a casual post-game question.
             </p>
-            <p className="leading-relaxed mt-3">
-              A valid WordGrid word must be at least 3 letters long, appear in the
-              WordGrid word list, and be traceable through adjacent tiles without
-              reusing a tile. The checker confirms the word-list portion; the board
-              still determines whether that word can be played in a specific round.
-            </p>
-            <p className="leading-relaxed mt-3">
-              Use this as a post-game <strong>Boggle word checker</strong>. It is
-              designed for learning, settling a casual question, and reviewing a
-              finished board rather than looking up words during a live challenge.
-            </p>
-            <p className="leading-relaxed mt-3">
-              The practical order is: learn the{" "}
-              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
-                rules
-              </Link>
-              , learn{" "}
-              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
-                scoring
-              </Link>
-              , build vocabulary here, then review missed answers with the{" "}
-              <Link href="/guides/boggle-solver" className="text-primary hover:underline">
-                solver
-              </Link>
-              .
-            </p>
-            <p className="leading-relaxed mt-3">
-              For the practical side of the dictionary, see{" "}
-              <Link href="/guides/boggle-word-lists" className="text-primary hover:underline">
-                Boggle word lists
-              </Link>{" "}
-              or{" "}
-              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
-                the most common words page
-              </Link>
-              .
+            <p>
+              A check is only the first step. A WordGrid word must be in the list,
+              have 3 to 6 letters, and trace through horizontally, vertically, or
+              diagonally adjacent tiles without reusing a tile.
             </p>
           </section>
 
           <BoggleWordChecker />
 
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              How This Dictionary Helps You Study Faster
-            </h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/guides/boggle-rules-beginners/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
-                <div className="font-semibold text-primary">Valid-word rules</div>
-                <p className="mt-1 text-sm text-text-muted">
-                  Avoid spending time on abbreviations, proper nouns, and other dead ends.
-                </p>
-              </Link>
-              <Link href="/guides/boggle-scoring-sheet/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
-                <div className="font-semibold text-primary">Point-aware vocabulary</div>
-                <p className="mt-1 text-sm text-text-muted">
-                  Learn which word families are worth chasing because they convert into real points.
-                </p>
-              </Link>
-              <Link href="/guides/most-common-boggle-words/" className="block rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
-                <div className="font-semibold text-primary">Common words first</div>
-                <p className="mt-1 text-sm text-text-muted">
-                  Start with the highest-frequency answers before you memorize rarer vocabulary.
-                </p>
-              </Link>
-              <Link href="/guides/boggle-solver/" className="block rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">
-                <div className="font-semibold text-primary">Solver review</div>
-                <p className="mt-1 text-sm text-text-muted">
-                  Turn missed words from a finished board into your next study list.
-                </p>
-              </Link>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Fast study paths
-            </h2>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              <Link href="/words" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
-                <div className="font-semibold text-primary">Word list</div>
-                <p className="mt-1 text-sm text-text-muted">Search words, scores, and patterns.</p>
-              </Link>
-              <Link href="/words/common-boggle-words/" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
-                <div className="font-semibold text-primary">Common words</div>
-                <p className="mt-1 text-sm text-text-muted">Memorize the most reusable answers.</p>
-              </Link>
-              <Link href="/words/words-with-qu/" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
-                <div className="font-semibold text-primary">Qu words</div>
-                <p className="mt-1 text-sm text-text-muted">Practice the special Qu tile quickly.</p>
-              </Link>
-              <Link href="/solver" className="rounded-xl bg-surface/50 p-4 hover:bg-surface transition">
-                <div className="font-semibold text-primary">Solver</div>
-                <p className="mt-1 text-sm text-text-muted">Review a finished board and study misses.</p>
-              </Link>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              What Words Count in Boggle
-            </h2>
-            <div className="bg-surface/50 rounded-xl p-4 border border-border">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <h3 className="font-semibold mb-2">✅ Allowed Words</h3>
-                  <ul className="space-y-1 text-sm">
-                    <li>• 3+ letters long</li>
-                    <li>• Standard English words</li>
-                    <li>• Common dictionary entries</li>
-                    <li>• Plurals (CATS, DOGS)</li>
-                    <li>• Past tense (PLAYED, RAN)</li>
-                    <li>• -ING forms (PLAYING)</li>
-                    <li>• Compound words (FOOTBALL)</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-2">❌ Not Allowed</h3>
-                  <ul className="space-y-1 text-sm">
-                    <li>• 2-letter words (AT, GO)</li>
-                    <li>• Proper nouns (PARIS, GOOGLE)</li>
-                    <li>• Abbreviations (TV, ASAP)</li>
-                    <li>• Foreign words (usually)</li>
-                    <li>• Words needing apostrophes</li>
-                    <li>• Hyphenated words (usually)</li>
-                    <li>• Acronyms (NASA, FBI)</li>
-                  </ul>
-                </div>
+          <section className="rounded-xl border border-border bg-surface/50 p-5">
+            <h2 className="mb-3 text-2xl font-semibold text-primary">What makes a word count</h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <h3 className="mb-2 font-semibold">Required</h3>
+                <ul className="space-y-2 text-sm leading-relaxed text-text-muted">
+                  <li>3 to 6 letters in the current WordGrid list.</li>
+                  <li>A route through touching horizontal, vertical, or diagonal tiles.</li>
+                  <li>No repeated tile in the same word.</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="mb-2 font-semibold">Not enough on its own</h3>
+                <ul className="space-y-2 text-sm leading-relaxed text-text-muted">
+                  <li>Appearing in a general-purpose dictionary.</li>
+                  <li>Having the right length without a legal route.</li>
+                  <li>Seeing the same letter twice when its tile cannot be reused.</li>
+                </ul>
               </div>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Quick Boggle Word Checker Rules
-            </h2>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[
-                ["Length", "The word should be at least 3 letters long."],
-                ["Dictionary", "It should appear as a normal English dictionary entry."],
-                ["Fair play", "Check words after the round, not during competitive play."],
-              ].map(([title, copy]) => (
-                <div key={title} className="rounded-xl border border-border bg-surface/50 p-4">
-                  <h3 className="font-semibold text-primary">{title}</h3>
-                  <p className="mt-2 text-sm text-text-muted leading-relaxed">{copy}</p>
-                </div>
+            <h2 className="mb-3 text-2xl font-semibold text-primary">A useful post-game routine</h2>
+            <ol className="ml-4 list-decimal space-y-3 leading-relaxed">
+              <li>Finish your Timed, Zen, or Daily board before checking answers.</li>
+              <li>Use this checker for a word you are unsure about.</li>
+              <li>Open the <Link href="/solver" className="text-primary hover:underline">solver</Link> to inspect all valid routes from the full board.</li>
+              <li>Study one current word family from the <Link href="/guides/boggle-word-lists/" className="text-primary hover:underline">word lists</Link> before your next board.</li>
+            </ol>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-2xl font-semibold text-primary">Questions about the WordGrid dictionary</h2>
+            <div className="space-y-3">
+              {faqItems.map(({ question, answer }) => (
+                <details key={question} className="rounded-xl bg-surface/50 p-4 first:open">
+                  <summary className="cursor-pointer font-semibold">{question}</summary>
+                  <p className="mt-2 text-sm leading-relaxed text-text-muted">{answer}</p>
+                </details>
               ))}
             </div>
-            <p className="mt-3 text-sm text-text-muted leading-relaxed">
-              For full-board review, open the{" "}
-              <Link href="/solver" className="text-primary hover:underline">
-                word grid solver
-              </Link>
-              . For vocabulary study, continue with{" "}
-              <Link href="/guides/boggle-word-lists" className="text-primary hover:underline">
-                Boggle word lists
-              </Link>
-              .
-            </p>
           </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Check If a Boggle Word Counts
-            </h2>
-            <div className="rounded-xl border border-primary/20 bg-primary/10 p-4">
-              <p className="text-sm leading-relaxed">
-                Use this quick test after a round: is the word 3+ letters, does
-                it appear in a normal English dictionary, and did the path use
-                adjacent tiles without repeating a tile? If yes, it usually
-                counts in Boggle-style play.
-              </p>
-            </div>
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <Link href="/solver" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
-                Check a full board
-              </Link>
-              <Link href="/guides/boggle-word-lists" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
-                Browse word lists
-              </Link>
-              <Link href="/guides/most-common-boggle-words" className="rounded-xl bg-surface/50 p-4 font-semibold hover:bg-surface transition">
-                Study common words
-              </Link>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Essential Boggle Vocabulary
-            </h2>
-            <p className="leading-relaxed mb-3">
-              High-frequency words that appear regularly in games:
-            </p>
-            <div className="space-y-4">
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Top 20 Most Common</h3>
-                <div className="grid grid-cols-5 gap-2 text-sm">
-                  {["THE", "AND", "THAT", "HAVE", "FOR", "NOT", "YOU", "THIS", "BUT", "FROM", "THEY", "WITH", "ARE", "WAS", "WERE", "WHAT", "WHEN", "MAKE", "TIME"].map(
-                    (word) => (
-                      <span key={word} className="px-2 py-1 bg-surface rounded font-mono">
-                        {word}
-                      </span>
-                    )
-                  )}
-                </div>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">High-Value Common Words</h3>
-                <p className="text-xs text-text-dim mb-2">
-                  Common words worth 5+ points:
-                </p>
-                <div className="flex flex-wrap gap-2 text-sm">
-                  {["THINK", "BELIEVE", "CREATE", "CONTROL", "SUPPORT", "REMEMBER", "UNDERSTAND", "KNOWLEDGE"].map(
-                    (word) => (
-                      <span key={word} className="px-2 py-1 bg-primary/20 rounded font-mono">
-                        {word}
-                      </span>
-                    )
-                  )}
-                </div>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Pattern Words</h3>
-                <p className="text-xs text-text-dim mb-2">
-                  Words with common endings:
-                </p>
-                <div className="flex flex-wrap gap-2 text-sm">
-                  {["ACTION", "MOTION", "PROMOTION", "HAPPINESS", "KINDNESS", "MOVEMENT", "PAYMENT"].map(
-                    (word) => (
-                      <span key={word} className="px-2 py-1 bg-surface rounded font-mono">
-                        {word}
-                      </span>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Using Dictionaries for Learning
-            </h2>
-            <div className="space-y-4">
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Post-Game Vocabulary Building</h3>
-                <p className="text-sm leading-relaxed">
-                  After each game, look up words you missed but the solver
-                  found. Study their meanings and common usage. Focus on words
-                  that appear regularly in grids but you don't know. Over time,
-                  this builds a game-specific vocabulary that improves your
-                  scores.
-                </p>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Pattern Dictionary Study</h3>
-                <p className="text-sm leading-relaxed">
-                  Instead of memorizing individual words, study word patterns.
-                  Learn all words starting with common prefixes (RE-, UN-, PRE-).
-                  Study word families (PLAY, PLAYED, PLAYING, PLAYER). Pattern
-                  knowledge is more valuable than rote memorization.
-                </p>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Letter Combination Reference</h3>
-                <p className="text-sm leading-relaxed">
-                  Build mental dictionaries of letter combinations: TH words
-                  (THE, THIS, THAT, WITH), HE words (THEM, HERE, HELD), IN words
-                  (INTO, TIME, FIND). When you see these pairs, your brain should
-                  automatically generate candidate words.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Word Lookup During Play
-            </h2>
-            <div className="space-y-4">
-              <div className="bg-red-900/20 rounded-xl p-4 border border-red-800/30">
-                <h3 className="font-semibold mb-2">❌ During Competitive Play</h3>
-                <p className="text-sm leading-relaxed">
-                  Looking up words during games is cheating. It violates fair play,
-                  gives you an unfair advantage, and doesn't help you build
-                  skills. Competitive play relies on your existing vocabulary
-                  and pattern recognition.
-                </p>
-              </div>
-
-              <div className="bg-green-900/20 rounded-xl p-4 border border-green-800/30">
-                <h3 className="font-semibold mb-2">✅ For Practice and Learning</h3>
-                <p className="text-sm leading-relaxed">
-                  Dictionary use is encouraged for learning. Look up words after
-                  games to expand vocabulary. Study word lists to build pattern
-                  recognition. Use dictionaries to settle disputes about word
-                  validity in casual games.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Dictionary Sources and Standards
-            </h2>
-            <p className="leading-relaxed mb-3">
-              Common dictionary sources used in Boggle:
-            </p>
-            <div className="space-y-4">
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Print Dictionaries</h3>
-                <ul className="space-y-1 text-sm">
-                  <li>• Merriam-Webster Collegiate Dictionary</li>
-                  <li>• Oxford English Dictionary</li>
-                  <li>• Collins English Dictionary</li>
-                  <li>• Webster's New World College Dictionary</li>
-                </ul>
-                <p className="text-xs text-text-muted mt-2">
-                  These are comprehensive standard references used in
-                  tournaments and formal play.
-                </p>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Digital Sources</h3>
-                <ul className="space-y-1 text-sm">
-                  <li>• WordNet (Princeton University)</li>
-                  <li>• SCOWL (Spell Checker Oriented Word Lists)</li>
-                  <li>• ENABLE (Enhanced North American Benchmark Lexicon)</li>
-                  <li>• Official Scrabble Players Dictionary (OSP D)</li>
-                </ul>
-                <p className="text-xs text-text-muted mt-2">
-                  Online Boggle games typically use one of these open-source
-                  dictionaries or custom combinations.
-                </p>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Tournament Standards</h3>
-                <p className="text-sm leading-relaxed">
-                  Competitive play uses agreed-upon word lists to avoid disputes.
-                  Before tournaments, organizers specify which dictionary
-                  defines valid words. This ensures all players have the same
-                  reference and prevents disagreements.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Building Your Game Vocabulary
-            </h2>
-            <div className="space-y-4">
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Tier 1: Core Vocabulary (Essential)</h3>
-                <p className="text-sm leading-relaxed">
-                  Master the top 100 most common Boggle words. These appear in
-                  almost every game and should be instant recognition. THE,
-                  AND, THAT, HAVE, FOR, NOT, YOU, THIS, BUT, FROM, THEY, WITH,
-                  ARE, WAS, WERE, WHAT, WHEN, MAKE, TIME.
-                </p>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Tier 2: Common Patterns (Important)</h3>
-                <p className="text-sm leading-relaxed">
-                  Learn common letter combinations and word families: TH, HE,
-                  IN, ER, AN, RE pairs. Words ending in -ING, -ED, -ER, -EST.
-                  Prefixes like RE-, UN-, PRE-. These patterns generate dozens of
-                  words from grid positions.
-                </p>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Tier 3: Advanced Vocabulary (Competitive)</h3>
-                <p className="text-sm leading-relaxed">
-                  For competitive play, learn longer words: -TION words (ACTION,
-                  CONDITION, MOTION), -NESS words (HAPPINESS, KINDNESS), -MENT
-                  words (MOMENT, MOVEMENT). Also learn specific vocabulary:
-                  REMEMBER, BELIEVE, CONTROL, CREATE, SUPPORT.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-4">
-              <details className="bg-surface/50 rounded-xl p-4" open>
-                <summary className="font-semibold cursor-pointer">
-                  What words are allowed in Boggle?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Boggle allows words 3+ letters long from standard English
-                  dictionaries. No proper nouns (Paris, Google), abbreviations
-                  (TV, ASAP), or foreign words. Common words like THE, AND, THAT,
-                  HAVE, FOR, NOT, YOU, THIS always count.
-                </p>
-              </details>
-              <details className="bg-surface/50 rounded-xl p-4">
-                <summary className="font-semibold cursor-pointer">
-                  How many words are in a Boggle dictionary?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  A standard Boggle dictionary contains 80,000-100,000 valid
-                  English words. Online versions may have 50,000-200,000 words
-                  depending on inclusiveness. Tournament dictionaries typically
-                  use 80,000-100,000 words.
-                </p>
-              </details>
-              <details className="bg-surface/50 rounded-xl p-4">
-                <summary className="font-semibold cursor-pointer">
-                  What dictionary does Boggle use?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Boggle typically uses standard English dictionaries like
-                  Merriam-Webster, Oxford, or Collins. Online versions use
-                  open-source dictionaries like WordNet or SCOWL. Consistency
-                  matters — all players should agree on which dictionary to use.
-                </p>
-              </details>
-              <details className="bg-surface/50 rounded-xl p-4">
-                <summary className="font-semibold cursor-pointer">
-                  Can you look up words in Boggle?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  During competitive play, no — this would be cheating. For
-                  learning and practice, word lookups are excellent for vocabulary
-                  building. Use dictionaries after games to learn new words you
-                  missed.
-                </p>
-              </details>
-            </div>
-          </section>
-
-          <div className="mt-8 p-6 bg-indigo-900/30 rounded-xl border border-indigo-800/50">
-            <h2 className="text-xl font-semibold text-primary mb-2">
-              Build Your Vocabulary
-            </h2>
-            <p className="text-text mb-4">
-              Study word lists, practice pattern recognition, and play daily to
-              expand your game vocabulary. Consistent practice builds instant
-              word recognition.
-            </p>
-            <div className="flex gap-3 flex-wrap">
-              <Link
-                href="/play"
-                className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
-              >
-                Play
-              </Link>
-              <Link
-                href="/daily"
-                className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
-              >
-                Daily
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-8 border-t border-border pt-6">
-            <h2 className="text-lg font-semibold mb-3">Related Resources</h2>
-            <div className="space-y-3">
-              <Link
-                href="/guides/boggle-rules-beginners/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Boggle Rules for Beginners →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Recheck the exact valid-word rules and adjacency basics.
-                </div>
-              </Link>
-              <Link
-                href="/guides/boggle-scoring-sheet/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Boggle Scoring Sheet →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Pair vocabulary growth with the point table that rewards longer words.
-                </div>
-              </Link>
-              <Link
-                href="/guides/boggle-word-lists/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Boggle Word Lists by Letter →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Complete vocabulary reference organized by letter.
-                </div>
-              </Link>
-              <Link
-                href="/guides/most-common-boggle-words/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Most Common Boggle Words →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Start with the highest-frequency vocabulary first.
-                </div>
-              </Link>
-              <Link
-                href="/guides/boggle-solver/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Boggle Solver →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Find all words in any grid.
-                </div>
-              </Link>
-              <Link
-                href="/play"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Play →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Apply vocabulary knowledge in a live round.
-                </div>
-              </Link>
-              <Link
-                href="/guides/"
-                className="block text-sm text-text-dim hover:text-text"
-              >
-                Browse all guides →
-              </Link>
-            </div>
-          </div>
         </div>
       </GuideDesktopShell>
     </main>

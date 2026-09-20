@@ -72,7 +72,7 @@ const GUIDES = [
     href: "/guides/play-boggle-online-free",
     title: "Play Boggle Online Free — No Download, No Sign-Up",
     description:
-      "Play Boggle online for free in your browser. No download, no sign-up, no ads. Classic Boggle plus larger practice grids, instant play.",
+      "Play Boggle-style WordGrid free in your browser. No download or sign-up. Choose Timed, Zen, or Daily play and a supported board size.",
     category: "Beginner",
     readTime: "5 min read",
     date: "2026-08-05",
@@ -90,7 +90,7 @@ const GUIDES = [
     href: "/guides/boggle-game-online",
     title: "Boggle Game Online — Play Free, No Download",
     description:
-      "Play the Boggle game online for free. No download, no sign-up. Classic Boggle with standard and larger practice grids in your browser.",
+      "Play a Boggle-style word game online free. No download or sign-up. Choose Timed, Zen, or Daily play and a supported board size.",
     category: "Beginner",
     readTime: "5 min read",
     date: "2026-08-05",
@@ -99,7 +99,7 @@ const GUIDES = [
     href: "/guides/boggle-online-free",
     title: "Boggle Online Free — Play Instantly, No Download",
     description:
-      "Play Boggle online free in your browser. No download, no sign-up, no ads. Classic Boggle plus larger practice grids.",
+      "Play Boggle-style WordGrid free in your browser. No download or sign-up. Choose Timed, Zen, or Daily play and a supported board size.",
     category: "Beginner",
     readTime: "4 min read",
     date: "2026-08-05",

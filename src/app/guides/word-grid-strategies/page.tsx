@@ -143,7 +143,7 @@ export default function Guide2() {
                   </thead>
                   <tbody>
                     {[
-                      [3, 1], [4, 2], [5, 4], [6, 6], [7, 8], [8, 11],
+                      [3, 1], [4, 2], [5, 4], [6, 6],
                     ].map(([len, pts]) => (
                       <tr key={len} className="border-t border-border/70">
                         <td className="py-2 px-4">{len} letters</td>
@@ -155,26 +155,27 @@ export default function Guide2() {
                 </table>
               </div>
               <p className="leading-relaxed mt-3 text-text-muted">
-                Notice: 5-letter words give the best value per letter. Aim for the 5-6
-                sweet spot rather than chasing rare 7+ words.
+                In the current WordGrid dictionary, 5- and 6-letter words have the
+                highest scores. Take clear short words first, then look for legal
+                5- and 6-letter extensions.
               </p>
             </section>
 
             <section className="mt-8 space-y-6 text-text max-w-3xl">
               <div>
-                <h2 className="text-2xl font-semibold text-primary mb-3">Time Management</h2>
+                <h2 className="text-2xl font-semibold text-primary mb-3">Mode-aware practice</h2>
                 <ul className="space-y-2 ml-4">
                   <li>
-                    <strong>0:00–0:30</strong> — Quick scan: grab all obvious 3-4 letter
-                    words you can see immediately.
+                    <strong>Timed mode:</strong> Make one quick pass for obvious
+                    3- and 4-letter words, then extend the strongest routes.
                   </li>
                   <li>
-                    <strong>0:30–2:00</strong> — Deep search: extend found words with
-                    prefixes and suffixes.
+                    <strong>Zen mode:</strong> Scan one row, column, or corner at a
+                    time and trace every likely extension without a clock.
                   </li>
                   <li>
-                    <strong>2:00–3:00</strong> — Final sweep: check plurals, verb tenses,
-                    and remaining board edges.
+                    <strong>After either mode:</strong> Use the solver to review
+                    missed routes, then carry one pattern into the next board.
                   </li>
                 </ul>
               </div>
@@ -189,8 +190,8 @@ export default function Guide2() {
                   ))}
                 </div>
                 <p className="leading-relaxed mt-3 text-text-muted">
-                  One root word can generate 3-5 additional valid words. This is how
-                  top scorers find 25+ words per game.
+                  One root word can create several related candidates, but each one
+                  still needs a legal adjacent path and a current dictionary entry.
                 </p>
               </div>
 

@@ -182,6 +182,8 @@ const currentRulesPages = [
   "src/app/guides/boggle-solver/page.tsx",
   "src/app/guides/word-grid-vs-boggle/page.tsx",
   "src/app/guides/boggle-generator/page.tsx",
+  "src/app/guides/boggle-dictionary/page.tsx",
+  "src/app/guides/word-grid-strategies/page.tsx",
 ];
 
 const unsupportedClaims = [
@@ -196,6 +198,7 @@ const unsupportedClaims = [
   "2-letter words",
   "standard Boggle scoring",
   "100-200",
+  "80,000-100,000",
   "7 letters",
   "7+",
   "8+ letters",

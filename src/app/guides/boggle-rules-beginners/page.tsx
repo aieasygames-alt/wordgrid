@@ -6,7 +6,7 @@ import GuideActionBar from "@/components/GuideActionBar";
 export const metadata: Metadata = {
   title: "Boggle Rules for Beginners — How to Play WordGrid",
   description:
-    "Learn the WordGrid Boggle-style rules: adjacent letters, valid words, the Qu tile, 3-minute timer, and scoring basics with examples.",
+    "Learn the WordGrid Boggle-style rules: adjacent letters, valid words, the Qu tile, Timed and Zen modes, and scoring basics with examples.",
   alternates: { canonical: "/guides/boggle-rules-beginners" },
   keywords: [
     "rules of boggle", "boggle rules", "how to play boggle",
@@ -45,7 +45,7 @@ const faqSchema = {
       name: "What are the rules of Boggle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The rules of Boggle are simple: 16 letters are arranged in a 4×4 grid. You have 3 minutes to find as many words as possible by connecting adjacent letters (horizontally, vertically, or diagonally). Words must be at least 3 letters long, you can't reuse the same tile twice in one word, and only valid English dictionary words count. Longer words score more points.",
+        text: "The rules of WordGrid are simple: letters are arranged in a square grid. Connect adjacent letters horizontally, vertically, or diagonally to make words. Words must be at least 3 letters long, cannot reuse a tile, and must be in the current dictionary. Choose Timed play for a clock or Zen for unlimited practice.",
       },
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: "How do you play Boggle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "To play Boggle, drag your finger or mouse from one letter to an adjacent letter to spell a word. Letters must be neighbors (up, down, left, right, or diagonal). Release to submit. Each word must be 3+ letters and use each tile at most once. When the 3-minute timer runs out, your score is tallied up.",
+        text: "To play WordGrid, drag your finger or mouse from one letter to an adjacent letter to spell a word. Letters must be neighbors in any direction. Release to submit. Each word must be 3+ letters, use each tile at most once, and be in the current dictionary.",
       },
     },
     {
@@ -69,7 +69,7 @@ const faqSchema = {
       name: "How long do you have in Boggle?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "WordGrid timed rounds last 3 minutes. You can also use untimed practice, while the Daily uses the same 3-minute clock for every player.",
+        text: "WordGrid offers Timed and Zen practice modes. The Daily board gives everyone the same board for the day.",
       },
     },
     {
@@ -144,9 +144,9 @@ export default function BoggleRulesGuide() {
             <p className="leading-relaxed">
               If you&apos;re searching for the <strong>rules of Boggle</strong> or
               wondering <strong>how to play Boggle</strong>, this is the fastest
-              place to start. The game looks busier than it is: 16 letters in a
-              4×4 grid, 3 minutes on the clock, and words built by connecting
-              adjacent letters.
+              place to start. The game looks busier than it is: a square grid,
+              words built by connecting adjacent letters, and a choice between
+              Timed or Zen practice.
             </p>
             <p className="leading-relaxed mt-3">
               Short version: find words of 3+ letters, move only to neighboring
@@ -370,14 +370,13 @@ export default function BoggleRulesGuide() {
               The Clock
             </h2>
             <p className="leading-relaxed">
-              Standard Boggle gives you 3 minutes. That&apos;s it. When the timer
-              hits zero, the round is over and your final score is tallied.
+              Timed mode adds a clock when you want a faster scan. Zen mode lets
+              you work through the same route rules without a clock.
             </p>
             <p className="leading-relaxed mt-3">
               In WordGrid, you can also choose no-timer &ldquo;Zen&rdquo; practice if
-              you just want to relax and find words at your own pace. But if
-              you&apos;re playing the Daily board,
-              everyone gets the same 3-minute clock.
+              you just want to relax and find words at your own pace. The Daily
+              board gives everyone the same board for the day.
             </p>
           </section>
 

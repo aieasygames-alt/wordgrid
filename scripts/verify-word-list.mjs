@@ -175,9 +175,23 @@ const currentRulesPages = [
   "src/app/guides/boggle-game-online/page.tsx",
   "src/app/guides/play-boggle-online-free/page.tsx",
   "src/app/guides/boggle-scoring-sheet/page.tsx",
+  "src/app/guides/boggle-online-free/page.tsx",
+  "src/app/guides/play-word-grid-online/page.tsx",
+  "src/app/guides/boggle-rules-printable/page.tsx",
 ];
 
-const unsupportedClaims = ["PLAYING", "STARTED", "QUESTION", "FORMATION", "5-minute"];
+const unsupportedClaims = [
+  "PLAYING",
+  "STARTED",
+  "QUESTION",
+  "FORMATION",
+  "5-minute",
+  "3-minute",
+  "3 minutes",
+  "7 letters",
+  "7+",
+  "8+ letters",
+];
 
 for (const page of currentRulesPages) {
   const source = readFileSync(new URL(`../${page}`, import.meta.url), "utf8");

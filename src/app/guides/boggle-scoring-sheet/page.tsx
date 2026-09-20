@@ -221,7 +221,6 @@ export default function BoggleScoringSheetGuide() {
                     [4, 2, "PLAY, WORD, GAME"],
                     [5, 4, "SCORE, QUICK, BOARD"],
                     [6, 6, "PLAYER, GARDEN"],
-                    ["7+", "8+", "Formula supports longer words when available"],
                   ].map(([len, pts, example]) => (
                     <tr key={String(len)} className="border-b border-surface">
                       <td className="py-2 font-semibold">{len} letters</td>
@@ -233,19 +232,7 @@ export default function BoggleScoringSheetGuide() {
               </table>
             </div>
             <p className="mt-3 text-xs leading-relaxed text-text-dim">
-              The current WordGrid word list contains words up to 6 letters, so
-              7+ scoring is retained for future word-list expansions rather than
-              today&apos;s playable boards.
-            </p>
-          </section>
-
-          <section className="rounded-xl border border-border bg-surface/50 p-5">
-            <h2 className="text-xl font-semibold text-primary mb-2">Classic Boggle reference</h2>
-            <p className="text-sm leading-relaxed text-text-muted">
-              Classic Boggle scoring is different: 3-4 letters score 1 point,
-              5 scores 2, 6 scores 3, 7 scores 5, and 8+ scores 11. Use the
-              table above when playing WordGrid; use classic scoring only when
-              your group has agreed to the traditional rules.
+              The current WordGrid word list contains words through 6 letters.
             </p>
           </section>
 
@@ -426,7 +413,7 @@ export default function BoggleScoringSheetGuide() {
                     <li>• 5-letter word = 4× 3-letter</li>
                     <li>• Prioritize -TION, -NESS</li>
                     <li>• Check word extensions</li>
-                    <li>• Use full 3 minutes</li>
+                    <li>• Use the full Timed round</li>
                     <li>• Hunt for Qu tile</li>
                   </ul>
                 </div>

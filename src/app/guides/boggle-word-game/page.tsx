@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Boggle Word Game: Rules, Scoring, and Free Online Play",
   description:
-    "Master the Boggle word game. Learn the rules, how scoring works, and play free online instantly. 4×4 grid, 3-minute rounds, connect adjacent letters to find words.",
+    "Master the Boggle-style word game. Learn current WordGrid rules and scoring, then play free online with Timed, Zen, or Daily boards.",
   alternates: { canonical: "/guides/boggle-word-game" },
   keywords: [
     "boggle word game", "boggle word game rules", "boggle word game online",
@@ -42,7 +42,7 @@ const faqSchema = {
       name: "What is the Boggle word game?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Boggle is a classic word game played on a 4×4 grid of 16 lettered dice. Players have 3 minutes to find as many words as possible by connecting adjacent letters horizontally, vertically, or diagonally. Words must be at least 3 letters long, and each tile can only be used once per word. Longer words score more points.",
+        text: "WordGrid is a Boggle-style word game played on a square letter grid. Connect adjacent letters horizontally, vertically, or diagonally to make words. Words must be at least 3 letters long, each tile can only be used once per word, and longer words score more points.",
       },
     },
     {
@@ -58,7 +58,7 @@ const faqSchema = {
       name: "What are the rules of the Boggle word game?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "The core rules are: 1) Connect adjacent letters (including diagonals) to spell words, 2) Each word must be at least 3 letters long, 3) You cannot reuse the same tile twice in one word, 4) Only valid English dictionary words count (no proper nouns, abbreviations, or foreign words), 5) You have 3 minutes to find as many words as possible.",
+        text: "The core rules are: 1) Connect adjacent letters including diagonals to spell words, 2) Each word must be at least 3 letters long, 3) You cannot reuse the same tile twice in one word, 4) Only words in the current WordGrid dictionary count, and 5) choose Timed or Zen practice before you play.",
       },
     },
     {
@@ -185,10 +185,10 @@ export default function BoggleWordGameGuide() {
               What Is the Boggle Word Game?
             </h2>
             <p className="leading-relaxed">
-              Boggle is a word search game played on a grid of 16 lettered dice
-              arranged in 4 rows and 4 columns. Players race against a 3-minute
-              timer to find words by connecting adjacent letters in any of the 8
-              directions (horizontal, vertical, or diagonal).
+              Boggle-style WordGrid is a word search game played on a square
+              letter grid. Connect adjacent letters in any of the 8 directions
+              to find words, then choose Timed practice for a clock or Zen for
+              an unlimited scan.
             </p>
             <p className="leading-relaxed mt-3">
               The game tests your vocabulary, pattern recognition, and speed.
@@ -280,8 +280,8 @@ export default function BoggleWordGameGuide() {
                 foreign words generally used in English.
               </li>
               <li>
-                <strong>3-minute timer.</strong> When time runs out, the round
-                is over and your final score is tallied.
+                <strong>Choose a mode.</strong> Timed practice adds a clock;
+                Zen gives you unlimited time to trace routes.
               </li>
             </ol>
           </section>
@@ -421,8 +421,8 @@ export default function BoggleWordGameGuide() {
                 </summary>
                 <p className="text-text-muted mt-2 text-sm leading-relaxed">
                   Boggle is a classic word game played on a 4×4 grid of
-                  letters. Players have 3 minutes to find words by connecting
-                  adjacent letters horizontally, vertically, or diagonally.
+                  letters. Players find words by connecting adjacent letters
+                  horizontally, vertically, or diagonally.
                   Words must be 3+ letters, and longer words score more.
                 </p>
               </details>
@@ -464,8 +464,8 @@ export default function BoggleWordGameGuide() {
               Play Boggle Word Game Online Free
             </h2>
             <p className="text-text mb-4">
-              No download. No sign-up. Classic Boggle rules, 3-minute timer,
-              unlimited free games.
+              No download. No sign-up. Boggle-style rules, Timed or Zen
+              practice, and unlimited free games.
             </p>
             <div className="flex gap-3 flex-wrap">
               <Link

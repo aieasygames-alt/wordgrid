@@ -8,7 +8,62 @@ const words = new Set(
 );
 
 const expectedWords = ["cat", "the", "run", "play", "quick", "garden", "player"];
-const missingWords = expectedWords.filter((word) => !words.has(word));
+const commonPracticeWords = [
+  "and",
+  "are",
+  "cat",
+  "dog",
+  "ear",
+  "eat",
+  "for",
+  "fun",
+  "get",
+  "map",
+  "net",
+  "run",
+  "sea",
+  "set",
+  "the",
+  "top",
+  "able",
+  "bank",
+  "beat",
+  "boat",
+  "book",
+  "call",
+  "care",
+  "cold",
+  "come",
+  "earn",
+  "east",
+  "find",
+  "fish",
+  "form",
+  "game",
+  "word",
+  "about",
+  "apple",
+  "beach",
+  "black",
+  "board",
+  "brain",
+  "build",
+  "chain",
+  "clean",
+  "close",
+  "daily",
+  "earth",
+  "great",
+  "money",
+  "quiet",
+  "water",
+  "action",
+  "garden",
+  "player",
+  "square",
+  "unique",
+];
+const missingWords = [...expectedWords, ...commonPracticeWords].filter((word) => !words.has(word));
 
 if (missingWords.length > 0) {
   throw new Error(`Scoring examples missing from the WordGrid word list: ${missingWords.join(", ")}`);
@@ -16,6 +71,16 @@ if (missingWords.length > 0) {
 
 if ([...words].some((word) => word.length > 6)) {
   throw new Error("The scoring page must be updated before the word list expands past 6 letters.");
+}
+
+const commonWordsPage = readFileSync(
+  new URL("../src/app/guides/most-common-boggle-words/page.tsx", import.meta.url),
+  "utf8"
+);
+const unlistedExamples = commonPracticeWords.filter((word) => !commonWordsPage.includes(`\"${word.toUpperCase()}\"`));
+
+if (unlistedExamples.length > 0) {
+  throw new Error(`Common-words examples missing from the page: ${unlistedExamples.join(", ")}`);
 }
 
 const currentRulesPages = [
@@ -36,4 +101,6 @@ for (const page of currentRulesPages) {
   }
 }
 
-console.log(`Verified ${expectedWords.length} scoring examples against ${words.size} WordGrid words.`);
+console.log(
+  `Verified ${expectedWords.length + commonPracticeWords.length} guide examples against ${words.size} WordGrid words.`
+);

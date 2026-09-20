@@ -3,629 +3,208 @@ import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 import GuideActionBar from "@/components/GuideActionBar";
 
+const BASE_URL = "https://wordgrid.games";
+
 export const metadata: Metadata = {
-  title: "Most Common Boggle Words: Top 100 List & Patterns",
+  title: "Common WordGrid Words: Verified 3-6 Letter Practice List",
   description:
-    "Study the top 100 most common Boggle words, high-frequency letter patterns, scoring opportunities, and practice links for instant recognition.",
-  alternates: { canonical: "/guides/most-common-boggle-words" },
+    "Practice common 3, 4, 5, and 6 letter words that are in the current WordGrid dictionary. Use the list to build fast scanning habits for your next board.",
   keywords: [
-    "most common boggle words", "boggle high frequency words", "boggle common words",
-    "boggle word frequency", "boggle vocabulary list", "boggle most used words",
-    "boggle popular words", "boggle word patterns",
+    "common boggle words",
+    "boggle word list",
+    "boggle practice words",
+    "wordgrid dictionary",
   ],
+  alternates: { canonical: `${BASE_URL}/guides/most-common-boggle-words/` },
   openGraph: {
-    title: "Most Common Boggle Words: Top 100 List & Patterns",
-    description:
-      "Top 100 most common Boggle words found in gameplay with high-frequency patterns, bonus combinations, and expert strategies for instant word recognition.",
+    title: "Common WordGrid Words: Verified Practice List",
+    description: "A practical 3-6 letter word list checked against the current WordGrid dictionary.",
+    url: `${BASE_URL}/guides/most-common-boggle-words/`,
   },
 };
 
-const BASE_URL = "https://wordgrid.games";
+const wordsByLength = {
+  "3 letter words": [
+    "AND",
+    "ARE",
+    "CAT",
+    "DOG",
+    "EAR",
+    "EAT",
+    "FOR",
+    "FUN",
+    "GET",
+    "MAP",
+    "NET",
+    "RUN",
+    "SEA",
+    "SET",
+    "THE",
+    "TOP",
+  ],
+  "4 letter words": [
+    "ABLE",
+    "BANK",
+    "BEAT",
+    "BOAT",
+    "BOOK",
+    "CALL",
+    "CARE",
+    "COLD",
+    "COME",
+    "EARN",
+    "EAST",
+    "FIND",
+    "FISH",
+    "FORM",
+    "GAME",
+    "WORD",
+  ],
+  "5 letter words": [
+    "ABOUT",
+    "APPLE",
+    "BEACH",
+    "BLACK",
+    "BOARD",
+    "BRAIN",
+    "BUILD",
+    "CHAIN",
+    "CLEAN",
+    "CLOSE",
+    "DAILY",
+    "EARTH",
+    "GREAT",
+    "MONEY",
+    "QUIET",
+    "WATER",
+  ],
+  "6 letter words": ["ACTION", "GARDEN", "PLAYER", "SQUARE", "UNIQUE"],
+} as const;
 
-// Top 100 most common Boggle words
-const TOP_100_WORDS = [
-  "THE", "AND", "THAT", "HAVE", "FOR", "NOT", "YOU", "THIS", "BUT", "FROM",
-  "THEY", "WITH", "ARE", "WAS", "WERE", "WHAT", "WHEN", "MAKE", "TIME", "JUST",
-  "KNOW", "TAKE", "YEAR", "GOOD", "SEE", "COME", "THINK", "LOOK", "WANT", "GIVE",
-  "USE", "FIND", "TELL", "ASK", "WORK", "SEEM", "FEEL", "TRY", "LEAVE", "CALL",
-  "SHOW", "PLAY", "RUN", "MOVE", "LIVE", "BELIEVE", "HOLD", "BRING", "HAPPEN", "WRITE",
-  "SIT", "STAND", "LOSE", "PAY", "MEET", "INCLUDE", "CONTINUE", "SET", "CHANGE", "LEAD",
-  "UNDERSTAND", "WATCH", "FOLLOW", "STOP", "CREATE", "SPEAK", "READ", "ALLOW", "ADD", "SPEND",
-  "GROW", "OPEN", "WALK", "WIN", "OFFER", "REMEMBER", "LOVE", "CONSIDER", "APPEAR", "BUY",
-  "WAIT", "SERVE", "DIE", "SEND", "EXPECT", "BUILD", "STAY", "FALL", "CUT", "REACH",
-  "KILL", "REMAIN", "SUGGEST", "RAISE", "PASS", "SELL", "REQUIRE", "REPORT", "DECIDE", "PULL",
-  "BREAK", "THANK", "RECEIVE", "JOIN", "CAUSE", "REPRESENT", "APPLY", "LEARN", "INCREASE", "COVER",
-  "EXPLAIN", "DRAW", "SUPPORT", "RETURN", "COMPARE", "KNOWLEDGE", "PERHAPS", "FIGURE", "TEACH", "ENJOY",
-  "TREAT", "CONTROL", "DESCRIBE", "PICK", "WISH",
+const faqItems = [
+  {
+    question: "Are these words valid in WordGrid?",
+    answer:
+      "Yes. Every example on this page is checked against the dictionary used by the current game. A word must still be traceable through adjacent tiles on the board.",
+  },
+  {
+    question: "Why focus on short words first?",
+    answer:
+      "Short words are faster to recognize and are plentiful on most boards. They also make a reliable base score before you spend time looking for longer routes.",
+  },
+  {
+    question: "How are words scored?",
+    answer:
+      "WordGrid gives 1 point for 3-letter words, 2 for 4-letter words, 4 for 5-letter words, and 6 for 6-letter words. See the scoring guide for the full rules.",
+  },
 ];
 
-const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "Most Common Boggle Words: Top 100 List & Patterns",
-  description:
-    "Top 100 most common Boggle words with high-frequency patterns, bonus combinations, and expert strategies for instant word recognition and improved scoring.",
-  author: { "@type": "Organization", name: "WordGrid" },
-  publisher: { "@type": "Organization", name: "WordGrid" },
-  datePublished: "2026-06-29",
-  dateModified: "2026-07-13",
-  mainEntityOfPage: `${BASE_URL}/guides/most-common-boggle-words/`,
-};
+export default function MostCommonBoggleWordsPage() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Common WordGrid Words: Verified 3-6 Letter Practice List",
+    description: metadata.description,
+    url: `${BASE_URL}/guides/most-common-boggle-words/`,
+    mainEntity: {
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
+  };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What are the most common words in Boggle?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "The most common Boggle words are high-frequency English words: THE, AND, THAT, HAVE, FOR, NOT, YOU, THIS, BUT, FROM, THEY, WITH, ARE, WAS, WERE, WHAT, WHEN, MAKE, TIME, JUST, KNOW, TAKE, YEAR, GOOD, SEE, COME, THINK, LOOK, WANT, GIVE, USE. These appear regularly in grids and should be instantly recognizable for competitive play.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How many words are typically found in a Boggle game?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Average Boggle game finds: 25-35 words for beginners, 35-50 words for intermediate players, 50-70 words for advanced players, and 70-100+ words for experts. The record for a single grid is 200+ words, but typical competitive games find 40-60 words depending on grid quality.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What are the highest scoring common words in Boggle?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Highest scoring common Boggle words: UNDERSTAND (10 letters, 15 points), KNOWLEDGE (9 letters, 13 points), EXPERIENCE (10 letters, 15 points), DIFFERENT (9 letters, 13 points), IMPORTANT (9 letters, 13 points), COMMUNITY (9 letters, 13 points). Common 6-8 letter words: REMEMBER (8 pts), BELIEVE (7 pts), CONTROL (8 pts), CREATE (6 pts), SUPPORT (7 pts).",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What letter combinations are most common in Boggle?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Most common Boggle letter combinations: TH (THE, THIS, THAT, WITH), HE (THEM, HELD, HERE), IN (INTO, TIME, FIND), ER (HERE, THERE, WERE), AN (AND, THAN, MANY), RE (HERE, THERE, MORE), ON (ON, INTO, ONLY), AT (THAT, WHAT), OR (FOR, OR), TI (TIME, INTO). These pairs appear in thousands of words.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How can I memorize common Boggle words?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Don't memorize — build pattern recognition. Practice the Daily board to see these words repeatedly. Focus on letter clusters (TH, HE, IN, ER) rather than individual words. Look for word endings (-TION, -NESS, -MENT). Play consistently and your brain will automatically recognize common patterns without memorization.",
-      },
-    },
-  ],
-};
-
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Word Grid", item: `${BASE_URL}/` },
-    { "@type": "ListItem", position: 2, name: "Guides", item: `${BASE_URL}/guides/` },
-    { "@type": "ListItem", position: 3, name: "Most Common Boggle Words" },
-  ],
-};
-
-export default function MostCommonBoggleWordsGuide() {
   return (
-    <main className="min-h-screen px-4 py-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <GuideDesktopShell>
-        <header className="mb-8">
-          <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
-            <Link href="/" className="hover:text-text">Word Grid</Link>
-            <span>/</span>
-            <Link href="/guides/" className="hover:text-text">Guides</Link>
-          </nav>
-          <h1 className="text-4xl font-bold mb-2">
-            Most Common Boggle Words: Top 100 List & Patterns
+        <section className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:py-14">
+          <p className="text-sm font-semibold uppercase tracking-wide text-amber-300">Practice list</p>
+          <h1 className="mt-3 text-4xl font-black tracking-tight text-white sm:text-5xl">
+            Common WordGrid words to practice
           </h1>
-          <p className="text-text-muted">10 min read &middot; Updated July 2026</p>
-        </header>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
+            This is a focused practice list, not a claim about universal word frequency. Each example is in the
+            current WordGrid dictionary, so you can learn patterns that work in the game you are playing.
+          </p>
 
-        <GuideActionBar
-          primary={{ href: "/play", label: "Play a board", detail: "Use common words in a live round." }}
-          secondary={{ href: "/daily", label: "Try today&apos;s Daily", detail: "See which patterns appear under pressure." }}
-          tertiary={{ href: "/solver", label: "Review Solver", detail: "Check common words you missed." }}
-          quaternary={{ href: "/words/common-boggle-words", label: "Study the list", detail: "Open the focused word-study page." }}
-        />
+          <GuideActionBar
+            primary={{ href: "/play", label: "Play a board", detail: "Put patterns into practice" }}
+            secondary={{ href: "/solver", label: "Review a board", detail: "Find routes you missed" }}
+            tertiary={{ href: "/guides/boggle-dictionary", label: "Check a word", detail: "Verify dictionary entries" }}
+            quaternary={{ href: "/guides/boggle-scoring-sheet", label: "See points", detail: "Learn the score rules" }}
+          />
 
-        <div className="space-y-6 text-text">
-          <section>
-            <p className="leading-relaxed">
-              These <strong>most common Boggle words</strong> appear regularly in
-              game grids. Expert players recognize them instantly — not through
-              memorization, but through pattern recognition built from thousands
-              of games.
-            </p>
-            <p className="leading-relaxed mt-3">
-              This isn't about memorizing a list. It's about understanding which
-              words and patterns show up most often so your brain can spot them
-              without conscious thought.
-            </p>
-            <p className="leading-relaxed mt-3">
-              Use this page together with{" "}
-              <Link href="/play" className="text-primary hover:underline">
-                /play
-              </Link>{" "}
-              and{" "}
-              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
-                Word Grid Strategies
-              </Link>
-              .
-            </p>
-            <p className="leading-relaxed mt-3">
-              If you want the broader vocabulary reference, go to{" "}
-              <Link href="/guides/boggle-word-lists" className="text-primary hover:underline">
-                Boggle Word Lists
-              </Link>
-              . If you want to turn recognition into points, use{" "}
-              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
-                the strategy guide
-              </Link>
-              .
-            </p>
-            <p className="leading-relaxed mt-3">
-              For best results, use this as a short practice loop: scan the top
-              words, play a board, then check missed common words with the{" "}
-              <Link href="/solver" className="text-primary hover:underline">
-                solver
-              </Link>
-              .
-            </p>
-          </section>
-
-          <section className="grid gap-3 sm:grid-cols-3">
-            <Link
-              href="/guides/boggle-word-lists"
-              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-            >
-              <h2 className="font-semibold text-primary">Browse by letter</h2>
-              <p className="mt-1 text-sm text-text-muted">
-                Expand this top list into a full letter-by-letter vocabulary reference.
-              </p>
-            </Link>
-            <Link
-              href="/guides/word-pattern-library"
-              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-            >
-              <h2 className="font-semibold text-primary">Study patterns</h2>
-              <p className="mt-1 text-sm text-text-muted">
-                Turn common words into prefix, suffix, plural, and Qu scanning habits.
-              </p>
-            </Link>
-            <Link
-              href="/play"
-              className="block bg-primary/10 hover:bg-primary/15 transition rounded-xl p-4 border border-primary/20"
-            >
-              <h2 className="font-semibold text-primary">Practice live</h2>
-              <p className="mt-1 text-sm text-text-muted">
-                Apply the list immediately on a fresh word grid board.
-              </p>
-            </Link>
-          </section>
-
-          <section className="grid gap-3 sm:grid-cols-3">
-            <Link
-              href="/daily"
-              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-            >
-              <h2 className="font-semibold text-primary">Try the Daily</h2>
-              <p className="mt-1 text-sm text-text-muted">
-                Use one shared board to see which common words you spot under pressure.
-              </p>
-            </Link>
-            <Link
-              href="/solver"
-              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-            >
-              <h2 className="font-semibold text-primary">Check missed words</h2>
-              <p className="mt-1 text-sm text-text-muted">
-                Review the board after playing and find common words you overlooked.
-              </p>
-            </Link>
-            <Link
-              href="/guides/boggle-generator"
-              className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-            >
-              <h2 className="font-semibold text-primary">Generate practice boards</h2>
-              <p className="mt-1 text-sm text-text-muted">
-                Create fresh boards when you want more repetitions with the same patterns.
-              </p>
-            </Link>
-          </section>
-
-          <section className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Turn common words into a drill
-            </h2>
-            <p className="text-sm text-text-muted leading-relaxed">
-              Pick five words from the list, scan a fresh board, then use the
-              solver to check which high-frequency words you missed.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Top 20 Most Common Boggle Words
-            </h2>
-            <div className="bg-surface/50 rounded-xl p-4 border border-border">
-              <p className="text-sm text-text-dim mb-3">
-                These appear in almost every game:
-              </p>
-              <div className="grid grid-cols-5 gap-3 text-sm">
-                {TOP_100_WORDS.slice(0, 20).map((word, i) => (
-                  <div key={word} className="text-center">
-                    <div className="font-mono font-semibold">{word}</div>
-                    <div className="text-xs text-text-dim">#{i + 1}</div>
-                  </div>
-                ))}
+          <div className="mt-10 grid gap-4 sm:grid-cols-4">
+            {[
+              ["3 letters", "1 point"],
+              ["4 letters", "2 points"],
+              ["5 letters", "4 points"],
+              ["6 letters", "6 points"],
+            ].map(([length, score]) => (
+              <div key={length} className="rounded-lg border border-slate-700 bg-slate-900/70 p-4">
+                <p className="text-sm font-semibold text-slate-300">{length}</p>
+                <p className="mt-1 text-2xl font-black text-amber-300">{score}</p>
               </div>
-            </div>
+            ))}
+          </div>
+
+          <div className="mt-12 space-y-8">
+            {Object.entries(wordsByLength).map(([length, words]) => (
+              <section key={length} aria-labelledby={length.replaceAll(" ", "-")}>
+                <div className="flex items-baseline justify-between gap-4">
+                  <h2 id={length.replaceAll(" ", "-")} className="text-2xl font-bold text-white">
+                    {length}
+                  </h2>
+                  <span className="text-sm text-slate-400">Verified in the current dictionary</span>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {words.map((word) => (
+                    <span
+                      key={word}
+                      className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 font-mono text-sm font-bold tracking-wide text-slate-100"
+                    >
+                      {word}
+                    </span>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <section className="mt-12 rounded-lg border border-amber-400/30 bg-amber-400/10 p-6">
+            <h2 className="text-2xl font-bold text-white">Use the list as a scanning drill</h2>
+            <ol className="mt-4 space-y-3 text-slate-200">
+              <li>1. Start a new board and find a few 3-letter routes without entering them.</li>
+              <li>2. Expand each route into nearby 4- and 5-letter possibilities.</li>
+              <li>3. Enter the words, then use the board review to spot the routes you missed.</li>
+            </ol>
           </section>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Practice These Words in 3 Steps
-            </h2>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[
-                ["Study", "/guides/boggle-word-lists", "Expand the top list into letter-by-letter vocabulary."],
-                ["Play", "/play", "Use the words on a fresh timed or Zen board."],
-                ["Review", "/solver", "Check which common words you missed after the round."],
-              ].map(([title, href, copy]) => (
-                <Link key={title} href={href} className="rounded-xl border border-border bg-surface/50 p-4 hover:bg-surface transition">
-                  <h3 className="font-semibold text-primary">{title}</h3>
-                  <p className="mt-1 text-sm text-text-muted leading-relaxed">{copy}</p>
-                </Link>
+          <section className="mt-12">
+            <h2 className="text-2xl font-bold text-white">Questions about the word list</h2>
+            <div className="mt-4 divide-y divide-slate-800 rounded-lg border border-slate-800 bg-slate-950/50">
+              {faqItems.map((item) => (
+                <details key={item.question} className="group p-5">
+                  <summary className="cursor-pointer list-none font-semibold text-white">
+                    {item.question}
+                  </summary>
+                  <p className="mt-3 leading-7 text-slate-300">{item.answer}</p>
+                </details>
               ))}
             </div>
           </section>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Top 100 Complete List
-            </h2>
-            <div className="bg-surface/50 rounded-xl p-4 border border-border">
-              <p className="text-sm text-text-dim mb-3">
-                Ranked by frequency of appearance in competitive play:
-              </p>
-              <div className="grid grid-cols-4 gap-2">
-                {TOP_100_WORDS.map((word, i) => (
-                  <span
-                    key={word}
-                    className={`px-2 py-1 text-sm font-mono rounded ${
-                      i < 20
-                        ? "bg-primary/20"
-                        : i < 50
-                        ? "bg-surface"
-                        : "bg-surface/50"
-                    }`}
-                  >
-                    {word}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              High-Scoring Common Words
-            </h2>
-            <p className="leading-relaxed mb-3">
-              Common words that also score highly due to length:
-            </p>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">8-10 Point Words</h3>
-                <ul className="space-y-1 text-sm">
-                  <li>REMEMBER (8 letters, 11 points)</li>
-                  <li>UNDERSTAND (10 letters, 15 points)</li>
-                  <li>KNOWLEDGE (9 letters, 13 points)</li>
-                  <li>EXPERIENCE (10 letters, 15 points)</li>
-                  <li>DIFFERENT (9 letters, 13 points)</li>
-                </ul>
-              </div>
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">5-7 Point Words</h3>
-                <ul className="space-y-1 text-sm">
-                  <li>THINK (5 letters, 4 points)</li>
-                  <li>BELIEVE (7 letters, 8 points)</li>
-                  <li>CONTROL (7 letters, 8 points)</li>
-                  <li>CREATE (6 letters, 6 points)</li>
-                  <li>SUPPORT (7 letters, 8 points)</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Letter Pair Analysis
-            </h2>
-            <p className="leading-relaxed mb-3">
-              Common letter pairs that generate these words:
-            </p>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">Most Common Pairs</h3>
-                <ul className="space-y-1">
-                  <li><strong>TH</strong> — THE, THIS, THAT, WITH</li>
-                  <li><strong>HE</strong> — THEM, HELD, HERE</li>
-                  <li><strong>IN</strong> — INTO, TIME, FIND</li>
-                  <li><strong>ER</strong> — HERE, THERE, WERE</li>
-                  <li><strong>AN</strong> — AND, THAN, MANY</li>
-                </ul>
-              </div>
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">High-Value Pairs</h3>
-                <ul className="space-y-1">
-                  <li><strong>RE</strong> — HERE, THERE, MORE</li>
-                  <li><strong>ON</strong> — ON, INTO, ONLY</li>
-                  <li><strong>AT</strong> — THAT, WHAT</li>
-                  <li><strong>OR</strong> — FOR, OR</li>
-                  <li><strong>TI</strong> — TIME, INTO</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Pattern Recognition Strategy
-            </h2>
-            <div className="bg-surface/50 rounded-xl p-4 border-l-4 border-primary">
-              <p className="text-sm leading-relaxed mb-3">
-                <strong>Expert insight:</strong> Don't memorize these words.
-                Instead, learn to recognize these patterns instantly:
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <strong>TH cluster:</strong> When you see T next to H, your brain
-                  should automatically generate THE, THIS, THAT, WITH, BOTH,
-                  WITHOUT
-                </li>
-                <li>
-                  <strong>Common endings:</strong> When you see -ER, instantly think
-                  HERE, THERE, WERE, OTHER, ANOTHER, TOGETHER
-                </li>
-                <li>
-                  <strong>ING words:</strong> PLAYING, THINKING, LOOKING,
-                  WANTING, FEELING, BEING
-                </li>
-                <li>
-                  <strong>Common starts:</strong> UNDERSTAND, KNOWLEDGE,
-                  EXPERIENCE when you see U-N, K-N, E-X patterns
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Word Extension Practice
-            </h2>
-            <p className="leading-relaxed mb-3">
-              From the top 100, these base words generate many extensions:
-            </p>
-            <div className="space-y-4">
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">THINK → Family of Words</h3>
-                <div className="flex flex-wrap gap-2 text-sm">
-                  {["THINK", "THINKS", "THINKING", "THOUGHT", "THINKER", "RETHINK"].map(
-                    (word) => (
-                      <span key={word} className="px-2 py-1 bg-surface rounded font-mono">
-                        {word}
-                      </span>
-                    )
-                  )}
-                </div>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">PLAY → Family of Words</h3>
-                <div className="flex flex-wrap gap-2 text-sm">
-                  {["PLAY", "PLAYS", "PLAYED", "PLAYING", "PLAYER", "PLAYERS", "REPLAY"].map(
-                    (word) => (
-                      <span key={word} className="px-2 py-1 bg-surface rounded font-mono">
-                        {word}
-                      </span>
-                    )
-                  )}
-                </div>
-              </div>
-
-              <div className="bg-surface/50 rounded-xl p-4">
-                <h3 className="font-semibold mb-2">MAKE → Family of Words</h3>
-                <div className="flex flex-wrap gap-2 text-sm">
-                  {["MAKE", "MAKES", "MADE", "MAKING", "MAKER", "REMAKE"].map(
-                    (word) => (
-                      <span key={word} className="px-2 py-1 bg-surface rounded font-mono">
-                        {word}
-                      </span>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-4">
-              <details className="bg-surface/50 rounded-xl p-4" open>
-                <summary className="font-semibold cursor-pointer">
-                  What are the most common words in Boggle?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Most common Boggle words: THE, AND, THAT, HAVE, FOR, NOT, YOU,
-                  THIS, BUT, FROM, THEY, WITH, ARE, WAS, WERE, WHAT, WHEN, MAKE,
-                  TIME, JUST, KNOW, TAKE, YEAR, GOOD, SEE, COME, THINK, LOOK,
-                  WANT, GIVE, USE. These appear regularly in grids.
-                </p>
-              </details>
-              <details className="bg-surface/50 rounded-xl p-4">
-                <summary className="font-semibold cursor-pointer">
-                  How many words are typically found in a Boggle game?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Average Boggle game finds: 25-35 for beginners, 35-50 for
-                  intermediate, 50-70 for advanced, 70-100+ for experts.
-                  Competitive games typically find 40-60 words.
-                </p>
-              </details>
-              <details className="bg-surface/50 rounded-xl p-4">
-                <summary className="font-semibold cursor-pointer">
-                  What are the highest scoring common words?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Highest scoring common Boggle words: UNDERSTAND (15 pts),
-                  KNOWLEDGE (13 pts), EXPERIENCE (15 pts), DIFFERENT (13 pts),
-                  IMPORTANT (13 pts). Common 6-8 letter words: REMEMBER (11
-                  pts), BELIEVE (8 pts), CONTROL (8 pts).
-                </p>
-              </details>
-              <details className="bg-surface/50 rounded-xl p-4">
-                <summary className="font-semibold cursor-pointer">
-                  What letter combinations are most common?
-                </summary>
-                <p className="text-text-muted mt-2 text-sm leading-relaxed">
-                  Most common Boggle letter combinations: TH (THE, THIS, THAT),
-                  HE (THEM, HERE), IN (INTO, TIME), ER (HERE, THERE), AN (AND,
-                  THAN), RE (HERE, THERE), ON (ON, INTO), AT (THAT, WHAT).
-                </p>
-              </details>
-            </div>
-          </section>
-
-          <div className="mt-8 p-6 bg-indigo-900/30 rounded-xl border border-indigo-800/50">
-            <h2 className="text-xl font-semibold text-primary mb-2">
-              Practice Recognizing These Words
-            </h2>
-            <p className="text-text mb-4">
-              Don't memorize — play. The Daily board will help you recognize these
-              patterns automatically. Consistent practice builds instant word
-              recognition.
-            </p>
-            <div className="flex gap-3 flex-wrap">
-              <Link
-                href="/play"
-                className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
-              >
-                Play
-              </Link>
-              <Link
-                href="/daily"
-                className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
-              >
-                Daily
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-8 border-t border-border pt-6">
-            <h2 className="text-lg font-semibold mb-3">Next Pages</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link
-                href="/guides/how-to-find-more-words"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  How to Find More Words
-                </div>
-                <div className="text-sm text-text-muted mt-1">
-                  Turn frequency recognition into a search routine.
-                </div>
-              </Link>
-              <Link
-                href="/guides/boggle-tips-tricks"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Boggle Tips and Tricks
-                </div>
-                <div className="text-sm text-text-muted mt-1">
-                  Use the word list with tactical scanning habits.
-                </div>
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-8 border-t border-border pt-6">
-            <h2 className="text-lg font-semibold mb-3">Keep Reading</h2>
-            <div className="space-y-3">
-              <Link
-                href="/guides/word-grid-strategies/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Word Grid Strategies →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Turn common-word recognition into a scoring plan.
-                </div>
-              </Link>
-              <Link
-                href="/guides/boggle-word-lists/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Boggle Word Lists by Letter →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Complete reference organized by starting letter.
-                </div>
-              </Link>
-              <Link
-                href="/guides/advanced-boggle-strategies/"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Advanced Boggle Strategies →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Expert-level techniques for competitive play.
-                </div>
-              </Link>
-              <Link
-                href="/play"
-                className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
-              >
-                <div className="font-semibold text-primary">
-                  Play →
-                </div>
-                <div className="text-sm text-text-muted">
-                  Apply the list in a live board immediately.
-                </div>
-              </Link>
-              <Link
-                href="/guides/"
-                className="block text-sm text-text-dim hover:text-text"
-              >
-                Browse all guides →
-              </Link>
-            </div>
-          </div>
-        </div>
+          <nav className="mt-12 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-amber-300" aria-label="Related guides">
+            <Link href="/guides/boggle-dictionary" className="hover:text-amber-200">Dictionary checker</Link>
+            <Link href="/guides/boggle-scoring-sheet" className="hover:text-amber-200">Scoring guide</Link>
+            <Link href="/guides/word-pattern-library" className="hover:text-amber-200">Word patterns</Link>
+            <Link href="/play" className="hover:text-amber-200">Play WordGrid</Link>
+          </nav>
+        </section>
       </GuideDesktopShell>
-    </main>
+    </>
   );
 }

@@ -185,6 +185,7 @@ const currentRulesPages = [
   "src/app/guides/boggle-dictionary/page.tsx",
   "src/app/guides/word-grid-strategies/page.tsx",
   "src/app/guides/boggle-word-lists/page.tsx",
+  "src/app/guides/boggle-variants/page.tsx",
 ];
 
 const unsupportedClaims = [
@@ -201,6 +202,7 @@ const unsupportedClaims = [
   "100-200",
   "80,000-100,000",
   "65% of words",
+  "4-minute",
   "7 letters",
   "7+",
   "8+ letters",

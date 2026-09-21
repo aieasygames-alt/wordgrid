@@ -281,6 +281,22 @@ if (
   throw new Error("Guides must label the scoring table as the current WordGrid rules, not official Boggle rules.");
 }
 
+const homePage = readFileSync(new URL("../src/app/page.tsx", import.meta.url), "utf8");
+const playPage = readFileSync(new URL("../src/app/play/page.tsx", import.meta.url), "utf8");
+const playClient = readFileSync(new URL("../src/app/play/PlayClient.tsx", import.meta.url), "utf8");
+
+if (!homePage.includes("three-minute timed board") || !homePage.includes("completed score as a target")) {
+  throw new Error("Home metadata must describe the current timed and shared-challenge workflow.");
+}
+
+if (!playPage.includes("4x4, 5x5, or 6x6") || playPage.includes("no ads")) {
+  throw new Error("Play metadata must describe the supported sizes without unverified ad claims.");
+}
+
+if (!playClient.includes("A three-minute round")) {
+  throw new Error("Timed mode copy must describe the current three-minute duration.");
+}
+
 console.log(
   `Verified ${expectedWords.length + commonPracticeWords.length + strategyGuideWords.length} guide examples against ${words.size} WordGrid words.`
 );

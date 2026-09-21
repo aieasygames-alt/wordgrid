@@ -72,7 +72,7 @@ export default function HomeClient() {
       <section className="mb-5 text-center">
         <div className="text-xs font-semibold uppercase tracking-wide text-primary">Free browser word game</div>
         <h1 className="mt-2 text-2xl font-bold sm:text-3xl">Play this board</h1>
-        <p className="mx-auto mt-2 max-w-xl text-sm text-text-muted">Connect adjacent letters, find as many words as you can, then review the board after the clock ends.</p>
+          <p className="mx-auto mt-2 max-w-xl text-sm text-text-muted">Connect adjacent letters, find as many words as you can in three minutes, then review the board after the clock ends.</p>
       </section>
       <div className="mb-6">
         <GameBoard
@@ -86,7 +86,7 @@ export default function HomeClient() {
         <Link href="/challenge" className="border border-primary/30 bg-primary/10 p-4 transition hover:bg-primary/15">
           <div className="text-xs font-semibold uppercase tracking-wide text-primary">Play with friends</div>
           <div className="mt-1 font-semibold">Challenge the same board</div>
-          <p className="mt-1 text-sm text-text-muted">Share a score link and see who finds more words.</p>
+          <p className="mt-1 text-sm text-text-muted">Finish a round, then share the exact board and your score target.</p>
         </Link>
         <Link href="/daily" className="border border-border bg-surface/50 p-4 transition hover:bg-surface">
           <div className="text-xs font-semibold uppercase tracking-wide text-primary">Daily</div>

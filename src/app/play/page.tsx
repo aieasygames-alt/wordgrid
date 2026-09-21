@@ -7,7 +7,7 @@ const BASE_URL = "https://wordgrid.games";
 export const metadata: Metadata = {
   title: "Play Boggle-Style Word Grid Online Free — Instant Game",
   description:
-    "Play a free Boggle-style 4x4 word grid instantly. Choose timed or unlimited practice, challenge friends on the same board, with no download or sign-up.",
+    "Play a free Boggle-style word grid instantly. Choose a three-minute timed round or unlimited Zen practice on 4x4, 5x5, or 6x6 boards, with no download or sign-up.",
   alternates: { canonical: "/play" },
   keywords: [
     "play boggle online free", "play boggle online", "boggle online free",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Play Word Grid Online Free — Instant Boggle Game",
     description:
-      "Play a timed word grid brain game in your browser. No download, no sign-up. Connect letters, find words, and beat the clock.",
+      "Play a three-minute timed word grid or unlimited Zen practice in your browser. No download or sign-up.",
   },
 };
 
@@ -61,7 +61,7 @@ export default function Page() {
         name: "Can I play Boggle online for free?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. WordGrid lets you play a free Boggle-style word grid game in your browser with no download, no sign-up, and no ads.",
+          text: "Yes. WordGrid lets you play a free Boggle-style word grid game in your browser with no download or sign-up.",
         },
       },
       {

@@ -6,12 +6,12 @@ const BASE_URL = "https://wordgrid.games";
 export const metadata: Metadata = {
   title: "Play Word Grid Online Free — Instant Boggle-Style Game",
   description:
-    "Play a free Boggle-style word grid game instantly. No download or sign-up: choose a timed board, challenge friends on the same grid, then review missed words.",
+    "Play a free Boggle-style word grid game instantly. No download or sign-up: choose a three-minute timed board or Zen practice, then review missed words.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Play Word Grid Online Free — WordGrid Game",
     description:
-      "A free Word Grid platform for playing boards with friends, comparing scores, solving puzzles, and learning word patterns.",
+      "A free WordGrid game for timed or Zen practice, shared boards, solver review, and word-pattern learning.",
     url: BASE_URL,
     images: [
       {
@@ -64,10 +64,10 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
-      { "@type": "Question", name: "How do you play WordGrid?", acceptedAnswer: { "@type": "Answer", text: "Connect adjacent letters horizontally, vertically, or diagonally to make words. Each tile can be used once per word. Submit words before the timer ends." } },
+      { "@type": "Question", name: "How do you play WordGrid?", acceptedAnswer: { "@type": "Answer", text: "Connect adjacent letters horizontally, vertically, or diagonally to make words. Each tile can be used once per word. Timed rounds use a three-minute clock, while Zen practice has no timer." } },
       { "@type": "Question", name: "Is WordGrid free to play?", acceptedAnswer: { "@type": "Answer", text: "Yes. WordGrid runs in a browser with no download or account required." } },
       { "@type": "Question", name: "What can I do after a round?", acceptedAnswer: { "@type": "Answer", text: "Review missed words, open the solver for the same board, share a challenge link, or play the Daily and Weekly boards." } },
-      { "@type": "Question", name: "Can I play WordGrid with friends?", acceptedAnswer: { "@type": "Answer", text: "Yes. Finish a round, save your name and score, then share the challenge link. Friends can play the same board and compare scores on the shared challenge page." } },
+      { "@type": "Question", name: "Can I play WordGrid with friends?", acceptedAnswer: { "@type": "Answer", text: "Yes. Finish a round and share its challenge link so friends can play the same board. The link can include the completed score as a target." } },
     ],
   };
 
@@ -88,7 +88,7 @@ export default function Home() {
           <h2 className="mt-7 text-xl font-semibold text-text">How a round works</h2>
           <ol className="mt-3 list-decimal space-y-2 pl-5"><li>Scan the 4 by 4 letter board for connected word paths.</li><li>Drag across adjacent tiles to submit each word before time expires.</li><li>Review your score, missed words, and the next practice focus after the round.</li></ol>
           <h2 className="mt-7 text-xl font-semibold text-text">Play, practice, and review</h2>
-          <p className="mt-3">Use Daily for a shared board that changes each day, Weekly for a themed repeatable challenge, and the Solver after a round when you want to review possible words. WordGrid&apos;s learning guides explain scoring, common patterns, and responsible post-game review.</p>
+          <p className="mt-3">Use Daily for a shared 4 by 4 board that changes each day, Weekly for a themed shared board all week, and the Solver after a round when you want to review possible words. WordGrid&apos;s learning guides explain scoring, common patterns, and responsible post-game review.</p>
           <p className="mt-5">For background on the classic Boggle format that inspired adjacent-letter word games, see <a className="font-semibold text-primary hover:underline" href="https://instructions.hasbro.com/api/download/C1009_en-us_boggle-classic-game.pdf" rel="noopener noreferrer">Hasbro&apos;s Boggle instructions</a>. This page was last updated on September 8, 2026.</p>
           <h2 className="mt-7 text-xl font-semibold text-text">Frequently asked questions</h2>
           <div className="mt-3 space-y-4"><div><h3 className="font-semibold text-text">Is WordGrid free?</h3><p className="mt-1">Yes. It is free to play in a browser and does not require an account.</p></div><div><h3 className="font-semibold text-text">Can I replay a board?</h3><p className="mt-1">Yes. Daily archive and challenge links preserve a board so it can be replayed and reviewed later.</p></div></div>

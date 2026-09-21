@@ -393,8 +393,8 @@ export default function PlayClient() {
           <div className="rounded-2xl border border-border bg-surface/50 p-5">
             <h2 className="font-semibold text-primary">Timed mode</h2>
             <p className="mt-2 text-sm text-text-muted leading-relaxed">
-              The classic 3-minute rhythm for players who want standard
-              Boggle-style pressure and comparable scores.
+              A three-minute round for players who want a focused clock and a
+              score they can compare on the same board.
             </p>
           </div>
           <div className="rounded-2xl border border-border bg-surface/50 p-5">

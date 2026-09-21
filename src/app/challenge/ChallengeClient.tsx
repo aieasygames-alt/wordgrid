@@ -106,6 +106,7 @@ export default function ChallengeClient() {
   const remainingToMax =
     meta.score !== null && meta.max !== null ? Math.max(0, meta.max - meta.score) : null;
   const sessionLabel = formatSession(meta.session);
+  const hasTargetScore = meta.score !== null;
   const saveLocalScore = () => {
     if (!grid || meta.score === null) return;
     const playerName = name.trim() || "You";
@@ -145,12 +146,7 @@ export default function ChallengeClient() {
   };
 
   return (
-    <main className="min-h-screen px-4 py-8 sm:py-12 overflow-hidden">
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute left-[-6rem] top-10 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl" />
-        <div className="absolute right-[-4rem] top-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
-      </div>
-
+    <main className="min-h-screen px-4 py-8 sm:py-12">
       <article className="mx-auto max-w-7xl">
         <header className="mb-8 sm:mb-10">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
@@ -171,8 +167,9 @@ export default function ChallengeClient() {
                 Challenge
               </h1>
               <p className="mt-4 max-w-2xl text-base sm:text-lg text-text-muted leading-relaxed">
-                Play the same grid, beat the shared score, or open the solver to
-                study the board before your next attempt.
+                {hasTargetScore
+                  ? "Play the same grid, try to beat the shared score, then open the solver to study missed paths."
+                  : "Open a shared grid, play the same layout, then use the solver to study missed paths."}
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">
@@ -201,7 +198,7 @@ export default function ChallengeClient() {
                     <div className="mt-1 font-semibold text-primary">
                       {meta.score !== null
                         ? `Score to beat: ${meta.score}`
-                        : "Score to beat not available"}
+                        : "Shared board ready"}
                     </div>
                   </div>
                   {completionRate !== null && (
@@ -226,7 +223,7 @@ export default function ChallengeClient() {
                   </div>
                   <div className="rounded-xl bg-surface/70 px-3 py-2">
                     <div className="text-xs uppercase tracking-wide text-text-dim">Mode</div>
-                    <div className="font-semibold text-text">{sessionLabel || "Timed"}</div>
+                    <div className="font-semibold text-text">{sessionLabel || "Not specified"}</div>
                   </div>
                   <div className="rounded-xl bg-surface/70 px-3 py-2">
                     <div className="text-xs uppercase tracking-wide text-text-dim">Gap to max</div>
@@ -242,9 +239,9 @@ export default function ChallengeClient() {
                 </div>
               )}
               <div className="mt-4 rounded-2xl bg-bg/60 px-4 py-3 text-sm text-text-muted leading-relaxed">
-                Treat this as a replay page first. If you already know the
-                board, the solver is the fastest way to turn the round into a
-                study session.
+                {hasTargetScore
+                  ? "Try the target score before checking the answer set. The solver is there for a focused review after your run."
+                  : "This link shares the board layout. Play first, then use the solver to turn the round into a study session."}
               </div>
             </div>
           </div>
@@ -254,7 +251,7 @@ export default function ChallengeClient() {
           <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10 lg:sticky lg:top-8">
             <h2 className="text-2xl font-bold">Board preview</h2>
             <p className="mt-1 text-sm text-text-muted">
-              {grid ? "This is the exact board your friend shared." : "Paste or open a board link to preview the challenge."}
+              {grid ? "This is the exact board from the shared link." : "Open a shared board link to preview and play the challenge."}
             </p>
 
             <div className="mt-5">
@@ -262,7 +259,7 @@ export default function ChallengeClient() {
                 <BoardPreview grid={grid} />
               ) : (
                 <div className="rounded-3xl border border-dashed border-border bg-bg/40 px-6 py-10 text-center text-text-muted">
-                  No board found in the link yet.
+                  No shared board is loaded yet. Start a fresh board, then share it from the results screen.
                 </div>
               )}
             </div>
@@ -273,14 +270,14 @@ export default function ChallengeClient() {
               <h2 className="text-2xl font-bold">How to use this challenge</h2>
               <ul className="mt-4 space-y-3 text-sm text-text-muted leading-relaxed">
                 <li>1. Open the board with the Play button to start the round.</li>
-                <li>2. Try to beat the target score without peeking.</li>
+                <li>2. {hasTargetScore ? "Try to beat the target score without peeking." : "Play the same layout before checking the answer set."}</li>
                 <li>3. Use the solver after the run to review missed patterns.</li>
               </ul>
             </div>
 
             <div className="rounded-3xl border border-primary/20 bg-primary/10 p-5 sm:p-6">
               <h2 className="text-2xl font-bold">Friend score board</h2>
-              <p className="mt-2 text-sm text-text-muted">Scores are saved in this browser. Share the link above so friends can play the same grid.</p>
+              <p className="mt-2 text-sm text-text-muted">Scores are saved in this browser. Share the scoreboard link after a score is present so friends can open the same grid.</p>
               {meta.score !== null && (
                 <div className="mt-4 flex flex-col gap-2 sm:flex-row">
                   <input value={name} onChange={(event) => setName(event.target.value)} maxLength={24} placeholder="Your name" aria-label="Your challenge name" className="min-w-0 flex-1 rounded-xl border border-border bg-bg/70 px-3 py-2 text-sm outline-none focus:border-primary" />
@@ -305,9 +302,9 @@ export default function ChallengeClient() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-2xl font-bold">Recommended next step</h2>
               <p className="mt-3 text-sm text-text-muted leading-relaxed">
-                If you are sharing this with someone else, send them the play
-                link. If you are using it yourself, start with the board
-                preview and then jump into the solver once you finish.
+                {grid
+                  ? "Send the play link to share this exact layout. Start with the board, then jump into the solver once you finish."
+                  : "Start a fresh board to create a shareable challenge, then use the solver after your round."}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Link href={playHref} onClick={() => trackEvent("challenge_start", { board_size: boardSize })} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">

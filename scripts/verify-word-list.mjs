@@ -246,6 +246,22 @@ if (zenPage.includes("repeat the same board") || zenPage.includes("same layout")
   throw new Error("Zen must not promise a repeatable board without a board-sharing workflow.");
 }
 
+const challengePage = readFileSync(new URL("../src/app/challenge/page.tsx", import.meta.url), "utf8");
+const challengeClient = readFileSync(new URL("../src/app/challenge/ChallengeClient.tsx", import.meta.url), "utf8");
+const archiveDetailPage = readFileSync(new URL("../src/app/daily/archive/[date]/page.tsx", import.meta.url), "utf8");
+
+if (!challengePage.includes("same shared board") || !challengePage.includes("isAccessibleForFree")) {
+  throw new Error("Challenge metadata must describe the shared-board workflow and free web game.");
+}
+
+if (!challengeClient.includes("hasTargetScore") || !challengeClient.includes("Shared board ready")) {
+  throw new Error("Challenge UI must distinguish a shared board from a scored challenge.");
+}
+
+if (!archiveDetailPage.includes("score: entry.totalPossibleScore")) {
+  throw new Error("Archive challenge links must pass a concrete score target for the selected board.");
+}
+
 console.log(
   `Verified ${expectedWords.length + commonPracticeWords.length + strategyGuideWords.length} guide examples against ${words.size} WordGrid words.`
 );

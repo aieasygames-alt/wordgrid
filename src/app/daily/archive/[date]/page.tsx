@@ -60,6 +60,7 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
     date: entry.date,
   });
   const challengePath = buildBoardUrl("/challenge", entry.grid, {
+    score: entry.totalPossibleScore,
     mode: "daily",
     date: entry.date,
     max: entry.totalPossibleScore,

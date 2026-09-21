@@ -9,7 +9,7 @@ const BASE_URL = "https://wordgrid.games";
 export const metadata: Metadata = {
   title: "Zen Word Grid: Practice Without the Clock",
   description:
-    "Practice WordGrid at your own pace with no timer. Use Zen mode to learn patterns, test boards, warm up, and build speed without pressure.",
+    "Practice WordGrid at your own pace with no timer. Use Zen mode to learn patterns, test word paths, and review a finished board with the solver.",
   alternates: { canonical: "/zen" },
   openGraph: {
     title: "Zen Word Grid: Practice Without the Clock",
@@ -25,13 +25,7 @@ export default function Page() {
   const tip = getTodayActionTip(today);
 
   return (
-    <main className="min-h-screen px-4 py-8 sm:py-12 overflow-hidden">
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute left-[-6rem] top-12 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
-        <div className="absolute right-[-4rem] top-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
-        <div className="absolute left-1/2 top-[42rem] h-80 w-80 -translate-x-1/2 rounded-full bg-indigo-500/10 blur-3xl" />
-      </div>
-
+    <main className="min-h-screen px-4 py-8 sm:py-12">
       <article className="mx-auto max-w-7xl">
         <header className="mb-8 sm:mb-10">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
@@ -79,8 +73,8 @@ export default function Page() {
                 <StatBox label="Pressure" value="Low" />
               </div>
               <div className="mt-4 rounded-2xl bg-bg/60 p-4 text-sm text-text-muted leading-relaxed">
-                Use Zen to scan at your own pace, repeat the same board, and
-                build up recognition before moving back to timed play.
+                Use Zen to scan at your own pace, test promising paths, and
+                review a finished board before moving back to timed play.
               </div>
             </div>
           </div>
@@ -125,9 +119,9 @@ export default function Page() {
         </section>
 
         <section className="grid gap-4 sm:grid-cols-3">
-          <Card title="Warm up" text="Get a feel for the board before the timer starts." />
+          <Card title="Warm up" text="Get a feel for a new board before choosing a timed run." />
           <Card title="Study patterns" text="Focus on prefixes, suffixes, Qu, and long word stems." />
-          <Card title="Repeat boards" text="Use the same layout to measure your progress over time." />
+          <Card title="Review a board" text="Open the solver after a round to study missed paths and word families." />
         </section>
 
         <section className="mt-10 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">

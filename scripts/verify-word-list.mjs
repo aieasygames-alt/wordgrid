@@ -229,6 +229,23 @@ if (!dailyClient.includes("shared 4x4") || !dailyClient.includes("3-minute")) {
   throw new Error("Daily UI must describe the current shared 4x4 board and 3-minute timer.");
 }
 
+const weeklyPage = readFileSync(new URL("../src/app/weekly/page.tsx", import.meta.url), "utf8");
+const weeklyClient = readFileSync(new URL("../src/app/weekly/WeeklyClient.tsx", import.meta.url), "utf8");
+
+if (!weeklyPage.includes("shared 4x4") || !weeklyPage.includes("three-minute")) {
+  throw new Error("Weekly metadata must describe the current shared 4x4 board and three-minute timer.");
+}
+
+if (!weeklyClient.includes("shared 4x4") || !weeklyClient.includes("initialDuration={180}")) {
+  throw new Error("Weekly UI must describe and implement the shared 4x4 three-minute challenge.");
+}
+
+const zenPage = readFileSync(new URL("../src/app/zen/page.tsx", import.meta.url), "utf8");
+
+if (zenPage.includes("repeat the same board") || zenPage.includes("same layout")) {
+  throw new Error("Zen must not promise a repeatable board without a board-sharing workflow.");
+}
+
 console.log(
   `Verified ${expectedWords.length + commonPracticeWords.length + strategyGuideWords.length} guide examples against ${words.size} WordGrid words.`
 );

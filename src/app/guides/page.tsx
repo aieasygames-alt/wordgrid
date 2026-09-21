@@ -494,7 +494,7 @@ export default function GuidesIndex() {
             >
               <h3 className="font-semibold text-lg mb-1">Understand scoring</h3>
               <p className="text-sm text-text-muted">
-                Official point values, score ranges, and why 5+ letter words matter.
+                Current WordGrid point values, fair score comparisons, and why 5+ letter words matter.
               </p>
             </Link>
             <Link

@@ -248,7 +248,8 @@ export default function BoggleScoringSheetGuide() {
                 <strong>The key insight:</strong> One 5-letter word = 4 points.
                 Four 3-letter words = 4 points. Same time investment, same
                 reward — but the 5-letter word is often easier to spot once you
-                train your brain to look for patterns like -TION, -NESS, -ING.
+                train your brain to look for playable families such as PLAY,
+                PLAYS, PLAYED, and PLAYER.
               </p>
             </div>
             <p className="leading-relaxed mt-3">
@@ -343,9 +344,9 @@ export default function BoggleScoringSheetGuide() {
               <div className="bg-surface/50 rounded-xl p-4">
                 <h3 className="font-semibold mb-2">Strategy 2: Pattern Recognition</h3>
                 <p className="text-sm leading-relaxed">
-                  Look for high-value patterns: -TION, -NESS, -MENT, -ABLE.
-                  These endings indicate longer words and significantly higher
-                  points.
+                  Look for playable word families such as PLAY, PLAYS, PLAYED,
+                  and PLAYER. Extending a valid stem can uncover a longer word
+                  with a higher score.
                 </p>
               </div>
 
@@ -411,7 +412,7 @@ export default function BoggleScoringSheetGuide() {
                   <h3 className="font-semibold mb-2">Key Tips</h3>
                   <ul className="space-y-1 text-xs">
                     <li>• 5-letter word = 4× 3-letter</li>
-                    <li>• Prioritize -TION, -NESS</li>
+                    <li>• Extend playable word families</li>
                     <li>• Check word extensions</li>
                     <li>• Use the full Timed round</li>
                     <li>• Hunt for Qu tile</li>

@@ -154,6 +154,7 @@ const strategyPages = [
   "src/app/guides/advanced-boggle-strategies/page.tsx",
   "src/app/guides/how-to-find-more-words/page.tsx",
   "src/app/guides/word-grid-strategies/page.tsx",
+  "src/app/guides/boggle-scoring-sheet/page.tsx",
 ];
 const nonWordTokens = new Set(["JSON", "FAQ"]);
 
@@ -260,6 +261,24 @@ if (!challengeClient.includes("hasTargetScore") || !challengeClient.includes("Sh
 
 if (!archiveDetailPage.includes("score: entry.totalPossibleScore")) {
   throw new Error("Archive challenge links must pass a concrete score target for the selected board.");
+}
+
+const rulesBeginnersPage = readFileSync(
+  new URL("../src/app/guides/boggle-rules-beginners/page.tsx", import.meta.url),
+  "utf8"
+);
+const kidsRulesPage = readFileSync(
+  new URL("../src/app/guides/boggle-rules-for-kids/page.tsx", import.meta.url),
+  "utf8"
+);
+const guidesIndexPage = readFileSync(new URL("../src/app/guides/page.tsx", import.meta.url), "utf8");
+
+if (
+  rulesBeginnersPage.includes("official point table") ||
+  kidsRulesPage.includes("standard adult rules") ||
+  guidesIndexPage.includes("Official point values")
+) {
+  throw new Error("Guides must label the scoring table as the current WordGrid rules, not official Boggle rules.");
 }
 
 console.log(

@@ -144,7 +144,7 @@ export default function BoggleRulesForKidsGuide() {
                 Open printable rules
               </Link>
               <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
-                Standard rules
+                WordGrid rules
               </Link>
             </div>
             <p className="leading-relaxed mt-3">
@@ -152,7 +152,7 @@ export default function BoggleRulesForKidsGuide() {
               recognition — all while discovering words at their own pace.
             </p>
             <p className="leading-relaxed mt-3">
-              For the standard adult rules and scoring reference, move next to{" "}
+              For the full WordGrid rules and scoring reference, move next to{" "}
               <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
                 Boggle Rules for Beginners
               </Link>{" "}
@@ -215,7 +215,7 @@ export default function BoggleRulesForKidsGuide() {
                 <div>
                   <h3 className="font-semibold mb-2">Ages 8+</h3>
                   <ul className="space-y-1">
-                    <li>• Ready for standard rules</li>
+                    <li>• Ready for the full WordGrid rules</li>
                     <li>• Try Timed mode when ready</li>
                     <li>• Can understand scoring</li>
                     <li>• Competitive play fun</li>

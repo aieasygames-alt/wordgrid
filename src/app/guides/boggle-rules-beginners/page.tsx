@@ -497,7 +497,7 @@ export default function BoggleRulesGuide() {
               </a>
               <a href="/guides/boggle-scoring-sheet/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">Boggle Scoring Sheet &rarr;</div>
-                <div className="text-sm text-text-muted">Use the official point table and winning score ranges as your next step.</div>
+                <div className="text-sm text-text-muted">Use the current WordGrid point table and same-board comparisons as your next step.</div>
               </a>
               <a href="/guides/boggle-solver/" className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4">
                 <div className="font-semibold text-primary">Word Grid Solver &rarr;</div>

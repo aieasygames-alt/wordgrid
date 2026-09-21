@@ -4,9 +4,9 @@ import DailyClient from "./DailyClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Daily Word Grid Puzzle — Today's Free 4x4 Board",
+  title: "Daily Word Grid Puzzle - Today's Shared 4x4 Board",
   description:
-    "Play today's free shared 4x4 word grid with a 3-minute timer. Everyone gets the same Daily board, with streak tracking and a new puzzle each day.",
+    "Play today's free shared 4x4 WordGrid board with a 3-minute timer, track your streak, then review missed routes after the round.",
   alternates: { canonical: "/daily" },
   keywords: [
     "daily word grid",
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     "free daily word game",
   ],
   openGraph: {
-    title: "Daily Word Grid Puzzle — Today's Free 4x4 Board",
+    title: "Daily Word Grid Puzzle - Today's Shared 4x4 Board",
     description:
-      "Today's shared word grid challenge with a 3-minute timer and fresh board every day.",
+      "Today's shared 4x4 word grid challenge, with a 3-minute timer and a fresh board every day.",
   },
 };
 
@@ -36,7 +36,7 @@ export default function Page() {
     playMode: ["SinglePlayer"],
     isAccessibleForFree: true,
     description:
-      "A free daily word guessing game with one shared Boggle-style 4x4 board, a 3-minute timer, streak tracking, and a new word grid puzzle every day.",
+      "A free daily WordGrid challenge with one shared Boggle-style 4x4 board, a 3-minute timer, streak tracking, and a new board every day.",
     offers: {
       "@type": "Offer",
       price: "0",
@@ -54,7 +54,7 @@ export default function Page() {
         name: "What is the WordGrid Daily puzzle?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "The WordGrid Daily puzzle is one shared Boggle-style 4x4 word grid each day. Everyone gets the same board and the same 3-minute timer, so scores are easy to compare.",
+          text: "The WordGrid Daily puzzle is one shared Boggle-style 4x4 word grid each day. Everyone gets the same board and the same 3-minute timer, so you can compare your own results over time and review the completed board afterward.",
         },
       },
       {

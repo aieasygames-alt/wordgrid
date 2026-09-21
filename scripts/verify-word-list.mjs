@@ -218,6 +218,17 @@ for (const page of currentRulesPages) {
   }
 }
 
+const dailyPage = readFileSync(new URL("../src/app/daily/page.tsx", import.meta.url), "utf8");
+const dailyClient = readFileSync(new URL("../src/app/daily/DailyClient.tsx", import.meta.url), "utf8");
+
+if (!dailyPage.includes("shared 4x4") || !dailyPage.includes("3-minute timer")) {
+  throw new Error("Daily metadata must describe the current shared 4x4 board and 3-minute timer.");
+}
+
+if (!dailyClient.includes("shared 4x4") || !dailyClient.includes("3-minute")) {
+  throw new Error("Daily UI must describe the current shared 4x4 board and 3-minute timer.");
+}
+
 console.log(
   `Verified ${expectedWords.length + commonPracticeWords.length + strategyGuideWords.length} guide examples against ${words.size} WordGrid words.`
 );

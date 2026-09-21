@@ -162,9 +162,9 @@ export default function DailyClient() {
             Daily Word Grid Puzzle — Today's Word Guessing Game
           </h1>
           <p className="mt-3 text-sm sm:text-base text-text-muted max-w-2xl mx-auto leading-relaxed">
-            Play today&apos;s free 4x4 WordGrid board for {today}. Everyone gets
-            the same Boggle-style word guessing game and the same 3-minute
-            timer, so your score is easy to compare and review.
+            Play today&apos;s free shared 4x4 WordGrid board for {today}. Everyone
+            gets the same Boggle-style grid and the same 3-minute timer, so you
+            can track your own results and review the board afterward.
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
             {entryLinks.map((entry) => (
@@ -224,7 +224,7 @@ export default function DailyClient() {
             </p>
             <p className="mt-3 text-sm text-text-muted leading-relaxed">
               If you want to practice without affecting your daily rhythm, open
-              a random board or use Zen mode.
+              a fresh 4x4, 5x5, or 6x6 board on Play, or use Zen mode without a clock.
             </p>
           </div>
           <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">

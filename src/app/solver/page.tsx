@@ -216,7 +216,7 @@ export default function Page() {
           <h2 className="text-2xl font-semibold">What This Solver Is For</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              ["Boggle solver", "Find all valid words in a 4x4 Boggle-style board after a round."],
+              ["Boggle solver", "Review valid words in a 4x4, 5x5, or 6x6 Boggle-style board after a round."],
               ["Word grid solver", "Check 4x4, 5x5, or 6x6 letter grids and sort valid answers by score."],
               ["Word finder", "Spot longer words, prefixes, suffixes, and Qu paths you missed."],
               ["Daily review", "Compare today's board with the full answer set after you play."],

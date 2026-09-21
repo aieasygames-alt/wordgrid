@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import WeeklyClient from "./WeeklyClient";
+import { getWeeklyChallenge } from "@/lib/weekly-challenge";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default function WeeklyPage() {
+  const challenge = getWeeklyChallenge();
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -57,7 +59,7 @@ export default function WeeklyPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <WeeklyClient />
+      <WeeklyClient challenge={challenge} />
     </>
   );
 }

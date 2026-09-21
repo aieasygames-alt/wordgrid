@@ -241,6 +241,16 @@ if (!weeklyClient.includes("shared 4x4") || !weeklyClient.includes("initialDurat
   throw new Error("Weekly UI must describe and implement the shared 4x4 three-minute challenge.");
 }
 
+if (weeklyClient.includes("getWeeklyChallenge()") || !weeklyPage.includes("const challenge = getWeeklyChallenge()")) {
+  throw new Error("Weekly must pass one server-generated challenge into the client to avoid a hydration mismatch.");
+}
+
+const dailyStatusBar = readFileSync(new URL("../src/components/DailyStatusBar.tsx", import.meta.url), "utf8");
+
+if (!dailyStatusBar.includes("useState<number | null>(null)") || !dailyStatusBar.includes('"--h --m"')) {
+  throw new Error("Daily status must defer time-sensitive text until the client mounts.");
+}
+
 const zenPage = readFileSync(new URL("../src/app/zen/page.tsx", import.meta.url), "utf8");
 
 if (zenPage.includes("repeat the same board") || zenPage.includes("same layout")) {

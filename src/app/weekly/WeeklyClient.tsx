@@ -3,7 +3,7 @@
 import Link from "next/link";
 import GameBoard from "@/components/GameBoard";
 import ResultScreen from "@/components/ResultScreen";
-import { getWeeklyChallenge } from "@/lib/weekly-challenge";
+import type { WeeklyChallenge } from "@/lib/weekly-challenge";
 import type { Trie } from "@/lib/dictionary";
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
@@ -11,8 +11,7 @@ import DailyStatusBar from "@/components/DailyStatusBar";
 
 type Result = { words: { word: string; score: number }[]; total: number; trie: Trie | null; bestCombo: number };
 
-export default function WeeklyClient() {
-  const challenge = getWeeklyChallenge();
+export default function WeeklyClient({ challenge }: { challenge: WeeklyChallenge }) {
   const [result, setResult] = useState<Result | null>(null);
 
   if (result) {

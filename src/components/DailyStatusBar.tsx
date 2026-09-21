@@ -14,7 +14,7 @@ function formatCountdown(ms: number): string {
 }
 
 export default function DailyStatusBar({ mode = "daily" }: { mode?: "daily" | "weekly" }) {
-  const [refreshMs, setRefreshMs] = useState(msUntilNextDailyBoundary());
+  const [refreshMs, setRefreshMs] = useState<number | null>(null);
   const [playedToday, setPlayedToday] = useState(false);
   const [streak, setStreak] = useState(0);
   const [average, setAverage] = useState(0);
@@ -41,7 +41,7 @@ export default function DailyStatusBar({ mode = "daily" }: { mode?: "daily" | "w
       </div>
       <div className="border border-border bg-surface/60 px-4 py-3">
         <div className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">{isWeekly ? "Daily reset" : "Next board"}</div>
-        <div className="mt-1 font-semibold tabular-nums text-text">{formatCountdown(refreshMs)}</div>
+        <div className="mt-1 font-semibold tabular-nums text-text">{refreshMs === null ? "--h --m" : formatCountdown(refreshMs)}</div>
       </div>
       <div className="border border-border bg-surface/60 px-4 py-3">
         <div className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Your baseline</div>

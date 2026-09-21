@@ -183,7 +183,7 @@ export default function Guide2() {
               <div>
                 <h2 className="text-2xl font-semibold text-primary mb-3">Word Families</h2>
                 <div className="grid gap-3 md:grid-cols-2">
-                  {["RATE → RATES, RATED, RATING", "STAR → STARS, STARRED, START, STARE", "POINT → POINTS, POINTED, POINTER", "FORM → FORMS, FORMED, REFORM"].map((line) => (
+                  {["RATE → RATES, RATED, RATING", "STAR → STARS, START, STARE", "PLAY → PLAYS, PLAYED, PLAYER", "FORM → FORMS, FORMED, REFORM"].map((line) => (
                     <div key={line} className="rounded-2xl bg-surface/50 border border-border px-4 py-3 font-mono text-sm">
                       {line}
                     </div>

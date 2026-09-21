@@ -187,6 +187,7 @@ const currentRulesPages = [
   "src/app/guides/word-grid-strategies/page.tsx",
   "src/app/guides/boggle-word-lists/page.tsx",
   "src/app/guides/boggle-variants/page.tsx",
+  "src/app/boggle-timed-game/page.tsx",
 ];
 
 const unsupportedClaims = [

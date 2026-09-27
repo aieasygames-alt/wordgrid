@@ -10,6 +10,9 @@ type OnlinePlayGuideProps = {
   title: string;
   description: string;
   canonicalPath: string;
+  focusTitle: string;
+  focusCopy: string;
+  focusSteps: string[];
 };
 
 const faqItems = [
@@ -19,13 +22,22 @@ const faqItems = [
   { question: "How does WordGrid score words?", answer: "Current scoring is 1 point for 3 letters, 2 for 4 letters, 4 for 5 letters, and 6 for 6 letters." },
 ];
 
-export default function OnlinePlayGuide({ eyebrow, title, description, canonicalPath }: OnlinePlayGuideProps) {
+export default function OnlinePlayGuide({
+  eyebrow,
+  title,
+  description,
+  canonicalPath,
+  focusTitle,
+  focusCopy,
+  focusSteps,
+}: OnlinePlayGuideProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: title,
     description,
     url: `${BASE_URL}${canonicalPath}`,
+    dateModified: "2026-09-27",
     mainEntity: {
       "@type": "FAQPage",
       mainEntity: faqItems.map((item) => ({
@@ -60,6 +72,13 @@ export default function OnlinePlayGuide({ eyebrow, title, description, canonical
           />
 
           <div className="space-y-8 text-text">
+            <section className="border-l-2 border-primary bg-primary/5 p-5">
+              <h2 className="text-2xl font-semibold text-primary">{focusTitle}</h2>
+              <p className="mt-3 leading-relaxed text-text-muted">{focusCopy}</p>
+              <ol className="mt-4 space-y-2 text-sm leading-relaxed text-text-muted">
+                {focusSteps.map((step, index) => <li key={step}>{index + 1}. {step}</li>)}
+              </ol>
+            </section>
             <section>
               <h2 className="mb-3 text-2xl font-semibold text-primary">Start a board in three steps</h2>
               <ol className="space-y-3 rounded-lg border border-border bg-surface/50 p-5 leading-relaxed text-text-muted">

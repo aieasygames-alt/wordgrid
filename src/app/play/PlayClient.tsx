@@ -7,7 +7,7 @@ import ResultScreen from "@/components/ResultScreen";
 import TodayTipCard from "@/components/TodayTipCard";
 import { generateGrid, generateSizedGrid, Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
-import { decodeBoard } from "@/lib/board-link";
+import { buildBoardUrl, decodeBoard } from "@/lib/board-link";
 import { getBoardActionTip } from "@/lib/daily-tip";
 import { trackEvent } from "@/lib/analytics";
 
@@ -50,11 +50,25 @@ export default function PlayClient() {
   const [boardSize, setBoardSize] = useState(4);
   const [sessionMode, setSessionMode] = useState<"timed" | "zen">("timed");
   const [entrySource, setEntrySource] = useState<string | null>(null);
+  const [challengeReturn, setChallengeReturn] = useState<string | null>(null);
+  const [challengeTarget, setChallengeTarget] = useState<number | null>(null);
+  const [challengeDate, setChallengeDate] = useState<string | null>(null);
   const boardTip = useMemo(() => getBoardActionTip(grid), [grid]);
   const gameKey = useMemo(
     () => `${sessionMode}-${boardSize}-${grid.flat().map((cell) => cell.letter).join("")}`,
     [sessionMode, boardSize, grid]
   );
+  const challengeResultHref = useMemo(() => {
+    if (entrySource !== "challenge" || !challengeReturn || !result) return null;
+    return buildBoardUrl(challengeReturn, result.grid, {
+      score: challengeTarget ?? undefined,
+      found: undefined,
+      mode: result.sessionMode,
+      date: challengeDate ?? undefined,
+      yourScore: result.total,
+      yourFound: result.words.length,
+    });
+  }, [challengeDate, challengeReturn, challengeTarget, entrySource, result]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -69,6 +83,10 @@ export default function PlayClient() {
       setSessionMode("zen");
     }
     setEntrySource(params.get("source"));
+    setChallengeReturn(params.get("returnTo"));
+    const target = Number(params.get("target"));
+    setChallengeTarget(Number.isFinite(target) ? target : null);
+    setChallengeDate(params.get("date"));
     const boardParam = params.get("board");
     if (!boardParam && Number.isFinite(sizeParam) && sizeParam >= 4) {
       const nextSeed = Math.floor(Math.random() * 1e9);
@@ -171,6 +189,9 @@ export default function PlayClient() {
             study tools. The board controls stay below, so the page reads in
             one clear order.
           </p>
+          {entrySource === "challenge" && challengeTarget !== null && (
+            <p className="mt-2 text-sm font-semibold text-primary">Target score: {challengeTarget}{challengeDate ? ` · Daily ${challengeDate}` : ""}</p>
+          )}
           <div className="mt-4">{entryNav}</div>
           <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
             <button
@@ -241,6 +262,15 @@ export default function PlayClient() {
           bestCombo={result.bestCombo}
           onPlayAgain={newGame}
         />
+        {challengeResultHref && (
+          <Link
+            href={challengeResultHref}
+            onClick={() => trackEvent("challenge_return_score", { board_size: result.grid.length, score: result.total })}
+            className="mt-6 rounded-xl bg-primary px-5 py-3 font-semibold text-white transition hover:bg-primary-hover"
+          >
+            Return to challenge and save my score
+          </Link>
+        )}
         <section className="mt-10 w-full max-w-5xl grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Link href="/guides/boggle-rules-beginners" className="rounded-2xl border border-border bg-surface/50 p-4 font-semibold hover:bg-surface transition">
             Rules guide

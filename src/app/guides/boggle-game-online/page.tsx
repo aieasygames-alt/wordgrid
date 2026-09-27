@@ -23,6 +23,13 @@ export default function BoggleGameOnlineGuide() {
       title="Boggle game online"
       description="WordGrid brings Boggle-style route finding to your browser. Choose the board size and mode that fit your practice, then review missed routes after the board."
       canonicalPath="/guides/boggle-game-online/"
+      focusTitle="Turn each board into better play"
+      focusCopy="This page is for players who want more than a single round: score a board, inspect the missed paths, and carry one pattern into the next game."
+      focusSteps={[
+        "Complete a board before opening the solver.",
+        "Check high-value missed words first, rather than scanning every answer.",
+        "Practice one pattern, such as Qu or a common ending, in your next round.",
+      ]}
     />
   );
 }

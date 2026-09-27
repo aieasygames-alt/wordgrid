@@ -4,8 +4,8 @@ import { INDEXABLE_WORDS } from "@/lib/worddata";
 import { WORD_LIST_PAGES } from "@/lib/word-lists";
 
 const BASE_URL = "https://wordgrid.games";
-const SITE_UPDATED = new Date("2026-08-29");
-const GUIDE_UPDATED = new Date("2026-08-29");
+const SITE_UPDATED = new Date("2026-09-27");
+const GUIDE_UPDATED = new Date("2026-09-27");
 const GUIDE_PREVIOUS = new Date("2026-07-24");
 const GUIDE_PATTERN_UPDATED = new Date("2026-07-09");
 const GUIDE_WORD_LIST_UPDATED = new Date("2026-07-13");
@@ -22,11 +22,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/zen/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.82 },
     { url: `${BASE_URL}/daily/`, lastModified: SITE_UPDATED, changeFrequency: "daily", priority: 0.9 },
     { url: `${BASE_URL}/weekly/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.82 },
+    { url: `${BASE_URL}/training/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.78 },
     { url: `${BASE_URL}/challenge/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.72 },
     { url: `${BASE_URL}/boggle-solver/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.84 },
     { url: `${BASE_URL}/word-grid-solver/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.84 },
-    { url: `${BASE_URL}/boggle-word-finder/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.82 },
-    { url: `${BASE_URL}/boggle-cheat/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.72 },
     { url: `${BASE_URL}/boggle-timed-game/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/daily/archive/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/solver/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.85 },

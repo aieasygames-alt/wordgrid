@@ -21,6 +21,7 @@ import TodayTipCard from "@/components/TodayTipCard";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
 import DailyStatusBar from "@/components/DailyStatusBar";
+import { loadGameHistory, type GameHistoryEntry } from "@/lib/game-history";
 
 interface GameResult {
   words: { word: string; score: number }[];
@@ -39,6 +40,7 @@ export default function DailyClient() {
   const [result, setResult] = useState<GameResult | null>(null);
   const [missions, setMissions] = useState<DailyMission[]>([]);
   const [missionsReady, setMissionsReady] = useState(false);
+  const [dailyHistory, setDailyHistory] = useState<GameHistoryEntry[]>([]);
   const todayTip = useMemo(() => getTodayActionTip(today), [today]);
 
   useEffect(() => {
@@ -81,6 +83,15 @@ export default function DailyClient() {
     };
   }, [grid]);
 
+  useEffect(() => {
+    setDailyHistory(loadGameHistory().filter((entry) => entry.mode === "daily"));
+  }, []);
+
+  const dailyAverage = useMemo(() => {
+    if (dailyHistory.length === 0) return 0;
+    return dailyHistory.reduce((sum, entry) => sum + entry.score, 0) / dailyHistory.length;
+  }, [dailyHistory]);
+
   const handleComplete = (
     words: { word: string; score: number }[],
     total: number,
@@ -102,6 +113,7 @@ export default function DailyClient() {
         JSON.stringify({ words, total })
       );
     }
+    setDailyHistory(loadGameHistory().filter((entry) => entry.mode === "daily"));
   };
 
   if (result) {
@@ -128,6 +140,14 @@ export default function DailyClient() {
           bestCombo={result.bestCombo}
           onPlayAgain={() => (window.location.href = "/play")}
         />
+        <section className="mt-6 w-full max-w-2xl border border-border bg-surface/50 p-5 text-center">
+          <div className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your Daily baseline</div>
+          {dailyAverage > 0 ? (
+            <p className="mt-2 text-sm text-text-muted">Today: <span className="font-semibold text-text">{result.total}</span> points. Your recorded Daily average on this device is <span className="font-semibold text-text">{dailyAverage.toFixed(0)}</span> points.</p>
+          ) : (
+            <p className="mt-2 text-sm text-text-muted">Today&apos;s score is your first local Daily baseline. Play again tomorrow to build a meaningful comparison.</p>
+          )}
+        </section>
         <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
           <Link href="/daily/archive" className="rounded-xl bg-surface px-4 py-2 font-semibold hover:bg-surface-hover transition">
             Browse Daily Archive
@@ -188,6 +208,16 @@ export default function DailyClient() {
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
           <section className="space-y-5">
             <StreakDisplay compact />
+            <section className="grid grid-cols-2 gap-2" aria-label="Your Daily baseline">
+              <div className="border border-border bg-surface/60 px-4 py-3">
+                <div className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Recorded Dailies</div>
+                <div className="mt-1 font-semibold text-text">{dailyHistory.length}</div>
+              </div>
+              <div className="border border-border bg-surface/60 px-4 py-3">
+                <div className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Your Daily average</div>
+                <div className="mt-1 font-semibold text-text">{dailyAverage > 0 ? `${dailyAverage.toFixed(0)} points` : "Set your first score"}</div>
+              </div>
+            </section>
             <GameBoard key={today} grid={grid} onComplete={handleComplete} />
           </section>
 

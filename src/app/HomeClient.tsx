@@ -66,7 +66,7 @@ export default function HomeClient() {
         <Link href="/" className="text-lg font-bold tracking-tight">WordGrid</Link>
         <div className="flex items-center gap-2 text-sm">
           <Link href="/daily" className="rounded-lg bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">Daily</Link>
-          <Link href="/weekly" className="rounded-lg bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">Weekly</Link>
+          <Link href="/guides" className="rounded-lg bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">How to play</Link>
         </div>
       </header>
       <section className="mb-5 text-center">
@@ -99,6 +99,7 @@ export default function HomeClient() {
         <Link href="/solver" className="border border-border bg-surface/50 p-4 transition hover:bg-surface">
           <div className="text-xs font-semibold uppercase tracking-wide text-primary">Improve</div>
           <div className="mt-1 font-semibold">Review a finished board</div>
+          <p className="mt-1 text-sm text-text-muted">Use the solver after a round to find the patterns you missed.</p>
         </Link>
       </section>
     </main>

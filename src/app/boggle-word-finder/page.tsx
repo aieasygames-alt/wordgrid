@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   title: "Boggle Word Finder - Review Valid Board Routes",
   description:
     "Use this Boggle word finder to review valid words in a square letter grid, compare current scores, and learn the routes you missed.",
-  alternates: { canonical: `${BASE_URL}/boggle-word-finder/` },
+  alternates: { canonical: `${BASE_URL}/solver/` },
+  robots: { index: false, follow: true },
   openGraph: {
     title: "Boggle Word Finder - Review Valid Board Routes",
     description:

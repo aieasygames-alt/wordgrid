@@ -23,6 +23,13 @@ export default function PlayWordGridOnlineGuide() {
       title="Play word grid online free"
       description="WordGrid is a browser-based word route puzzle. Connect adjacent letters, choose the board size and mode you want, then use review tools to improve your next board."
       canonicalPath="/guides/play-word-grid-online/"
+      focusTitle="Learn the basic word-grid loop"
+      focusCopy="This is the general starting point for players who are new to word-grid games and want to understand the route, score, and review loop before trying a specialized Boggle page."
+      focusSteps={[
+        "Connect touching letters horizontally, vertically, or diagonally.",
+        "Submit three-letter or longer words without reusing a tile.",
+        "Finish the board, then review the missed paths before you play again.",
+      ]}
     />
   );
 }

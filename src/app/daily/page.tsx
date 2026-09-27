@@ -42,7 +42,7 @@ export default function Page() {
       price: "0",
       priceCurrency: "USD",
     },
-    dateModified: "2026-08-22",
+    dateModified: "2026-09-27",
   };
 
   const faqSchema = {

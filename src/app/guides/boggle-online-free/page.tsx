@@ -23,6 +23,13 @@ export default function BoggleOnlineFreeGuide() {
       title="Boggle online free game"
       description="Play WordGrid in your browser with no download or sign-up. Start a fresh practice board, slow down in Zen, or take on today's shared Daily board."
       canonicalPath="/guides/boggle-online-free/"
+      focusTitle="Start immediately in your browser"
+      focusCopy="This page is for the fastest route from search to a playable board. You do not need an account, download, or setup step before your first timed round."
+      focusSteps={[
+        "Open Play and leave the default 4x4 timed board selected.",
+        "Start the three-minute clock and submit any valid routes you find.",
+        "Use the post-game review to see what the board contained.",
+      ]}
     />
   );
 }

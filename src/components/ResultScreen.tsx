@@ -227,6 +227,8 @@ export default function ResultScreen({
     return url.toString();
   }, [challengePath, totalScore, foundWords.length]);
 
+  const dailyChallengeLabel = mode === "daily" ? `Daily ${dateLabel}` : null;
+
   useEffect(() => {
     setChallengeName(getChallengeName());
   }, []);
@@ -291,10 +293,7 @@ export default function ResultScreen({
 
   const trainingHref = useMemo(() => {
     if (!topMissedCategory) return "/weekly";
-    if (topMissedCategory.id === "qu") return "/guides/qu-strategy";
-    if (topMissedCategory.id === "prefix") return "/guides/prefix-strategy";
-    if (topMissedCategory.id === "suffix") return "/guides/suffix-strategy";
-    return "/weekly";
+    return `/training?focus=${topMissedCategory.id}`;
   }, [topMissedCategory]);
 
   const percentage = maxPossible > 0 ? Math.round((totalScore / maxPossible) * 100) : 0;
@@ -530,7 +529,7 @@ export default function ResultScreen({
           )}
           {trainingHint && (
             <a href={trainingHref} onClick={() => trackEvent("training_recommendation_open", { focus: topMissedCategory?.id ?? "general", destination: trainingHref })} className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover">
-              Practice {topMissedCategory?.label ?? "this focus"}
+              Start a 30-second sprint
             </a>
           )}
         </div>
@@ -949,10 +948,10 @@ export default function ResultScreen({
           </a>
           <a
             href={challengeUrl}
-            onClick={() => trackEvent("result_next_action", { action: "challenge", mode, board_size: grid.length })}
+            onClick={() => trackEvent("result_next_action", { action: mode === "daily" ? "daily_challenge" : "challenge", mode, board_size: grid.length })}
             className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
           >
-            Open Challenge
+            {dailyChallengeLabel ? "Challenge Today&apos;s Daily" : "Open Challenge"}
           </a>
           {mode !== "daily" && (
             <a
@@ -961,6 +960,15 @@ export default function ResultScreen({
               className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
             >
               Play Today&apos;s Daily
+            </a>
+          )}
+          {mode === "daily" && (
+            <a
+              href="/daily/archive"
+              onClick={() => trackEvent("result_next_action", { action: "daily_archive", mode, board_size: grid.length })}
+              className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
+            >
+              Replay a Daily Board
             </a>
           )}
           <a
@@ -988,6 +996,15 @@ export default function ResultScreen({
         >
           Home
         </a>
+        {mode === "daily" && (
+          <a
+            href="/daily"
+            onClick={() => trackEvent("result_next_action", { action: "daily_return", mode, board_size: grid.length })}
+            className="rounded-xl bg-surface px-6 py-3 font-semibold transition hover:bg-surface-hover"
+          >
+            Return Tomorrow
+          </a>
+        )}
       </div>
     </div>
   );

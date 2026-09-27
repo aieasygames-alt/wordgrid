@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   title: "Boggle Cheat Sheet - Solver for After-Game Review",
   description:
     "Use this Boggle cheat sheet after a round to review valid words, missed high-score routes, Qu words, and common endings.",
-  alternates: { canonical: `${BASE_URL}/boggle-cheat/` },
+  alternates: { canonical: `${BASE_URL}/solver/` },
+  robots: { index: false, follow: true },
   openGraph: {
     title: "Boggle Cheat Sheet - Solver for After-Game Review",
     description:

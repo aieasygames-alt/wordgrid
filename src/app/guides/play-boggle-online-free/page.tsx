@@ -23,6 +23,13 @@ export default function PlayBoggleOnlineFreeGuide() {
       title="Play Boggle online free"
       description="Open a free WordGrid board in your browser. No download or account is required, and you can switch between timed practice, unlimited Zen, and Daily play."
       canonicalPath="/guides/play-boggle-online-free/"
+      focusTitle="Choose the right way to play"
+      focusCopy="Use this guide when you are deciding between a quick scored game, no-clock practice, or today's shared board. Each mode has a different reason to return."
+      focusSteps={[
+        "Choose Timed for a three-minute score challenge.",
+        "Choose Zen to explore routes without the clock.",
+        "Choose Daily when you want the same board as every other player that day.",
+      ]}
     />
   );
 }

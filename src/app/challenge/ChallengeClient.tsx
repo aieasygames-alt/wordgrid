@@ -55,6 +55,8 @@ export default function ChallengeClient() {
   const [entries, setEntries] = useState<FriendChallengeEntry[]>([]);
   const [name, setName] = useState("");
   const [saved, setSaved] = useState(false);
+  const [returnScore, setReturnScore] = useState<number | null>(null);
+  const [returnFound, setReturnFound] = useState<number | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -72,6 +74,8 @@ export default function ChallengeClient() {
       session: params.get("session"),
       date: params.get("date"),
     });
+    setReturnScore(parseNumber(params.get("yourScore")));
+    setReturnFound(parseNumber(params.get("yourFound")));
     if (parsedGrid) {
       const boardKey = challengeBoardKey(parsedGrid);
       const localEntries = getChallengeEntries(boardKey);
@@ -93,8 +97,14 @@ export default function ChallengeClient() {
   }, []);
 
   const playHref = useMemo(
-    () => (grid ? buildBoardUrl("/play", grid, { mode: meta.session ?? undefined, source: "challenge" }) : "/play"),
-    [grid, meta.session]
+    () => (grid ? buildBoardUrl("/play", grid, {
+      mode: meta.session ?? undefined,
+      source: "challenge",
+      returnTo: "/challenge",
+      target: meta.score ?? undefined,
+      date: meta.date ?? undefined,
+    }) : "/play"),
+    [grid, meta.session, meta.score, meta.date]
   );
   const solverHref = useMemo(
     () => (grid ? buildBoardUrl("/solver", grid) : "/solver"),
@@ -107,14 +117,16 @@ export default function ChallengeClient() {
     meta.score !== null && meta.max !== null ? Math.max(0, meta.max - meta.score) : null;
   const sessionLabel = formatSession(meta.session);
   const hasTargetScore = meta.score !== null;
+  const scoreToSave = returnScore ?? meta.score;
+  const foundToSave = returnFound ?? meta.found ?? 0;
   const saveLocalScore = () => {
-    if (!grid || meta.score === null) return;
+    if (!grid || scoreToSave === null) return;
     const playerName = name.trim() || "You";
     saveChallengeName(playerName);
     const entry = {
       name: playerName,
-      score: meta.score,
-      found: meta.found || 0,
+      score: scoreToSave,
+      found: foundToSave,
       playedAt: new Date().toISOString(),
     };
     setEntries(recordChallengeEntry(challengeBoardKey(grid), entry));
@@ -123,7 +135,7 @@ export default function ChallengeClient() {
     });
     setSaved(true);
     setTimeout(() => setSaved(false), 2200);
-    trackEvent("friend_challenge_score_saved", { board_size: boardSize });
+    trackEvent("friend_challenge_score_saved", { board_size: boardSize, source: returnScore !== null ? "played_challenge" : "shared_score" });
   };
 
   const shareUrl = useMemo(() => {
@@ -164,7 +176,7 @@ export default function ChallengeClient() {
                 {sessionLabel ? ` · ${sessionLabel}` : ""}
               </div>
               <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight">
-                Challenge
+                {meta.mode === "daily" ? "Daily Challenge" : "Challenge"}
               </h1>
               <p className="mt-4 max-w-2xl text-base sm:text-lg text-text-muted leading-relaxed">
                 {hasTargetScore
@@ -173,7 +185,7 @@ export default function ChallengeClient() {
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                <Link href={playHref} onClick={() => trackEvent("challenge_start", { board_size: boardSize })} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                <Link href={playHref} onClick={() => trackEvent("challenge_start", { board_size: boardSize, challenge_mode: meta.mode ?? "shared", has_target: hasTargetScore })} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
                   Play
                 </Link>
                 <Link href={solverHref} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
@@ -235,7 +247,7 @@ export default function ChallengeClient() {
               </div>
               {meta.date && (
                 <div className="mt-4 rounded-2xl bg-bg/60 px-4 py-3 text-sm text-text-muted">
-                  Shared on {meta.date} · {boardSize ? `${boardSize}x${boardSize}` : "board"}
+                  {meta.mode === "daily" ? `Daily board for ${meta.date}` : `Shared on ${meta.date}`} · {boardSize ? `${boardSize}x${boardSize}` : "board"}
                 </div>
               )}
               <div className="mt-4 rounded-2xl bg-bg/60 px-4 py-3 text-sm text-text-muted leading-relaxed">
@@ -277,12 +289,17 @@ export default function ChallengeClient() {
 
             <div className="rounded-3xl border border-primary/20 bg-primary/10 p-5 sm:p-6">
               <h2 className="text-2xl font-bold">Friend score board</h2>
-              <p className="mt-2 text-sm text-text-muted">Scores are saved in this browser. Share the scoreboard link after a score is present so friends can open the same grid.</p>
-              {meta.score !== null && (
+              <p className="mt-2 text-sm text-text-muted">Save your result, then share the scoreboard link so friends can play this exact board and add their own score.</p>
+              {scoreToSave !== null && (
                 <div className="mt-4 flex flex-col gap-2 sm:flex-row">
                   <input value={name} onChange={(event) => setName(event.target.value)} maxLength={24} placeholder="Your name" aria-label="Your challenge name" className="min-w-0 flex-1 rounded-xl border border-border bg-bg/70 px-3 py-2 text-sm outline-none focus:border-primary" />
-                  <button onClick={saveLocalScore} className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover">{saved ? "Score saved" : "Save score"}</button>
+                  <button onClick={saveLocalScore} className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover">{saved ? "Score saved" : returnScore !== null ? "Save my result" : "Save shared score"}</button>
                 </div>
+              )}
+              {returnScore !== null && meta.score !== null && (
+                <p className={`mt-3 text-sm font-semibold ${returnScore > meta.score ? "text-success" : "text-text-muted"}`}>
+                  {returnScore > meta.score ? `You beat the target by ${returnScore - meta.score} points.` : `${Math.max(0, meta.score - returnScore)} points to beat the target.`}
+                </p>
               )}
               <div className="mt-4 space-y-2">
                 {entries.length === 0 ? <p className="text-sm text-text-muted">No scores saved here yet.</p> : entries.slice(0, 10).map((entry, index) => (
@@ -307,7 +324,7 @@ export default function ChallengeClient() {
                   : "Start a fresh board to create a shareable challenge, then use the solver after your round."}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link href={playHref} onClick={() => trackEvent("challenge_start", { board_size: boardSize })} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
+                <Link href={playHref} onClick={() => trackEvent("challenge_start", { board_size: boardSize, challenge_mode: meta.mode ?? "shared", has_target: hasTargetScore })} className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
                   Play
                 </Link>
                 <Link href={solverHref} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">

@@ -295,6 +295,7 @@ const playClient = readFileSync(new URL("../src/app/play/PlayClient.tsx", import
 const indexableWordsSource = readFileSync(new URL("../src/lib/indexable-words.ts", import.meta.url), "utf8");
 const sitemapSource = readFileSync(new URL("../src/app/sitemap.ts", import.meta.url), "utf8");
 const redirectsSource = readFileSync(new URL("../public/_redirects", import.meta.url), "utf8");
+const onlinePlayGuide = readFileSync(new URL("../src/components/OnlinePlayGuide.tsx", import.meta.url), "utf8");
 const trailingSlashCanonicalPages = [
   "src/app/guides/boggle-dictionary/page.tsx",
   "src/app/guides/boggle-generator/page.tsx",
@@ -373,6 +374,17 @@ for (const page of trailingSlashCanonicalPages) {
   const canonical = source.match(/alternates:\s*\{\s*canonical:\s*["`]([^"`]+)["`]/)?.[1];
   if (!canonical?.endsWith("/")) {
     throw new Error(`Canonical URL must use a trailing slash: ${page}`);
+  }
+}
+
+for (const requiredCopy of [
+  "Start your first board in three steps",
+  "What to do after you play",
+  "Review missed routes",
+  "Need the full path, dictionary, and scoring rules before you begin?",
+]) {
+  if (!onlinePlayGuide.includes(requiredCopy)) {
+    throw new Error(`Online play guide must keep its distinct start-and-review intent: ${requiredCopy}`);
   }
 }
 

@@ -34,3 +34,7 @@ https://www.wordgrid.games/* https://wordgrid.games/:splat  301
 /guides/boggle-game-online /guides/boggle-word-game/ 301
 /guides/boggle-online-free/ /guides/play-boggle-online-free/ 301
 /guides/boggle-online-free /guides/play-boggle-online-free/ 301
+
+# Keep one strategy landing page for score-improvement intent.
+/guides/how-to-win-boggle/ /guides/word-grid-strategies/ 301
+/guides/how-to-win-boggle /guides/word-grid-strategies/ 301

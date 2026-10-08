@@ -150,7 +150,6 @@ if (unlistedExamples.length > 0) {
 const strategyPages = [
   "src/app/guides/boggle-strategy-guide/page.tsx",
   "src/app/guides/boggle-tips-tricks/page.tsx",
-  "src/app/guides/how-to-win-boggle/page.tsx",
   "src/app/guides/advanced-boggle-strategies/page.tsx",
   "src/app/guides/how-to-find-more-words/page.tsx",
   "src/app/guides/word-grid-strategies/page.tsx",
@@ -340,7 +339,7 @@ if (missingCoverageWords.length > 0) {
   throw new Error(`Coverage URLs must have indexable word pages: ${missingCoverageWords.join(", ")}`);
 }
 
-for (const legacyGuide of ["boggle-game-online", "boggle-online-free"]) {
+for (const legacyGuide of ["boggle-game-online", "boggle-online-free", "how-to-win-boggle"]) {
   if (sitemapSource.includes(`/guides/${legacyGuide}/`)) {
     throw new Error(`Merged guide must not appear in the sitemap: ${legacyGuide}`);
   }

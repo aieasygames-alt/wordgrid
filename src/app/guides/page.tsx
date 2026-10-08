@@ -87,15 +87,6 @@ const GUIDES = [
     date: "2026-06-28",
   },
   {
-    href: "/guides/how-to-win-boggle",
-    title: "How to Win at Boggle — Proven Strategies to Score Higher",
-    description:
-      "Learn how to win at Boggle with proven strategies from competitive players. Master word patterns, time management, grid scanning, and scoring optimization.",
-    category: "Intermediate",
-    readTime: "8 min read",
-    date: "2026-08-05",
-  },
-  {
     href: "/guides/boggle-tips-tricks",
     title: "Boggle Tips and Tricks — Quick Techniques to Find More Words",
     description:

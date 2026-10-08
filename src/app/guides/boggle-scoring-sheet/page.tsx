@@ -168,13 +168,9 @@ export default function BoggleScoringSheetGuide() {
               .
             </p>
             <p className="leading-relaxed mt-3">
-              If you want the tactical side next, move to{" "}
-              <Link href="/guides/how-to-win-boggle/" className="text-primary hover:underline">
-                how to win at Boggle
-              </Link>{" "}
-              or{" "}
+              For the tactical side next, move to the{" "}
               <Link href="/guides/word-grid-strategies/" className="text-primary hover:underline">
-                the WordGrid strategy guide
+                WordGrid score-improvement strategy guide
               </Link>
               .
             </p>
@@ -553,14 +549,14 @@ export default function BoggleScoringSheetGuide() {
                 </div>
               </Link>
               <Link
-                href="/guides/how-to-win-boggle/"
+                href="/guides/word-grid-strategies/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
-                  How to Win at Boggle →
+                  Score Improvement Strategy →
                 </div>
                 <div className="text-sm text-text-muted">
-                  Proven strategies for consistently high scores.
+                  Choose higher-value routes and build a repeatable review habit.
                 </div>
               </Link>
               <Link

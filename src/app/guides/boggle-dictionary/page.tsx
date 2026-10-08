@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Boggle Dictionary and Word Checker - Valid Words",
   description:
     "Check whether a 3-6 letter word is in the current WordGrid dictionary, then review the path and score rules for a finished board.",
-  alternates: { canonical: "/guides/boggle-dictionary" },
+  alternates: { canonical: "/guides/boggle-dictionary/" },
   keywords: [
     "boggle dictionary",
     "boggle word checker",
@@ -98,8 +98,8 @@ export default function BoggleDictionaryGuide() {
         </header>
 
         <GuideActionBar
-          primary={{ href: "/play", label: "Play a board", detail: "Start Timed or Zen practice." }}
-          secondary={{ href: "/solver", label: "Review a board", detail: "Find missed routes after play." }}
+          primary={{ href: "/play/", label: "Play a board", detail: "Start Timed or Zen practice." }}
+          secondary={{ href: "/solver/", label: "Review a board", detail: "Find missed routes after play." }}
           tertiary={{ href: "/words", label: "Browse words", detail: "Study current word lists." }}
           quaternary={{ href: "/guides/boggle-scoring-sheet/", label: "See scoring", detail: "Check the 1/2/4/6 point table." }}
         />
@@ -148,7 +148,7 @@ export default function BoggleDictionaryGuide() {
             <ol className="ml-4 list-decimal space-y-3 leading-relaxed">
               <li>Finish your Timed, Zen, or Daily board before checking answers.</li>
               <li>Use this checker for a word you are unsure about.</li>
-              <li>Open the <Link href="/solver" className="text-primary hover:underline">solver</Link> to inspect all valid routes from the full board.</li>
+              <li>Open the <Link href="/solver/" className="text-primary hover:underline">solver</Link> to inspect all valid routes from the full board.</li>
               <li>Study one current word family from the <Link href="/guides/boggle-word-lists/" className="text-primary hover:underline">word lists</Link> before your next board.</li>
             </ol>
           </section>

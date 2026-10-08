@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Boggle Rules for Beginners — How to Play WordGrid",
   description:
     "Learn the WordGrid Boggle-style rules: adjacent letters, valid words, the Qu tile, Timed and Zen modes, and scoring basics with examples.",
-  alternates: { canonical: "/guides/boggle-rules-beginners" },
+  alternates: { canonical: "/guides/boggle-rules-beginners/" },
   keywords: [
     "rules of boggle", "boggle rules", "how to play boggle",
     "rules for playing boggle", "boggle rules for beginners",
@@ -132,10 +132,10 @@ export default function BoggleRulesGuide() {
         </header>
 
         <GuideActionBar
-          primary={{ href: "/play", label: "Play the rules", detail: "Try a live board while the basics are fresh." }}
-          secondary={{ href: "/guides/boggle-scoring-sheet", label: "Learn scoring", detail: "See points by word length with examples." }}
+          primary={{ href: "/play/", label: "Play the rules", detail: "Try a live board while the basics are fresh." }}
+          secondary={{ href: "/guides/boggle-scoring-sheet/", label: "Learn scoring", detail: "See points by word length with examples." }}
           tertiary={{ href: "/words", label: "Study words", detail: "Build vocabulary and spot useful patterns." }}
-          quaternary={{ href: "/solver", label: "Review a board", detail: "Use Solver after you finish playing." }}
+          quaternary={{ href: "/solver/", label: "Review a board", detail: "Use Solver after you finish playing." }}
         />
 
         <div className="space-y-6 text-text">
@@ -465,13 +465,13 @@ export default function BoggleRulesGuide() {
             </p>
             <div className="flex gap-3">
               <a
-                href="/play"
+                href="/play/"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
                 Play a Free Game
               </a>
               <a
-                href="/daily"
+                href="/daily/"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
                 Daily board

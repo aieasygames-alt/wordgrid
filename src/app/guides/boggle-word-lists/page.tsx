@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Boggle Word Lists - Current WordGrid Study Lists",
   description:
     "Browse current WordGrid word lists by length and pattern, including 3-letter anchors, Qu words, S endings, ING endings, and high-scoring targets.",
-  alternates: { canonical: "/guides/boggle-word-lists" },
+  alternates: { canonical: "/guides/boggle-word-lists/" },
   keywords: [
     "boggle word lists",
     "boggle word list",
@@ -98,8 +98,8 @@ export default function BoggleWordListsGuide() {
 
         <GuideActionBar
           primary={{ href: "/words", label: "Browse all words", detail: "Open the current word-list hub." }}
-          secondary={{ href: "/play", label: "Play a board", detail: "Try a pattern in Timed or Zen." }}
-          tertiary={{ href: "/solver", label: "Review a board", detail: "Find missed routes after play." }}
+          secondary={{ href: "/play/", label: "Play a board", detail: "Try a pattern in Timed or Zen." }}
+          tertiary={{ href: "/solver/", label: "Review a board", detail: "Find missed routes after play." }}
           quaternary={{ href: "/guides/boggle-dictionary/", label: "Check a word", detail: "Verify dictionary membership." }}
         />
 
@@ -113,7 +113,7 @@ export default function BoggleWordListsGuide() {
             </p>
             <p>
               The best way to use a list is to learn one pattern, play a board,
-              then use the <Link href="/solver" className="text-primary hover:underline">solver</Link> to
+              then use the <Link href="/solver/" className="text-primary hover:underline">solver</Link> to
               review whether you missed similar routes. That turns vocabulary into
               a repeatable scanning habit.
             </p>

@@ -142,19 +142,19 @@ export default function BoggleWordGameGuide() {
               where to play online, and which deeper guide to open next.
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+              <Link href="/play/" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
                 Play free online
               </Link>
-              <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+              <Link href="/guides/boggle-rules-beginners/" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
                 Read full rules
               </Link>
-              <Link href="/guides/boggle-scoring-sheet" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+              <Link href="/guides/boggle-scoring-sheet/" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
                 Check scoring
               </Link>
             </div>
             <p className="leading-relaxed mt-3">
               New to the game? Start with{" "}
-              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+              <Link href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">
                 Boggle Rules for Beginners
               </Link>{" "}
               or{" "}
@@ -165,15 +165,15 @@ export default function BoggleWordGameGuide() {
             </p>
             <p className="leading-relaxed mt-3">
               Once you know the basics, the best companion pages are the{" "}
-              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+              <Link href="/guides/boggle-scoring-sheet/" className="text-primary hover:underline">
                 scoring sheet
               </Link>
               ,{" "}
-              <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+              <Link href="/guides/boggle-dictionary/" className="text-primary hover:underline">
                 dictionary guide
               </Link>
               , and{" "}
-              <Link href="/solver" className="text-primary hover:underline">
+              <Link href="/solver/" className="text-primary hover:underline">
                 solver
               </Link>
               .
@@ -204,14 +204,14 @@ export default function BoggleWordGameGuide() {
             </h2>
             <p className="leading-relaxed">
               Start a practice round on{" "}
-              <Link href="/play" className="text-primary hover:underline">
+              <Link href="/play/" className="text-primary hover:underline">
                 /play
               </Link>
               , or read the beginner rules page if you want a slower walkthrough
               first:
             </p>
             <p className="leading-relaxed mt-3">
-              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+              <Link href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">
                 Boggle Rules for Beginners
               </Link>{" "}
               ·{" "}
@@ -326,7 +326,7 @@ export default function BoggleWordGameGuide() {
             </p>
             <p className="leading-relaxed mt-3">
               For the exact point table and stronger score benchmarks, see the{" "}
-              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+              <Link href="/guides/boggle-scoring-sheet/" className="text-primary hover:underline">
                 Boggle scoring sheet
               </Link>
               .
@@ -377,7 +377,7 @@ export default function BoggleWordGameGuide() {
               </li>
             </ul>
             <p className="leading-relaxed mt-3">
-              <Link href="/play" className="text-primary hover:underline">
+              <Link href="/play/" className="text-primary hover:underline">
                 Play →
               </Link>
             </p>
@@ -469,13 +469,13 @@ export default function BoggleWordGameGuide() {
             </p>
             <div className="flex gap-3 flex-wrap">
               <Link
-                href="/play"
+                href="/play/"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
                 Play
               </Link>
               <Link
-                href="/daily"
+                href="/daily/"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
                 Daily
@@ -543,7 +543,7 @@ export default function BoggleWordGameGuide() {
                 </div>
               </Link>
               <Link
-                href="/play"
+                href="/play/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
@@ -576,13 +576,13 @@ export default function BoggleWordGameGuide() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">Start playing</h2>
               <div className="mt-4 grid gap-2">
-                <Link href="/play" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/play/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Play now
                 </Link>
-                <Link href="/daily" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/daily/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Daily board
                 </Link>
-                <Link href="/solver" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/solver/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Review solver
                 </Link>
               </div>
@@ -591,13 +591,13 @@ export default function BoggleWordGameGuide() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">Related guides</h2>
               <div className="mt-4 grid gap-2">
-                <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/guides/boggle-rules-beginners/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Rules for beginners
                 </Link>
                 <Link href="/guides/play-boggle-online-free/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Play online free
                 </Link>
-                <Link href="/guides/word-grid-strategies" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/guides/word-grid-strategies/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Score higher
                 </Link>
               </div>

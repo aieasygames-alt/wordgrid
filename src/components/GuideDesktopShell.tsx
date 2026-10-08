@@ -20,7 +20,7 @@ export function GuideDesktopShell({ children, rail }: GuideDesktopShellProps) {
                   pattern is still in your head.
                 </p>
                 <a
-                  href="/play"
+                  href="/play/"
                   className="mt-4 block rounded-xl bg-primary px-4 py-3 text-center text-sm font-semibold transition hover:bg-primary-hover"
                 >
                   Play Word Grid Free
@@ -64,7 +64,7 @@ export function GuideDesktopShell({ children, rail }: GuideDesktopShellProps) {
                   <a href="/guides/boggle-tips-tricks/" className="block text-primary hover:underline">
                     Tips and tricks
                   </a>
-                  <a href="/daily" className="block text-primary hover:underline">
+                  <a href="/daily/" className="block text-primary hover:underline">
                     Daily board
                   </a>
                 </div>

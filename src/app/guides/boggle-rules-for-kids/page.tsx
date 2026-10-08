@@ -122,10 +122,10 @@ export default function BoggleRulesForKidsGuide() {
         </header>
 
         <GuideActionBar
-          primary={{ href: "/play", label: "Start Zen practice", detail: "Play without a clock." }}
-          secondary={{ href: "/daily", label: "Try Daily", detail: "Use one shared board." }}
+          primary={{ href: "/play/", label: "Start Zen practice", detail: "Play without a clock." }}
+          secondary={{ href: "/daily/", label: "Try Daily", detail: "Use one shared board." }}
           tertiary={{ href: "/guides/boggle-rules-printable/", label: "Printable rules", detail: "Keep the path rules nearby." }}
-          quaternary={{ href: "/solver", label: "Review a board", detail: "Find routes after play." }}
+          quaternary={{ href: "/solver/", label: "Review a board", detail: "Find routes after play." }}
         />
 
         <div className="space-y-6 text-text">
@@ -137,13 +137,13 @@ export default function BoggleRulesForKidsGuide() {
               players, classrooms, and family game nights.
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+              <Link href="/play/" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
                 Play a practice board
               </Link>
               <Link href="/guides/boggle-rules-printable/" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
                 Open printable rules
               </Link>
-              <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+              <Link href="/guides/boggle-rules-beginners/" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
                 WordGrid rules
               </Link>
             </div>
@@ -153,11 +153,11 @@ export default function BoggleRulesForKidsGuide() {
             </p>
             <p className="leading-relaxed mt-3">
               For the full WordGrid rules and scoring reference, move next to{" "}
-              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+              <Link href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">
                 Boggle Rules for Beginners
               </Link>{" "}
               and the{" "}
-              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+              <Link href="/guides/boggle-scoring-sheet/" className="text-primary hover:underline">
                 scoring sheet
               </Link>
               .
@@ -517,13 +517,13 @@ export default function BoggleRulesForKidsGuide() {
             </p>
             <div className="flex gap-3 flex-wrap">
               <Link
-                href="/play"
+                href="/play/"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
                 Play
               </Link>
               <Link
-                href="/daily"
+                href="/daily/"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
                 Daily

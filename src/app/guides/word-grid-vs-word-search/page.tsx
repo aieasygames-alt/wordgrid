@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Word Grid vs Word Search vs Crossword: Key Differences",
   description:
     "Compare word grid games, word search puzzles, and crossword puzzles. Learn the rules, goals, and best free online option for each puzzle type before you play.",
-  alternates: { canonical: "/guides/word-grid-vs-word-search" },
+  alternates: { canonical: "/guides/word-grid-vs-word-search/" },
   keywords: [
     "word grid vs word search",
     "word grid vs crossword",
@@ -55,7 +55,7 @@ const comparison = [
     goal: "Find as many hidden words as possible by connecting adjacent letters.",
     input: "A square grid of letters, usually 4x4 or larger.",
     bestFor: "Fast pattern scanning, vocabulary practice, and score chasing.",
-    play: "/play",
+    play: "/play/",
   },
   {
     type: "Word search puzzle",
@@ -115,7 +115,7 @@ export default function WordGridVsWordSearchGuide() {
               </p>
               <p className="leading-relaxed">
                 If you want to play that style now, open{" "}
-                <Link href="/play" className="text-primary hover:underline">
+                <Link href="/play/" className="text-primary hover:underline">
                   WordGrid online
                 </Link>
                 . If you are comparing rules, the sections below make the differences
@@ -204,13 +204,13 @@ export default function WordGridVsWordSearchGuide() {
                   which words you missed.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2 text-sm">
-                  <Link href="/play" className="px-3 py-1.5 rounded-full bg-primary/15 text-primary hover:bg-primary/20 transition">
+                  <Link href="/play/" className="px-3 py-1.5 rounded-full bg-primary/15 text-primary hover:bg-primary/20 transition">
                     Play WordGrid
                   </Link>
-                  <Link href="/solver" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
+                  <Link href="/solver/" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
                     Word Grid Solver
                   </Link>
-                  <Link href="/guides/word-grid-vs-boggle" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
+                  <Link href="/guides/word-grid-vs-boggle/" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
                     Word Grid vs Boggle
                   </Link>
                 </div>
@@ -230,16 +230,16 @@ export default function WordGridVsWordSearchGuide() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">Related pages</h2>
               <div className="mt-4 grid gap-2">
-                <Link href="/play" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/play/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Play Word Grid Online
                 </Link>
-                <Link href="/guides/play-word-grid-online" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/guides/play-word-grid-online/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Play Word Grid Guide
                 </Link>
-                <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/guides/boggle-rules-beginners/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Rules for Beginners
                 </Link>
-                <Link href="/solver" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/solver/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Word Grid Solver
                 </Link>
               </div>

@@ -295,6 +295,25 @@ const playClient = readFileSync(new URL("../src/app/play/PlayClient.tsx", import
 const indexableWordsSource = readFileSync(new URL("../src/lib/indexable-words.ts", import.meta.url), "utf8");
 const sitemapSource = readFileSync(new URL("../src/app/sitemap.ts", import.meta.url), "utf8");
 const redirectsSource = readFileSync(new URL("../public/_redirects", import.meta.url), "utf8");
+const trailingSlashCanonicalPages = [
+  "src/app/guides/boggle-dictionary/page.tsx",
+  "src/app/guides/boggle-generator/page.tsx",
+  "src/app/guides/boggle-rules-beginners/page.tsx",
+  "src/app/guides/boggle-rules-for-kids/page.tsx",
+  "src/app/guides/boggle-rules-printable/page.tsx",
+  "src/app/guides/boggle-scoring-sheet/page.tsx",
+  "src/app/guides/boggle-solver/page.tsx",
+  "src/app/guides/boggle-variants/page.tsx",
+  "src/app/guides/boggle-word-game/page.tsx",
+  "src/app/guides/boggle-word-lists/page.tsx",
+  "src/app/guides/prefix-strategy/page.tsx",
+  "src/app/guides/qu-strategy/page.tsx",
+  "src/app/guides/suffix-strategy/page.tsx",
+  "src/app/guides/word-grid-strategies/page.tsx",
+  "src/app/guides/word-grid-vs-boggle/page.tsx",
+  "src/app/guides/word-grid-vs-word-search/page.tsx",
+  "src/app/guides/word-pattern-library/page.tsx",
+];
 
 if (!homePage.includes("three-minute timed board") || !homePage.includes("completed score as a target")) {
   throw new Error("Home metadata must describe the current timed and shared-challenge workflow.");
@@ -325,6 +344,14 @@ for (const legacyGuide of ["boggle-game-online", "boggle-online-free"]) {
   }
   if (!redirectsSource.includes(`/guides/${legacyGuide}/`)) {
     throw new Error(`Merged guide must keep its permanent redirect: ${legacyGuide}`);
+  }
+}
+
+for (const page of trailingSlashCanonicalPages) {
+  const source = readFileSync(new URL(`../${page}`, import.meta.url), "utf8");
+  const canonical = source.match(/alternates:\s*\{\s*canonical:\s*["`]([^"`]+)["`]/)?.[1];
+  if (!canonical?.endsWith("/")) {
+    throw new Error(`Canonical URL must use a trailing slash: ${page}`);
   }
 }
 

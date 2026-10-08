@@ -167,13 +167,13 @@ export default function WordListPage({ page }: WordListPageProps) {
             {page.patternTip}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href="/play" className="rounded-xl bg-primary px-4 py-2 font-semibold transition hover:bg-primary-hover">
+            <Link href="/play/" className="rounded-xl bg-primary px-4 py-2 font-semibold transition hover:bg-primary-hover">
               Practice on a board
             </Link>
-            <Link href="/solver" className="rounded-xl bg-surface px-4 py-2 font-semibold transition hover:bg-surface-hover">
+            <Link href="/solver/" className="rounded-xl bg-surface px-4 py-2 font-semibold transition hover:bg-surface-hover">
               Review with solver
             </Link>
-            <Link href="/guides/word-pattern-library" className="rounded-xl border border-border px-4 py-2 font-semibold text-text-muted transition hover:bg-surface hover:text-text">
+            <Link href="/guides/word-pattern-library/" className="rounded-xl border border-border px-4 py-2 font-semibold text-text-muted transition hover:bg-surface hover:text-text">
               Pattern library
             </Link>
           </div>
@@ -181,11 +181,11 @@ export default function WordListPage({ page }: WordListPageProps) {
         <aside className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
           <h2 className="text-lg font-semibold">Related word lists</h2>
           <div className="mt-4 grid gap-2 text-sm">
-            <Link href="/words/3-letter-boggle-words" className="text-primary hover:underline">3 letter Boggle words</Link>
-            <Link href="/words/4-letter-boggle-words" className="text-primary hover:underline">4 letter Boggle words</Link>
-            <Link href="/words/5-letter-boggle-words" className="text-primary hover:underline">5 letter Boggle words</Link>
-            <Link href="/words/words-with-qu" className="text-primary hover:underline">Words with Qu</Link>
-            <Link href="/words/high-scoring-boggle-words" className="text-primary hover:underline">High scoring Boggle words</Link>
+            <Link href="/words/3-letter-boggle-words/" className="text-primary hover:underline">3 letter Boggle words</Link>
+            <Link href="/words/4-letter-boggle-words/" className="text-primary hover:underline">4 letter Boggle words</Link>
+            <Link href="/words/5-letter-boggle-words/" className="text-primary hover:underline">5 letter Boggle words</Link>
+            <Link href="/words/words-with-qu/" className="text-primary hover:underline">Words with Qu</Link>
+            <Link href="/words/high-scoring-boggle-words/" className="text-primary hover:underline">High scoring Boggle words</Link>
           </div>
         </aside>
       </section>
@@ -229,13 +229,13 @@ export default function WordListPage({ page }: WordListPageProps) {
           solver to see whether those patterns appeared in places you missed.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link href="/guides/boggle-word-lists" className="rounded-xl bg-surface px-4 py-2 font-semibold transition hover:bg-surface-hover">
+          <Link href="/guides/boggle-word-lists/" className="rounded-xl bg-surface px-4 py-2 font-semibold transition hover:bg-surface-hover">
             Full Boggle word list
           </Link>
-          <Link href="/guides/most-common-boggle-words" className="rounded-xl bg-surface px-4 py-2 font-semibold transition hover:bg-surface-hover">
+          <Link href="/guides/most-common-boggle-words/" className="rounded-xl bg-surface px-4 py-2 font-semibold transition hover:bg-surface-hover">
             Most common words
           </Link>
-          <Link href="/daily" className="rounded-xl bg-primary px-4 py-2 font-semibold transition hover:bg-primary-hover">
+          <Link href="/daily/" className="rounded-xl bg-primary px-4 py-2 font-semibold transition hover:bg-primary-hover">
             Try today's board
           </Link>
         </div>

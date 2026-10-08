@@ -100,9 +100,9 @@ export default function BoggleVariantsGuide() {
         </header>
 
         <GuideActionBar
-          primary={{ href: "/play", label: "Start a board", detail: "Choose Timed or Zen practice." }}
-          secondary={{ href: "/daily", label: "Play Daily", detail: "Use today's shared board." }}
-          tertiary={{ href: "/solver", label: "Review a board", detail: "Find missed legal routes." }}
+          primary={{ href: "/play/", label: "Start a board", detail: "Choose Timed or Zen practice." }}
+          secondary={{ href: "/daily/", label: "Play Daily", detail: "Use today's shared board." }}
+          tertiary={{ href: "/solver/", label: "Review a board", detail: "Find missed legal routes." }}
           quaternary={{ href: "/guides/boggle-rules-printable/", label: "Read rules", detail: "Keep current scoring nearby." }}
         />
 

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Boggle Points & Scoring Chart — WordGrid Rules",
   description:
     "See WordGrid's Boggle-style points chart by word length, with scoring examples and a clear reference for every round.",
-  alternates: { canonical: "/guides/boggle-scoring-sheet" },
+  alternates: { canonical: "/guides/boggle-scoring-sheet/" },
   keywords: [
     "boggle scoring sheet", "boggle scoring table", "boggle points system",
     "how does boggle scoring work", "boggle point values", "boggle score calculation",
@@ -158,11 +158,11 @@ export default function BoggleScoringSheetGuide() {
             </p>
             <p className="leading-relaxed mt-3">
               If you are still learning the basics, start with{" "}
-              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+              <Link href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">
                 Boggle rules for beginners
               </Link>
               . If you want to check missed words after a round, use the{" "}
-              <Link href="/guides/boggle-solver" className="text-primary hover:underline">
+              <Link href="/guides/boggle-solver/" className="text-primary hover:underline">
                 solver guide
               </Link>
               .
@@ -173,7 +173,7 @@ export default function BoggleScoringSheetGuide() {
                 how to win at Boggle
               </Link>{" "}
               or{" "}
-              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+              <Link href="/guides/word-grid-strategies/" className="text-primary hover:underline">
                 the WordGrid strategy guide
               </Link>
               .
@@ -445,7 +445,7 @@ export default function BoggleScoringSheetGuide() {
                   Compare your score to the full board after the game and see where the points were hiding.
                 </p>
               </Link>
-              <Link href="/play" className="block rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">
+              <Link href="/play/" className="block rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">
                 <div className="font-semibold text-primary">Practice live</div>
                 <p className="mt-1 text-sm text-text-muted">
                   Try a fresh board and apply the length-first scoring approach right away.
@@ -513,13 +513,13 @@ export default function BoggleScoringSheetGuide() {
             </p>
             <div className="flex gap-3 flex-wrap">
               <Link
-                href="/play"
+                href="/play/"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
                 Play
               </Link>
               <Link
-                href="/daily"
+                href="/daily/"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
                 Daily
@@ -586,7 +586,7 @@ export default function BoggleScoringSheetGuide() {
                 </div>
               </Link>
               <Link
-                href="/play"
+                href="/play/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Word Grid Pattern Library — Prefixes, Suffixes & Qu",
   description:
     "Learn the most useful word grid patterns: prefixes, suffixes, Qu words, plurals, and word families. A practical guide for spotting more words faster.",
-  alternates: { canonical: "/guides/word-pattern-library" },
+  alternates: { canonical: "/guides/word-pattern-library/" },
   keywords: [
     "word grid patterns",
     "boggle word patterns",
@@ -171,13 +171,13 @@ export default function WordPatternLibraryPage() {
                 <SummaryStat label="Score boost" value="5+ letters" />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
+                <Link href="/play/" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
                   Play
                 </Link>
                 <Link href="/words" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                   Words
                 </Link>
-                <Link href="/solver" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+                <Link href="/solver/" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                   Open solver
                 </Link>
               </div>
@@ -239,19 +239,19 @@ export default function WordPatternLibraryPage() {
         <section className="mt-8 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
           <h2 className="text-2xl font-semibold">Pattern drill shortcuts</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <Link href="/guides/prefix-strategy" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/guides/prefix-strategy/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="font-semibold text-primary">Prefixes</div>
               <p className="mt-1 text-sm text-text-muted">RE, UN, IN, PRE</p>
             </Link>
-            <Link href="/guides/suffix-strategy" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/guides/suffix-strategy/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="font-semibold text-primary">Suffixes</div>
               <p className="mt-1 text-sm text-text-muted">ING, ED, ER, LY</p>
             </Link>
-            <Link href="/guides/qu-strategy" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/guides/qu-strategy/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="font-semibold text-primary">Qu</div>
               <p className="mt-1 text-sm text-text-muted">QUI, QUA, QUE, QUO</p>
             </Link>
-            <Link href="/words/words-with-qu" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/words/words-with-qu/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="font-semibold text-primary">Qu words</div>
               <p className="mt-1 text-sm text-text-muted">Study the live list</p>
             </Link>
@@ -269,17 +269,17 @@ export default function WordPatternLibraryPage() {
             </div>
           </div>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
-            <Link href="/guides/prefix-strategy" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/guides/prefix-strategy/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="text-xs uppercase tracking-[0.2em] text-text-dim">Prefix guide</div>
               <div className="mt-1 font-semibold text-text">Prefix Strategy</div>
               <p className="mt-2 text-sm text-text-muted leading-relaxed">RE-, UN-, IN-, PRE- and how to turn one stem into a family.</p>
             </Link>
-            <Link href="/guides/suffix-strategy" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/guides/suffix-strategy/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="text-xs uppercase tracking-[0.2em] text-text-dim">Suffix guide</div>
               <div className="mt-1 font-semibold text-text">Suffix Strategy</div>
               <p className="mt-2 text-sm text-text-muted leading-relaxed">-ING, -ED, -ER, -LY, and the fastest ways to extend a base word.</p>
             </Link>
-            <Link href="/guides/qu-strategy" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/guides/qu-strategy/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="text-xs uppercase tracking-[0.2em] text-text-dim">Qu guide</div>
               <div className="mt-1 font-semibold text-text">Qu Strategy</div>
               <p className="mt-2 text-sm text-text-muted leading-relaxed">A special-case tile that deserves first-pass attention on every board.</p>
@@ -392,13 +392,13 @@ export default function WordPatternLibraryPage() {
               review the archive, and come back with one pattern to improve.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
-              <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
+              <Link href="/play/" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">
                 Play a round
               </Link>
-              <Link href="/stats" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+              <Link href="/stats/" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                 Open stats
               </Link>
-              <Link href="/daily" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+              <Link href="/daily/" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                 Daily
               </Link>
             </div>

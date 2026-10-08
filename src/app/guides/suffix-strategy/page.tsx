@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Suffix Strategy for Word Grid — ING, ED, ER & LY",
   description:
     "Learn suffix strategy for word grid and Boggle-style puzzles. Extend base words with -ING, -ED, -ER, -LY, and plural endings for more points.",
-  alternates: { canonical: "/guides/suffix-strategy" },
+  alternates: { canonical: "/guides/suffix-strategy/" },
   keywords: [
     "suffix strategy",
     "word grid suffixes",
@@ -109,9 +109,9 @@ export default function SuffixStrategyPage() {
             Practice suffix hunting in a live round, then open the archive to see how often long stems and endings show up together.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play</Link>
-            <Link href="/guides/word-pattern-library" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Pattern library</Link>
-            <Link href="/stats" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Stats</Link>
+            <Link href="/play/" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play</Link>
+            <Link href="/guides/word-pattern-library/" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Pattern library</Link>
+            <Link href="/stats/" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Stats</Link>
           </div>
         </section>
       </GuideDesktopShell>

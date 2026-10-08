@@ -58,10 +58,10 @@ export default function BoggleRulesPrintableGuide() {
 
           <div className="print:hidden">
             <GuideActionBar
-              primary={{ href: "/play", label: "Play a board", detail: "Use the rules in a live game" }}
-              secondary={{ href: "/guides/boggle-dictionary", label: "Check a word", detail: "Confirm a current entry" }}
-              tertiary={{ href: "/guides/boggle-scoring-sheet", label: "See scoring", detail: "Read the full points guide" }}
-              quaternary={{ href: "/solver", label: "Review a board", detail: "Find routes after play" }}
+              primary={{ href: "/play/", label: "Play a board", detail: "Use the rules in a live game" }}
+              secondary={{ href: "/guides/boggle-dictionary/", label: "Check a word", detail: "Confirm a current entry" }}
+              tertiary={{ href: "/guides/boggle-scoring-sheet/", label: "See scoring", detail: "Read the full points guide" }}
+              quaternary={{ href: "/solver/", label: "Review a board", detail: "Find routes after play" }}
             />
           </div>
 

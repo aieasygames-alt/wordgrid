@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Word Grid vs Boggle: What's the Difference?",
   description:
     "Boggle was invented in 1972. Word grid games took the concept online. Here's how they compare — the rules, scoring, and what playing online actually changes.",
-  alternates: { canonical: "/guides/word-grid-vs-boggle" },
+  alternates: { canonical: "/guides/word-grid-vs-boggle/" },
   openGraph: {
     title: "Word Grid vs Boggle: What's the Difference?",
     description:
@@ -72,9 +72,9 @@ export default function WordGridVsBoggleGuide() {
             </header>
 
             <GuideActionBar
-              primary={{ href: "/play", label: "Play WordGrid", detail: "Start a fresh board." }}
-              secondary={{ href: "/daily", label: "Play Daily", detail: "Try today's shared board." }}
-              tertiary={{ href: "/solver", label: "Open solver", detail: "Review a finished board." }}
+              primary={{ href: "/play/", label: "Play WordGrid", detail: "Start a fresh board." }}
+              secondary={{ href: "/daily/", label: "Play Daily", detail: "Try today's shared board." }}
+              tertiary={{ href: "/solver/", label: "Open solver", detail: "Review a finished board." }}
               quaternary={{ href: "/guides/boggle-rules-beginners/", label: "Read rules", detail: "Check valid paths and scoring." }}
             />
 
@@ -92,26 +92,26 @@ export default function WordGridVsBoggleGuide() {
               <p className="leading-relaxed">
                 If you already know the difference and just want to play, go straight
                 to{" "}
-                <a href="/play" className="text-primary hover:underline">
+                <a href="/play/" className="text-primary hover:underline">
                   /play
                 </a>
                 . If you want the rules first, try{" "}
-                <a href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                <a href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">
                   Boggle Rules for Beginners
                 </a>
                 .
               </p>
               <p className="leading-relaxed">
                 If you want the full modern workflow after that, add the{" "}
-                <a href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                <a href="/guides/boggle-scoring-sheet/" className="text-primary hover:underline">
                   scoring sheet
                 </a>
                 ,{" "}
-                <a href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                <a href="/guides/boggle-dictionary/" className="text-primary hover:underline">
                   dictionary guide
                 </a>
                 , and{" "}
-                <a href="/solver" className="text-primary hover:underline">
+                <a href="/solver/" className="text-primary hover:underline">
                   solver
                 </a>
                 .
@@ -186,13 +186,13 @@ export default function WordGridVsBoggleGuide() {
               <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
                 <h2 className="text-xl font-semibold mb-2">Best next pages</h2>
                 <div className="flex flex-wrap gap-2 text-sm">
-                  <a href="/guides/play-word-grid-online" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
+                  <a href="/guides/play-word-grid-online/" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
                     Play Word Grid Online
                   </a>
                   <a href="/guides/play-boggle-online-free/" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
                     Play Boggle Online Free
                   </a>
-                  <a href="/guides/boggle-rules-beginners" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
+                  <a href="/guides/boggle-rules-beginners/" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
                     Boggle Rules for Beginners
                   </a>
                 </div>
@@ -212,13 +212,13 @@ export default function WordGridVsBoggleGuide() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">Desktop tools</h2>
               <div className="mt-4 grid gap-2">
-                <a href="/play" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <a href="/play/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Play now
                 </a>
-                <a href="/solver" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <a href="/solver/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Open solver
                 </a>
-                <a href="/daily" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <a href="/daily/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Daily board
                 </a>
               </div>
@@ -227,13 +227,13 @@ export default function WordGridVsBoggleGuide() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">What to read next</h2>
               <div className="mt-4 grid gap-2">
-                <a href="/guides/how-to-find-more-words" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <a href="/guides/how-to-find-more-words/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Find more words
                 </a>
-                <a href="/guides/word-grid-strategies" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <a href="/guides/word-grid-strategies/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Score higher
                 </a>
-                <a href="/guides/word-pattern-library" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <a href="/guides/word-pattern-library/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Pattern library
                 </a>
               </div>

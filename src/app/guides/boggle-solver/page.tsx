@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Boggle Solver Guide — Find All Words Fast",
   description:
     "Learn how to use a Boggle solver after a round to find every word, compare scores, and study missed patterns.",
-  alternates: { canonical: "/guides/boggle-solver" },
+  alternates: { canonical: "/guides/boggle-solver/" },
   keywords: [
     "word grid solver", "boggle solver", "boggle word finder", "boggle cheat", "boggle helper",
     "boggle grid solver", "boggle anagram solver", "boggle word search",
@@ -130,19 +130,19 @@ export default function BoggleSolverGuide() {
         </header>
 
         <GuideActionBar
-          primary={{ href: "/solver", label: "Open solver", detail: "Enter a 4×4, 5×5, or 6×6 board." }}
-          secondary={{ href: "/play", label: "Play first", detail: "Finish a clean practice board." }}
-          tertiary={{ href: "/daily", label: "Try Daily", detail: "Review today's shared board." }}
+          primary={{ href: "/solver/", label: "Open solver", detail: "Enter a 4×4, 5×5, or 6×6 board." }}
+          secondary={{ href: "/play/", label: "Play first", detail: "Finish a clean practice board." }}
+          tertiary={{ href: "/daily/", label: "Try Daily", detail: "Review today's shared board." }}
           quaternary={{ href: "/guides/boggle-dictionary/", label: "Check dictionary", detail: "Learn what the solver accepts." }}
         />
 
         <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/solver/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="font-semibold text-primary">Open solver</div>
               <p className="mt-1 text-sm text-text-muted">Use the live tool now.</p>
             </Link>
-            <Link href="/play" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/play/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="font-semibold text-primary">Play first</div>
               <p className="mt-1 text-sm text-text-muted">Finish a board before review.</p>
             </Link>
@@ -150,7 +150,7 @@ export default function BoggleSolverGuide() {
               <div className="font-semibold text-primary">Words</div>
               <p className="mt-1 text-sm text-text-muted">Search the missed answers.</p>
             </Link>
-            <Link href="/guides/most-common-boggle-words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+            <Link href="/guides/most-common-boggle-words/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
               <div className="font-semibold text-primary">Common words</div>
               <p className="mt-1 text-sm text-text-muted">Focus your review on frequent finds.</p>
             </Link>
@@ -168,56 +168,56 @@ export default function BoggleSolverGuide() {
             </p>
             <p className="leading-relaxed mt-3">
               If you want the tool itself, open the{" "}
-              <Link href="/solver" className="text-primary hover:underline">
+              <Link href="/solver/" className="text-primary hover:underline">
                 free online Boggle solver
               </Link>
               . This guide explains when to use it, what the results mean, and
               how to turn a solved board into better scanning habits.
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <Link href="/solver" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
+              <Link href="/solver/" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
                 Open live solver
               </Link>
-              <Link href="/play" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+              <Link href="/play/" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
                 Play first
               </Link>
-              <Link href="/daily" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+              <Link href="/daily/" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
                 Try Daily
               </Link>
             </div>
             <p className="leading-relaxed mt-3">
-              <Link href="/solver" className="text-primary hover:underline">
+              <Link href="/solver/" className="text-primary hover:underline">
                 Open the live solver
               </Link>{" "}
               to review a finished board, or{" "}
-              <Link href="/play" className="text-primary hover:underline">
+              <Link href="/play/" className="text-primary hover:underline">
                 play first
               </Link>{" "}
               if you want a clean round before analysis.
             </p>
             <p className="leading-relaxed mt-3">
               The strongest workflow is simple: learn the{" "}
-              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+              <Link href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">
                 rules
               </Link>
               , understand{" "}
-              <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+              <Link href="/guides/boggle-scoring-sheet/" className="text-primary hover:underline">
                 scoring
               </Link>
               , then use the solver after the clock ends.
             </p>
             <p className="leading-relaxed mt-3">
-              <Link href="/solver" className="text-primary hover:underline">
+              <Link href="/solver/" className="text-primary hover:underline">
                 Live solver →
               </Link>
             </p>
             <p className="leading-relaxed mt-3">
               If you want to build the right habit first, start with{" "}
-              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+              <Link href="/guides/most-common-boggle-words/" className="text-primary hover:underline">
                 Most Common Boggle Words
               </Link>{" "}
               or{" "}
-              <Link href="/guides/word-grid-strategies" className="text-primary hover:underline">
+              <Link href="/guides/word-grid-strategies/" className="text-primary hover:underline">
                 Word Grid Strategies
               </Link>
               .
@@ -241,12 +241,12 @@ export default function BoggleSolverGuide() {
           <section>
             <p className="leading-relaxed">
               If you are still learning the game, start with{" "}
-              <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+              <Link href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">
                 Boggle Rules for Beginners
               </Link>
               . If you want the high-frequency words that matter most while
               solving, open{" "}
-              <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+              <Link href="/guides/most-common-boggle-words/" className="text-primary hover:underline">
                 Most Common Boggle Words
               </Link>
               .
@@ -287,10 +287,10 @@ export default function BoggleSolverGuide() {
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
-                ["Play", "/play", "Finish a clean board without looking up answers."],
-                ["Score", "/guides/boggle-scoring-sheet", "Check whether missed words were low-value or high-value."],
-                ["Check", "/guides/boggle-dictionary", "Confirm what counts as a valid Boggle word."],
-                ["Solve", "/solver", "Find every word and choose one pattern to practice next."],
+                ["Play", "/play/", "Finish a clean board without looking up answers."],
+                ["Score", "/guides/boggle-scoring-sheet/", "Check whether missed words were low-value or high-value."],
+                ["Check", "/guides/boggle-dictionary/", "Confirm what counts as a valid Boggle word."],
+                ["Solve", "/solver/", "Find every word and choose one pattern to practice next."],
               ].map(([title, href, copy]) => (
                 <Link key={title} href={href} className="rounded-xl border border-border bg-surface/50 p-4 hover:bg-surface transition">
                   <h3 className="font-semibold text-primary">{title}</h3>
@@ -372,7 +372,7 @@ export default function BoggleSolverGuide() {
                   Pair solver results with common words by letter and high-value endings.
                 </p>
               </Link>
-              <Link href="/solver" className="block rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">
+              <Link href="/solver/" className="block rounded-xl border border-primary/20 bg-primary/10 p-4 hover:bg-primary/15 transition">
                 <div className="font-semibold text-primary">Use the live solver</div>
                 <p className="mt-1 text-sm text-text-muted">
                   Paste a board, see every valid word, and turn the result into a practice review.
@@ -586,13 +586,13 @@ export default function BoggleSolverGuide() {
             </p>
             <div className="flex gap-3 flex-wrap">
               <Link
-                href="/play"
+                href="/play/"
                 className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
               >
                 Play
               </Link>
               <Link
-                href="/daily"
+                href="/daily/"
                 className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
               >
                 Daily
@@ -604,7 +604,7 @@ export default function BoggleSolverGuide() {
             <h2 className="text-lg font-semibold mb-3">Next Pages</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               <Link
-                href="/guides/boggle-generator"
+                href="/guides/boggle-generator/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
@@ -615,7 +615,7 @@ export default function BoggleSolverGuide() {
                 </div>
               </Link>
               <Link
-                href="/guides/word-grid-vs-boggle"
+                href="/guides/word-grid-vs-boggle/"
                 className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
               >
                 <div className="font-semibold text-primary">
@@ -709,13 +709,13 @@ export default function BoggleSolverGuide() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">Open next</h2>
               <div className="mt-4 grid gap-2">
-                <Link href="/play" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/play/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Play first
                 </Link>
-                <Link href="/daily" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/daily/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Daily board
                 </Link>
-                <Link href="/guides/most-common-boggle-words" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/guides/most-common-boggle-words/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Word patterns
                 </Link>
               </div>

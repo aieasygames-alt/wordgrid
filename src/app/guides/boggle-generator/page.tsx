@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Boggle Generator - Create Free Practice Boards",
   description:
     "Create a fresh 4x4, 5x5, or 6x6 WordGrid practice board in your browser, then review valid routes with the free solver.",
-  alternates: { canonical: "/guides/boggle-generator" },
+  alternates: { canonical: "/guides/boggle-generator/" },
   keywords: [
     "boggle generator",
     "boggle board generator",
@@ -110,9 +110,9 @@ export default function BoggleGeneratorGuide() {
         </header>
 
         <GuideActionBar
-          primary={{ href: "/play", label: "Start a board", detail: "Choose Timed or Zen practice." }}
-          secondary={{ href: "/daily", label: "Play Daily", detail: "Use today's shared board." }}
-          tertiary={{ href: "/solver", label: "Open solver", detail: "Review a finished grid." }}
+          primary={{ href: "/play/", label: "Start a board", detail: "Choose Timed or Zen practice." }}
+          secondary={{ href: "/daily/", label: "Play Daily", detail: "Use today's shared board." }}
+          tertiary={{ href: "/solver/", label: "Open solver", detail: "Review a finished grid." }}
           quaternary={{ href: "/guides/boggle-rules-printable/", label: "Read rules", detail: "Check legal routes and scoring." }}
         />
 
@@ -126,7 +126,7 @@ export default function BoggleGeneratorGuide() {
             </p>
             <p>
               The reliable practice loop is simple: play before looking up
-              answers, enter the finished layout into the <Link href="/solver" className="text-primary hover:underline">solver</Link>,
+              answers, enter the finished layout into the <Link href="/solver/" className="text-primary hover:underline">solver</Link>,
               then study one missed route or word pattern on your next board.
             </p>
           </section>

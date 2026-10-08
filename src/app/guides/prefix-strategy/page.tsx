@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Prefix Strategy for Word Grid — RE, UN, IN & PRE",
   description:
     "Learn how to use prefixes in word grid and Boggle-style puzzles. Scan RE-, UN-, IN-, PRE-, and other common starts to find more words faster.",
-  alternates: { canonical: "/guides/prefix-strategy" },
+  alternates: { canonical: "/guides/prefix-strategy/" },
   keywords: [
     "prefix strategy",
     "word grid prefixes",
@@ -106,8 +106,8 @@ export default function PrefixStrategyPage() {
             Practice this in the live game, then review the archive to see which boards gave you the strongest prefix families.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play</Link>
-            <Link href="/guides/word-pattern-library" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Pattern library</Link>
+            <Link href="/play/" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play</Link>
+            <Link href="/guides/word-pattern-library/" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Pattern library</Link>
             <Link href="/daily/archive" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Archive</Link>
           </div>
         </section>

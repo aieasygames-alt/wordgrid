@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Word Grid Strategies — Score Higher, Faster",
   description:
     "Advanced word grid strategy for faster scoring, better time management, and stronger pattern scanning.",
-  alternates: { canonical: "/guides/word-grid-strategies" },
+  alternates: { canonical: "/guides/word-grid-strategies/" },
   openGraph: {
     title: "Word Grid Strategies — Score Higher, Faster",
     description:
@@ -64,7 +64,7 @@ export default function Guide2() {
 
             <section className="mb-6 rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                <Link href="/play" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+                <Link href="/play/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
                   <div className="font-semibold text-primary">Play</div>
                   <p className="mt-1 text-sm text-text-muted">Try the strategy on a live board.</p>
                 </Link>
@@ -72,11 +72,11 @@ export default function Guide2() {
                   <div className="font-semibold text-primary">Words</div>
                   <p className="mt-1 text-sm text-text-muted">Study common and high-value words.</p>
                 </Link>
-                <Link href="/solver" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+                <Link href="/solver/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
                   <div className="font-semibold text-primary">Solver</div>
                   <p className="mt-1 text-sm text-text-muted">Review missed patterns after play.</p>
                 </Link>
-                <Link href="/guides/most-common-boggle-words" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
+                <Link href="/guides/most-common-boggle-words/" className="rounded-2xl bg-bg/60 p-4 hover:bg-bg/80 transition">
                   <div className="font-semibold text-primary">Common words</div>
                   <p className="mt-1 text-sm text-text-muted">Use frequency to guide scanning.</p>
                 </Link>
@@ -87,41 +87,41 @@ export default function Guide2() {
               <p className="leading-relaxed">
                 If you are building toward higher scores, the two best companion pages
                 are{" "}
-                <Link href="/guides/how-to-find-more-words" className="text-primary hover:underline">
+                <Link href="/guides/how-to-find-more-words/" className="text-primary hover:underline">
                   How to Find More Words
                 </Link>{" "}
                 and{" "}
-                <Link href="/guides/most-common-boggle-words" className="text-primary hover:underline">
+                <Link href="/guides/most-common-boggle-words/" className="text-primary hover:underline">
                   Most Common Boggle Words
                 </Link>
                 . Use them together with the live game on{" "}
-                <Link href="/play" className="text-primary hover:underline">
+                <Link href="/play/" className="text-primary hover:underline">
                   /play
                 </Link>
                 .
               </p>
               <p className="leading-relaxed">
                 If you are still learning the rules, step back to{" "}
-                <Link href="/guides/boggle-rules-beginners" className="text-primary hover:underline">
+                <Link href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">
                   Boggle Rules for Beginners
                 </Link>
                 . If you want the browser-game wording, try{" "}
-                <Link href="/guides/play-word-grid-online" className="text-primary hover:underline">
+                <Link href="/guides/play-word-grid-online/" className="text-primary hover:underline">
                   Play Word Grid Online
                 </Link>
                 .
               </p>
               <p className="leading-relaxed">
                 To translate strategy into score gains, keep the{" "}
-                <Link href="/guides/boggle-scoring-sheet" className="text-primary hover:underline">
+                <Link href="/guides/boggle-scoring-sheet/" className="text-primary hover:underline">
                   scoring sheet
                 </Link>
                 ,{" "}
-                <Link href="/guides/boggle-dictionary" className="text-primary hover:underline">
+                <Link href="/guides/boggle-dictionary/" className="text-primary hover:underline">
                   dictionary guide
                 </Link>
                 , and{" "}
-                <Link href="/solver" className="text-primary hover:underline">
+                <Link href="/solver/" className="text-primary hover:underline">
                   solver
                 </Link>
                 in the same review cycle.
@@ -213,13 +213,13 @@ export default function Guide2() {
               </p>
               <div className="flex gap-3 flex-wrap">
                 <a
-                  href="/daily"
+                  href="/daily/"
                   className="px-6 py-3 bg-primary hover:bg-primary-hover transition rounded-xl font-semibold"
                 >
                   Daily board
                 </a>
                 <a
-                  href="/guides/how-to-find-more-words"
+                  href="/guides/how-to-find-more-words/"
                   className="px-6 py-3 bg-surface hover:bg-surface-hover transition rounded-xl font-semibold"
                 >
                   More Tips
@@ -238,13 +238,13 @@ export default function Guide2() {
             <div className="mt-8 border-t border-border pt-6 max-w-4xl">
               <h2 className="text-lg font-semibold mb-3">Best Next Pages</h2>
               <div className="grid gap-3 sm:grid-cols-2">
-                <Link href="/guides/boggle-tips-tricks" className="block bg-surface/50 hover:bg-surface transition rounded-2xl p-4">
+                <Link href="/guides/boggle-tips-tricks/" className="block bg-surface/50 hover:bg-surface transition rounded-2xl p-4">
                   <div className="font-semibold text-primary">Boggle Tips and Tricks</div>
                   <p className="text-sm text-text-muted mt-1">
                     Quick tactical habits you can use inside a live round.
                   </p>
                 </Link>
-                <Link href="/guides/most-common-boggle-words" className="block bg-surface/50 hover:bg-surface transition rounded-2xl p-4">
+                <Link href="/guides/most-common-boggle-words/" className="block bg-surface/50 hover:bg-surface transition rounded-2xl p-4">
                   <div className="font-semibold text-primary">Most Common Boggle Words</div>
                   <p className="text-sm text-text-muted mt-1">
                     Frequency list that supports the scoring strategy in this guide.
@@ -266,13 +266,13 @@ export default function Guide2() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">Quick drills</h2>
               <div className="mt-4 grid gap-2">
-                <a href="/play" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <a href="/play/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Practice Play
                 </a>
-                <a href="/daily" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <a href="/daily/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Daily Challenge
                 </a>
-                <a href="/solver" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <a href="/solver/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Review Solver
                 </a>
               </div>
@@ -281,13 +281,13 @@ export default function Guide2() {
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
               <h2 className="text-lg font-semibold text-text">Related reading</h2>
               <div className="mt-4 grid gap-2">
-                <Link href="/guides/how-to-find-more-words" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/guides/how-to-find-more-words/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Find more words
                 </Link>
-                <Link href="/guides/word-pattern-library" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/guides/word-pattern-library/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Pattern library
                 </Link>
-                <Link href="/guides/boggle-strategy-guide" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/guides/boggle-strategy-guide/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Competitive guide
                 </Link>
               </div>

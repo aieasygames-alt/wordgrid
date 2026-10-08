@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Qu Strategy for Word Grid — Find Qu Words Faster",
   description:
     "Learn Qu strategy for word grid and Boggle-style puzzles. Spot Qu first, connect vowels fast, and find more high-value words.",
-  alternates: { canonical: "/guides/qu-strategy" },
+  alternates: { canonical: "/guides/qu-strategy/" },
   keywords: [
     "Qu strategy",
     "word grid Qu",
@@ -109,9 +109,9 @@ export default function QuStrategyPage() {
             Use this guide with the pattern library, then practice in the daily challenge to see whether Qu boards feel easier to decode.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link href="/play" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play</Link>
-            <Link href="/guides/word-pattern-library" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Pattern library</Link>
-            <Link href="/daily" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Daily</Link>
+            <Link href="/play/" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold">Play</Link>
+            <Link href="/guides/word-pattern-library/" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Pattern library</Link>
+            <Link href="/daily/" className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">Daily</Link>
           </div>
         </section>
       </GuideDesktopShell>

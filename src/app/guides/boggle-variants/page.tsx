@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Boggle Variants and WordGrid Practice Modes",
   description:
     "Explore WordGrid's current Timed, Zen, and Daily modes, plus offline Boggle-style variation ideas for groups, classrooms, and solo practice.",
-  alternates: { canonical: "/guides/boggle-variants" },
+  alternates: { canonical: "/guides/boggle-variants/" },
   keywords: [
     "boggle variants",
     "boggle variations",

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Boggle Word Game: Rules, Scoring, and Free Online Play",
   description:
     "Master the Boggle-style word game. Learn current WordGrid rules and scoring, then play free online with Timed, Zen, or Daily boards.",
-  alternates: { canonical: "/guides/boggle-word-game" },
+  alternates: { canonical: "/guides/boggle-word-game/" },
   keywords: [
     "boggle word game", "boggle word game rules", "boggle word game online",
     "boggle word game scoring", "how to play boggle word game", "boggle word game instructions",
@@ -158,7 +158,7 @@ export default function BoggleWordGameGuide() {
                 Boggle Rules for Beginners
               </Link>{" "}
               or{" "}
-              <Link href="/guides/play-boggle-online-free" className="text-primary hover:underline">
+              <Link href="/guides/play-boggle-online-free/" className="text-primary hover:underline">
                 Play Boggle Online Free
               </Link>
               .
@@ -215,7 +215,7 @@ export default function BoggleWordGameGuide() {
                 Boggle Rules for Beginners
               </Link>{" "}
               ·{" "}
-              <Link href="/guides/play-boggle-online-free" className="text-primary hover:underline">
+              <Link href="/guides/play-boggle-online-free/" className="text-primary hover:underline">
                 Play Boggle Online Free
               </Link>
             </p>
@@ -594,7 +594,7 @@ export default function BoggleWordGameGuide() {
                 <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Rules for beginners
                 </Link>
-                <Link href="/guides/play-boggle-online-free" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                <Link href="/guides/play-boggle-online-free/" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
                   Play online free
                 </Link>
                 <Link href="/guides/word-grid-strategies" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">

@@ -69,7 +69,7 @@ const GUIDES = [
     date: "2026-06-19",
   },
   {
-    href: "/guides/play-boggle-online-free",
+    href: "/guides/play-boggle-online-free/",
     title: "Play Boggle Online Free — No Download, No Sign-Up",
     description:
       "Play Boggle-style WordGrid free in your browser. No download or sign-up. Choose Timed, Zen, or Daily play and a supported board size.",
@@ -85,24 +85,6 @@ const GUIDES = [
     category: "Beginner",
     readTime: "6 min read",
     date: "2026-06-28",
-  },
-  {
-    href: "/guides/boggle-game-online",
-    title: "Boggle Game Online — Play Free, No Download",
-    description:
-      "Play a Boggle-style word game online free. No download or sign-up. Choose Timed, Zen, or Daily play and a supported board size.",
-    category: "Beginner",
-    readTime: "5 min read",
-    date: "2026-08-05",
-  },
-  {
-    href: "/guides/boggle-online-free",
-    title: "Boggle Online Free — Play Instantly, No Download",
-    description:
-      "Play Boggle-style WordGrid free in your browser. No download or sign-up. Choose Timed, Zen, or Daily play and a supported board size.",
-    category: "Beginner",
-    readTime: "4 min read",
-    date: "2026-08-05",
   },
   {
     href: "/guides/how-to-win-boggle",
@@ -382,7 +364,7 @@ export default function GuidesIndex() {
               </p>
             </Link>
             <Link
-              href="/guides/play-boggle-online-free"
+              href="/guides/play-boggle-online-free/"
               className="block bg-surface/50 hover:bg-surface transition rounded-xl p-4"
             >
               <div className="font-semibold text-primary">Play Boggle Online Free</div>

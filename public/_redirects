@@ -27,3 +27,10 @@ https://www.wordgrid.games/* https://wordgrid.games/:splat  301
 /tʃəʊz/ /words/ 301
 
 # Previously generated non-indexable word URLs
+
+# Consolidate overlapping online-play guide aliases onto the pages with the
+# clearest distinct search intent. Keep these legacy URLs out of the sitemap.
+/guides/boggle-game-online/ /guides/boggle-word-game/ 301
+/guides/boggle-game-online /guides/boggle-word-game/ 301
+/guides/boggle-online-free/ /guides/play-boggle-online-free/ 301
+/guides/boggle-online-free /guides/play-boggle-online-free/ 301

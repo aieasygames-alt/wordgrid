@@ -189,7 +189,7 @@ export default function WordGridVsBoggleGuide() {
                   <a href="/guides/play-word-grid-online" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
                     Play Word Grid Online
                   </a>
-                  <a href="/guides/play-boggle-online-free" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
+                  <a href="/guides/play-boggle-online-free/" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">
                     Play Boggle Online Free
                   </a>
                   <a href="/guides/boggle-rules-beginners" className="px-3 py-1.5 rounded-full bg-surface hover:bg-surface-hover transition">

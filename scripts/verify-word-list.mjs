@@ -174,10 +174,8 @@ for (const page of strategyPages) {
 const currentRulesPages = [
   "src/app/guides/boggle-rules-beginners/page.tsx",
   "src/app/guides/boggle-word-game/page.tsx",
-  "src/app/guides/boggle-game-online/page.tsx",
   "src/app/guides/play-boggle-online-free/page.tsx",
   "src/app/guides/boggle-scoring-sheet/page.tsx",
-  "src/app/guides/boggle-online-free/page.tsx",
   "src/app/guides/play-word-grid-online/page.tsx",
   "src/app/guides/boggle-rules-printable/page.tsx",
   "src/app/guides/boggle-rules-for-kids/page.tsx",
@@ -294,6 +292,9 @@ if (
 const homePage = readFileSync(new URL("../src/app/page.tsx", import.meta.url), "utf8");
 const playPage = readFileSync(new URL("../src/app/play/page.tsx", import.meta.url), "utf8");
 const playClient = readFileSync(new URL("../src/app/play/PlayClient.tsx", import.meta.url), "utf8");
+const indexableWordsSource = readFileSync(new URL("../src/lib/indexable-words.ts", import.meta.url), "utf8");
+const sitemapSource = readFileSync(new URL("../src/app/sitemap.ts", import.meta.url), "utf8");
+const redirectsSource = readFileSync(new URL("../public/_redirects", import.meta.url), "utf8");
 
 if (!homePage.includes("three-minute timed board") || !homePage.includes("completed score as a target")) {
   throw new Error("Home metadata must describe the current timed and shared-challenge workflow.");
@@ -305,6 +306,26 @@ if (!playPage.includes("4x4, 5x5, or 6x6") || playPage.includes("no ads")) {
 
 if (!playClient.includes("A three-minute round")) {
   throw new Error("Timed mode copy must describe the current three-minute duration.");
+}
+
+const coverageWordSlugs = [
+  "bit", "band", "dean", "raw", "each", "ever", "admit", "use", "day", "say", "his", "its", "can", "let",
+];
+const missingCoverageWords = coverageWordSlugs.filter(
+  (word) => !indexableWordsSource.includes(`"${word}"`)
+);
+
+if (missingCoverageWords.length > 0) {
+  throw new Error(`Coverage URLs must have indexable word pages: ${missingCoverageWords.join(", ")}`);
+}
+
+for (const legacyGuide of ["boggle-game-online", "boggle-online-free"]) {
+  if (sitemapSource.includes(`/guides/${legacyGuide}/`)) {
+    throw new Error(`Merged guide must not appear in the sitemap: ${legacyGuide}`);
+  }
+  if (!redirectsSource.includes(`/guides/${legacyGuide}/`)) {
+    throw new Error(`Merged guide must keep its permanent redirect: ${legacyGuide}`);
+  }
 }
 
 console.log(

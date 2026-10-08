@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Boggle Rules for Kids: Easy Rules for Children and Classrooms",
   description:
     "Easy Boggle rules for kids, parents, and teachers. Use simple examples, classroom tips, scoring basics, and fun variations for young players.",
-  alternates: { canonical: "/guides/boggle-rules-for-kids" },
+  alternates: { canonical: "/guides/boggle-rules-for-kids/" },
   keywords: [
     "boggle rules for kids", "boggle for children", "how to teach kids boggle",
     "boggle rules simplified", "boggle for young players", "kids word games",
@@ -140,7 +140,7 @@ export default function BoggleRulesForKidsGuide() {
               <Link href="/play" className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-semibold text-primary hover:bg-primary/15 transition">
                 Play a practice board
               </Link>
-              <Link href="/guides/boggle-rules-printable" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
+              <Link href="/guides/boggle-rules-printable/" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">
                 Open printable rules
               </Link>
               <Link href="/guides/boggle-rules-beginners" className="rounded-xl bg-surface/70 px-4 py-3 font-semibold hover:bg-surface transition">

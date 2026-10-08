@@ -30,7 +30,7 @@ const entryLinks = [
 
   const supportLinks = [
   { href: "/guides/play-word-grid-online", label: "Play Guide" },
-  { href: "/guides/play-boggle-online-free", label: "Free Boggle" },
+  { href: "/guides/play-boggle-online-free/", label: "Free Boggle" },
   { href: "/guides/boggle-rules-beginners", label: "Rules" },
   { href: "/guides/how-to-find-more-words", label: "Find More Words" },
   { href: "/guides/word-grid-strategies", label: "Strategy" },

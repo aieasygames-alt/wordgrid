@@ -169,7 +169,7 @@ export default function BoggleScoringSheetGuide() {
             </p>
             <p className="leading-relaxed mt-3">
               If you want the tactical side next, move to{" "}
-              <Link href="/guides/how-to-win-boggle" className="text-primary hover:underline">
+              <Link href="/guides/how-to-win-boggle/" className="text-primary hover:underline">
                 how to win at Boggle
               </Link>{" "}
               or{" "}

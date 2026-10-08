@@ -347,6 +347,27 @@ for (const legacyGuide of ["boggle-game-online", "boggle-online-free"]) {
   }
 }
 
+const phoneticRedirectTargets = {
+  "/klʌb/": "club",
+  "/t͡ʃɛst/": "chest",
+  "/ɑːm/": "arm",
+  "/fɔːt/": "fort",
+  "/kæp/": "cap",
+  "/fɪʃ/": "fish",
+  "/ɹæn/": "ran",
+  "/fɒɡ/": "fog",
+  "/tʃəʊz/": "chose",
+};
+
+for (const [legacyPath, target] of Object.entries(phoneticRedirectTargets)) {
+  if (!redirectsSource.includes(`${legacyPath} /words/${target}/ 301`)) {
+    throw new Error(`Phonetic legacy URL must redirect to its matching word page: ${legacyPath}`);
+  }
+  if (!indexableWordsSource.includes(`"${target}"`)) {
+    throw new Error(`Phonetic redirect target must remain indexable: ${target}`);
+  }
+}
+
 for (const page of trailingSlashCanonicalPages) {
   const source = readFileSync(new URL(`../${page}`, import.meta.url), "utf8");
   const canonical = source.match(/alternates:\s*\{\s*canonical:\s*["`]([^"`]+)["`]/)?.[1];

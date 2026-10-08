@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 };
 
 const faqItems = [
+  { question: "What makes this a printable reference rather than a full rules guide?", answer: "This page is designed to sit beside a board. It condenses setup, route checks, scoring, and end-of-round review into a single handout. Use the full rules guide for detailed explanations." },
   { question: "What makes a WordGrid word valid?", answer: "It must be at least 3 letters, be present in the current dictionary, and trace through adjacent tiles without reusing a tile." },
   { question: "How are WordGrid words scored?", answer: "3 letters score 1 point, 4 score 2, 5 score 4, and 6 score 6. The current word list has words through 6 letters." },
   { question: "How does a Qu tile work?", answer: "A Qu tile supplies QU as one tile. The rest of the word still needs a legal adjacent route." },
@@ -52,8 +53,8 @@ export default function BoggleRulesPrintableGuide() {
               <span>/</span>
               <Link href="/guides/" className="hover:text-text">Guides</Link>
             </nav>
-            <h1 className="text-4xl font-bold">Boggle rules printable reference</h1>
-            <p className="mt-3 max-w-3xl leading-relaxed text-text-muted">A concise current-rules sheet for WordGrid. Print this page or keep it open beside a board.</p>
+            <h1 className="text-4xl font-bold">Printable WordGrid game reference</h1>
+            <p className="mt-3 max-w-3xl leading-relaxed text-text-muted">A one-page setup, scoring, and review card for a WordGrid board. Print it for a family round, a classroom activity, or your own desk.</p>
           </header>
 
           <div className="print:hidden">
@@ -66,7 +67,21 @@ export default function BoggleRulesPrintableGuide() {
           </div>
 
           <article className="rounded-lg border border-border bg-surface/50 p-6 print:border-0 print:bg-white print:p-0">
-            <h1 className="hidden text-3xl font-bold print:block">WordGrid Rules Reference</h1>
+            <h1 className="hidden text-3xl font-bold print:block">WordGrid Game Reference Card</h1>
+            <section className="mt-6 grid gap-3 rounded-lg border border-border bg-bg/40 p-4 print:grid-cols-3 print:border-black print:bg-white">
+              <div>
+                <h2 className="font-semibold text-primary print:text-black">Before the board</h2>
+                <p className="mt-1 text-sm leading-relaxed text-text-muted print:text-black">Choose Timed or Zen, agree on the board size, and give each player a place to record words.</p>
+              </div>
+              <div>
+                <h2 className="font-semibold text-primary print:text-black">During the board</h2>
+                <p className="mt-1 text-sm leading-relaxed text-text-muted print:text-black">Trace one continuous route at a time. Record the word first; settle questions after the round.</p>
+              </div>
+              <div>
+                <h2 className="font-semibold text-primary print:text-black">After the board</h2>
+                <p className="mt-1 text-sm leading-relaxed text-text-muted print:text-black">Check disputed words, total points, then review one missed pattern before the next game.</p>
+              </div>
+            </section>
             <section className="mt-6">
               <h2 className="text-2xl font-semibold text-primary print:text-black">How to form a word</h2>
               <ol className="mt-3 space-y-2 leading-relaxed text-text-muted print:text-black">
@@ -106,6 +121,45 @@ export default function BoggleRulesPrintableGuide() {
               <p className="mt-3 text-sm text-text-muted print:text-black">The current WordGrid word list contains words through 6 letters.</p>
             </section>
 
+            <section className="mt-8">
+              <h2 className="text-2xl font-semibold text-primary print:text-black">Round checklist</h2>
+              <div className="mt-3 grid gap-3 text-sm sm:grid-cols-2 print:grid-cols-2">
+                <div className="rounded-lg border border-border p-4 print:border-black">
+                  <h3 className="font-semibold">Player check</h3>
+                  <ul className="mt-2 space-y-1 leading-relaxed text-text-muted print:text-black">
+                    <li>□ I did not reuse a tile.</li>
+                    <li>□ Each step touches the previous tile.</li>
+                    <li>□ The word has at least 3 letters.</li>
+                    <li>□ I recorded the word before checking it.</li>
+                  </ul>
+                </div>
+                <div className="rounded-lg border border-border p-4 print:border-black">
+                  <h3 className="font-semibold">Host or group check</h3>
+                  <ul className="mt-2 space-y-1 leading-relaxed text-text-muted print:text-black">
+                    <li>□ Confirm the same board and mode for everyone.</li>
+                    <li>□ Resolve uncertain words with the current dictionary.</li>
+                    <li>□ Score only confirmed words.</li>
+                    <li>□ Save one useful route to practice next time.</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <section className="mt-8 grid gap-3 border-t border-border pt-6 print:grid-cols-3 print:border-black">
+              <div>
+                <h2 className="text-lg font-semibold text-primary print:text-black">Mode</h2>
+                <p className="mt-2 border-b border-dashed border-border pb-2 text-sm text-text-muted print:border-black print:text-black">Timed / Zen / Daily</p>
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-primary print:text-black">Board size</h2>
+                <p className="mt-2 border-b border-dashed border-border pb-2 text-sm text-text-muted print:border-black print:text-black">4x4 / 5x5 / 6x6</p>
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-primary print:text-black">Next pattern to practice</h2>
+                <p className="mt-2 border-b border-dashed border-border pb-2 text-sm text-text-muted print:border-black print:text-black">________________</p>
+              </div>
+            </section>
+
             <section className="mt-8 print:hidden">
               <h2 className="mb-3 text-2xl font-semibold text-primary">Questions about the rules</h2>
               <div className="divide-y divide-border rounded-lg border border-border">
@@ -116,6 +170,10 @@ export default function BoggleRulesPrintableGuide() {
                   </details>
                 ))}
               </div>
+              <p className="mt-4 text-sm leading-relaxed text-text-muted">
+                Need the full explanation of legal paths, the dictionary, or scoring? Read the{" "}
+                <Link href="/guides/boggle-rules-beginners/" className="text-primary hover:underline">WordGrid rules guide</Link>.
+              </p>
             </section>
           </article>
         </GuideDesktopShell>

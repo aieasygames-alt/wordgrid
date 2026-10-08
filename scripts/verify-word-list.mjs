@@ -296,6 +296,7 @@ const indexableWordsSource = readFileSync(new URL("../src/lib/indexable-words.ts
 const sitemapSource = readFileSync(new URL("../src/app/sitemap.ts", import.meta.url), "utf8");
 const redirectsSource = readFileSync(new URL("../public/_redirects", import.meta.url), "utf8");
 const onlinePlayGuide = readFileSync(new URL("../src/components/OnlinePlayGuide.tsx", import.meta.url), "utf8");
+const printableRulesGuide = readFileSync(new URL("../src/app/guides/boggle-rules-printable/page.tsx", import.meta.url), "utf8");
 const trailingSlashCanonicalPages = [
   "src/app/guides/boggle-dictionary/page.tsx",
   "src/app/guides/boggle-generator/page.tsx",
@@ -385,6 +386,20 @@ for (const requiredCopy of [
 ]) {
   if (!onlinePlayGuide.includes(requiredCopy)) {
     throw new Error(`Online play guide must keep its distinct start-and-review intent: ${requiredCopy}`);
+  }
+}
+
+for (const requiredCopy of [
+  "WordGrid Game Reference Card",
+  "Before the board",
+  "During the board",
+  "After the board",
+  "Round checklist",
+  "Host or group check",
+  "Next pattern to practice",
+]) {
+  if (!printableRulesGuide.includes(requiredCopy)) {
+    throw new Error(`Printable guide must keep its game-reference workflow: ${requiredCopy}`);
   }
 }
 

@@ -83,6 +83,11 @@ export default function HomeClient() {
         />
       </div>
       <section className="grid gap-3 sm:grid-cols-3">
+        <Link href="/complete" className="border border-primary/30 bg-primary/10 p-4 transition hover:bg-primary/15">
+          <div className="text-xs font-semibold uppercase tracking-wide text-primary">Complete / No timer</div>
+          <div className="mt-1 font-semibold">Find every word</div>
+          <p className="mt-1 text-sm text-text-muted">Collect every target on a new daily board, including long-word discoveries.</p>
+        </Link>
         <Link href="/challenge" className="border border-primary/30 bg-primary/10 p-4 transition hover:bg-primary/15">
           <div className="text-xs font-semibold uppercase tracking-wide text-primary">Play with friends</div>
           <div className="mt-1 font-semibold">Challenge the same board</div>

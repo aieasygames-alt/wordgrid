@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "node scripts/verify-word-list.mjs"
+    "test": "node scripts/verify-word-list.mjs && node scripts/test-complete.cjs",
+    "generate:complete": "node scripts/generate-complete.cjs"
   },
   "dependencies": {
     "next": "14.2.5",

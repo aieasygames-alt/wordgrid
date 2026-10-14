@@ -8,6 +8,7 @@ export default function SiteFooter() {
         <nav className="flex flex-wrap gap-x-4 gap-y-2" aria-label="Site navigation">
           <Link href="/play" className="hover:text-text">Play</Link>
           <Link href="/daily" className="hover:text-text">Daily</Link>
+          <Link href="/complete" className="hover:text-text">Complete</Link>
           <Link href="/weekly" className="hover:text-text">Weekly</Link>
           <Link href="/training" className="hover:text-text">Training</Link>
           <Link href="/solver" className="hover:text-text">Solver</Link>

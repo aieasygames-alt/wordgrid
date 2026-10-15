@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { CompletePuzzle, checkCompleteWord, cleanProgress, completeDate, completeScore, findCompletePath, progressKey, selectCompletePuzzle, wordFromPath } from "../src/lib/complete";
+import { CompletePuzzle, checkCompleteWord, cleanProgress, completeDate, completeScore, findCompletePath, mergeCompleteProgress, progressKey, selectCompletePuzzle, wordFromPath } from "../src/lib/complete";
 
 const puzzle: CompletePuzzle = {
   id: "test", date: "2026-10-14", version: "1", rulesVersion: "1", dictionaryVersion: "1",
@@ -36,6 +36,16 @@ test("daily puzzles use UTC+8 with explicit practice fallback", () => {
   const bank = {version:"1",startDate:puzzle.date,endDate:puzzle.date,puzzles:[puzzle]};
   assert.equal(selectCompletePuzzle(bank,puzzle.date).practice,false);
   assert.equal(selectCompletePuzzle(bank,"2028-01-01").practice,true);
+});
+
+test("stale tabs merge discoveries and reveals without losing words or restoring revealed points", () => {
+  const a = {found:["RATE"],revealed:[]};
+  const b = {found:["QUIET"],revealed:["QUIET"]};
+  const merged = mergeCompleteProgress(puzzle,a,b);
+  assert.deepEqual(merged,{found:["QUIET","RATE"],revealed:["QUIET"]});
+  assert.deepEqual(mergeCompleteProgress(puzzle,b,a),merged);
+  assert.deepEqual(mergeCompleteProgress(puzzle,merged,a),merged);
+  assert.equal(completeScore(puzzle,merged.found,merged.revealed),2);
 });
 
 import bankData from "../public/data/complete/bank-v1.json";
@@ -105,10 +115,13 @@ test("real SQLite endpoint validates paths and derives points, deduplicates play
     assert.equal((await onRequestPost({request:request(valid,"192.0.2.1",cookie),env})).status,200);
     const list=await onRequestGet({request:new Request(`https://wordgrid.games/api/complete/score?date=${daily.date}`),env});
     assert.equal((await list.json()).entries.length,1);
-    const lower=await onRequestPost({request:request({...valid,revealed:valid.words},"192.0.2.1",cookie),env});
+    const lower=await onRequestPost({request:request({...valid,name:"New Name",revealed:valid.words},"192.0.2.1",cookie),env});
     assert.equal(lower.status,200);
+    assert.equal((await lower.json()).score,value.score);
     const after=await onRequestGet({request:new Request(`https://wordgrid.games/api/complete/score?date=${daily.date}`),env});
-    assert.equal((await after.json()).entries[0].score,value.score);
+    const saved=(await after.json()).entries[0];
+    assert.equal(saved.score,value.score);
+    assert.equal(saved.name,"New Name");
     const finished=await onRequestPost({request:request({...valid,words:daily.requiredWords,revealed:daily.requiredWords},"192.0.2.8"),env});
     assert.equal(finished.status,200);
     const finishedData=await finished.json();
@@ -134,4 +147,38 @@ test("D1 rate limit is atomic; oversized payloads and missing source fail closed
     const limited=await onRequestPost({request:request({},"192.0.2.5"),env});
     assert.equal(limited.status,429);assert.equal(limited.headers.get("retry-after"),"60");
   } finally {db.close();}
+});
+
+import { completeHintUnlock, completeShareText, remainingStartCounts, rotateCompletePosition } from "../src/lib/complete";
+test("rotation maps display coordinates back to canonical paths without changing words",()=>{
+  const path=findCompletePath(puzzle,"QUIET")!;
+  for(let turns=0;turns<4;turns++) {
+    const rotated=path.map(cell=>rotateCompletePosition(cell,4,turns));
+    const restored=rotated.map(cell=>rotateCompletePosition(cell,4,-turns));
+    assert.deepEqual(restored,path);
+    assert.equal(wordFromPath(puzzle,restored),"QUIET");
+  }
+});
+test("progressive hints unlock at target completion thresholds and count every possible start",()=>{
+  const p=bank.puzzles[0];
+  assert.equal(completeHintUnlock(p,{found:[],revealed:[]}),0);
+  assert.equal(completeHintUnlock(p,{found:p.requiredWords.slice(0,2),revealed:[]}),1);
+  assert.equal(completeHintUnlock(p,{found:p.requiredWords.slice(0,4),revealed:[]}),2);
+  assert.equal(completeHintUnlock(p,{found:p.requiredWords.slice(0,6),revealed:[]}),3);
+  assert.ok(remainingStartCounts(p,[]).flat().some(count=>count>0));
+  assert.ok(remainingStartCounts(p,p.requiredWords).flat().every(count=>count===0));
+  const multi={...puzzle,board:[["R","A","T","E"],["X","X","X","X"],["R","A","T","E"],["X","X","X","X"]],requiredWords:["RATE"],bonusWords:[]};
+  const counts=remainingStartCounts(multi,[]);
+  assert.equal(counts[0][0],1);assert.equal(counts[2][0],1);
+});
+test("sharing never includes answers or board data and preserves hint usage through old saves and merges",()=>{
+  const progress={found:["RATE","QUIET"],revealed:[],hintLevel:2};
+  const merged=mergeCompleteProgress(puzzle,progress,{found:["RATE"],revealed:[]});
+  assert.equal(merged.hintLevel,2);
+  assert.equal(cleanProgress(puzzle,{...progress,hintLevel:99}).hintLevel,3);
+  const text=completeShareText(puzzle,merged);
+  assert.match(text,/2\/2 targets \(100%\)/);assert.match(text,/Hints used/);
+  for(const word of puzzle.requiredWords)assert.ok(!text.includes(word));
+  assert.match(completeShareText(puzzle,{found:[],revealed:[]}),/No hints used/);
+  assert.match(completeShareText(puzzle,{found:["RATE"],revealed:["RATE"]},true),/Practice.*\n.*\n.*\nHints used/);
 });

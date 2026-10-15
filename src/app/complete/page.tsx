@@ -24,8 +24,8 @@ export default function CompletePage() {
       </div>
       <CompleteClient />
       <section className="mt-10 grid gap-5 border-t border-border pt-7 text-sm sm:grid-cols-3" aria-label="Complete rules">
-        <div><h2 className="font-semibold">Connect</h2><p className="mt-2 text-text-muted">Drag across adjacent tiles, including diagonals, or tap tiles and submit. A tile can only be used once per word. You can also type a word. Words need at least four letters; a Qu tile counts as two letters.</p></div>
-        <div><h2 className="font-semibold">Collect</h2><p className="mt-2 text-text-muted">Find all target words to finish. Bonus words add points but are not required. Reveal a target when stuck: it counts as found but earns no points. This is a finite editorial word list, not every dictionary word.</p></div>
+        <div><h2 className="font-semibold">Connect</h2><p className="mt-2 text-text-muted">Drag across adjacent tiles, including diagonals, or tap tiles and submit. A tile can only be used once per word. You can also type a word. On the board, arrows move focus, Space selects, Backspace undoes, Enter submits, and Escape clears. Rotating changes only the view. Words need at least four letters; a Qu tile counts as two letters.</p></div>
+        <div><h2 className="font-semibold">Collect</h2><p className="mt-2 text-text-muted">Find all target words to finish. Bonus words add points but are not required. At 20% completion, unlock starting-tile counts; at 40%, first letters; at 60%, zero-point reveals. Click a found word to review its numbered path. This is a finite editorial word list, not every dictionary word.</p></div>
         <div><h2 className="font-semibold">Return</h2><p className="mt-2 text-text-muted">A new board arrives at midnight UTC+8. Progress stays in this browser when storage is available. The optional leaderboard is casual, not a verified competition. No account needed.</p></div>
       </section>
     </main>

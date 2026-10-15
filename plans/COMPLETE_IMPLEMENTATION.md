@@ -74,7 +74,47 @@ admin dashboard is not included.
 - Existing _redirects contains two absolute HTTPS source rules rejected by local
   Wrangler; unrelated to this feature and left unchanged.
 
-## Deployment checklist (not executed remotely)
+## Deployment records and checklist
+
+### Production release record - 2026-10-14
+
+- User subsequently authorized production deployment. Published the current
+  workspace through Wrangler to Pages project wordgrid, production branch main.
+- Deployment: https://12cee546.wordgrid-ajr.pages.dev ; live game:
+  https://wordgrid.games/complete/ . No Git commit or push was made for this release.
+- Production D1 lacked Complete tables; applied the additive schema.sql
+  CREATE IF NOT EXISTS statements. Existing tables and scores were not deleted.
+- Live Complete page and leaderboard GET returned HTTP 200; leaderboard
+  reported remote=true. Browser confirmed the tutorial, new controls and
+  working rotation with no console errors. No public test score was submitted.
+- Device acceptance handoff: plans/COMPLETE_DEVICE_ACCEPTANCE.md.
+
+### Complete interaction upgrade
+
+- Progressive hints unlock at 20%, 40%, and 60% of required targets: tile
+  start counts, first letters, then zero-point reveals. Counts include every
+  legal starting tile once per remaining word. Hint usage is stored and merged
+  across tabs; older saves without hintLevel remain supported.
+- Rotation is view-only. Selection, keyboard focus, start-count badges and
+  numbered review paths map back to canonical puzzle coordinates. No puzzle,
+  score, word-list or API schema changes are needed.
+- Found targets and bonus words support numbered path review. Existing indexed
+  word guides are linked where available; unsupported long words show an
+  explicit unavailable-definition notice rather than fabricated definitions.
+- Sharing contains date, completion, bonus count, hint/reveal usage and the
+  game URL only. Native sharing falls back to clipboard and manual text copy;
+  visible previews track the current progress.
+- An independent three-example tutorial teaches selection/submission,
+  diagonals and undo. Completion/skip is remembered locally and Quick start
+  reopens it. Daily input and hints are disabled during practice.
+- Verification: 12 rule/API tests and 86 existing guide checks; lint, TypeScript
+  and static export. Browser checks cover all tutorial steps, 90/180 degree
+  rotation, post-rotation selection, keyboard arrows/Space/Backspace/Escape,
+  hint stages, zero-point reveals, path review, safe copy and refresh
+  persistence. The 320px layout has no horizontal overflow.
+- Subsequent device feedback confirmed basic touch interaction. Web acceptance
+  on 2026-10-15 confirmed the full daily logic; native OS share-sheet behavior
+  remains unconfirmed. See COMPLETE_ACCEPTANCE_SUMMARY.md for release scope.
 
 1. Use Node 24 LTS for local/CI verification; run npm ci, npm test, npm run lint,
    npx tsc --noEmit --incremental false, npm run build.

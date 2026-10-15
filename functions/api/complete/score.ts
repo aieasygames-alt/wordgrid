@@ -97,10 +97,15 @@ export async function onRequestPost({ request, env }: Context): Promise<Response
   try {
     await env.DB.prepare(`INSERT INTO complete_scores (puzzle_id, puzzle_version, player_id, name, score, found, completed, created_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
-      ON CONFLICT(puzzle_id, puzzle_version, player_id) DO UPDATE SET name = excluded.name, score = excluded.score, found = excluded.found, completed = excluded.completed, created_at = excluded.created_at
-      WHERE excluded.score > complete_scores.score OR (excluded.score = complete_scores.score AND excluded.found > complete_scores.found)`)
+      ON CONFLICT(puzzle_id, puzzle_version, player_id) DO UPDATE SET name = excluded.name,
+      score = CASE WHEN excluded.score > complete_scores.score OR (excluded.score = complete_scores.score AND excluded.found > complete_scores.found) THEN excluded.score ELSE complete_scores.score END,
+      found = CASE WHEN excluded.score > complete_scores.score OR (excluded.score = complete_scores.score AND excluded.found > complete_scores.found) THEN excluded.found ELSE complete_scores.found END,
+      completed = CASE WHEN excluded.score > complete_scores.score OR (excluded.score = complete_scores.score AND excluded.found > complete_scores.found) THEN excluded.completed ELSE complete_scores.completed END,
+      created_at = CASE WHEN excluded.score > complete_scores.score OR (excluded.score = complete_scores.score AND excluded.found > complete_scores.found) THEN excluded.created_at ELSE complete_scores.created_at END`)
       .bind(puzzle.id,puzzle.version,player,name,score,found,Number(found===puzzle.requiredWords.length)).run();
-    return json({score,found,entries:await entries(env.DB,puzzle),remote:true},200,{
+    const saved = await env.DB.prepare("SELECT name, score, found, completed FROM complete_scores WHERE puzzle_id = ? AND puzzle_version = ? AND player_id = ?")
+      .bind(puzzle.id,puzzle.version,player).all<Entry>();
+    return json({...saved.results?.[0],entries:await entries(env.DB,puzzle),remote:true},200,{
       "Set-Cookie":`wg_complete_player=${player}; Path=/api/complete/; HttpOnly; SameSite=Strict; Max-Age=31536000${url.protocol === "https:" ? "; Secure" : ""}`,
     });
   } catch { return json({error:"Leaderboard temporarily unavailable."},503); }

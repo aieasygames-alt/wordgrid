@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { generateGrid, generateSizedGrid, seedFromDate, todayDateString, type Grid } from "@/lib/boggle";
-import { decodeBoard } from "@/lib/board-link";
+import { decodeBoard, buildBoardUrl } from "@/lib/board-link";
 import { loadDictionary, Trie } from "@/lib/dictionary";
 import { solveBoard, type SolvedWord } from "@/lib/solver";
 import { INDEXABLE_WORDS } from "@/lib/indexable-words";
@@ -145,6 +145,8 @@ export default function SolverClient() {
   const [activeBoardName, setActiveBoardName] = useState("Today's board");
   const autoSolvedRef = useRef(false);
   const boardSize = values.length;
+  const currentGrid = useMemo(() => valuesToGrid(values), [values]);
+  const playThisBoardUrl = useMemo(() => buildBoardUrl("/play/", currentGrid), [currentGrid]);
 
   useEffect(() => {
     let cancelled = false;
@@ -458,6 +460,33 @@ export default function SolverClient() {
               <div className="text-2xl font-bold text-primary">{longestWords[0]?.word || "—"}</div>
             </div>
           </div>
+
+          {/* Action Bridge: Play This Exact Board */}
+          {solvedWords.length > 0 && (
+            <div className="mt-4 p-4 rounded-2xl border border-primary/30 bg-gradient-to-r from-primary/10 via-surface/60 to-surface/80 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-md">
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5">
+                  <span>🎯</span> Playable Board Ready
+                </div>
+                <div className="text-sm font-bold text-text mt-0.5">Want to test your speed on this board?</div>
+                <div className="text-xs text-text-muted mt-0.5">Challenge yourself with a 3-minute timer or practice with no clock.</div>
+              </div>
+              <div className="flex flex-wrap gap-2 shrink-0">
+                <Link
+                  href={playThisBoardUrl}
+                  className="px-3.5 py-2 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold shadow-md shadow-primary/20 transition flex items-center gap-1.5 active:scale-95"
+                >
+                  <span>▶</span> Play Live (3 Min)
+                </Link>
+                <Link
+                  href="/daily/"
+                  className="px-3.5 py-2 rounded-xl bg-surface hover:bg-surface-hover text-text text-xs font-semibold border border-border/80 transition"
+                >
+                  Today&apos;s Daily
+                </Link>
+              </div>
+            </div>
+          )}
 
           {error && (
             <div className="mt-4 rounded-2xl border border-danger/30 bg-danger-bg/20 px-4 py-3 text-sm text-danger">

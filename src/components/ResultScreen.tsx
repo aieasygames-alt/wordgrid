@@ -18,6 +18,7 @@ import { loadGameHistory, summarizeGameHistory } from "@/lib/game-history";
 import MissedWordPathPreview from "./MissedWordPathPreview";
 import ProgressiveHint from "./ProgressiveHint";
 import { challengeBoardKey, encodeChallengeEntries, getChallengeName, recordChallengeEntry, saveChallengeName } from "@/lib/friend-challenge";
+import PwaInstallPrompt from "./PwaInstallPrompt";
 
 interface FoundWord {
   word: string;
@@ -395,47 +396,41 @@ export default function ResultScreen({
   const shareText = useMemo(() => {
     const header =
       mode === "daily"
-        ? `WordGrid Daily ${dateLabel}`
+        ? `WordGrid Daily · ${dateLabel}`
         : sessionMode === "zen"
-        ? "WordGrid Zen"
-        : "WordGrid Play";
+        ? "WordGrid Zen Practice"
+        : "WordGrid Challenge";
     const lines = [
       header,
+      `${tier.badge} ${tier.title} · ${totalScore} pts ${"★".repeat(tier.stars)}`,
       hasDictionary
-        ? `Score: ${totalScore} / ${maxPossible} (${percentage}%)`
-        : `Score: ${totalScore}`,
-      hasDictionary
-        ? `Words: ${foundWords.length} / ${allWords.length}`
-        : `Words found: ${foundWords.length}`,
+        ? `🎯 Words: ${foundWords.length}/${allWords.length} (${percentage}%) · ⚡ Combo: ${bestCombo ?? 0}x`
+        : `🎯 Words found: ${foundWords.length}`,
     ];
 
     if (achievements.length > 0) {
-      lines.push(`Achievements: ${achievements.map((achievement) => achievement.label).join(", ")}`);
+      lines.push(`🏆 Achievements: ${achievements.map((achievement) => achievement.label).join(", ")}`);
     }
 
     if (streak && streak >= 2) {
       lines.push(`🔥 ${streak}-day streak`);
     }
-    if (bestCombo && bestCombo >= 2) {
-      lines.push(`⚡ Best combo: x${bestCombo}`);
-    }
-    if (!hasDictionary) {
-      lines.push("Dictionary data was unavailable, so missed words could not be calculated.");
-    }
     lines.push("");
-    lines.push(`Challenge: ${challengeUrl}`);
 
-    // Emoji summary: 🟩 found, 🟥 missed (top 20 by score)
-    if (hasDictionary) {
-      const topWords = allWords.slice(0, 20);
-      const emojis = topWords
-        .map((w) => (foundSet.has(w.word) ? "🟩" : "🟥"))
-        .join("");
-      lines.push(emojis);
+    // 4x4 clean visual emoji matrix (top 16 words formatted as a 4x4 grid)
+    if (hasDictionary && allWords.length > 0) {
+      const top16 = allWords.slice(0, 16);
+      for (let i = 0; i < top16.length; i += 4) {
+        const row = top16.slice(i, i + 4).map((w) => (foundSet.has(w.word) ? "🟩" : "⬜")).join("");
+        lines.push(row);
+      }
       lines.push("");
     }
+
+    lines.push("Can you beat my score?");
+    lines.push(challengeUrl || "https://wordgrid.games/daily/");
     return lines.join("\n");
-  }, [mode, sessionMode, dateLabel, totalScore, maxPossible, percentage, foundWords.length, allWords, foundSet, streak, hasDictionary, bestCombo, challengeUrl, achievements]);
+  }, [mode, sessionMode, dateLabel, tier, totalScore, percentage, foundWords.length, allWords, foundSet, streak, hasDictionary, bestCombo, challengeUrl, achievements]);
 
   const handleShare = async () => {
     trackEvent("share_result", { mode, result_type: "text", board_size: grid.length });
@@ -663,6 +658,8 @@ export default function ResultScreen({
         </div>
       </section>
 
+      <PwaInstallPrompt />
+
       {achievements.length > 0 && (
         <section className="w-full rounded-2xl border border-primary/20 bg-primary/10 p-4 sm:p-5">
           <div className="text-xs font-semibold uppercase tracking-wide text-primary">
@@ -775,7 +772,7 @@ export default function ResultScreen({
               onClick={handleShare}
               className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
             >
-              {copied ? "Copied!" : "Text"}
+              {copied ? "Copied!" : "Share Text (Emoji)"}
             </button>
             <button
               onClick={handleCopyChallenge}
@@ -796,11 +793,11 @@ export default function ResultScreen({
               Open Solver
             </a>
             <a
-              href="/stats"
+              href="/stats/"
               className="rounded-xl bg-surface px-6 py-3 font-semibold whitespace-nowrap transition hover:bg-surface-hover"
             >
               Stats
-              </a>
+            </a>
             </div>
           </div>
 
@@ -1102,6 +1099,8 @@ export default function ResultScreen({
           </a>
         </div>
       </section>
+
+      <PwaInstallPrompt />
 
       <div className="flex flex-wrap gap-3">
         {onPlayAgain && (

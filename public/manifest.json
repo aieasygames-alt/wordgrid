@@ -2,7 +2,7 @@
   "name": "WordGrid — Daily Word Puzzle",
   "short_name": "WordGrid",
   "description": "Find words by connecting adjacent letters in a 4×4 grid. New daily challenge every day.",
-  "start_url": "/play",
+  "start_url": "/daily/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0f172a",

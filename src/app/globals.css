@@ -18,6 +18,8 @@
   --c-danger-bg: 127 29 29;    /* red-900 */
   --c-accent: 251 146 60;      /* orange-400 */
   --c-border: 51 65 85;        /* slate-700 */
+  --c-tile-shadow: 10 15 30;   /* deep 3D tile bevel */
+  --c-tile-top: 51 65 85;      /* top specular highlight */
 }
 
 /* ===== Theme: Light ===== */
@@ -36,6 +38,8 @@
   --c-danger-bg: 254 226 226;  /* red-100 */
   --c-accent: 234 88 12;       /* orange-600 */
   --c-border: 203 213 225;     /* slate-300 */
+  --c-tile-shadow: 203 213 225;
+  --c-tile-top: 255 255 255;
 }
 
 html,
@@ -106,3 +110,92 @@ body {
 .animate-combo-ring {
   animation: combo-ring 0.9s ease-out;
 }
+
+/* ===== Game Tactile 3D Tiles & Immersion System ===== */
+.game-tray {
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 70%),
+              rgb(var(--c-surface) / 0.45);
+  border: 1px solid rgb(var(--c-border));
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.game-tile-3d {
+  background: linear-gradient(180deg, rgb(var(--c-surface)) 0%, rgb(var(--c-surface) / 0.85) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 5px 0 0 rgb(var(--c-tile-shadow)),
+              0 8px 12px -2px rgba(0, 0, 0, 0.35);
+  transform: translateY(0);
+  transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.08s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 0.15s ease,
+              border-color 0.15s ease;
+}
+
+.game-tile-3d:hover {
+  background: linear-gradient(180deg, rgb(var(--c-surface-hover)) 0%, rgb(var(--c-surface)) 100%);
+}
+
+.game-tile-3d:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 0 rgb(var(--c-tile-shadow)),
+              0 3px 6px -1px rgba(0, 0, 0, 0.4);
+}
+
+.game-tile-selected {
+  background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%) !important;
+  color: #ffffff !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 4px 0 0 #312e81,
+              0 0 20px 2px rgba(99, 102, 241, 0.65),
+              0 8px 16px -2px rgba(0, 0, 0, 0.4) !important;
+  transform: translateY(1px) scale(1.03);
+}
+
+.game-tile-last {
+  background: linear-gradient(180deg, #818cf8 0%, #6366f1 100%) !important;
+  box-shadow: 0 4px 0 0 #3730a3,
+              0 0 24px 4px rgba(129, 140, 248, 0.75),
+              0 8px 16px -2px rgba(0, 0, 0, 0.4) !important;
+  animation: tile-head-pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes tile-head-pulse {
+  0%, 100% {
+    transform: translateY(1px) scale(1.04);
+  }
+  50% {
+    transform: translateY(0px) scale(1.07);
+  }
+}
+
+/* Floating Score popup */
+@keyframes score-float-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 8px) scale(0.6);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1.2);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -24px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -42px) scale(0.85);
+  }
+}
+
+.animate-score-float {
+  animation: score-float-up 0.85s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+/* Subtle arcade dot grid background */
+.game-backdrop {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+

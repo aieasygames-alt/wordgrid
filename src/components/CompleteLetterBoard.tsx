@@ -2,6 +2,7 @@
 
 import { PointerEvent, useRef } from "react";
 import { CompletePuzzle, Position, rotateCompletePosition } from "@/lib/complete";
+import { LETTER_POINTS } from "@/lib/boggle";
 
 interface Props {
   puzzle: CompletePuzzle;
@@ -49,7 +50,7 @@ export default function CompleteLetterBoard({puzzle, turns = 0, path, preview = 
   const shown = (path.length ? path : preview).map(cell=>rotateCompletePosition(cell,size,turns));
   // Tiles use a 90-unit pitch with a 10-unit gap, matching the 9:1 CSS gap ratio.
   const points=shown.map(cell=>`${cell.col*100+45},${cell.row*100+45}`).join(" ");
-  return <div className="relative mx-auto my-6 max-w-md touch-none select-none" data-complete-board aria-label="Letter board"
+  return <div className="relative mx-auto my-6 max-w-md touch-none select-none rounded-3xl p-3 sm:p-4 game-tray shadow-xl" data-complete-board aria-label="Letter board"
     onKeyDown={event=>{
       if (disabled) return;
       if (event.key==='Escape') {event.preventDefault();change([]);onFeedback("Trail cleared.");}
@@ -73,15 +74,19 @@ export default function CompleteLetterBoard({puzzle, turns = 0, path, preview = 
         const letter=puzzle.board[cell.row][cell.col];
         const selected=path.findIndex(item=>same(item,cell));
         const reviewed=preview.findIndex(item=>same(item,cell));
+        const pointValue = LETTER_POINTS[letter] ?? 1;
+        const isSel = selected >= 0;
+        const isRev = reviewed >= 0;
         return <button key={`${cell.row}-${cell.col}`} type="button" disabled={disabled} data-complete-cell data-row={cell.row} data-col={cell.col}
-          aria-label={`Row ${display.row+1}, column ${display.col+1}: ${letter}${counts ? `, ${counts[cell.row][cell.col]} remaining words start here` : ""}`} aria-pressed={selected>=0}
-          className={`relative aspect-square rounded-xl border text-2xl font-bold transition-colors sm:text-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${selected>=0?'border-primary bg-primary text-white':reviewed>=0?'border-accent bg-accent/20':'border-border bg-surface hover:bg-surface-hover'}`}
+          aria-label={`Row ${display.row+1}, column ${display.col+1}: ${letter}${counts ? `, ${counts[cell.row][cell.col]} remaining words start here` : ""}`} aria-pressed={isSel}
+          className={`relative aspect-square rounded-2xl font-black transition-all text-2xl sm:text-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isSel ? 'game-tile-selected z-30' : isRev ? 'border border-accent bg-accent/20 z-20' : 'game-tile-3d text-text z-10'}`}
           onPointerDown={event=>down(event,cell)} onPointerMove={move} onPointerUp={event=>{if(pointer.current!==event.pointerId)return;pointer.current=null;if(dragging.current)onSubmit(current.current);}}
           onPointerCancel={()=>{pointer.current=null;change([]);onFeedback("Gesture cancelled. Try again.");}}
           onClick={event=>{if(event.detail===0)add(cell);}}>
           <span className="relative z-10">{letter}</span>
-          {(selected>=0||reviewed>=0) && <span className="absolute right-1 top-1 z-10 text-[10px] leading-none">{(selected>=0?selected:reviewed)+1}</span>}
-          {counts && <span className="absolute bottom-1 right-1 z-10 rounded bg-bg/80 px-1 text-[10px] text-text">{counts[cell.row][cell.col]}</span>}
+          <span className={`absolute bottom-1 right-1.5 text-[10px] font-bold leading-none select-none ${isSel ? 'text-white/80' : 'text-text-muted/60'}`}>{pointValue}</span>
+          {(isSel || isRev) && <span className="absolute left-1.5 top-1 z-10 text-[9px] font-black leading-none text-white/80">{(isSel ? selected : reviewed) + 1}</span>}
+          {counts && <span className="absolute top-1 right-1 z-10 rounded bg-bg/90 px-1 py-0.5 text-[9px] font-bold text-accent shadow-sm">{counts[cell.row][cell.col]}</span>}
         </button>;
       })}
     </div>

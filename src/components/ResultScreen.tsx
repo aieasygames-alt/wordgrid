@@ -302,6 +302,72 @@ export default function ResultScreen({
     return summarizeGameHistory(loadGameHistory()).averageScore;
   }, []);
 
+  const [displayScore, setDisplayScore] = useState(0);
+  useEffect(() => {
+    const end = totalScore;
+    if (end <= 0) {
+      setDisplayScore(0);
+      return;
+    }
+    const duration = 850;
+    const startTime = performance.now();
+    const update = (now: number) => {
+      const progress = Math.min(1, (now - startTime) / duration);
+      const current = Math.floor(end * (1 - Math.pow(2, -10 * progress)));
+      setDisplayScore(current);
+      if (progress < 1) requestAnimationFrame(update);
+      else setDisplayScore(end);
+    };
+    const id = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(id);
+  }, [totalScore]);
+
+  const tier = useMemo(() => {
+    if (percentage >= 45 || totalScore >= 300) {
+      return {
+        title: "GRANDMASTER",
+        badge: "👑",
+        stars: 5,
+        color: "text-amber-400 border-amber-500/40 bg-amber-500/10 shadow-amber-500/20",
+        desc: "Exceptional board vision! You dominated the deepest word trails.",
+      };
+    }
+    if (percentage >= 30 || totalScore >= 180) {
+      return {
+        title: "EXPERT",
+        badge: "💎",
+        stars: 4,
+        color: "text-indigo-400 border-indigo-500/40 bg-indigo-500/10 shadow-indigo-500/20",
+        desc: "High pattern mastery! Superb word-spotting agility.",
+      };
+    }
+    if (percentage >= 18 || totalScore >= 90) {
+      return {
+        title: "SHARP EYE",
+        badge: "⚡",
+        stars: 3,
+        color: "text-emerald-400 border-emerald-500/40 bg-emerald-500/10 shadow-emerald-500/20",
+        desc: "Great speed! You snatched key combinations and families.",
+      };
+    }
+    if (percentage >= 8 || totalScore >= 35) {
+      return {
+        title: "EXPLORER",
+        badge: "🌟",
+        stars: 2,
+        color: "text-sky-400 border-sky-500/40 bg-sky-500/10 shadow-sky-500/20",
+        desc: "Solid round! Each board sharpens your vocabulary radar.",
+      };
+    }
+    return {
+      title: "APPRENTICE",
+      badge: "🌱",
+      stars: 1,
+      color: "text-slate-300 border-border bg-surface shadow-black/10",
+      desc: "Good effort! Scan for common prefixes and suffixes next round.",
+    };
+  }, [percentage, totalScore]);
+
   const achievements = useMemo<Achievement[]>(() => {
     const items: Achievement[] = [];
     if (hasDictionary && percentage >= 75) {
@@ -506,30 +572,92 @@ export default function ResultScreen({
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-6">
       <Confetti fire={fireConfetti} />
-      <section className="text-center">
-        <div className="text-xs font-semibold uppercase tracking-wide text-primary">Round complete</div>
-        <h2 className="mt-2 text-3xl font-bold">
-          {mode === "daily" ? `Daily — ${dateLabel}` : sessionMode === "zen" ? "Zen Complete" : "Game Over"}
-        </h2>
-        <div className="mt-3 text-5xl font-bold tabular-nums text-primary">{totalScore}</div>
-        <p className="mt-1 text-sm text-text-muted">
-          {bestFoundWord ? `Best word: ${bestFoundWord.word}` : "Your next board is ready whenever you are."}
-          {hasDictionary ? ` · ${percentage}% of available score` : ""}
-        </p>
-        {personalAverage > 0 && (
-          <div className={`mt-2 text-sm font-semibold ${totalScore >= personalAverage ? "text-success" : "text-text-muted"}`}>
-            {totalScore >= personalAverage ? `Above your ${personalAverage.toFixed(0)}-point average` : `Your average is ${personalAverage.toFixed(0)} points`}
+
+      {/* Hero Endgame Trophy Showcase */}
+      <section className="relative overflow-hidden rounded-3xl border border-border/80 bg-gradient-to-b from-surface via-surface/60 to-bg p-6 sm:p-8 text-center shadow-2xl backdrop-blur-md">
+        {/* Ambient Top Glow */}
+        <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-40 bg-primary/20 blur-3xl rounded-full" />
+
+        {/* Mode Label */}
+        <div className="text-xs font-bold uppercase tracking-widest text-text-muted mb-2">
+          {mode === "daily" ? `Daily Challenge · ${dateLabel}` : sessionMode === "zen" ? "Zen Practice Complete" : "Round Finished"}
+        </div>
+
+        {/* Tier Medal Pill */}
+        <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-black tracking-wider uppercase shadow-md ${tier.color}`}>
+          <span className="text-base">{tier.badge}</span>
+          <span>{tier.title}</span>
+          <span className="text-amber-400 font-normal tracking-tight">{"★".repeat(tier.stars)}</span>
+        </div>
+
+        {/* Rolling Score Counter */}
+        <div className="mt-4 flex flex-col items-center">
+          <div className="flex items-baseline gap-2">
+            <span className="text-6xl sm:text-7xl font-black tabular-nums tracking-tight bg-gradient-to-b from-white via-slate-100 to-slate-300 bg-clip-text text-transparent drop-shadow-md">
+              {displayScore}
+            </span>
+            <span className="text-xl sm:text-2xl font-bold text-primary">pts</span>
           </div>
-        )}
-        <div className="mt-5 flex flex-wrap justify-center gap-3">
+          <p className="mt-1 text-xs sm:text-sm text-text-muted max-w-md">
+            {tier.desc}
+          </p>
+        </div>
+
+        {/* Triad Performance Metrics */}
+        <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-4 max-w-xl mx-auto text-left">
+          <div className="rounded-2xl border border-border/70 bg-bg/60 p-3 sm:p-4 text-center">
+            <div className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-text-muted">Found Words</div>
+            <div className="mt-1 text-lg sm:text-2xl font-black text-text">{foundWords.length}</div>
+            <div className="text-[10px] text-text-dim mt-0.5">{hasDictionary ? `${percentage}% score` : "recorded"}</div>
+          </div>
+
+          <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3 sm:p-4 text-center">
+            <div className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-400">👑 MVP Word</div>
+            <div className="mt-1 text-base sm:text-xl font-black text-amber-300 truncate font-mono">
+              {bestFoundWord ? bestFoundWord.word : "—"}
+            </div>
+            <div className="text-[10px] text-amber-400/80 mt-0.5">
+              {bestFoundWord ? `+${bestFoundWord.score} pts` : "No scored word"}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/70 bg-bg/60 p-3 sm:p-4 text-center">
+            <div className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-text-muted">⚡ Best Combo</div>
+            <div className="mt-1 text-lg sm:text-2xl font-black text-primary">
+              {(bestCombo ?? 0) > 0 ? `x${bestCombo}` : "—"}
+            </div>
+            <div className="text-[10px] text-text-dim mt-0.5">Consecutive run</div>
+          </div>
+        </div>
+
+        {/* Primary Action Buttons */}
+        <div className="mt-7 flex flex-wrap justify-center gap-3">
           {onPlayAgain && (
-            <button onClick={onPlayAgain} className="rounded-xl bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary-hover">
-              {mode === "daily" ? "Play Random" : "Play Again"}
+            <button
+              onClick={onPlayAgain}
+              className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-base shadow-xl shadow-primary/30 transition hover:scale-105 active:scale-95"
+            >
+              {mode === "daily" ? "Play Random Board" : "Play Again"}
             </button>
           )}
+
+          <button
+            onClick={handleShareCard}
+            disabled={cardLoading}
+            className="flex items-center gap-2 px-6 py-3.5 rounded-2xl border border-border bg-surface hover:bg-surface-hover text-text font-bold text-sm transition active:scale-95 shadow-md"
+          >
+            <span>📤</span>
+            <span>{cardLoading ? "Generating..." : "Share Card"}</span>
+          </button>
+
           {trainingHint && (
-            <a href={trainingHref} onClick={() => trackEvent("training_recommendation_open", { focus: topMissedCategory?.id ?? "general", destination: trainingHref })} className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover">
-              Start a 30-second sprint
+            <a
+              href={trainingHref}
+              onClick={() => trackEvent("training_recommendation_open", { focus: topMissedCategory?.id ?? "general", destination: trainingHref })}
+              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl border border-border bg-surface hover:bg-surface-hover text-text font-bold text-sm transition active:scale-95"
+            >
+              <span>🎯</span>
+              <span>Sprint Drill</span>
             </a>
           )}
         </div>
@@ -554,17 +682,11 @@ export default function ResultScreen({
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
         <div className="flex flex-col gap-6">
           <div className="rounded-3xl border border-border bg-surface/35 p-5 shadow-lg shadow-black/5 sm:p-6">
-            <div className="text-center">
-              <div className="mb-1 text-6xl font-bold text-primary">{totalScore}</div>
-              {hasDictionary ? (
-                <div className="text-sm text-text-muted">
-                  out of {maxPossible} possible ({percentage}%)
-                </div>
-              ) : (
-                <div className="text-sm text-text-muted">
-                  Dictionary data was not ready, so missed words are hidden.
-                </div>
-              )}
+            <div className="flex items-center justify-between pb-4 border-b border-border/60">
+              <span className="text-xs font-bold uppercase tracking-wider text-text-muted">Board Potential</span>
+              <span className="text-xs font-bold text-primary">
+                {hasDictionary ? `${percentage}% achieved (${maxPossible} max)` : ""}
+              </span>
             </div>
 
             {mode === "daily" && dailyMissions.length > 0 && (

@@ -6,3 +6,5 @@ out/
 *.log
 *.tsbuildinfo
 .wrangler/
+squaredle-public/
+scripts/run-ui-verification.mjs

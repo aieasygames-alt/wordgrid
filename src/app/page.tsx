@@ -82,16 +82,43 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="mx-auto max-w-7xl">
         <HomeClient />
-        <section className="mx-auto mt-12 max-w-4xl border-t border-border pt-8 text-sm leading-relaxed text-text-muted">
-          <h2 className="text-xl font-semibold text-text">What WordGrid is</h2>
-          <p className="mt-3">WordGrid is a free adjacent-letter word puzzle for browsers. Draw a path through neighboring tiles to make words, score each valid find, and use the same board afterward to study patterns you missed.</p>
-          <h2 className="mt-7 text-xl font-semibold text-text">How a round works</h2>
-          <ol className="mt-3 list-decimal space-y-2 pl-5"><li>Scan the 4 by 4 letter board for connected word paths.</li><li>Drag across adjacent tiles to submit each word before time expires.</li><li>Review your score, missed words, and the next practice focus after the round.</li></ol>
-          <h2 className="mt-7 text-xl font-semibold text-text">Play, practice, and review</h2>
-          <p className="mt-3">Use Daily for a shared 4 by 4 board that changes each day, Weekly for a themed shared board all week, and the Solver after a round when you want to review possible words. WordGrid&apos;s learning guides explain scoring, common patterns, and responsible post-game review.</p>
-          <p className="mt-5">For background on the classic Boggle format that inspired adjacent-letter word games, see <a className="font-semibold text-primary hover:underline" href="https://instructions.hasbro.com/api/download/C1009_en-us_boggle-classic-game.pdf" rel="noopener noreferrer">Hasbro&apos;s Boggle instructions</a>. This page was last updated on September 8, 2026.</p>
-          <h2 className="mt-7 text-xl font-semibold text-text">Frequently asked questions</h2>
-          <div className="mt-3 space-y-4"><div><h3 className="font-semibold text-text">Is WordGrid free?</h3><p className="mt-1">Yes. It is free to play in a browser and does not require an account.</p></div><div><h3 className="font-semibold text-text">Can I replay a board?</h3><p className="mt-1">Yes. Daily archive and challenge links preserve a board so it can be replayed and reviewed later.</p></div></div>
+        <section className="mx-auto mt-16 max-w-4xl rounded-3xl border border-border/70 bg-surface/30 p-6 sm:p-8 text-sm leading-relaxed text-text-muted backdrop-blur-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="w-2.5 h-2.5 rounded-full bg-primary"></span>
+            <span className="text-xs font-bold uppercase tracking-widest text-text-dim">WordGrid Codex & Guide</span>
+          </div>
+
+          <h2 className="text-xl font-bold text-text">What WordGrid is</h2>
+          <p className="mt-2.5">
+            WordGrid is a free adjacent-letter word puzzle designed for browsers. Draw paths through neighboring tiles (horizontally, vertically, and diagonally) to make words, score each valid find, and explore missed patterns after each round.
+          </p>
+
+          <h2 className="mt-7 text-xl font-bold text-text">How a round works</h2>
+          <ol className="mt-2.5 list-decimal space-y-1.5 pl-5">
+            <li>Scan the 4 by 4 letter board for connected word paths.</li>
+            <li>Drag across adjacent tiles to submit each word before time expires.</li>
+            <li>Review your score, missed words, and the next practice focus after the round.</li>
+          </ol>
+
+          <h2 className="mt-7 text-xl font-bold text-text">Play, practice, and review</h2>
+          <p className="mt-2.5">
+            Use <strong>Daily</strong> for a shared 4 by 4 board that changes each day, <strong>Complete</strong> for an untimed full-dictionary collection challenge, and the <strong>Solver</strong> after a round when you want to review possible words. WordGrid&apos;s learning guides explain scoring, common patterns, and responsible post-game review.
+          </p>
+          <p className="mt-4 text-xs">
+            For background on the classic Boggle format that inspired adjacent-letter word games, see <a className="font-semibold text-primary hover:underline" href="https://instructions.hasbro.com/api/download/C1009_en-us_boggle-classic-game.pdf" rel="noopener noreferrer">Hasbro&apos;s Boggle instructions</a>. This page was last updated on September 8, 2026.
+          </p>
+
+          <h2 className="mt-8 text-xl font-bold text-text">Frequently asked questions</h2>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-2xl border border-border/80 bg-surface/50 p-4">
+              <h3 className="font-bold text-text">Is WordGrid free?</h3>
+              <p className="mt-1 text-xs text-text-muted">Yes. It is completely free to play in any modern browser and does not require an account or download.</p>
+            </div>
+            <div className="rounded-2xl border border-border/80 bg-surface/50 p-4">
+              <h3 className="font-bold text-text">Can I replay a board?</h3>
+              <p className="mt-1 text-xs text-text-muted">Yes. Daily archive and challenge links preserve a board so it can be replayed and reviewed later.</p>
+            </div>
+          </div>
         </section>
       </div>
     </main>

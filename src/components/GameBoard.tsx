@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { Grid, isValidPath, scoreWord } from "@/lib/boggle";
+import { Grid, isValidPath, scoreWord, LETTER_POINTS } from "@/lib/boggle";
 import { loadDictionary, Trie } from "@/lib/dictionary";
 import { sounds } from "@/lib/sounds";
 import Timer from "./Timer";
@@ -57,6 +57,8 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
   const [showDurationPicker, setShowDurationPicker] = useState(false);
   const [combo, setCombo] = useState(0);
   const [bestCombo, setBestCombo] = useState(0);
+  const [floatingScore, setFloatingScore] = useState<{ score: number; word: string; key: number } | null>(null);
+  const floatingTimerRef = useRef<number | null>(null);
   const [viewportWidth, setViewportWidth] = useState(1024);
   const cellRefs = useRef<(HTMLDivElement | null)[][]>([]);
   const completedRef = useRef(false);
@@ -204,6 +206,10 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
 
     const score = scoreWord(word);
     setFoundWords((prev) => [...prev, { word, score }]);
+    setFloatingScore({ score, word, key: Date.now() });
+    if (floatingTimerRef.current) window.clearTimeout(floatingTimerRef.current);
+    floatingTimerRef.current = window.setTimeout(() => setFloatingScore(null), 850);
+
     const nextCombo = comboRef.current + 1;
     comboRef.current = nextCombo;
     setCombo(nextCombo);
@@ -216,6 +222,7 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
         window.clearTimeout(comboBurstTimerRef.current);
       }
       setComboBurst(nextCombo);
+      playSound(() => sounds.comboBurst(nextCombo));
       comboBurstTimerRef.current = window.setTimeout(() => {
         setComboBurst(null);
         comboBurstTimerRef.current = null;
@@ -224,7 +231,7 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
     setSelected([]);
     setError(null);
     triggerFlash("correct");
-    playSound(sounds.correct);
+    playSound(() => sounds.correct(word.length, nextCombo));
   }, [grid, dictError, playSound]);
 
   const handlePointerDown = (e: React.PointerEvent, r: number, c: number) => {
@@ -234,7 +241,7 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
     setIsDragging(true);
     setSelected([{ row: r, col: c }]);
     setError(null);
-    playSound(sounds.select);
+    playSound(() => sounds.select(0));
   };
 
   const handleCellClick = (r: number, c: number) => {
@@ -243,12 +250,14 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
     const last = current[current.length - 1];
     if (!last) {
       setSelected([{ row: r, col: c }]);
+      playSound(() => sounds.select(0));
       return;
     }
     const dr = Math.abs(r - last.row);
     const dc = Math.abs(c - last.col);
     if (dr <= 1 && dc <= 1 && dr + dc > 0 && !current.some((cell) => cell.row === r && cell.col === c)) {
       setSelected([...current, { row: r, col: c }]);
+      playSound(() => sounds.select(current.length));
     }
   };
 
@@ -289,7 +298,7 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
       if (dr <= 1 && dc <= 1 && dr + dc > 0) {
         if (!selected.some((s) => s.row === pos.row && s.col === pos.col)) {
           setSelected([...selected, pos]);
-          playSound(sounds.select);
+          playSound(() => sounds.select(selected.length));
         }
       }
     },
@@ -313,10 +322,78 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
     };
   }, [handlePointerMove, handlePointerUp]);
 
+  // Keyboard typing support for fast desktop arcade gameplay
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (gameOver || !hasStarted) return;
+      const tag = (e.target as HTMLElement)?.tagName?.toLowerCase();
+      if (tag === "input" || tag === "textarea") return;
+
+      if (e.key === "Enter") {
+        e.preventDefault();
+        trySubmit();
+        return;
+      }
+      if (e.key === "Backspace") {
+        e.preventDefault();
+        setSelected((curr) => curr.slice(0, -1));
+        return;
+      }
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setSelected([]);
+        setError(null);
+        return;
+      }
+
+      const keyUpper = e.key.toUpperCase();
+      if (/^[A-Z]$/.test(keyUpper)) {
+        const curr = selectedRef.current;
+        const last = curr[curr.length - 1];
+        const targetLetter = keyUpper === "Q" ? "QU" : keyUpper;
+
+        if (!last) {
+          for (let r = 0; r < boardSize; r++) {
+            for (let c = 0; c < boardSize; c++) {
+              if (grid[r][c].letter.toUpperCase() === targetLetter) {
+                setSelected([{ row: r, col: c }]);
+                playSound(() => sounds.select(0));
+                return;
+              }
+            }
+          }
+        } else {
+          for (let dr = -1; dr <= 1; dr++) {
+            for (let dc = -1; dc <= 1; dc++) {
+              if (dr === 0 && dc === 0) continue;
+              const nr = last.row + dr;
+              const nc = last.col + dc;
+              if (nr >= 0 && nr < boardSize && nc >= 0 && nc < boardSize) {
+                if (!curr.some((p) => p.row === nr && p.col === nc)) {
+                  if (grid[nr][nc].letter.toUpperCase() === targetLetter) {
+                    setSelected([...curr, { row: nr, col: nc }]);
+                    playSound(() => sounds.select(curr.length));
+                    return;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, [gameOver, hasStarted, boardSize, grid, trySubmit, playSound]);
+
   useEffect(() => {
     return () => {
       if (comboBurstTimerRef.current) {
         window.clearTimeout(comboBurstTimerRef.current);
+      }
+      if (floatingTimerRef.current) {
+        window.clearTimeout(floatingTimerRef.current);
       }
     };
   }, []);
@@ -536,127 +613,176 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
             </div>
           </div>
 
-          {/* Grid with SVG path overlay */}
-          <div
-            ref={boardRef}
-            id="game-board"
-            className={`relative grid touch-none select-none transition-all duration-300 ${!hasStarted ? "opacity-70" : ""} ${
-              comboBurst === 5
-                ? "scale-[1.03] drop-shadow-[0_0_28px_rgba(74,222,128,0.32)]"
-                : comboBurst === 3
-                ? "scale-[1.02] drop-shadow-[0_0_24px_rgba(99,102,241,0.28)]"
-                : ""
-            }`}
-            style={{
-              width: renderedBoardSize,
-              gridTemplateColumns: `repeat(${boardSize}, ${tileSize}px)`,
-              gap,
-            }}
-            role="grid"
-            aria-label={`${boardSize} by ${boardSize} letter grid`}
-          >
-            {!hasStarted && (
-              <div className="absolute inset-0 z-40 flex items-center justify-center rounded-xl bg-bg/65 p-5 text-center backdrop-blur-[1px]">
-                <div>
-                  <div className="text-sm font-semibold text-text">Your board is ready</div>
-                  <p className="mt-1 text-xs text-text-muted">The timer starts when you are ready.</p>
-                  <button onClick={startGame} className="relative z-50 mt-4 rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-hover">Start game</button>
-                </div>
+          {/* Grid with SVG path overlay wrapped in tactical game tray */}
+          <div className="relative p-2.5 sm:p-3.5 rounded-3xl game-tray shadow-2xl">
+            {floatingScore && (
+              <div
+                key={floatingScore.key}
+                className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 animate-score-float flex flex-col items-center"
+              >
+                <span className="text-4xl sm:text-5xl font-black text-amber-300 drop-shadow-[0_4px_16px_rgba(251,191,36,0.7)]">
+                  +{floatingScore.score}
+                </span>
+                <span className="text-xs font-bold uppercase tracking-wider text-white bg-slate-900/85 px-2.5 py-0.5 rounded-full mt-1 border border-amber-300/30 backdrop-blur-sm shadow-lg">
+                  {floatingScore.word}
+                </span>
               </div>
             )}
-            {comboBurst && (
-              <div
-                className={`pointer-events-none absolute -inset-3 rounded-3xl opacity-80 blur-md ${
-                  comboBurst === 5
-                    ? "bg-emerald-400/15 animate-combo-ring"
-                    : "bg-indigo-400/15 animate-combo-ring"
-                }`}
-              />
-            )}
-            {selected.length > 1 && (
-              <svg
-                className="absolute inset-0 pointer-events-none z-20"
-                width="100%"
-                height="100%"
-                style={{ overflow: "visible" }}
-              >
-                <path
-                  d={pathD}
-                  stroke="rgba(99, 102, 241, 0.5)"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                />
-                <path
-                  d={pathD}
-                  stroke="rgba(129, 140, 248, 0.8)"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                />
-              </svg>
-            )}
-            {grid.map((row, r) =>
-              row.map((cell, c) => (
-                <div
-                  key={`${r}-${c}`}
-                  ref={(el) => {
-                    if (!cellRefs.current[r]) cellRefs.current[r] = [];
-                    cellRefs.current[r][c] = el;
-                  }}
-                  onPointerDown={(e) => handlePointerDown(e, r, c)}
-                  onClick={() => handleCellClick(r, c)}
-                  onKeyDown={(e) => handleCellKeyDown(e, r, c)}
-                  role="gridcell"
-                  aria-label={`Row ${r + 1} column ${c + 1}, letter ${cell.letter}`}
-                  aria-selected={isCellSelected(r, c)}
-                  tabIndex={hasStarted ? 0 : -1}
-                  className={`
-                    flex items-center justify-center
-                    rounded-xl text-2xl sm:text-3xl font-bold
-                    transition-all duration-100 cursor-pointer relative z-30
-                    ${!hasStarted ? "pointer-events-none" : ""}
-                    ${cell.letter === "Qu" ? "text-xl sm:text-2xl" : ""}
-                    ${
-                      isCellSelected(r, c)
-                        ? "bg-indigo-500 text-white scale-105 shadow-lg shadow-indigo-500/50"
-                        : "bg-surface text-text active:bg-surface-hover"
-                    }
-                  `}
-                  style={{
-                    width: tileSize,
-                    height: tileSize,
-                    fontSize:
-                      boardSize <= 4
-                        ? viewportSmall
-                          ? "1.875rem"
-                          : viewportWide
-                          ? "2.5rem"
-                          : "2.25rem"
-                        : boardSize === 5
-                        ? viewportSmall
-                          ? "1.55rem"
-                          : viewportWide
-                          ? "2rem"
-                          : "1.9rem"
-                        : viewportSmall
-                        ? "1.3rem"
-                        : viewportWide
-                        ? "1.65rem"
-                        : "1.55rem",
-                  }}
-                >
-                  {cell.letter}
+            <div
+              ref={boardRef}
+              id="game-board"
+              className={`relative grid touch-none select-none transition-all duration-300 ${!hasStarted ? "opacity-70" : ""} ${
+                comboBurst === 5
+                  ? "scale-[1.03] drop-shadow-[0_0_28px_rgba(74,222,128,0.32)]"
+                  : comboBurst === 3
+                  ? "scale-[1.02] drop-shadow-[0_0_24px_rgba(99,102,241,0.28)]"
+                  : ""
+              }`}
+              style={{
+                width: renderedBoardSize,
+                gridTemplateColumns: `repeat(${boardSize}, ${tileSize}px)`,
+                gap,
+              }}
+              role="grid"
+              aria-label={`${boardSize} by ${boardSize} letter grid`}
+            >
+              {!hasStarted && (
+                <div className="absolute inset-0 z-40 flex items-center justify-center rounded-2xl bg-bg/75 p-5 text-center backdrop-blur-[2px]">
+                  <div>
+                    <div className="text-base font-bold text-text">Your board is ready</div>
+                    <p className="mt-1 text-xs text-text-muted">The timer starts when you tap Start.</p>
+                    <button
+                      onClick={startGame}
+                      className="relative z-50 mt-4 rounded-xl bg-gradient-to-r from-primary to-indigo-600 px-7 py-3.5 font-bold text-white shadow-lg shadow-primary/40 transition hover:scale-105 active:scale-95"
+                    >
+                      Start Game
+                    </button>
+                  </div>
                 </div>
-              ))
-            )}
+              )}
+              {comboBurst && (
+                <div
+                  className={`pointer-events-none absolute -inset-3 rounded-3xl opacity-80 blur-md ${
+                    comboBurst === 5
+                      ? "bg-emerald-400/15 animate-combo-ring"
+                      : "bg-indigo-400/15 animate-combo-ring"
+                  }`}
+                />
+              )}
+              {selected.length > 1 && (
+                <svg
+                  className="absolute inset-0 pointer-events-none z-20"
+                  width="100%"
+                  height="100%"
+                  style={{ overflow: "visible" }}
+                >
+                  <path
+                    d={pathD}
+                    stroke="rgba(99, 102, 241, 0.28)"
+                    strokeWidth="18"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                  />
+                  <path
+                    d={pathD}
+                    stroke="rgba(129, 140, 248, 0.85)"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                  />
+                  <path
+                    d={pathD}
+                    stroke="#ffffff"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                  />
+                </svg>
+              )}
+              {grid.map((row, r) =>
+                row.map((cell, c) => {
+                  const selIdx = selected.findIndex((s) => s.row === r && s.col === c);
+                  const isSel = selIdx !== -1;
+                  const isLast = isSel && selIdx === selected.length - 1;
+                  const pointValue = LETTER_POINTS[cell.letter] ?? 1;
+
+                  return (
+                    <div
+                      key={`${r}-${c}`}
+                      ref={(el) => {
+                        if (!cellRefs.current[r]) cellRefs.current[r] = [];
+                        cellRefs.current[r][c] = el;
+                      }}
+                      onPointerDown={(e) => handlePointerDown(e, r, c)}
+                      onClick={() => handleCellClick(r, c)}
+                      onKeyDown={(e) => handleCellKeyDown(e, r, c)}
+                      role="gridcell"
+                      aria-label={`Row ${r + 1} column ${c + 1}, letter ${cell.letter}, value ${pointValue}`}
+                      aria-selected={isSel}
+                      tabIndex={hasStarted ? 0 : -1}
+                      className={`
+                        flex items-center justify-center
+                        rounded-xl sm:rounded-2xl font-black
+                        transition-all cursor-pointer relative select-none
+                        ${!hasStarted ? "pointer-events-none" : ""}
+                        ${cell.letter === "Qu" ? "text-xl sm:text-2xl tracking-tighter" : ""}
+                        ${
+                          isSel
+                            ? isLast
+                              ? "game-tile-last z-40"
+                              : "game-tile-selected z-30"
+                            : "game-tile-3d text-text z-20"
+                        }
+                      `}
+                      style={{
+                        width: tileSize,
+                        height: tileSize,
+                        fontSize:
+                          boardSize <= 4
+                            ? viewportSmall
+                              ? "1.875rem"
+                              : viewportWide
+                              ? "2.5rem"
+                              : "2.25rem"
+                            : boardSize === 5
+                            ? viewportSmall
+                              ? "1.55rem"
+                              : viewportWide
+                              ? "2rem"
+                              : "1.9rem"
+                            : viewportSmall
+                            ? "1.3rem"
+                            : viewportWide
+                            ? "1.65rem"
+                            : "1.55rem",
+                      }}
+                    >
+                      <span className="relative z-10 leading-none">{cell.letter}</span>
+                      <span
+                        className={`absolute bottom-1 right-1.5 text-[10px] sm:text-[11px] font-bold leading-none select-none transition-colors ${
+                          isSel ? "text-white/80" : "text-text-muted/60"
+                        }`}
+                      >
+                        {pointValue}
+                      </span>
+                      {isSel && (
+                        <span className="absolute top-1 left-1.5 text-[9px] sm:text-[10px] font-extrabold leading-none text-white/70 select-none">
+                          {selIdx + 1}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </div>
           </div>
 
           {/* Error feedback */}
           <div className="h-6 text-center" aria-live="assertive" aria-atomic="true">
-            {error && <span className="text-danger text-sm font-medium animate-pulse">{error}</span>}
+            {error && <span className="text-danger text-sm font-semibold animate-shake">{error}</span>}
           </div>
 
           {/* Action: Clear only (submit is now on pointer up) */}
@@ -668,29 +794,30 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
               }}
               disabled={gameOver || selected.length === 0}
               aria-label="Clear selection"
-              className="flex-1 py-3.5 bg-surface hover:bg-surface-hover disabled:opacity-50 transition rounded-xl font-semibold text-lg active:scale-[0.98]"
+              className="flex-1 py-3 bg-surface hover:bg-surface-hover disabled:opacity-40 transition rounded-xl font-bold text-base active:scale-[0.98] border border-border"
             >
-              Clear
+              Clear Trail
             </button>
           </div>
-          <p className="text-text-dim text-xs -mt-2 text-center lg:hidden">
-            Release to submit · Drag back to undo
+          <p className="text-text-dim text-xs -mt-1 text-center">
+            <span className="hidden sm:inline">Drag tiles or type on keyboard · Enter to submit · Esc to clear</span>
+            <span className="sm:hidden">Release to submit · Drag back to undo</span>
           </p>
         </div>
 
-        <aside className="w-full space-y-4 rounded-2xl bg-surface/50 p-4 lg:sticky lg:top-6">
+        <aside className="w-full space-y-4 rounded-3xl border border-border bg-surface/50 p-4 sm:p-5 lg:sticky lg:top-6 shadow-lg backdrop-blur-sm">
           <div>
             <div className="flex justify-between items-center mb-3">
-              <span className="text-text-muted text-sm font-medium">
-                {foundWords.length} {foundWords.length === 1 ? "word" : "words"}
+              <span className="text-text-muted text-xs font-bold uppercase tracking-wider">
+                Found ({foundWords.length})
               </span>
-              <span className="text-text-muted text-sm font-medium">
-                Best combo: <span className="text-primary">{bestCombo > 0 ? `x${bestCombo}` : "—"}</span>
+              <span className="text-text-muted text-xs font-semibold">
+                Best Combo: <span className="text-primary font-bold">{bestCombo > 0 ? `x${bestCombo}` : "—"}</span>
               </span>
             </div>
-            <ul className="flex flex-wrap gap-1.5 min-h-[2rem] list-none p-0 lg:max-h-40 lg:overflow-y-auto">
+            <ul className="flex flex-wrap gap-1.5 min-h-[3rem] list-none p-0 lg:max-h-48 lg:overflow-y-auto">
               {foundWords.length === 0 ? (
-                <li className="text-text-muted text-sm">No words yet — start dragging!</li>
+                <li className="text-text-muted text-xs italic py-2">No words yet — drag across tiles to begin!</li>
               ) : (
                 foundWords
                   .slice()
@@ -698,9 +825,16 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
                   .map((f, i) => (
                     <li
                       key={i}
-                      className="px-2 py-1 bg-surface-hover rounded-md text-sm font-mono"
+                      className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold tracking-wide flex items-center gap-1.5 shadow-sm transition ${
+                        f.word.length >= 6
+                          ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                          : f.word.length >= 5
+                          ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30"
+                          : "bg-surface-hover text-text border border-border"
+                      }`}
                     >
-                      {f.word} <span className="text-primary text-xs">{f.score}</span>
+                      <span>{f.word}</span>
+                      <span className="rounded bg-bg/60 px-1 py-0.5 text-[10px] text-primary font-bold">+{f.score}</span>
                     </li>
                   ))
               )}
@@ -710,9 +844,9 @@ export default function GameBoard({ grid, initialDuration, startPaused = false, 
           {!gameOver && (
             <button
               onClick={finishGame}
-              className="w-full text-text-muted hover:text-text text-sm underline min-h-[44px] px-4 py-2"
+              className="w-full text-text-muted hover:text-danger text-xs font-semibold transition py-2 rounded-lg hover:bg-danger-bg/20"
             >
-              End Game
+              End Round Early
             </button>
           )}
         </aside>

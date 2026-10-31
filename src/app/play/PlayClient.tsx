@@ -297,78 +297,63 @@ export default function PlayClient() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-start py-6 px-4">
-        <header className="mb-6 text-center max-w-4xl">
-        <Link href="/" className="text-sm text-text-dim hover:text-text">
-          WordGrid
-        </Link>
-        <h1 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
-          Play Word Grid Online Free
-        </h1>
-        <p className="mt-3 text-sm sm:text-base text-text-muted max-w-xl mx-auto">
-          Start a free Boggle-style word grid puzzle in your browser. Choose a
-          classic 4x4 board, practice on 5x5 or 6x6 grids, then switch between
-          timed rounds, unlimited practice, Daily, or a friend challenge.
-        </p>
-        <div className="mt-4">{entryNav}</div>
-        <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
-          <button
-            onClick={() => { setSessionMode("timed"); trackEvent("mode_switch", { mode: "timed" }); }}
-            className={`px-3 py-1.5 rounded-full transition ${
-              sessionMode === "timed" ? "bg-primary text-white" : "bg-surface/70 hover:bg-surface"
-            }`}
-          >
-            Timed
-          </button>
-          <button
-              onClick={() => { setSessionMode("zen"); trackEvent("mode_switch", { mode: "zen" }); }}
-            className={`px-3 py-1.5 rounded-full transition ${
-              sessionMode === "zen" ? "bg-primary text-white" : "bg-surface/70 hover:bg-surface"
-            }`}
-          >
-            Zen
-          </button>
-          <button
-              onClick={() => {
-                trackEvent("board_size_change", { board_size: 4 });
-              const s = Math.floor(Math.random() * 1e9);
-              setBoardSize(4);
-              setSeed(s);
-              setGrid(generateGrid(s));
-              setResult(null);
-            }}
-            className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition"
-          >
-            4x4
-          </button>
-          <button
-            onClick={() => {
-              trackEvent("board_size_change", { board_size: 5 });
-              const s = Math.floor(Math.random() * 1e9);
-              setBoardSize(5);
-              setSeed(s);
-              setGrid(generateSizedGrid(s, 5));
-              setResult(null);
-            }}
-            className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition"
-          >
-            5x5
-          </button>
-          <button
-            onClick={() => {
-              trackEvent("board_size_change", { board_size: 6 });
-              const s = Math.floor(Math.random() * 1e9);
-              setBoardSize(6);
-              setSeed(s);
-              setGrid(generateSizedGrid(s, 6));
-              setResult(null);
-            }}
-            className="px-3 py-1.5 rounded-full bg-surface/70 hover:bg-surface transition"
+    <main className="min-h-screen flex flex-col items-center justify-start py-4 px-4 sm:py-6">
+      <header className="mb-6 text-center max-w-4xl w-full">
+        {/* Game Mode & Board Configuration Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/80 bg-surface/50 p-2.5 sm:p-3 backdrop-blur-sm shadow-sm">
+          {/* Mode Switcher */}
+          <div className="flex items-center gap-1 bg-bg/60 p-1 rounded-xl border border-border/50">
+            <button
+              onClick={() => { setSessionMode("timed"); trackEvent("mode_switch", { mode: "timed" }); }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                sessionMode === "timed" ? "bg-primary text-white shadow-sm" : "text-text-muted hover:text-text"
+              }`}
             >
-              6x6
+              <span>⚡</span>
+              <span>3 Min Timed</span>
             </button>
+            <button
+              onClick={() => { setSessionMode("zen"); trackEvent("mode_switch", { mode: "zen" }); }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                sessionMode === "zen" ? "bg-primary text-white shadow-sm" : "text-text-muted hover:text-text"
+              }`}
+            >
+              <span>🧘</span>
+              <span>Zen Free</span>
+            </button>
+          </div>
+
+          {/* Size Switcher */}
+          <div className="flex items-center gap-1 bg-bg/60 p-1 rounded-xl border border-border/50">
+            {[4, 5, 6].map((size) => (
+              <button
+                key={size}
+                onClick={() => {
+                  trackEvent("board_size_change", { board_size: size });
+                  const s = Math.floor(Math.random() * 1e9);
+                  setBoardSize(size);
+                  setSeed(s);
+                  setGrid(size === 4 ? generateGrid(s) : generateSizedGrid(s, size));
+                  setResult(null);
+                }}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                  boardSize === size ? "bg-primary text-white shadow-sm" : "text-text-muted hover:text-text"
+                }`}
+              >
+                {size}×{size}
+              </button>
+            ))}
+          </div>
+
+          {/* New Random Board */}
+          <button
+            onClick={newGame}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-border/70 bg-surface hover:bg-surface-hover text-text text-xs font-bold transition active:scale-95 shadow-sm"
+          >
+            <span>🎲</span>
+            <span>New Board</span>
+          </button>
         </div>
-        {supportNav}
       </header>
       <div className="w-full max-w-7xl mx-auto lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start">
         <div className="w-full">

@@ -61,20 +61,20 @@ export default function HomeClient() {
 
   // Default: game-first lobby with secondary modes kept out of the primary path.
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-5 sm:py-8">
-      <header className="mb-5 flex items-center justify-between gap-4">
-        <Link href="/" className="text-lg font-bold tracking-tight">WordGrid</Link>
-        <div className="flex items-center gap-2 text-sm">
-          <Link href="/daily" className="rounded-lg bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">Daily</Link>
-          <Link href="/guides" className="rounded-lg bg-surface px-3 py-2 font-semibold hover:bg-surface-hover transition">How to play</Link>
-        </div>
-      </header>
+    <div className="mx-auto w-full max-w-6xl px-4 py-4 sm:py-6">
       <section className="mb-5 text-center">
-        <div className="text-xs font-semibold uppercase tracking-wide text-primary">Free browser word game</div>
-        <h1 className="mt-2 text-2xl font-bold sm:text-3xl">Play this board</h1>
-          <p className="mx-auto mt-2 max-w-xl text-sm text-text-muted">Connect adjacent letters, find as many words as you can in three minutes, then review the board after the clock ends.</p>
+        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary shadow-sm">
+          <span className="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+          Instant Arcade Board · 3-Minute Blitz
+        </div>
+        <h1 className="mt-2.5 text-2xl font-black tracking-tight sm:text-4xl">
+          Connect Adjacent Tiles. Find Every Word.
+        </h1>
+        <p className="mx-auto mt-2 max-w-xl text-sm text-text-muted">
+          Drag horizontally, vertically, or diagonally. Submit words before the clock runs out!
+        </p>
       </section>
-      <div className="mb-6">
+      <div className="mb-8">
         <GameBoard
           grid={grid}
           startPaused
@@ -82,31 +82,121 @@ export default function HomeClient() {
           onComplete={handleComplete}
         />
       </div>
-      <section className="grid gap-3 sm:grid-cols-3">
-        <Link href="/complete" className="border border-primary/30 bg-primary/10 p-4 transition hover:bg-primary/15">
-          <div className="text-xs font-semibold uppercase tracking-wide text-primary">Complete / No timer</div>
-          <div className="mt-1 font-semibold">Find every word</div>
-          <p className="mt-1 text-sm text-text-muted">Collect every target on a new daily board, including long-word discoveries.</p>
-        </Link>
-        <Link href="/challenge" className="border border-primary/30 bg-primary/10 p-4 transition hover:bg-primary/15">
-          <div className="text-xs font-semibold uppercase tracking-wide text-primary">Play with friends</div>
-          <div className="mt-1 font-semibold">Challenge the same board</div>
-          <p className="mt-1 text-sm text-text-muted">Finish a round, then share the exact board and your score target.</p>
-        </Link>
-        <Link href="/daily" className="border border-border bg-surface/50 p-4 transition hover:bg-surface">
-          <div className="text-xs font-semibold uppercase tracking-wide text-primary">Daily</div>
-          <div className="mt-1 font-semibold">Shared board, new each day</div>
-        </Link>
-        <Link href="/weekly" className="border border-border bg-surface/50 p-4 transition hover:bg-surface">
-          <div className="text-xs font-semibold uppercase tracking-wide text-primary">Weekly</div>
-          <div className="mt-1 font-semibold">One themed board all week</div>
-        </Link>
-        <Link href="/solver" className="border border-border bg-surface/50 p-4 transition hover:bg-surface">
-          <div className="text-xs font-semibold uppercase tracking-wide text-primary">Improve</div>
-          <div className="mt-1 font-semibold">Review a finished board</div>
-          <p className="mt-1 text-sm text-text-muted">Use the solver after a round to find the patterns you missed.</p>
-        </Link>
+      <section className="mt-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-black tracking-tight text-text">More Game Modes</h2>
+          <span className="text-xs font-semibold text-text-muted">Pick a challenge</span>
+        </div>
+        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+          <Link
+            href="/daily"
+            className="group relative rounded-2xl border border-border/80 bg-gradient-to-br from-surface to-surface/40 p-5 transition-all hover:-translate-y-1 hover:border-amber-500/50 hover:shadow-xl hover:shadow-amber-500/10"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-2xl">🔥</span>
+              <span className="rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-amber-400">
+                Daily Board
+              </span>
+            </div>
+            <div className="mt-3 font-bold text-base text-text group-hover:text-amber-400 transition-colors">
+              Daily Challenge
+            </div>
+            <p className="mt-1 text-xs text-text-muted leading-relaxed">
+              Same board for everyone globally. Changes at midnight UTC+8. Build your daily streak!
+            </p>
+          </Link>
+
+          <Link
+            href="/complete"
+            className="group relative rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/15 via-surface to-surface/40 p-5 transition-all hover:-translate-y-1 hover:border-indigo-400/60 hover:shadow-xl hover:shadow-indigo-500/15"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-2xl">🧩</span>
+              <span className="rounded-full bg-indigo-500/20 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-primary">
+                Untimed Collection
+              </span>
+            </div>
+            <div className="mt-3 font-bold text-base text-text group-hover:text-primary transition-colors">
+              WordGrid Complete
+            </div>
+            <p className="mt-1 text-xs text-text-muted leading-relaxed">
+              No timer pressure. Find all required target words, reveal bonus words, and climb the leaderboard.
+            </p>
+          </Link>
+
+          <Link
+            href="/zen"
+            className="group relative rounded-2xl border border-border/80 bg-gradient-to-br from-surface to-surface/40 p-5 transition-all hover:-translate-y-1 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/10"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-2xl">🧘</span>
+              <span className="rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">
+                Endless Practice
+              </span>
+            </div>
+            <div className="mt-3 font-bold text-base text-text group-hover:text-emerald-400 transition-colors">
+              Zen Mode
+            </div>
+            <p className="mt-1 text-xs text-text-muted leading-relaxed">
+              Relaxed word hunting without time limits. Great for discovering obscure roots and prefixes.
+            </p>
+          </Link>
+
+          <Link
+            href="/challenge"
+            className="group relative rounded-2xl border border-border/80 bg-gradient-to-br from-surface to-surface/40 p-5 transition-all hover:-translate-y-1 hover:border-rose-500/50 hover:shadow-xl hover:shadow-rose-500/10"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-2xl">⚔️</span>
+              <span className="rounded-full bg-rose-500/15 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-rose-400">
+                Multiplayer
+              </span>
+            </div>
+            <div className="mt-3 font-bold text-base text-text group-hover:text-rose-400 transition-colors">
+              Friend Challenge
+            </div>
+            <p className="mt-1 text-xs text-text-muted leading-relaxed">
+              Share your finished board and score target with friends to see who can beat your record.
+            </p>
+          </Link>
+
+          <Link
+            href="/training"
+            className="group relative rounded-2xl border border-border/80 bg-gradient-to-br from-surface to-surface/40 p-5 transition-all hover:-translate-y-1 hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-2xl">🎯</span>
+              <span className="rounded-full bg-violet-500/15 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-violet-400">
+                Skill Sprints
+              </span>
+            </div>
+            <div className="mt-3 font-bold text-base text-text group-hover:text-violet-400 transition-colors">
+              Pattern Sprint
+            </div>
+            <p className="mt-1 text-xs text-text-muted leading-relaxed">
+              Fast 30-second drills targeting specific prefixes, suffixes, and high-scoring letter combos.
+            </p>
+          </Link>
+
+          <Link
+            href="/solver"
+            className="group relative rounded-2xl border border-border/80 bg-gradient-to-br from-surface to-surface/40 p-5 transition-all hover:-translate-y-1 hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/10"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-2xl">🔍</span>
+              <span className="rounded-full bg-cyan-500/15 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-cyan-400">
+                Analyzer
+              </span>
+            </div>
+            <div className="mt-3 font-bold text-base text-text group-hover:text-cyan-400 transition-colors">
+              Board Solver
+            </div>
+            <p className="mt-1 text-xs text-text-muted leading-relaxed">
+              Input any custom grid to instantly calculate all possible words and visualize paths.
+            </p>
+          </Link>
+        </div>
       </section>
-    </main>
+    </div>
   );
 }

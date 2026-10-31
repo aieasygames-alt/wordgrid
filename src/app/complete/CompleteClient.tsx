@@ -179,12 +179,45 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
       {storageWarning && <p role="status" className="mb-4 text-sm text-accent">Browser storage is unavailable or the saved game could not be read. Progress may not survive a reload.</p>}
       {tutorial && <CompleteTutorial onClose={closeTutorial} />}
       <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr]">
-        <section className="min-w-0 rounded-3xl border border-border bg-gradient-to-br from-surface to-bg p-4 sm:p-6" aria-label="Daily puzzle">
+        <section className="min-w-0 rounded-3xl border border-border bg-gradient-to-br from-surface to-bg p-4 sm:p-6 shadow-xl" aria-label="Daily puzzle">
           <div className="flex items-center justify-between gap-3">
-            <div><p className="text-xs uppercase tracking-widest text-text-muted">{practice ? "Practice" : puzzle.date} / {puzzle.difficulty}</p><p className="mt-2 text-3xl font-bold" data-testid="complete-progress">{targets.length}<span className="text-text-dim"> / {puzzle.requiredWords.length}</span></p></div>
-            <ThemeToggle />
+            <div>
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/20 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-widest text-primary">
+                <span>🧩</span>
+                <span>{practice ? "Practice Board" : puzzle.date} · {puzzle.difficulty}</span>
+              </div>
+              <p className="mt-2 text-3xl font-black tracking-tight" data-testid="complete-progress">
+                {targets.length}
+                <span className="text-text-dim font-bold text-xl"> / {puzzle.requiredWords.length} targets</span>
+              </p>
+            </div>
+            <div className="text-right">
+              <span className="text-xs uppercase tracking-wider text-text-muted font-bold block">Score</span>
+              <span className="text-2xl font-black text-amber-400 tabular-nums">{score}</span>
+            </div>
           </div>
-          <progress value={targets.length} max={puzzle.requiredWords.length} aria-label="Target words found" className="mt-4 h-2 w-full accent-indigo-500" />
+
+          {/* Gamified XP Collection Progress Bar */}
+          <div className="mt-4 space-y-1.5">
+            <div className="flex items-center justify-between text-xs font-bold">
+              <span className="text-text-muted">Collection Trail</span>
+              <span className="text-primary font-mono">{Math.round((targets.length / puzzle.requiredWords.length) * 100)}%</span>
+            </div>
+            <div className="relative h-2.5 w-full rounded-full bg-surface-hover/80 overflow-hidden p-0.5 border border-border/80">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-primary to-amber-400 transition-all duration-300 shadow-sm"
+                style={{ width: `${Math.min(100, Math.max(0, Math.round((targets.length / puzzle.requiredWords.length) * 100)))}%` }}
+              />
+            </div>
+            <div className="flex justify-between text-[10px] text-text-dim px-0.5 font-mono">
+              <span>0%</span>
+              <span className={unlock >= 1 ? "text-primary font-bold" : ""}>20% (Counts)</span>
+              <span className={unlock >= 2 ? "text-primary font-bold" : ""}>40% (Letters)</span>
+              <span className={unlock >= 3 ? "text-amber-400 font-bold" : ""}>60% (Reveals)</span>
+              <span>100%</span>
+            </div>
+            <progress value={targets.length} max={puzzle.requiredWords.length} aria-label="Target words found" className="sr-only" />
+          </div>
           {complete && <div role="status" className="mt-4 rounded-xl border border-success/40 bg-success/10 p-4"><h2 className="font-bold text-success">Board complete!</h2><p className="mt-1 text-sm">Every target found. {score} points{progress.revealed.length ? `, ${progress.revealed.length} revealed` : " without reveals"}. Return tomorrow for a new trail.</p></div>}
           <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
             <button disabled={!ready} className="text-primary disabled:opacity-40" onClick={()=>{setTurns((turns+1)%4);setMessage("Board rotated 90 degrees. Score and progress are unchanged.");}}>Rotate 90°</button>

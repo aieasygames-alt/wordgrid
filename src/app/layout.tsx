@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import CookieBanner from "@/components/CookieBanner";
 import SiteFooter from "@/components/SiteFooter";
+import GameHeader from "@/components/GameHeader";
 
 const GA_ID = "G-MLZV98LG8Z";
 
@@ -106,8 +107,12 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script id="consent-default" dangerouslySetInnerHTML={{ __html: consentScript }} />
       </head>
-      <body>
-        <ThemeProvider>{children}<SiteFooter /></ThemeProvider>
+      <body className="min-h-screen flex flex-col bg-bg text-text game-backdrop">
+        <ThemeProvider>
+          <GameHeader />
+          <div className="flex-1">{children}</div>
+          <SiteFooter />
+        </ThemeProvider>
         <CookieBanner />
         {/* Google Analytics (GA4) */}
         <Script

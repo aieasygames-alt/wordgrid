@@ -172,36 +172,19 @@ export default function DailyClient() {
   ];
 
   return (
-    <main className="min-h-screen px-4 py-8 sm:py-12">
+    <main className="min-h-screen px-4 py-6 sm:py-8">
       <article className="mx-auto max-w-7xl">
-        <header className="mb-6 sm:mb-8 text-center">
-          <a href="/" className="text-sm text-text-dim hover:text-text">
-            WordGrid
-          </a>
-          <h1 className="mt-1 text-3xl sm:text-4xl font-bold tracking-tight">
-            Daily Word Grid Puzzle — Today's Word Guessing Game
-          </h1>
-          <p className="mt-3 text-sm sm:text-base text-text-muted max-w-2xl mx-auto leading-relaxed">
-            Play today&apos;s free shared 4x4 WordGrid board for {today}. Everyone
-            gets the same Boggle-style grid and the same 3-minute timer, so you
-            can track your own results and review the board afterward.
-          </p>
-          <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
-            {entryLinks.map((entry) => (
-              <Link
-                key={entry.href}
-                href={entry.href}
-                aria-current={entry.href === "/daily" ? "page" : undefined}
-                className={`px-3 py-1.5 rounded-full transition ${
-                  entry.href === "/daily"
-                    ? "bg-primary text-white shadow-lg shadow-primary/20"
-                    : "bg-surface/70 hover:bg-surface text-text-muted hover:text-text"
-                }`}
-              >
-                {entry.label}
-              </Link>
-            ))}
+        <header className="mb-6 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1 text-xs font-bold text-amber-400">
+            <span>🔥</span>
+            <span>Daily Board · {today}</span>
           </div>
+          <h1 className="mt-2 text-2xl sm:text-4xl font-black tracking-tight">
+            Today&apos;s Word Grid Challenge
+          </h1>
+          <p className="mt-1.5 text-xs sm:text-sm text-text-muted max-w-xl mx-auto">
+            A shared 4×4 board with a 3-minute clock. Same grid for all players worldwide today.
+          </p>
         </header>
         <DailyStatusBar mode="daily" />
 

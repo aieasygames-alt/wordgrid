@@ -1100,8 +1100,6 @@ export default function ResultScreen({
         </div>
       </section>
 
-      <PwaInstallPrompt />
-
       <div className="flex flex-wrap gap-3">
         {onPlayAgain && (
           <button

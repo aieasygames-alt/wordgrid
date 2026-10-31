@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/play/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE_URL}/zen/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.82 },
     { url: `${BASE_URL}/daily/`, lastModified: SITE_UPDATED, changeFrequency: "daily", priority: 0.9 },
+    { url: `${BASE_URL}/complete/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/weekly/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.82 },
     { url: `${BASE_URL}/training/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.78 },
     { url: `${BASE_URL}/challenge/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.72 },

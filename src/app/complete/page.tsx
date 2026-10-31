@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CompleteClient from "./CompleteClient";
 
+const BASE_URL = "https://wordgrid.games";
+
 export const metadata: Metadata = {
-  title: "Complete - Find Every Word",
-  description: "An untimed daily word grid. Connect adjacent letters, discover long words, and find every target in WordGrid Complete.",
-  alternates: { canonical: "/complete/" },
-  robots: { index: false, follow: true },
-  openGraph: { title: "WordGrid Complete - Find Every Word", description: "One daily grid. No timer. Find every target word.", url: "https://wordgrid.games/complete/" },
+  title: "WordGrid Complete — Untimed Word Grid Challenge (Find Every Word)",
+  description: "Play WordGrid Complete free online. One daily 4x4 grid with no timer. Connect adjacent letters to discover long words and find every target word.",
+  alternates: { canonical: `${BASE_URL}/complete/` },
+  openGraph: {
+    title: "WordGrid Complete — Untimed Word Grid Challenge",
+    description: "One daily 4x4 grid. No timer. Connect adjacent letters and find every target word.",
+    url: `${BASE_URL}/complete/`,
+  },
 };
 
 export default function CompletePage() {

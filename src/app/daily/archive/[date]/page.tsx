@@ -35,11 +35,11 @@ export function generateMetadata({ params }: PageProps): Metadata {
     title: `${formatArchiveDate(entry.date)} Daily Board — WordGrid`,
     description:
       `Review the WordGrid daily board for ${formatArchiveDate(entry.date)} with ${entry.totalWords} possible words, ${entry.totalPossibleScore} possible points, and the strongest word paths.`,
-    alternates: { canonical: `/daily/archive/${entry.date}` },
+    alternates: { canonical: `${BASE_URL}/daily/archive/${entry.date}/` },
     openGraph: {
       title: `${formatArchiveDate(entry.date)} Daily Board — WordGrid`,
       description: entry.detail,
-      url: `${BASE_URL}/daily/archive/${entry.date}`,
+      url: `${BASE_URL}/daily/archive/${entry.date}/`,
     },
   };
 }

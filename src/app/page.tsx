@@ -4,15 +4,15 @@ import HomeClient from "./HomeClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online Free — Instant Boggle-Style Game",
+  title: "Play Word Grid Online Free — Boggle 4x4 Puzzle (No Download)",
   description:
-    "Play a free Boggle-style word grid game instantly. No download or sign-up: choose a three-minute timed board or Zen practice, then review missed words.",
-  alternates: { canonical: "/" },
+    "Play the free classic word grid game online in your browser. Choose a three-minute timed board or Zen practice, then review missed words. No download or sign-up.",
+  alternates: { canonical: `${BASE_URL}/` },
   openGraph: {
-    title: "Play Word Grid Online Free — WordGrid Game",
+    title: "Play Word Grid Online Free — Boggle 4x4 Puzzle",
     description:
-      "A free WordGrid game for timed or Zen practice, shared boards, solver review, and word-pattern learning.",
-    url: BASE_URL,
+      "Play the free classic word grid game online in your browser. 3-minute timed, Zen practice, and daily challenges with no download.",
+    url: `${BASE_URL}/`,
     images: [
       {
         url: "/share-card-bg.png",

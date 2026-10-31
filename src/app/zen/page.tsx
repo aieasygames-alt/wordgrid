@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: "Zen Word Grid: Practice Without the Clock",
   description:
     "Practice WordGrid at your own pace with no timer. Use Zen mode to learn patterns, test word paths, and review a finished board with the solver.",
-  alternates: { canonical: "/zen" },
+  alternates: { canonical: `${BASE_URL}/zen/` },
   openGraph: {
     title: "Zen Word Grid: Practice Without the Clock",
     description:
       "No timer, no pressure. Use Zen mode to practice patterns and build board recognition at your own pace.",
-    url: `${BASE_URL}/zen`,
+    url: `${BASE_URL}/zen/`,
   },
 };
 

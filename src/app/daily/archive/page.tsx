@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   title: "WordGrid Daily Archive: Recent Puzzle Boards",
   description:
     "Browse recent WordGrid daily boards. Review the last two weeks of grids, spot patterns, and jump back into today's puzzle.",
-  alternates: { canonical: "/daily/archive" },
+  alternates: { canonical: `${BASE_URL}/daily/archive/` },
   openGraph: {
     title: "WordGrid Daily Archive: Recent Puzzle Boards",
     description:
       "Review recent daily WordGrid boards and return to today's board whenever you're ready.",
-    url: `${BASE_URL}/daily/archive`,
+    url: `${BASE_URL}/daily/archive/`,
   },
 };
 

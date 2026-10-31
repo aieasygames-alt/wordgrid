@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const BASE_URL = "https://wordgrid.games";
+
 export const metadata: Metadata = {
   title: "Word Grid Learn — Rules, Strategy, Solver & Tips",
   description:
     "Learn Word Grid rules, strategy, solver review, scoring, and word patterns with a guided path from beginner to advanced play.",
-  alternates: { canonical: "/guides" },
+  alternates: { canonical: `${BASE_URL}/guides/` },
   openGraph: {
     title: "Word Grid Learn — Rules, Strategy, Solver & Tips",
     description:
       "A learning hub for rules, strategy, solver review, scoring, and word patterns.",
+    url: `${BASE_URL}/guides/`,
   },
 };
 

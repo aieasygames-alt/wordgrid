@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: "Weekly Word Grid Challenge - Shared 4x4 Board",
   description:
     "Play this week's shared 4x4 WordGrid board with a three-minute timer, then review missed patterns and share the same challenge.",
-  alternates: { canonical: "/weekly" },
+  alternates: { canonical: `${BASE_URL}/weekly/` },
   openGraph: {
     title: "Weekly Word Grid Challenge - Shared 4x4 Board",
     description:
       "A fresh shared 4x4 WordGrid board each week, with a three-minute timed run and post-game review.",
-    url: `${BASE_URL}/weekly`,
+    url: `${BASE_URL}/weekly/`,
   },
 };
 

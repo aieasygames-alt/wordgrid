@@ -5,9 +5,9 @@ import SolverClient from "./SolverClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Boggle Solver — Free Word Grid Finder Online",
+  title: "Boggle Solver & Word Grid Finder — Solve 4x4, 5x5, 6x6 Grids Free",
   description:
-    "Use this free Boggle solver to review valid words in 4x4, 5x5, or 6x6 Boggle-style grids, compare scores, and study missed routes after play.",
+    "Find every valid word on any Boggle grid in seconds. Enter your 4x4, 5x5, or 6x6 board to get all words sorted by points. 100% free with visual route preview.",
   alternates: { canonical: `${BASE_URL}/solver/` },
   keywords: [
     "boggle solver",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     "word finder puzzle",
   ],
   openGraph: {
-    title: "Word Grid Finder & Boggle Solver - Review Valid Routes",
+    title: "Boggle Solver & Word Grid Finder — Solve 4x4, 5x5, 6x6 Grids Free",
     description:
-      "Paste a 4x4, 5x5, or 6x6 square grid and review valid words, scores, and missed routes.",
+      "Find all valid words in any 4x4, 5x5, or 6x6 Boggle grid. 100% free online solver with visual route preview.",
     url: `${BASE_URL}/solver/`,
   },
 };

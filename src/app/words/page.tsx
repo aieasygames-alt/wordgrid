@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   title: "Word Grid Word List — Search, Study, and Score",
   description:
     "Search curated Word Grid words, browse pattern-based word lists, and jump to high-value word pages.",
-  alternates: { canonical: "/words" },
+  alternates: { canonical: `${BASE_URL}/words/` },
   openGraph: {
     title: "Word Grid Word List — Search, Study, and Score",
     description:
       "A searchable Word Grid word list with patterns, scores, and quick links to related study pages.",
-    url: `${BASE_URL}/words`,
+    url: `${BASE_URL}/words/`,
   },
 };
 

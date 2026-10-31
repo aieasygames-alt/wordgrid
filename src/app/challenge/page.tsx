@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   title: "Share a WordGrid Board - Play the Same Grid",
   description:
     "Share a WordGrid board with friends, play the same grid on any device, compare a shared target when included, and review missed words after the round.",
-  alternates: { canonical: "/challenge" },
+  alternates: { canonical: `${BASE_URL}/challenge/` },
   openGraph: {
     title: "Share a WordGrid Board - Play the Same Grid",
     description:
       "Open a shared board, play the same grid, and review it with the solver after the run.",
-    url: `${BASE_URL}/challenge`,
+    url: `${BASE_URL}/challenge/`,
   },
 };
 

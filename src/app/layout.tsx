@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     "word search puzzle", "free boggle online",
   ],
   alternates: {
-    canonical: BASE_URL,
+    canonical: `${BASE_URL}/`,
   },
   manifest: "/manifest.json",
   appleWebApp: {

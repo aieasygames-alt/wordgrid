@@ -31,7 +31,7 @@ export async function generateMetadata({
       follow: true,
     },
     alternates: {
-      canonical: `/words/${wordLower}/`,
+      canonical: `${BASE_URL}/words/${wordLower}/`,
     },
     openGraph: {
       title: `${word} — WordGrid Word Guide`,
@@ -82,7 +82,7 @@ export default async function Page({ params }: { params: { word: string } }) {
         "@type": "ListItem",
         position: 2,
         name: "Words",
-        item: `${BASE_URL}/words`,
+        item: `${BASE_URL}/words/`,
       },
       {
         "@type": "ListItem",
@@ -117,9 +117,9 @@ export default async function Page({ params }: { params: { word: string } }) {
           <div>
             {/* Breadcrumb */}
             <nav className="flex flex-wrap items-center gap-2 text-sm text-text-dim mb-6">
-              <a href="/" className="hover:text-text">Home</a>
+              <Link href="/" className="hover:text-text">Home</Link>
               <span>›</span>
-              <a href="/words" className="hover:text-text">Words</a>
+              <Link href="/words/" className="hover:text-text">Words</Link>
               <span>›</span>
               <span className="text-text-muted">{wordUpper}</span>
             </nav>
@@ -228,69 +228,129 @@ export default async function Page({ params }: { params: { word: string } }) {
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {relatedWords.map((rw) => (
-                    <a
+                    <Link
                       key={rw}
                       href={`/words/${rw}/`}
                       className="px-3 py-1.5 bg-surface hover:bg-surface-hover rounded-lg text-sm font-mono text-text transition"
                     >
                       {rw.toUpperCase()}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
             )}
 
-            <nav className="max-w-3xl mt-12 pt-8 border-t border-surface">
-              <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-3">
-                Play Word Games
+            {/* In-stream Game Challenge Box */}
+            <div className="mt-10 max-w-3xl rounded-3xl border border-primary/30 bg-gradient-to-r from-primary/10 via-surface/60 to-surface/80 p-6 sm:p-7 shadow-lg">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <span className="text-xs uppercase tracking-wider font-bold text-primary">Challenge Ready</span>
+                  <h3 className="mt-1 text-lg font-bold text-text">Spot &quot;{wordUpper}&quot; in live word grids</h3>
+                  <p className="mt-1 text-sm text-text-muted">
+                    Practice finding {wordUpper.length}-letter words under pressure or compete on today&apos;s shared board.
+                  </p>
+                </div>
+                <div className="flex gap-2.5 sm:flex-col sm:w-48 shrink-0">
+                  <Link
+                    href="/daily/"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-primary hover:bg-primary-hover text-white text-sm font-bold shadow-md shadow-primary/20 transition active:scale-[0.98]"
+                  >
+                    <span>▶</span> Play Daily
+                  </Link>
+                  <Link
+                    href="/play/"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2 px-4 rounded-xl bg-surface hover:bg-surface-hover text-text text-xs font-semibold border border-border/80 transition text-center"
+                  >
+                    Free Practice
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <nav className="max-w-3xl mt-8 pt-6 border-t border-border">
+              <h2 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-3">
+                Explore WordGrid Game Modes
               </h2>
               <div className="flex gap-3 flex-wrap">
-                <a
-                  href="/play"
-                  className="px-4 py-2.5 bg-primary hover:bg-primary-hover transition rounded-lg text-sm font-medium"
+                <Link
+                  href="/daily/"
+                  className="px-4 py-2 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 transition rounded-xl text-sm font-semibold"
                 >
-                  Play
-                </a>
-                <a
-                  href="/daily"
-                  className="px-4 py-2.5 bg-surface hover:bg-surface-hover transition rounded-lg text-sm font-medium"
+                  📅 Today&apos;s Daily (4x4)
+                </Link>
+                <Link
+                  href="/play/"
+                  className="px-4 py-2 bg-surface hover:bg-surface-hover transition rounded-xl text-sm font-medium border border-border"
                 >
-                  Daily
-                </a>
+                  ⏱️ Timed Mode
+                </Link>
+                <Link
+                  href="/complete/"
+                  className="px-4 py-2 bg-surface hover:bg-surface-hover transition rounded-xl text-sm font-medium border border-border"
+                >
+                  🏆 Complete Mode
+                </Link>
+                <Link
+                  href="/solver/"
+                  className="px-4 py-2 bg-surface hover:bg-surface-hover transition rounded-xl text-sm font-medium border border-border"
+                >
+                  🔍 Boggle Solver
+                </Link>
               </div>
             </nav>
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-8">
-            <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6 shadow-xl shadow-black/10">
-              <div className="text-xs uppercase tracking-wide text-text-muted font-semibold">
-                Word snapshot
+            <div className="rounded-3xl border border-primary/30 bg-gradient-to-b from-primary/15 via-surface/60 to-surface/80 p-5 sm:p-6 shadow-xl shadow-primary/5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-wider font-bold text-primary">Word Value</span>
+                <span className="px-2 py-0.5 rounded-full bg-primary/20 text-xs font-bold text-primary">{points} pts</span>
               </div>
-              <div className="mt-2 text-3xl font-bold text-primary">{points} pts</div>
-              <p className="mt-2 text-sm text-text-muted leading-relaxed">
-                Use this card as a quick desktop reference while scanning related
-                words or hopping back into a round.
-              </p>
+              <div className="mt-3">
+                <h3 className="text-base font-bold text-text">Spot {wordUpper} in Action</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
+                  Test your speed and pattern recognition on today&apos;s shared 4×4 board.
+                </p>
+              </div>
+              <div className="mt-4 space-y-2">
+                <Link
+                  href="/daily/"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-primary hover:bg-primary-hover text-white text-sm font-bold shadow-md shadow-primary/20 transition active:scale-[0.98]"
+                >
+                  <span>▶</span> Play Daily Challenge
+                </Link>
+                <Link
+                  href="/play/"
+                  className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-surface hover:bg-surface-hover text-text text-xs font-semibold border border-border/80 transition"
+                >
+                  ⚡ Instant Practice (4x4)
+                </Link>
+              </div>
+              <div className="mt-3 pt-3 border-t border-border/50 flex items-center justify-center gap-3 text-[11px] text-text-dim">
+                <span>✓ Free browser play</span>
+                <span>•</span>
+                <span>✓ No download</span>
+              </div>
             </div>
 
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-              <h2 className="text-lg font-semibold text-text">Study next</h2>
-              <div className="mt-4 grid gap-2">
-                <a href="/guides/how-to-find-more-words" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+              <h2 className="text-base font-semibold text-text">Study next</h2>
+              <div className="mt-3 grid gap-2">
+                <Link href="/guides/how-to-find-more-words/" className="rounded-xl bg-bg/60 px-3.5 py-2.5 text-sm font-semibold hover:bg-surface-hover transition">
                   More word-finding
-                </a>
-                <a href="/guides/word-grid-strategies" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                </Link>
+                <Link href="/guides/word-grid-strategies/" className="rounded-xl bg-bg/60 px-3.5 py-2.5 text-sm font-semibold hover:bg-surface-hover transition">
                   Scoring strategy
-                </a>
-                <a href="/words" className="rounded-xl bg-bg/60 px-4 py-3 font-semibold hover:bg-surface-hover transition">
+                </Link>
+                <Link href="/words/" className="rounded-xl bg-bg/60 px-3.5 py-2.5 text-sm font-semibold hover:bg-surface-hover transition">
                   Back to list
-                </a>
+                </Link>
               </div>
             </div>
 
             <div className="rounded-3xl border border-border bg-surface/50 p-5 sm:p-6">
-              <h2 className="text-lg font-semibold text-text">Pattern reminder</h2>
-              <p className="mt-3 text-sm text-text-muted leading-relaxed">
+              <h2 className="text-base font-semibold text-text">Pattern reminder</h2>
+              <p className="mt-2 text-xs text-text-muted leading-relaxed">
                 Short common words are useful anchors. Extend them with prefixes,
                 suffixes, and nearby letter branches to build higher-value chains.
               </p>

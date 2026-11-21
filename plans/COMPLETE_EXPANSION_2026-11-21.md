@@ -36,6 +36,9 @@
   API、POST、第三方和分析请求从不缓存、不离线排队。
 - 首次访问需要在线准备，配额不足、清站点数据、缓存题库范围到期均有边界；
   题库到期明确回退练习。排行榜始终需要网络。
+- 正式域名曾将 `sw.js` 的 `no-cache` 改为 4 小时。对 worker 和清单同时设置
+  浏览器与 Cloudflare CDN 的 `no-store`，防止脚本发布后被边缘缓存延迟更新。
+  规则依据 [Cloudflare CDN-Cache-Control](https://developers.cloudflare.com/cache/concepts/cdn-cache-control/)。
 
 ## 验证证据
 

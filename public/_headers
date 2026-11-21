@@ -20,7 +20,9 @@
 /data/complete/bank-v2.json
   Cache-Control: public, max-age=0, must-revalidate
 /sw.js
-  Cache-Control: no-cache
+  Cache-Control: no-store, max-age=0
+  Cloudflare-CDN-Cache-Control: no-store
   Service-Worker-Allowed: /
 /offline-manifest.json
-  Cache-Control: no-cache
+  Cache-Control: no-store, max-age=0
+  Cloudflare-CDN-Cache-Control: no-store

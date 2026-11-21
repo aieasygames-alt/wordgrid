@@ -7,7 +7,8 @@ The archive calls its newest entry the latest published board so a delayed build
 does not label an old board as today.
 
 The daily refresh workflow validates the site at 00:15 and 12:15 UTC+8, then
-advances a date file on main to trigger the existing Cloudflare Pages Git deployment.
+advances a date/refresh marker on main to trigger the existing Cloudflare Pages Git deployment.
+The refresh time changes on both runs so a failed first deployment can be retried.
 GitHub schedules may be delayed. Workflow success, deployment success, and the
 public archive/sitemap should all be checked when investigating freshness.
 
@@ -21,7 +22,8 @@ public archive/sitemap should all be checked when investigating freshness.
 - `/guides/boggle-rules-beginners/`: adds a legal TAP path and the WordGrid
   1/2/4/6 score table before the full article, with a tracked play link.
 - `/guides/boggle-generator/`: generates and previews 4×4, 5×5, or 6×6 boards;
-  both play links and sharing preserve every displayed tile.
+  both play links and sharing preserve every displayed tile. Weighted larger
+  boards use Qu consistently so a Q face cannot change when a link is opened.
 - `/guides/boggle-word-lists/` and `/guides/most-common-boggle-words/`: retain the
   study lists and add tracked links to relevant training focuses.
 - `/training/`: makes the first render stable before reading the URL focus;

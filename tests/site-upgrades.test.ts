@@ -32,12 +32,14 @@ test("archive rejects invalid and unpublished dates, including leap day rollover
 
 test("generated board links retain every previewed tile and mode at all three sizes", () => {
   for (const size of [4, 5, 6]) {
-    const grid = generateSizedGrid(574624, size);
-    for (const mode of ["timed", "zen"]) {
-      const url = new URL(buildBoardUrl("/play/", grid, { mode, source: "generator" }), "https://wordgrid.games");
-      assert.deepEqual(decodeBoard(url.searchParams.get("board")!), grid);
-      assert.equal(url.searchParams.get("size"), String(size));
-      assert.equal(url.searchParams.get("mode"), mode);
+    for (const seed of [574624, ...Array.from({ length: 64 }, (_, index) => index)]) {
+      const grid = generateSizedGrid(seed, size);
+      for (const mode of ["timed", "zen"]) {
+        const url = new URL(buildBoardUrl("/play/", grid, { mode, source: "generator" }), "https://wordgrid.games");
+        assert.deepEqual(decodeBoard(url.searchParams.get("board")!), grid, `size ${size}, seed ${seed}`);
+        assert.equal(url.searchParams.get("size"), String(size));
+        assert.equal(url.searchParams.get("mode"), mode);
+      }
     }
   }
 });

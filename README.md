@@ -33,9 +33,11 @@ npx wrangler pages deploy out
 
 `.github/workflows/refresh-daily-archive.yml` runs at 00:15 and 12:15 UTC+8 on
 the default branch and can also be run manually. It validates a fresh static
-export, advances `public/data/archive-build.json`, and commits that date to
+export, advances the date and refresh time in `public/data/archive-build.json`, and commits the marker to
 trigger the existing Cloudflare Pages Git integration. Scheduled runs can be
 delayed by GitHub; the archive labels its newest published board explicitly.
+The second run refreshes the deployment marker even on the same date so a
+failed Cloudflare build can be retried.
 Historical URLs from June 10, 2026 onward are retained in builds and the sitemap.
 Monitor the workflow and the Cloudflare Pages deployment after enabling it on main.
 

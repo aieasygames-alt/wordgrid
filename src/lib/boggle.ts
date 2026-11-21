@@ -82,7 +82,9 @@ function pickWeightedLetter(rand: () => number): string {
   let roll = rand() * total;
   for (const [letter, weight] of LETTER_WEIGHTS) {
     roll -= weight;
-    if (roll <= 0) return letter;
+    // All Q faces represent Qu, including weighted 5x5/6x6 boards. Shared
+    // board links use that same normalization when decoding a Q token.
+    if (roll <= 0) return letter === "Q" ? "Qu" : letter;
   }
   return "E";
 }

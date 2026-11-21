@@ -3,19 +3,22 @@
 Word search puzzle game — find words by connecting adjacent letters in a 4×4 grid.
 
 ## Tech Stack
-- Next.js 14 (static export)
+- Next.js 15.5 (static export)
 - TypeScript + Tailwind CSS
 - Deploy: Cloudflare Pages
 
 ## Local Development
+Use Node 24 LTS (`.node-version`). Tests require Node 22.13+ for SQLite.
+
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
 ## Build & Deploy
 ```bash
 npm run build    # outputs to ./out
+npm run check:functions  # packages Pages Functions locally; no deployment or database writes
 npx wrangler pages deploy out
 ```
 
@@ -41,6 +44,15 @@ failed Cloudflare build can be retried.
 Historical URLs from June 10, 2026 onward are retained in builds and the sitemap.
 Monitor the workflow and the Cloudflare Pages deployment after enabling it on main.
 
+### Weekly board quality
+
+Weekly boards change on Monday UTC and are selected during the static build,
+then passed to the client. From the week of November 23, 2026, candidates are
+solved with the current game dictionary and must contain at least three words
+matching the Qu, long-word (5+ letters), or quick-grab (3–4 letters) theme.
+Previously published weekly layouts are preserved. Generation fails the build
+if no qualifying candidate is found instead of publishing a mismatched board.
+
 ## Complete Mode
 
 `/complete/` is an independent untimed daily collection game: find all target
@@ -57,5 +69,7 @@ remains playable. The published mode is indexable and included in the sitemap.
   production databases before enabling ranking. Static hosting works without it.
 - Published answers are readable and browser identity is anonymous: rankings are
   casual, not cheat-proof. No Squaredle assets or NASPA word list are reused.
+- Hints unlock at 20%, 40%, and 60% of target collection. The interface shows
+  the exact number of targets needed for the next stage; bonuses do not count.
 
 See `plans/COMPLETE_IMPLEMENTATION.md` for verification and deployment steps.

@@ -28,7 +28,7 @@ jobs:
       - name: Advance archive date
         run: node scripts/refresh-archive.mjs
       - name: Validate the new day's export
-        run: npm test && npm run build
+        run: npm test && npm run build && npm run check:functions
       - name: Trigger the existing Cloudflare Pages Git deployment
         run: |
           if git diff --quiet -- public/data/archive-build.json; then exit 0; fi

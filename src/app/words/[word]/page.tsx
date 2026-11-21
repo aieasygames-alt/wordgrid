@@ -16,10 +16,11 @@ export const dynamicParams = false;
 export async function generateMetadata({
   params,
 }: {
-  params: { word: string };
+  params: Promise<{ word: string }>;
 }): Promise<Metadata> {
-  const word = params.word.toUpperCase();
-  const wordLower = params.word.toLowerCase();
+  const { word: paramWord } = await params;
+  const word = paramWord.toUpperCase();
+  const wordLower = paramWord.toLowerCase();
   const isIndexable = INDEXABLE_WORDS.includes(wordLower);
   const points = scoreWord(wordLower);
 
@@ -41,8 +42,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { word: string } }) {
-  const word = params.word;
+export default async function Page({ params }: { params: Promise<{ word: string }> }) {
+  const { word } = await params;
   const wordLower = word.toLowerCase();
   const wordUpper = word.toUpperCase();
   const points = scoreWord(wordUpper);

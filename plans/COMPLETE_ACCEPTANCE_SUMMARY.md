@@ -2,6 +2,8 @@
 
 日期：2026-10-15（UTC+8）。
 
+> 历史验收记录。2026-11-21 状态核对：Complete 已可索引并进入 sitemap；“距下一级提示还差几个目标词”也已实现。当前改动和验证见 [RELIABILITY_UPGRADES_2026-11-21.md](RELIABILITY_UPGRADES_2026-11-21.md)。下文保留当时的 beta 放行条件与未验收范围。
+
 ## 放行结论
 
 本轮核心玩法与交互升级通过验收，可作为 beta 版本归档。保留 /complete/ 的 noindex；不调整首页推广和 sitemap，不承诺所有浏览器或系统能力均已覆盖。

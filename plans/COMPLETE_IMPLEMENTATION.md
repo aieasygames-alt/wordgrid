@@ -3,6 +3,11 @@
 Implemented 2026-10-14. New route: /complete/. All stages are part of one commit;
 no production deployment or remote database modification is performed.
 
+> Historical implementation record. As checked on November 21, 2026, Complete
+> has launched as an indexable route in the sitemap, and exact hint countdowns
+> are implemented. See [the current upgrade record](RELIABILITY_UPGRADES_2026-11-21.md).
+> The original beta-stage statements below describe the October implementation.
+
 ## Stage 1: independent untimed collection game
 
 - A dedicated React client and shared pure rules module; existing timed/Zen/daily

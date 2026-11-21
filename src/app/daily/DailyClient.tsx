@@ -120,9 +120,9 @@ export default function DailyClient() {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center py-8 px-4">
         <header className="mb-6 text-center">
-          <a href="/" className="text-sm text-text-dim hover:text-text">
+          <Link href="/" className="text-sm text-text-dim hover:text-text">
             WordGrid
-          </a>
+          </Link>
         </header>
         {result.streak.currentStreak >= 2 && (
           <div className="mb-4">

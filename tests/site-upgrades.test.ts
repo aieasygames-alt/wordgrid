@@ -10,6 +10,9 @@ import { getPatternSprint, PatternFocus } from "../src/lib/pattern-sprint";
 import { Trie } from "../src/lib/dictionary";
 import { solveBoard } from "../src/lib/solver";
 import { readFileSync } from "node:fs";
+import { getWeeklyChallenge } from "../src/lib/weekly-challenge";
+import { completeHintProgress, completeHintUnlock, CompletePuzzle } from "../src/lib/complete";
+import completeBank from "../public/data/complete/bank-v1.json";
 
 test("daily archive retains old URLs when advancing across the UTC+8 day boundary", () => {
   const first = getPublishedArchiveDates("2026-11-20");
@@ -112,4 +115,38 @@ test("every fixed training board contains multiple playable words matching its f
     assert.ok(matches.length >= 3, `${focus} needs at least three valid pattern routes`);
     if (focus === "qu") assert.ok(sprint.grid.flat().some((cell) => cell.letter === "Qu"));
   }
+});
+
+test("new weekly boards have playable theme words and remain stable throughout the week", () => {
+  const trie = new Trie();
+  for (const word of readFileSync("public/data/words.txt", "utf8").trim().split(/\s+/)) {
+    if (word.length >= 3) trie.insert(word);
+  }
+  for (let week = 0; week < 53; week++) {
+    const monday = Date.parse("2026-11-23T00:00:00Z") + week * 7 * 86400000;
+    const challenge = getWeeklyChallenge(new Date(monday));
+    const solved = solveBoard(challenge.grid, trie);
+    const matches = solved.filter(({ word }) => challenge.focus === "qu" ? word.includes("QU") : challenge.focus === "long" ? word.length >= 5 : word.length <= 4);
+    assert.ok(matches.length >= 3, `${challenge.id}: ${challenge.focus} needs at least three playable theme words`);
+    assert.deepEqual(getWeeklyChallenge(new Date(monday + 7 * 86400000 - 1)), challenge);
+  }
+  const published = getWeeklyChallenge(new Date("2026-11-21T12:00:00Z"));
+  assert.equal(published.id, "2026-11-16");
+  assert.equal(published.grid.map(row => row.map(cell => cell.letter).join(" ")).join(" / "), "R Qu B S / O V V W / R I A S / M H P I");
+});
+
+test("hint countdown uses whole target words at exact thresholds and ignores bonuses and duplicates", () => {
+  const puzzle = completeBank.puzzles.find(puzzle => puzzle.requiredWords.length === 27 && puzzle.bonusWords.length > 0) as CompletePuzzle;
+  assert.ok(puzzle);
+  assert.deepEqual(completeHintProgress(puzzle, { found: [], revealed: [] }).map(step => step.remaining), [6, 11, 17]);
+  const five = [...puzzle.requiredWords.slice(0, 5), puzzle.requiredWords[0], puzzle.bonusWords[0]];
+  assert.equal(completeHintUnlock(puzzle, { found: five, revealed: [] }), 0);
+  assert.equal(completeHintProgress(puzzle, { found: five, revealed: [] })[0].remaining, 1);
+  for (const [found, expectedLevel, expectedRemaining] of [[6, 1, 5], [10, 1, 1], [11, 2, 6], [16, 2, 1], [17, 3, 0]]) {
+    const progress = { found: puzzle.requiredWords.slice(0, found), revealed: [] };
+    assert.equal(completeHintUnlock(puzzle, progress), expectedLevel);
+    const next = completeHintProgress(puzzle, progress).find(step => !step.unlocked);
+    assert.equal(next?.remaining ?? 0, expectedRemaining);
+  }
+  assert.ok(completeHintProgress(puzzle, { found: puzzle.requiredWords, revealed: [] }).every(step => step.unlocked && step.remaining === 0));
 });

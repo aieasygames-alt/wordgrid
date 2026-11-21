@@ -1,17 +1,18 @@
 # WordGrid.games 开发文档
 
 > 本文档记录项目的架构、技术决策、模块说明和升级指南，便于后续迭代维护。
+> 当前状态核对：2026-11-21。Complete 的早期 beta/noindex 验收记录属于历史版本，当前页面已可索引并进入 sitemap。
 
 ---
 
 ## 1. 项目概述
 
-**WordGrid.games** 是一款基于 Boggle 玩法的网页单词搜索游戏。玩家在 4×4 字母网格中拖拽相邻字母组成单词，限时得分。
+**WordGrid.games** 是一款基于 Boggle 玩法的网页单词搜索游戏，支持 4×4/5×5/6×6、Timed/Zen、每日共享棋盘、每周主题和 Pattern Sprint。Complete 是独立的每日 4×4 无计时找全词模式，使用自己的编辑词表。
 
 - **线上地址**: https://wordgrid.games
 - **GitHub**: https://github.com/aieasygames-alt/wordgrid
 - **部署**: Cloudflare Pages (自动构建)
-- **构建产物**: 390 个静态 HTML 页面
+- **构建产物**: 静态页面导出到 `out/`；页面数量随保留的每日归档增长。排行榜由 Pages Functions + D1 提供。
 
 ---
 
@@ -19,12 +20,14 @@
 
 | 层级 | 技术 | 版本 |
 |---|---|---|
-| 框架 | Next.js 14 (App Router) | 14.2.5 |
+| 框架 | Next.js 15 (App Router，静态导出) | 15.5.29 |
 | 语言 | TypeScript (strict mode) | ^5 |
-| 样式 | Tailwind CSS | 3.4.6 |
+| 样式 | Tailwind CSS | 3.4.x |
 | 部署 | Cloudflare Pages (SSG) | — |
-| 字典数据 | /public/data/words.txt (~55k words) | — |
-| 外部 API | Free Dictionary API (dictionaryapi.dev) | 构建时调用 |
+| 排行榜 | Pages Functions + Cloudflare D1 | 可选 |
+| 本地 / CI | Node.js | 24 LTS；测试最低 22.13 |
+| 字典数据 | /public/data/words.txt（普通玩法 3–6 字母） | 源文件 55,538 条，含不参与普通玩法的 2 字母词 |
+| 外部 API | Free Dictionary API (dictionaryapi.dev) | 默认关闭；仅显式启用时在构建中调用 |
 
 **依赖极简**: 仅 next / react / react-dom，零运行时第三方库。
 
@@ -35,6 +38,20 @@
 - Cloudflare Pages Git 集成: push → 自动 `npm run build` → 部署 `out/`
 - 构建命令: `npm run build`
 - 输出目录: `out`
+- `.node-version` 固定 Node 24；GitHub 归档工作流同样使用 Node 24。
+- 动态路径的 `params` 按 Next.js 15 API 使用 Promise，并在页面和 metadata 中 await；仍通过 `generateStaticParams` 静态生成。
+- `postcss` override 与直接开发依赖共用已更新的 8.x 版本，覆盖 Next 内部固定的旧版本。升级后重新运行 audit、导出及 Functions 打包。
+- Wrangler 4.166.0 固定为项目开发依赖；`npm run check:functions` 在本地打包 Pages Functions，归档 CI 也执行该检查，不修改远程数据库。
+
+### 已上线能力与边界
+
+- Daily 使用 UTC+8，每日归档从 2026-06-10 起保留；Actions 每日 00:15/12:15 推进构建标记，触发 Pages Git 部署。
+- Weekly 在构建时生成并传入客户端，避免首屏棋盘不一致。从 2026-11-23 起，按实际游戏字典求解筛选，保证至少 3 个主题词；之前已发布棋盘保留原样。Weekly 沿用周一 UTC 切周规则。
+- Complete 已有首玩教程、提示、旋转、编号路径回看、进度合并、分享及可选排行榜；题库覆盖 2026-10-14 至 2027-10-13。
+- Complete 提示以目标词数计算 20%/40%/60% 门槛，并显示距离下一阶段还差几个词；奖励词不推进解锁。
+- 普通玩法的 Long Word 成就从 6 字母开始，与现有 3–6 字母词表一致。
+- 已接入主题切换、Cookie Banner 和 GA4 `G-MLZV98LG8Z`。同意状态先于 GA 配置排队，生产配置限正式站域名。
+- manifest 与安装提示提供桌面快捷入口，尚无 Service Worker 离线缓存。
 
 ---
 
@@ -52,13 +69,17 @@ wordgrid/
 │   │   ├── daily/
 │   │   │   ├── page.tsx              # Server Component (metadata)
 │   │   │   └── DailyClient.tsx       # Client Component (每日挑战 + Streak)
-│   │   ├── words/[word]/page.tsx     # SSG 单词详情页 (300 页, 构建时获取释义)
-│   │   ├── guides/                   # SEO 内容页 (2 篇攻略)
+│   │   ├── complete/                # 独立找全词玩法
+│   │   ├── weekly/                  # 每周主题棋盘
+│   │   ├── training/                # Pattern Sprint
+│   │   ├── solver/                  # 输入棋盘、求解和路径复盘
+│   │   ├── words/[word]/page.tsx     # 精选词条 SSG，默认使用本地内容
+│   │   ├── guides/                   # 规则、词汇及在线玩法攻略
 │   │   ├── globals.css               # 全局样式 + touch-action
 │   │   ├── sitemap.ts                # XML Sitemap 生成
 │   │   └── robots.ts                 # robots.txt
 │   ├── components/                   # React 组件
-│   │   ├── GameBoard.tsx             # 主游戏面板 (476 行, 核心交互)
+│   │   ├── GameBoard.tsx             # 主游戏面板和核心交互
 │   │   ├── ResultScreen.tsx          # 结果页 (分数/遗漏词/分享)
 │   │   ├── Timer.tsx                 # 倒计时器
 │   │   ├── StreakDisplay.tsx         # 连续打卡显示
@@ -74,17 +95,22 @@ wordgrid/
 │       ├── shareCard.ts              # Canvas 分享图片生成
 │       └── worddata.ts               # 构建时单词释义获取 (Free Dictionary API)
 ├── public/
-│   ├── data/words.txt                # 英文字典 (~55k 词, 3-7 字母)
+│   ├── data/words.txt                # 普通玩法可接受 3–6 字母词
+│   ├── data/complete/               # 版本化编辑词表和每日题库
 │   ├── share-card-bg.png             # 分享卡片背景图
 │   ├── manifest.json                 # PWA manifest
 │   └── icon-192.png / icon-512.png   # PWA 图标
 ├── next.config.mjs                   # Next.js 配置 (SSG)
+├── functions/api/                    # Challenge 和 Complete 排行榜
+├── schema.sql                       # D1 增量建表脚本
+├── tests/                           # 规则、SQLite API 与站点升级回归
+├── eslint.config.mjs                # ESLint 9 flat config
 ├── wrangler.toml                     # Cloudflare Pages 配置
 ├── tailwind.config.ts
 └── tsconfig.json
 ```
 
-**总代码量**: ~2,955 行 (24 个源文件)
+上图为主要模块，完整页面和组件以当前源码为准。
 
 ---
 
@@ -184,7 +210,9 @@ seedFromDate("2026-06-19") → 数字种子
 | `/daily` | SSG + Client | 1 |
 | `/words/[word]` | SSG (精选可索引词页，默认不依赖远程 API) | 256 |
 | `/words/*-boggle-words` | SSG 词表聚合页 | 8 |
-| `/guides/*` | SSG | 2 |
+| `/guides/*` | SSG | 以当前路由为准 |
+| `/daily/archive/[date]` | SSG，含棋盘/词数/分数/复玩 | 随每日发布增长 |
+| `/complete`、`/weekly`、`/training`、`/solver` | SSG + Client | 独立玩法/工具 |
 
 - Server Component 负责 metadata + JSON-LD
 - Client Component 负责游戏交互
@@ -196,7 +224,7 @@ seedFromDate("2026-06-19") → 数字种子
 
 - 首页: `WebSite` + `FAQPage`
 - 单词页: `DefinedWord` + `BreadcrumbList`
-- 帮助 Google 理解内容，争取 rich snippet
+- 标记须与可见内容一致；不把 FAQ 标记视为富结果展示的保证。
 
 ---
 
@@ -239,7 +267,7 @@ loadDictionary()
 - 用 Trie 剪枝: 当前路径不是有效前缀则回溯
 - 返回: 所有有效单词 + 路径 + 分数，按分数降序
 
-### 6.4 GameBoard.tsx — 核心交互组件 (476 行)
+### 6.4 GameBoard.tsx — 核心交互组件
 
 **状态管理**:
 - `foundWords`, `trie`, `selected` → 同时用 `useRef` 镜像，避免闭包陷阱
@@ -283,7 +311,7 @@ loadDictionary()
 ### 6.8 worddata.ts — 构建时 SEO 数据
 
 - `INDEXABLE_WORDS`: 精选可索引 3-5 字母常用英文词
-- `fetchWordData()`: 调用 Free Dictionary API，Next.js `revalidate` 缓存
+- `fetchWordData()`: 只有 `WORDGRID_ENABLE_REMOTE_DICTIONARY=1` 时调用 Free Dictionary API；默认不依赖外网释义
 - `loadWordList()`: 从文件系统读取 words.txt (仅服务端)
 - 用于生成 `/words/[word]` 静态页面
 
@@ -295,8 +323,12 @@ loadDictionary()
 |---|---|---|
 | `wordgrid-streak` | 连续打卡数据 | JSON `{ currentStreak, longestStreak, totalPlayed, lastPlayedDate }` |
 | `daily-{YYYY-MM-DD}` | 当天 Daily 成绩缓存 | JSON `{ words, total }` |
-| `wordgrid-muted` | 静音偏好 | `"true"` / `"false"` |
+| `wordgrid-muted` | 静音偏好 | `"1"` / `"0"` |
 | `wordgrid-duration` | 计时模式偏好 | `180` / `300` / `0` |
+| `wordgrid-theme` | 主题 | `dark` / `light` |
+| `wordgrid-game-history` | 最近普通游戏统计 | JSON，最多 60 局 |
+| `wordgrid-complete-v1:…` | 分题、分版本的 Complete 进度 | found/revealed/hintLevel；练习使用独立命名空间 |
+| `wordgrid-complete-tutorial-v1` | Complete 教程完成状态 | `done` |
 
 ---
 
@@ -314,6 +346,15 @@ npx wrangler pages deploy ./out --project-name wordgrid
 
 # Lint
 npm run lint
+
+# 规则、词条、题库和 SQLite API 回归
+npm test
+
+# 类型检查
+npx tsc --noEmit --incremental false
+
+# Pages Functions 本地打包检查
+npm run check:functions
 ```
 
 ---
@@ -333,11 +374,10 @@ npm run lint
 2. 运行 `npm run build`，SSG 自动生成新页面
 3. sitemap.ts 自动包含新页面
 
-### 修改棋盘大小 (如 5×5)
-1. `boggle.ts` → 增加 `BOGGLE_DICE` 到 25 骰子，`generateGrid` 改循环范围
-2. `solver.ts` → DIRECTIONS 不变 (仍是 8 方向)，改边界检查 `nr < 0 || nr >= 5`
-3. `GameBoard.tsx` → CSS grid 改为 5 列
-4. `shareCard.ts` → `drawMiniBoard` 改循环范围
+### 现有棋盘尺寸与扩展
+1. 已支持 4×4/5×5/6×6，统一调用 `generateSizedGrid(seed, size)`；solver 按实际尺寸处理。
+2. 4×4 使用经典骰子，较大尺寸使用字母权重；所有 Q 面均规范为 Qu。
+3. 修改尺寸时核对 board-link 编解码、选择路径、分享图及生成器；不要为了增加一个尺寸修改历史 Daily 的骰子和种子算法。
 
 ### 替换字典
 1. 替换 `public/data/words.txt`
@@ -348,29 +388,29 @@ npm run lint
 1. `sounds.ts` → 添加新方法，用 `playTone()` 或 `getCtx()` 合成
 2. 在 `GameBoard.tsx` 对应事件中调用
 
-### 添加分析统计 (Plausible/GA4)
-1. `layout.tsx` → 在 `<head>` 中添加 script 标签
-2. 推荐使用 `<Script strategy="afterInteractive">`
-3. Cloudflare Pages 兼容 Plausible 自托管
+### 维护已有 GA4
+1. `analytics-config.ts` 维护同意队列和现有 Measurement ID；`layout.tsx` 加载 tag，CookieBanner 更新同意状态。
+2. 行为事件通过 `trackEvent()` 发送。事件字典和漏斗说明见 `plans/growth-measurement-runbook-2026-09.md`、`plans/SEO_UPGRADES_2026-11-21.md`。
+3. 不发送玩家姓名、完整输入词或原始分享 URL；部署后用正式属性 Realtime/DebugView 验证，区分 QA 与真实用户数据。
 
 ---
 
 ## 10. 已知限制与未来计划
 
 ### 已知限制
-- **无后端**: 所有数据存在 localStorage，换设备/清缓存会丢失 Streak
-- **字典大小固定**: ~55k 词 (3-7 字母)，部分专业词汇可能缺失
-- **无多人对战**: 仅单人游戏
+- **进度保存在本机**: 可选排行榜有后端，但 Streak 和游戏进度仍保存在 localStorage，清缓存/换设备不会同步。
+- **词表范围**: 普通玩法 3–6 字母；Complete 使用独立有限编辑词表。两种模式都不声称是官方完整比赛词典。
+- **无实时多人对战**: 可分享同盘挑战和成绩，不是同时在线对战。
 - **无账号系统**: 无法同步进度
+- **无完整离线缓存**: 安装入口不保证断网可玩。
 
 ### 未来可以考虑的方向
 - PWA 离线模式 (Service Worker 缓存)
-- 多语言棋盘 (中文成语版?)
-- 排行榜 (需要后端: Cloudflare Workers + D1/KV)
-- 自定义棋盘大小 (5×5 Big Boggle)
-- 暗色/亮色主题切换
-- 分析统计接入 (Plausible / GA4)
-- Cookie Banner (GDPR 合规)
+- Complete 编辑词表、难度分档与路径多样性升级
+- Complete 历史复盘、独立重玩和个人统计
+- 通用验收流程与系统分享真机补验
+- Solver 查询到 URL 的意图映射与入口转化评估
+- 基于实测的性能优化；多语言和账号同步需另验证需求
 
 ---
 
@@ -389,7 +429,10 @@ npm run lint
 | 2026-06-19 | Canvas 分享卡片 | 纯前端生成，无需图片服务器 |
 | 2026-06-19 | 纯 CSS Confetti | 零依赖，60 粒子够用 |
 | 2026-06-19 | Streak 系统 | 提升 Daily Challenge 留存率 |
+| 2026-11-21 | Weekly 按真实求解结果筛选主题盘 | 避免主题没有可玩词；已发布周盘不变 |
+| 2026-11-21 | Next.js 15 维护版本与 ESLint 9 | 更新受影响依赖，保留 Pages 静态导出架构 |
+| 2026-11-21 | Complete 显示提示解锁所需目标数 | 精确展示下一步门槛，避免将奖励词误计入 |
 
 ---
 
-*最后更新: 2026-06-19*
+*最后更新: 2026-11-21*

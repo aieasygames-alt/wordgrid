@@ -3,6 +3,8 @@ import { getPublishedArchiveDates } from "@/lib/archive-dates";
 import { INDEXABLE_WORDS } from "@/lib/worddata";
 import { WORD_LIST_PAGES } from "@/lib/word-lists";
 
+export const dynamic = "force-static";
+
 const BASE_URL = "https://wordgrid.games";
 const SITE_UPDATED = new Date("2026-09-27");
 const GUIDE_UPDATED = new Date("2026-09-27");

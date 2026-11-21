@@ -12,17 +12,18 @@ import { buildBoardUrl } from "@/lib/board-link";
 const BASE_URL = "https://wordgrid.games";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     date: string;
-  };
+  }>;
 };
 
 export function generateStaticParams() {
   return getPublishedArchiveDates().map((date) => ({ date }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const entry = getDailyArchiveEntry(params.date);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { date } = await params;
+  const entry = getDailyArchiveEntry(date);
   if (!entry) {
     return {
       title: "Daily Archive",
@@ -42,8 +43,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
-export default function DailyArchiveDetailPage({ params }: PageProps) {
-  const entry = getDailyArchiveEntry(params.date);
+export default async function DailyArchiveDetailPage({ params }: PageProps) {
+  const { date } = await params;
+  const entry = getDailyArchiveEntry(date);
   if (!entry) {
     notFound();
   }

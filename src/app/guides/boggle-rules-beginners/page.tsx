@@ -122,7 +122,7 @@ export default function BoggleRulesGuide() {
           <div>
         <header className="mb-8">
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
-            <a href="/" className="hover:text-text">Home</a>
+            <Link href="/" className="hover:text-text">Home</Link>
             <span>/</span>
             <a href="/guides/" className="hover:text-text">Guides</a>
           </nav>

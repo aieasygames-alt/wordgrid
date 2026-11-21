@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { checkCompleteWord, completeDate, completeScore, CompleteBank, CompleteProgress, CompletePuzzle, findCompletePath, completeHintUnlock, completeShareText, remainingStartCounts, mergeCompleteProgress, Position, progressKey, selectCompletePuzzle, wordFromPath } from "@/lib/complete";
+import { checkCompleteWord, completeDate, completeScore, CompleteBank, CompleteProgress, CompletePuzzle, findCompletePath, completeHintProgress, completeShareText, remainingStartCounts, mergeCompleteProgress, Position, progressKey, selectCompletePuzzle, wordFromPath } from "@/lib/complete";
 import Link from "next/link";
 import { INDEXABLE_WORDS } from "@/lib/indexable-words";
 import CompleteLetterBoard from "@/components/CompleteLetterBoard";
@@ -153,7 +153,9 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
   const remaining = puzzle.requiredWords.filter((word) => !progress.found.includes(word));
   const lengths = [...new Set(puzzle.requiredWords.map((word) => word.length))].sort((a, b) => a - b);
   const selectedWord = path.map(({ row, col }) => puzzle.board[row][col].toUpperCase()).join("");
-  const unlock = completeHintUnlock(puzzle, progress);
+  const hintSteps = completeHintProgress(puzzle, progress);
+  const unlock = hintSteps.filter((step) => step.unlocked).length;
+  const nextHint = hintSteps.find((step) => !step.unlocked);
   const counts = useMemo(() => hintView >= 1 ? remainingStartCounts(puzzle, progress.found) : undefined, [hintView, puzzle, progress.found]);
   const preview = useMemo(() => hint ? findCompletePath(puzzle, hint) || [] : [], [hint, puzzle]);
   const activateHints = (level: number) => {
@@ -280,12 +282,20 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
           <div className="flex justify-between gap-3"><h2 className="text-xl font-bold">Your collection</h2><span className="text-sm text-text-muted">{remaining.length} to find</span></div>
           <div className="mt-4 rounded-xl border border-border p-3 text-sm">
             <p className="font-semibold">Hints unlock as you collect: 20% / 40% / 60%</p>
+            <p aria-live="polite" className="mt-2 text-sm text-text-muted">
+              {nextHint
+                ? `Find ${nextHint.remaining} more target ${nextHint.remaining === 1 ? "word" : "words"} to unlock ${nextHint.label.toLowerCase()} (${nextHint.percent}%).`
+                : "All hints unlocked. You can use them or keep searching without hints."}
+            </p>
             <div className="mt-3 flex flex-wrap gap-3">
-              <button disabled={!ready || tutorial || unlock<1} onClick={()=>activateHints(1)} className="text-primary disabled:text-text-dim">Start counts {unlock<1?"(20%)":""}</button>
-              <button disabled={!ready || tutorial || unlock<2} onClick={()=>activateHints(2)} className="text-primary disabled:text-text-dim">First letters {unlock<2?"(40%)":""}</button>
+              {hintSteps.slice(0, 2).map((step) => (
+                <button key={step.level} disabled={!ready || tutorial || !step.unlocked} onClick={()=>activateHints(step.level)} className="text-primary disabled:text-text-dim">
+                  {step.label} {step.unlocked ? "(unlocked)" : `(${step.remaining} more)`}
+                </button>
+              ))}
               <button onClick={()=>setHintView(0)} className="text-text-muted">Hide hints</button>
             </div>
-            <p className="mt-2 text-xs text-text-muted">Reveals unlock at 60% and earn no points. Using counts or letters is recorded even if you hide them.</p>
+            <p className="mt-2 text-xs text-text-muted">Only target words advance hint unlocks. Reveals unlock at 60% and earn no points. Using counts or letters is recorded even if you hide them.</p>
           </div>
           <div className="mt-5 space-y-5">{lengths.map((length) => {
             const words = puzzle.requiredWords.filter((word) => word.length === length);

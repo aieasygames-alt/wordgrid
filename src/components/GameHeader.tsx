@@ -60,7 +60,7 @@ export default function GameHeader({ currentMode }: Props) {
                 G
               </span>
             </div>
-            <div className="flex flex-col">
+            <div className="hidden min-[360px]:flex flex-col">
               <span className="text-lg font-black tracking-tight text-text leading-none group-hover:text-primary transition-colors">
                 WordGrid
               </span>

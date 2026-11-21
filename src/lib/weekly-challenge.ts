@@ -1,4 +1,7 @@
-import { generateGrid, type Grid } from "@/lib/boggle";
+import { generateGrid, type Grid } from "./boggle";
+import { Trie } from "./dictionary";
+import { solveBoard } from "./solver";
+import { loadWordList } from "./worddata";
 
 export type WeeklyChallenge = {
   id: string;
@@ -7,6 +10,26 @@ export type WeeklyChallenge = {
   focus: "qu" | "long" | "quick";
   grid: Grid;
 };
+
+// Keep already published boards stable, including the current week's challenge.
+const QUALITY_CHECKED_FROM = "2026-11-23";
+const MIN_THEME_WORDS = 3;
+let weeklyTrie: Trie | undefined;
+
+function getWeeklyTrie(): Trie {
+  if (!weeklyTrie) {
+    weeklyTrie = new Trie();
+    for (const word of loadWordList()) weeklyTrie.insert(word);
+  }
+  return weeklyTrie;
+}
+
+function hasThemeWords(grid: Grid, focus: WeeklyChallenge["focus"]): boolean {
+  if (focus === "qu" && !grid.flat().some((cell) => cell.letter === "Qu")) return false;
+  return solveBoard(grid, getWeeklyTrie()).filter(({ word }) =>
+    focus === "qu" ? word.includes("QU") : focus === "long" ? word.length >= 5 : word.length <= 4
+  ).length >= MIN_THEME_WORDS;
+}
 
 function mondayUtc(date = new Date()): Date {
   const value = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
@@ -44,5 +67,14 @@ export function getWeeklyChallenge(date = new Date()): WeeklyChallenge {
     },
   ];
   const theme = themes[index];
-  return { id, ...theme, grid: generateGrid(seedFromWeek(id)) };
+  const seed = seedFromWeek(id);
+  if (id < QUALITY_CHECKED_FROM) return { id, ...theme, grid: generateGrid(seed) };
+
+  // Selection runs at build time with the actual game dictionary, never in the
+  // browser. The same week and dictionary always choose the same candidate.
+  for (let attempt = 0; attempt < 2048; attempt++) {
+    const grid = generateGrid((seed + attempt) >>> 0);
+    if (hasThemeWords(grid, theme.focus)) return { id, ...theme, grid };
+  }
+  throw new Error(`Could not generate a playable ${theme.focus} challenge for ${id}.`);
 }

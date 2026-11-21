@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
+import Link from "next/link";
 import { Grid } from "@/lib/boggle";
 import { Trie } from "@/lib/dictionary";
 import { solveBoard, SolvedWord } from "@/lib/solver";
@@ -374,8 +375,8 @@ export default function ResultScreen({
     if (hasDictionary && percentage >= 75) {
       items.push({ id: "perfect-scan", label: "Perfect Scan", detail: `${percentage}% of the board score found.` });
     }
-    if (longestFoundWord && longestFoundWord.word.length >= 7) {
-      items.push({ id: "long-word", label: "Long Word", detail: `${longestFoundWord.word} was your longest find.` });
+    if (longestFoundWord && longestFoundWord.word.length >= 6) {
+      items.push({ id: "long-word", label: "Long Word", detail: `${longestFoundWord.word} was your longest find (${longestFoundWord.word.length} letters).` });
     }
     if (foundWords.some((word) => word.word.toUpperCase().includes("QU"))) {
       items.push({ id: "qu-hunter", label: "Qu Hunter", detail: "You found a word using the Qu tile." });
@@ -1082,13 +1083,13 @@ export default function ResultScreen({
             </a>
           )}
           {mode === "daily" && (
-            <a
+            <Link
               href="/daily/archive"
               onClick={() => trackEvent("result_next_action", { action: "daily_archive", mode, board_size: grid.length })}
               className="rounded-xl bg-surface px-5 py-3 font-semibold transition hover:bg-surface-hover"
             >
               Replay a Daily Board
-            </a>
+            </Link>
           )}
           <a
             href="/stats"
@@ -1109,6 +1110,8 @@ export default function ResultScreen({
             {mode === "daily" ? "Play Random" : "New Game"}
           </button>
         )}
+        {/* A full navigation also resets the completed game when already on /. */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a
           href="/"
           className="rounded-xl bg-surface px-6 py-3 font-semibold transition hover:bg-surface-hover"

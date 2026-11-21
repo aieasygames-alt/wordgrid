@@ -116,10 +116,22 @@ export function rotateCompletePosition(cell: Position, size: number, turns: numb
   return {row, col};
 }
 
-export function completeHintUnlock(puzzle: CompletePuzzle, progress: CompleteProgress): number {
+const HINT_STEPS = [
+  { level: 1, label: "Start counts", percent: 20 },
+  { level: 2, label: "First letters", percent: 40 },
+  { level: 3, label: "Reveals", percent: 60 },
+] as const;
+
+export function completeHintProgress(puzzle: CompletePuzzle, progress: CompleteProgress) {
   const found = puzzle.requiredWords.filter(word => progress.found.includes(word)).length;
-  const ratio = found / puzzle.requiredWords.length;
-  return ratio >= 0.6 ? 3 : ratio >= 0.4 ? 2 : ratio >= 0.2 ? 1 : 0;
+  return HINT_STEPS.map((step) => {
+    const remaining = Math.max(0, Math.ceil(puzzle.requiredWords.length * step.percent / 100) - found);
+    return { ...step, remaining, unlocked: remaining === 0 };
+  });
+}
+
+export function completeHintUnlock(puzzle: CompletePuzzle, progress: CompleteProgress): number {
+  return completeHintProgress(puzzle, progress).filter((step) => step.unlocked).length;
 }
 
 export function remainingStartCounts(puzzle: CompletePuzzle, found: string[]): number[][] {

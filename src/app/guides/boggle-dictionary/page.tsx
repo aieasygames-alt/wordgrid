@@ -5,7 +5,7 @@ import GuideActionBar from "@/components/GuideActionBar";
 import BoggleWordChecker from "@/components/BoggleWordChecker";
 
 export const metadata: Metadata = {
-  title: "Boggle Dictionary and Word Checker - Valid Words",
+  title: "Free Boggle Word Checker — WordGrid Dictionary (3–6 Letters)",
   description:
     "Check whether a 3-6 letter word is in the current WordGrid dictionary, then review the path and score rules for a finished board.",
   alternates: { canonical: "/guides/boggle-dictionary/" },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "word grid dictionary",
   ],
   openGraph: {
-    title: "Boggle Dictionary and Word Checker - Valid Words",
+    title: "Free Word Checker — WordGrid Dictionary (3–6 Letters)",
     description:
       "Check the current WordGrid dictionary and learn what else a word needs to count on a board.",
   },
@@ -56,6 +56,7 @@ const articleSchema = {
     "A current WordGrid dictionary checker with rules for valid paths, word length, and post-game review.",
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
+  dateModified: "2026-11-21",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-dictionary/`,
 };
 
@@ -97,6 +98,10 @@ export default function BoggleDictionaryGuide() {
           <p className="text-text-muted">Check a word against the current WordGrid list, then verify its route on the board.</p>
         </header>
 
+        <div className="mb-8 max-w-3xl">
+          <BoggleWordChecker />
+        </div>
+
         <GuideActionBar
           primary={{ href: "/play/", label: "Play a board", detail: "Start Timed or Zen practice." }}
           secondary={{ href: "/solver/", label: "Review a board", detail: "Find missed routes after play." }}
@@ -118,8 +123,6 @@ export default function BoggleDictionaryGuide() {
               diagonally adjacent tiles without reusing a tile.
             </p>
           </section>
-
-          <BoggleWordChecker />
 
           <section className="rounded-xl border border-border bg-surface/50 p-5">
             <h2 className="mb-3 text-2xl font-semibold text-primary">What makes a word count</h2>

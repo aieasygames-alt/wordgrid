@@ -26,7 +26,18 @@ npx wrangler pages deploy out
 ## Routes
 - `/` — Landing page
 - `/play` — Random game
-- `/daily` — Daily challenge (same grid for everyone, UTC date-based)
+- `/daily` — Daily challenge (same grid for everyone, midnight UTC+8)
+- `/daily/archive/` — Static daily history, refreshed by the daily archive workflow.
+
+### Daily archive refresh
+
+`.github/workflows/refresh-daily-archive.yml` runs at 00:15 and 12:15 UTC+8 on
+the default branch and can also be run manually. It validates a fresh static
+export, advances `public/data/archive-build.json`, and commits that date to
+trigger the existing Cloudflare Pages Git integration. Scheduled runs can be
+delayed by GitHub; the archive labels its newest published board explicitly.
+Historical URLs from June 10, 2026 onward are retained in builds and the sitemap.
+Monitor the workflow and the Cloudflare Pages deployment after enabling it on main.
 
 ## Complete Mode
 
@@ -34,7 +45,7 @@ npx wrangler pages deploy out
 words, discover optional bonuses, reveal words for zero points, and save progress
 locally. Daily boards change at midnight UTC+8. The initial editorial bank covers
 2026-10-14 through 2027-10-13; outside coverage, a clearly labelled practice board
-remains playable. The mode is noindex during beta.
+remains playable. The published mode is indexable and included in the sitemap.
 
 - `npm run generate:complete` regenerates the deterministic editorial bank.
 - `npm test` includes Complete rules, all generated puzzles, and SQLite API tests;

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getDailyArchiveDates } from "@/lib/daily-archive";
+import { getPublishedArchiveDates } from "@/lib/archive-dates";
 import { INDEXABLE_WORDS } from "@/lib/worddata";
 import { WORD_LIST_PAGES } from "@/lib/word-lists";
 
@@ -10,6 +10,12 @@ const GUIDE_PREVIOUS = new Date("2026-07-24");
 const GUIDE_PATTERN_UPDATED = new Date("2026-07-09");
 const GUIDE_WORD_LIST_UPDATED = new Date("2026-07-13");
 const WORDS_UPDATED = new Date("2026-07-24");
+const NOVEMBER_UPDATED = new Date("2026-11-21");
+const UPDATED_URLS = new Set([
+  "/", "/play/", "/daily/", "/complete/", "/training/",
+  "/guides/boggle-rules-beginners/", "/guides/boggle-word-lists/",
+  "/guides/most-common-boggle-words/", "/guides/boggle-generator/", "/guides/boggle-dictionary/",
+]);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
@@ -28,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/boggle-solver/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.84 },
     { url: `${BASE_URL}/word-grid-solver/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.84 },
     { url: `${BASE_URL}/boggle-timed-game/`, lastModified: SITE_UPDATED, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/daily/archive/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/daily/archive/`, lastModified: new Date(`${getPublishedArchiveDates()[0]}T00:00:00+08:00`), changeFrequency: "daily", priority: 0.8 },
     { url: `${BASE_URL}/solver/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/guides/`, lastModified: GUIDE_UPDATED, changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/words/`, lastModified: WORDS_UPDATED, changeFrequency: "monthly", priority: 0.75 },
@@ -72,12 +78,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.82,
   }));
 
-  const archivePages: MetadataRoute.Sitemap = getDailyArchiveDates().map((date) => ({
+  const archivePages: MetadataRoute.Sitemap = getPublishedArchiveDates().map((date) => ({
     url: `${BASE_URL}/daily/archive/${date}/`,
-    lastModified: SITE_UPDATED,
-    changeFrequency: "weekly",
+    lastModified: new Date(`${date}T00:00:00+08:00`),
+    changeFrequency: "never",
     priority: 0.72,
   }));
 
-  return [...staticPages, ...archivePages, ...wordListPages, ...wordPages];
+  return [...staticPages.map((page) => UPDATED_URLS.has(new URL(page.url).pathname) ? { ...page, lastModified: NOVEMBER_UPDATED } : page), ...archivePages, ...wordListPages, ...wordPages];
 }

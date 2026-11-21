@@ -1,37 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
-const CONSENT_KEY = "wordgrid-cookie-consent";
-
-type ConsentValue = "granted" | "denied";
-
-function updateConsent(value: ConsentValue) {
-  const w = window as unknown as { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
-  w.dataLayer = w.dataLayer || [];
-  w.gtag = function (...args: unknown[]) {
-    w.dataLayer!.push(args);
-  };
-  w.gtag("consent", "update", {
-    analytics_storage: value,
-  });
-}
+import { CONSENT_KEY, ConsentValue, updateAnalyticsConsent } from "@/lib/analytics-config";
 
 export default function CookieBanner() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem(CONSENT_KEY);
-    if (saved === "granted" || saved === "denied") {
-      updateConsent(saved);
-    } else {
-      setShow(true);
-    }
+    try {
+      const saved = localStorage.getItem(CONSENT_KEY);
+      if (saved === "granted" || saved === "denied") return;
+    } catch { /* Consent still works for this visit without persistent storage. */ }
+    setShow(true);
   }, []);
 
   const handleChoice = (choice: ConsentValue) => {
-    localStorage.setItem(CONSENT_KEY, choice);
-    updateConsent(choice);
+    try { localStorage.setItem(CONSENT_KEY, choice); } catch { /* Visit-only consent. */ }
+    updateAnalyticsConsent(choice);
     setShow(false);
   };
 

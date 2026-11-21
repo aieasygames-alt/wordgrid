@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 import GuideActionBar from "@/components/GuideActionBar";
+import WordListPractice from "@/components/WordListPractice";
 
 export const metadata: Metadata = {
   title: "Boggle Word Lists - Current WordGrid Study Lists",
@@ -66,6 +67,7 @@ const articleSchema = {
     "A practical index of current WordGrid word lists by length, score, and reusable pattern.",
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
+  dateModified: "2026-11-21",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-word-lists/`,
 };
 
@@ -130,6 +132,8 @@ export default function BoggleWordListsGuide() {
               ))}
             </div>
           </section>
+
+          <WordListPractice />
 
           <section className="rounded-xl border border-border bg-surface/50 p-5">
             <h2 className="mb-3 text-2xl font-semibold text-primary">Choose the right target</h2>

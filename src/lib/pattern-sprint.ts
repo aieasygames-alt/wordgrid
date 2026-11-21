@@ -1,4 +1,4 @@
-import { generateGrid, type Grid } from "@/lib/boggle";
+import { generateGrid, type Grid } from "./boggle";
 
 export type PatternFocus = "qu" | "prefix" | "suffix" | "long" | "quick";
 
@@ -50,8 +50,8 @@ const SPRINTS: Record<PatternFocus, Omit<PatternSprint, "grid">> = {
 };
 
 const SEEDS: Record<PatternFocus, number> = {
-  qu: 2026092701,
-  prefix: 2026092702,
+  qu: 2026092702,
+  prefix: 2026092710,
   suffix: 2026092703,
   long: 2026092704,
   quick: 2026092705,

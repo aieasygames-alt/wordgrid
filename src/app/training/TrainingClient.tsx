@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import GameBoard from "@/components/GameBoard";
 import ResultScreen from "@/components/ResultScreen";
@@ -13,19 +13,25 @@ type Result = { words: { word: string; score: number }[]; total: number; trie: T
 const FOCUSES: PatternFocus[] = ["quick", "long", "prefix", "suffix", "qu"];
 
 export default function TrainingClient() {
-  const [focus, setFocus] = useState<PatternFocus>(() => {
-    if (typeof window === "undefined") return "quick";
-    return getPatternFocus(new URLSearchParams(window.location.search).get("focus"));
-  });
+  const [focus, setFocus] = useState<PatternFocus>("quick");
   const [attempt, setAttempt] = useState(0);
   const [result, setResult] = useState<Result | null>(null);
+  useEffect(() => {
+    const syncFocus = () => {
+      setFocus(getPatternFocus(new URLSearchParams(window.location.search).get("focus")));
+      setResult(null);
+    };
+    syncFocus();
+    window.addEventListener("popstate", syncFocus);
+    return () => window.removeEventListener("popstate", syncFocus);
+  }, []);
   const sprint = useMemo(() => getPatternSprint(focus), [focus]);
 
   const chooseFocus = (next: PatternFocus) => {
     setFocus(next);
     setResult(null);
     setAttempt((value) => value + 1);
-    window.history.replaceState(null, "", `/training?focus=${next}`);
+    window.history.replaceState(null, "", `/training/?focus=${next}`);
     trackEvent("pattern_sprint_select", { focus: next });
   };
 

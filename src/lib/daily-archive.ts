@@ -2,6 +2,7 @@ import { generateGrid, seedFromDate, todayDateString, type Grid } from "@/lib/bo
 import { Trie } from "@/lib/dictionary";
 import { loadWordList } from "@/lib/worddata";
 import { solveBoard } from "@/lib/solver";
+import { isPublishedArchiveDate } from "@/lib/archive-dates";
 
 export interface DailyArchiveEntry {
   date: string;
@@ -142,26 +143,28 @@ function formatDay(dateStr: string): string {
     weekday: "short",
     month: "short",
     day: "numeric",
+    timeZone: "UTC",
   }).format(new Date(`${dateStr}T00:00:00Z`));
 }
 
+const entryCache = new Map<string, DailyArchiveEntry>();
+
+function buildArchiveEntry(date: string): DailyArchiveEntry {
+  const cached = entryCache.get(date);
+  if (cached) return cached;
+  const seed = seedFromDate(date);
+  const grid = generateGrid(seed);
+  const entry = { date, seed, grid, ...analyzeGrid(grid) };
+  entryCache.set(date, entry);
+  return entry;
+}
+
 export function getRecentDailyArchive(limit = 14, anchorDate = todayDateString()): DailyArchiveEntry[] {
-  return Array.from({ length: limit }, (_, index) => {
-    const date = shiftDate(anchorDate, -index);
-    const seed = seedFromDate(date);
-    const grid = generateGrid(seed);
-    const metrics = analyzeGrid(grid);
-    return {
-      date,
-      seed,
-      grid,
-      ...metrics,
-    };
-  });
+  return getDailyArchiveDates(limit, anchorDate).filter((date) => isPublishedArchiveDate(date, anchorDate)).map(buildArchiveEntry);
 }
 
 export function getDailyArchiveEntry(date: string): DailyArchiveEntry | null {
-  return getRecentDailyArchive(DAILY_ARCHIVE_DAYS).find((entry) => entry.date === date) || null;
+  return isPublishedArchiveDate(date) ? buildArchiveEntry(date) : null;
 }
 
 export function getDailyArchiveDates(limit = DAILY_ARCHIVE_DAYS, anchorDate = todayDateString()): string[] {

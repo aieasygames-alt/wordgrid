@@ -7,6 +7,8 @@ import { INDEXABLE_WORDS } from "@/lib/indexable-words";
 import CompleteLetterBoard from "@/components/CompleteLetterBoard";
 import CompleteTutorial from "@/components/CompleteTutorial";
 import ThemeToggle from "@/components/ThemeToggle";
+import { trackEvent } from "@/lib/analytics";
+import { crossedCompleteMilestones } from "@/lib/complete-milestones";
 
 interface Entry { name: string; score: number; found: number; completed: number }
 const EMPTY: CompleteProgress = { found: [], revealed: [] };
@@ -57,6 +59,8 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
   const [posting, setPosting] = useState(false);
   const [receipt, setReceipt] = useState("");
   const mounted = useRef(true);
+  const autoTutorialTracked = useRef(false);
+  const reportedMilestones = useRef(new Set<number>());
   const key = progressKey(puzzle, practice);
   useEffect(() => {
     mounted.current = true;
@@ -67,7 +71,13 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
       if (saved.found.length) setMessage("Your saved collection is restored.");
     }
     catch { setStorageWarning(true); }
-    try { setTutorial(localStorage.getItem("wordgrid-complete-tutorial-v1") !== "done"); } catch { setTutorial(true); }
+    let needsTutorial = true;
+    try { needsTutorial = localStorage.getItem("wordgrid-complete-tutorial-v1") !== "done"; } catch { /* Show tutorial without storage. */ }
+    setTutorial(needsTutorial);
+    if (needsTutorial && !autoTutorialTracked.current) {
+      autoTutorialTracked.current = true;
+      trackEvent("complete_tutorial_start", { source: "first_visit", practice });
+    }
     setReady(true);
     const sync = (event: StorageEvent) => {
       if (event.key !== key || event.storageArea !== localStorage || !event.newValue) return;
@@ -81,7 +91,7 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
     };
     window.addEventListener("storage", sync);
     return () => { mounted.current = false; window.removeEventListener("storage", sync); };
-  }, [key, puzzle]);
+  }, [key, puzzle, practice]);
   useEffect(() => {
     if (!ready) return;
     try {
@@ -112,11 +122,26 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
   }, [loadLeaderboard]);
 
   const changePath = (next: Position[]) => { setPath(next); if (next.length) setHint(""); };
+  const recordFind = (word: string, revealed = false) => {
+    const before = progressRef.current;
+    if (before.found.includes(word)) return;
+    const next = { ...before, found: [...new Set([...before.found, word])], revealed: revealed ? [...before.revealed, word] : before.revealed, hintLevel: revealed ? 3 : before.hintLevel };
+    progressRef.current = next;
+    setProgress(next);
+    const beforeTargets = before.found.filter((item) => puzzle.requiredWords.includes(item)).length;
+    const afterTargets = next.found.filter((item) => puzzle.requiredWords.includes(item)).length;
+    if (!before.found.length && !revealed) trackEvent("complete_first_word", { practice, word_type: puzzle.requiredWords.includes(word) ? "target" : "bonus" });
+    for (const milestone of crossedCompleteMilestones(beforeTargets, afterTargets, puzzle.requiredWords.length)) {
+      if (reportedMilestones.current.has(milestone)) continue;
+      reportedMilestones.current.add(milestone);
+      trackEvent("complete_milestone", { percent: milestone, practice, targets_found: afterTargets, target_count: puzzle.requiredWords.length, revealed_count: next.revealed.length });
+    }
+  };
   const submit = (value: string) => {
     if (!ready || tutorial) return;
-    const result = checkCompleteWord(puzzle, value, progress.found);
+    const result = checkCompleteWord(puzzle, value, progressRef.current.found);
     if (result.kind === "required" || result.kind === "bonus") {
-      setProgress((current) => ({ ...current, found: [...new Set([...current.found, result.word])] }));
+      recordFind(result.word);
       setMessage(`${result.word}: ${result.kind === "bonus" ? "bonus word" : "target found"}!`);
     } else setMessage(result.kind === "duplicate" ? `${result.word} is already found.` : result.kind === "unknown" ? `${result.word} is not in this puzzle's editorial word list.` : "Use a connected path of at least four letters without reusing tiles.");
     setInput(""); changePath([]); setHint("");
@@ -134,16 +159,24 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
   const activateHints = (level: number) => {
     if (!ready || tutorial || level > unlock) return;
     setHintView(level);
-    setProgress(current => ({...current, hintLevel: Math.max(current.hintLevel || 0, level)}));
+    const next = { ...progressRef.current, hintLevel: Math.max(progressRef.current.hintLevel || 0, level) };
+    progressRef.current = next;
+    setProgress(next);
     setMessage(level === 1 ? "Tile badges count remaining target words starting there." : "Missing targets now show their first letter.");
   };
-  const closeTutorial = () => {setTutorial(false);try {localStorage.setItem("wordgrid-complete-tutorial-v1","done");} catch { /* The tutorial remains available without storage. */ }};
+  const closeTutorial = (reason: "complete" | "skip", step: number) => {
+    trackEvent(reason === "complete" ? "complete_tutorial_finish" : "complete_tutorial_skip", { step, practice });
+    setTutorial(false);
+    try { localStorage.setItem("wordgrid-complete-tutorial-v1", "done"); } catch { /* The tutorial remains available without storage. */ }
+  };
   const share = async (copy: boolean) => {
     const text = completeShareText(puzzle, progress, practice);
+    const method = !copy && typeof navigator.share === "function" ? "share" : "clipboard";
     setSharePreview(text);
     try {
-      if (!copy && navigator.share) { await navigator.share({text}); setShareStatus("Share sheet completed."); }
+      if (method === "share") { await navigator.share({text}); setShareStatus("Share sheet completed."); }
       else { await navigator.clipboard.writeText(text); setShareStatus("Result copied. No answers included."); }
+      trackEvent("complete_share_success", { practice, method, targets_found: targets.length, target_count: puzzle.requiredWords.length });
     } catch (reason) {setShareStatus(reason instanceof Error && reason.name === "AbortError" ? "Sharing cancelled." : "Sharing unavailable. Select and copy the preview below.");}
   };
   const review = (word: string) => {setPath([]);setHint(word);setMessage(`Reviewing ${word}: follow the numbered trail. This does not change your score.`);};
@@ -151,7 +184,7 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
     if (!ready || tutorial || unlock < 3) return;
     const word = remaining[0];
     if (!word) return;
-    setProgress((current) => ({ ...current, found: [...new Set([...current.found, word])], revealed: [...current.revealed, word], hintLevel: 3 }));
+    recordFind(word, true);
     setHint(word); setMessage(`${word} revealed. No points awarded.`); changePath([]);
   };
   const postScore = async (event: FormEvent) => {
@@ -222,7 +255,7 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
           <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
             <button disabled={!ready} className="text-primary disabled:opacity-40" onClick={()=>{setTurns((turns+1)%4);setMessage("Board rotated 90 degrees. Score and progress are unchanged.");}}>Rotate 90°</button>
             <span className="text-text-dim">View {turns*90}°</span>
-            <button className="text-text-muted" onClick={()=>setTutorial(true)}>Quick start</button>
+            <button className="text-text-muted" onClick={()=>{trackEvent("complete_tutorial_start", { source: "replay", practice });setTutorial(true);}}>Quick start</button>
           </div>
           <CompleteLetterBoard puzzle={puzzle} turns={turns} path={path} preview={preview} counts={counts} disabled={!ready || tutorial} onPath={changePath} onSubmit={trail=>submit(wordFromPath(puzzle,trail)||"")} onFeedback={setMessage} />
           {hint && <div className="mb-4 rounded-xl border border-accent/30 p-3 text-sm">

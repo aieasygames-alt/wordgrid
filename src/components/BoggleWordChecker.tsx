@@ -2,11 +2,12 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { loadDictionary } from "@/lib/dictionary";
+import { trackEvent } from "@/lib/analytics";
 
 type CheckState = "idle" | "loading" | "valid" | "invalid" | "format" | "error";
 
 function normalizeWord(value: string) {
-  return value.trim().replace(/\s+/g, "").toUpperCase();
+  return value.trim().toUpperCase();
 }
 
 export default function BoggleWordChecker() {
@@ -24,18 +25,23 @@ export default function BoggleWordChecker() {
     event.preventDefault();
     const normalized = normalizeWord(value);
     setWord(normalized);
+    trackEvent("word_check_submit", { word_length: normalized.length });
 
     if (!/^[A-Z]+$/.test(normalized) || normalized.length < 3) {
       setState("format");
+      trackEvent("word_check_result", { result: "format", word_length: normalized.length });
       return;
     }
 
     setState("loading");
     try {
       const dictionary = await loadDictionary();
-      setState(dictionary.contains(normalized) ? "valid" : "invalid");
+      const result = dictionary.contains(normalized) ? "valid" : "invalid";
+      setState(result);
+      trackEvent("word_check_result", { result, word_length: normalized.length });
     } catch {
       setState("error");
+      trackEvent("word_check_result", { result: "error", word_length: normalized.length });
     }
   }
 
@@ -55,7 +61,7 @@ export default function BoggleWordChecker() {
           <h2 id="word-checker-title" className="text-xl font-semibold text-text">Check a WordGrid word</h2>
           <p className="mt-1 text-sm leading-relaxed text-text-muted">Use the same word list that validates WordGrid rounds. Check after a game, not during a live challenge.</p>
         </div>
-        <span className="text-xs font-semibold uppercase tracking-wide text-text-dim">3+ letters</span>
+        <span className="text-xs font-semibold uppercase tracking-wide text-text-dim">3–6 letters</span>
       </div>
       <form className="mt-4 flex flex-col gap-3 sm:flex-row" onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="boggle-word-checker">Word to check</label>
@@ -67,9 +73,10 @@ export default function BoggleWordChecker() {
           placeholder="Type a word, e.g. GARDEN"
           autoComplete="off"
           spellCheck="false"
+          maxLength={40}
         />
-        <button type="submit" className="rounded-lg bg-primary px-4 py-2.5 font-semibold text-white transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-bg">
-          Check word
+        <button type="submit" disabled={state === "loading"} className="rounded-lg bg-primary px-4 py-2.5 font-semibold text-white transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-bg disabled:opacity-50">
+          {state === "loading" ? "Checking…" : "Check word"}
         </button>
       </form>
       {result}

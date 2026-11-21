@@ -5,22 +5,11 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import CookieBanner from "@/components/CookieBanner";
 import SiteFooter from "@/components/SiteFooter";
 import GameHeader from "@/components/GameHeader";
-
-const GA_ID = "G-MLZV98LG8Z";
+import { analyticsBootstrapScript, GA_MEASUREMENT_ID } from "@/lib/analytics-config";
 
 // Anti-flash: apply saved theme before first paint
 const themeScript = `
 (function(){try{var t=localStorage.getItem('wordgrid-theme')||'dark';var d=document.documentElement;if(t==='light'){d.classList.remove('dark');d.classList.add('light')}else{d.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})()
-`;
-
-// Consent Mode v2 default: denied until user chooses
-const consentScript = `
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('consent', 'default', {
-  'analytics_storage': 'denied',
-  'wait_for_update': 500
-});
 `;
 
 const BASE_URL = "https://wordgrid.games";
@@ -105,7 +94,7 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <script id="consent-default" dangerouslySetInnerHTML={{ __html: consentScript }} />
+        <script id="analytics-bootstrap" dangerouslySetInnerHTML={{ __html: analyticsBootstrapScript }} />
       </head>
       <body className="min-h-screen flex flex-col bg-bg text-text game-backdrop">
         <ThemeProvider>
@@ -116,15 +105,9 @@ export default function RootLayout({
         <CookieBanner />
         {/* Google Analytics (GA4) */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
-        <Script id="ga4-init" strategy="afterInteractive">{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_ID}');
-        `}</Script>
       </body>
     </html>
   );

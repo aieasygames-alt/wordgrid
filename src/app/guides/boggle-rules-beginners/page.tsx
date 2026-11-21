@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GuideImage from "@/components/GuideImage";
 import GuideActionBar from "@/components/GuideActionBar";
+import TrackedGuideLink from "@/components/TrackedGuideLink";
 
 export const metadata: Metadata = {
   title: "Boggle Rules for Beginners — How to Play WordGrid",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Boggle Rules for Beginners: How to Play, Score, and Win",
     description:
-      "Learn the rules of Boggle from scratch — the 4×4 grid, letter adjacency, valid words, and scoring. Free interactive examples included.",
+      "Learn adjacent letter paths, the Qu tile, and WordGrid's 1/2/4/6 scoring with a simple board example. Try a free round in your browser.",
     images: ["/images/seo/boggle-rules-paths.webp"],
   },
 };
@@ -30,7 +31,7 @@ const articleSchema = {
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
   datePublished: "2026-06-20",
-  dateModified: "2026-08-05",
+  dateModified: "2026-11-21",
   mainEntityOfPage: "https://wordgrid.games/guides/boggle-rules-beginners/",
 };
 
@@ -128,8 +129,27 @@ export default function BoggleRulesGuide() {
           <h1 className="text-4xl font-bold mb-2">
             Boggle Rules for Beginners: How to Play, Score, and Win
           </h1>
-          <p className="text-text-muted">8 min read &middot; Updated July 2026</p>
+          <p className="text-text-muted">8 min read &middot; Updated November 21, 2026</p>
         </header>
+
+        <section aria-labelledby="rules-quick-start" className="mb-6 rounded-2xl border border-primary/30 bg-primary/5 p-5">
+          <h2 id="rules-quick-start" className="text-xl font-bold">How to play in 30 seconds</h2>
+          <p className="mt-2 leading-relaxed">Connect touching tiles in any direction to spell a word, then release to submit. Each tile can be used once per word. WordGrid Timed, Zen, and Daily accept words from the current 3–6 letter word list.</p>
+          <div className="mt-4 grid gap-5 sm:grid-cols-[auto_1fr] sm:items-center">
+            <div>
+              <div className="grid w-40 grid-cols-4 gap-1" aria-label="Example grid with the path T to A to P in the first row">
+                {EXAMPLE_BOARD.flat().map((letter, index) => <span key={index} className={`flex h-9 items-center justify-center rounded-md border font-bold ${index < 3 ? "border-primary bg-primary/20 text-primary" : "border-border bg-surface"}`}>{letter}</span>)}
+              </div>
+              <p className="mt-2 text-sm font-semibold text-primary">T → A → P = TAP</p>
+            </div>
+            <div>
+              <h3 className="font-semibold">WordGrid scoring</h3>
+              <p className="mt-1 text-sm text-text-muted">3 letters: 1 point · 4: 2 · 5: 4 · 6: 6</p>
+              <p className="mt-2 text-sm leading-relaxed text-text-muted">Qu is one tile and two letters. WordGrid uses its own word list and points; these differ from traditional Boggle. Complete has separate collection rules.</p>
+              <div className="mt-3"><TrackedGuideLink href="/play/" label="Try your first board" detail="" compact /></div>
+            </div>
+          </div>
+        </section>
 
         <GuideActionBar
           primary={{ href: "/play/", label: "Play the rules", detail: "Try a live board while the basics are fresh." }}

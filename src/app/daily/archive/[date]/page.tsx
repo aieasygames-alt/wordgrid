@@ -3,12 +3,10 @@ import Link from "next/link";
 import TrackedReplayLink from "@/components/TrackedReplayLink";
 import { notFound } from "next/navigation";
 import {
-  DAILY_ARCHIVE_DAYS,
   formatArchiveDate,
-  getDailyArchiveDates,
   getDailyArchiveEntry,
-  getRecentDailyArchive,
 } from "@/lib/daily-archive";
+import { getPublishedArchiveDates } from "@/lib/archive-dates";
 import { buildBoardUrl } from "@/lib/board-link";
 
 const BASE_URL = "https://wordgrid.games";
@@ -20,7 +18,7 @@ type PageProps = {
 };
 
 export function generateStaticParams() {
-  return getDailyArchiveDates(DAILY_ARCHIVE_DAYS).map((date) => ({ date }));
+  return getPublishedArchiveDates().map((date) => ({ date }));
 }
 
 export function generateMetadata({ params }: PageProps): Metadata {
@@ -50,8 +48,8 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const archive = getRecentDailyArchive(DAILY_ARCHIVE_DAYS);
-  const index = archive.findIndex((item) => item.date === entry.date);
+  const archive = getPublishedArchiveDates();
+  const index = archive.indexOf(entry.date);
   const newer = index > 0 ? archive[index - 1] : null;
   const older = index >= 0 && index < archive.length - 1 ? archive[index + 1] : null;
   const replayPath = buildBoardUrl("/play", entry.grid, {
@@ -266,12 +264,12 @@ export default function DailyArchiveDetailPage({ params }: PageProps) {
               <h2 className="text-2xl font-semibold">Navigate the archive</h2>
               <div className="mt-4 flex flex-wrap gap-2">
                 {newer && (
-                  <Link href={`/daily/archive/${newer.date}`} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+                  <Link href={`/daily/archive/${newer}/`} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                     Newer board
                   </Link>
                 )}
                 {older && (
-                  <Link href={`/daily/archive/${older.date}`} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
+                  <Link href={`/daily/archive/${older}/`} className="px-4 py-2 rounded-xl bg-surface hover:bg-surface-hover transition font-semibold">
                     Older board
                   </Link>
                 )}

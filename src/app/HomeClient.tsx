@@ -68,10 +68,10 @@ export default function HomeClient() {
           Instant Arcade Board · 3-Minute Blitz
         </div>
         <h1 className="mt-2.5 text-2xl font-black tracking-tight sm:text-4xl">
-          Connect Adjacent Tiles. Find Every Word.
+          WordGrid — Free Word Grid Game
         </h1>
         <p className="mx-auto mt-2 max-w-xl text-sm text-text-muted">
-          Drag horizontally, vertically, or diagonally. Submit words before the clock runs out!
+          Connect adjacent letters in a three-minute round. Find words, review missed paths, and try again.
         </p>
       </section>
       <div className="mb-8">

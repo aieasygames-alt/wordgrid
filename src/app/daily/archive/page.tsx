@@ -57,7 +57,7 @@ export default function DailyArchivePage() {
           <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <div>
               <span className="inline-flex items-center rounded-full border border-border bg-surface/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-text-dim">
-                Retention hub
+                Past daily puzzles
               </span>
               <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight">
                 Daily Archive
@@ -65,8 +65,8 @@ export default function DailyArchivePage() {
               <p className="mt-4 max-w-2xl text-base sm:text-lg text-text-muted leading-relaxed">
                 Review recent daily boards, notice recurring letter patterns,
                 and jump back into today&apos;s board when you are ready to
-                play again. This page gives the daily mode a visible history
-                instead of a single isolated game.
+                play again. Older boards stay available through the archive
+                navigation on each details page.
               </p>
             </div>
 
@@ -74,7 +74,7 @@ export default function DailyArchivePage() {
               <div className="grid gap-4 sm:grid-cols-3">
                 <Metric label="Boards shown" value={archive.length} />
                 <Metric label="Best for" value="Review" />
-                <Metric label="Today" value={formatArchiveDate(archive[0]?.date || "")} />
+                <Metric label="Latest board" value={formatArchiveDate(archive[0]?.date || "")} />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 <Link href="/daily" className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover transition font-semibold shadow-lg shadow-primary/20">
@@ -106,7 +106,7 @@ export default function DailyArchivePage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="text-xs uppercase tracking-[0.2em] text-text-dim">
-                    {index === 0 ? "Today" : index === 1 ? "Yesterday" : "Past board"}
+                    {index === 0 ? "Latest archived board" : "Past board"}
                   </div>
                   <h2 className="mt-1 text-xl font-bold text-text">
                     {formatArchiveDate(entry.date)}
@@ -167,7 +167,7 @@ export default function DailyArchivePage() {
                       href={buildBoardUrl("/play", entry.grid, { mode: "timed", source: "daily-archive", date: entry.date })}
                       className="inline-flex items-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover transition"
                     >
-                      Replay yesterday
+                      Replay this board
                     </Link>
                   )}
                 </div>

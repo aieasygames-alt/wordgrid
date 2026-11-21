@@ -130,8 +130,7 @@ export function seedFromDate(dateStr: string): number {
 
 // UTC+8 date string — ensures all players globally see the same daily board.
 // Without this, UTC+12 players see "tomorrow's" board and UTC-12 see "yesterday's".
-export function todayDateString(): string {
-  const now = new Date();
+export function todayDateString(now = new Date()): string {
   // Shift to UTC+8 (Singapore/Western China timezone)
   const utc8 = new Date(now.getTime() + 8 * 3600_000);
   return utc8.toISOString().slice(0, 10);

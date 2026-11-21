@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 import GuideActionBar from "@/components/GuideActionBar";
+import BoardGenerator from "@/components/BoardGenerator";
 
 export const metadata: Metadata = {
   title: "Boggle Generator - Create Free Practice Boards",
@@ -32,6 +33,7 @@ const articleSchema = {
     "A practical guide to creating a fresh WordGrid practice board, choosing a supported board size, and reviewing it with the solver.",
   author: { "@type": "Organization", name: "WordGrid" },
   publisher: { "@type": "Organization", name: "WordGrid" },
+  dateModified: "2026-11-21",
   mainEntityOfPage: `${BASE_URL}/guides/boggle-generator/`,
 };
 
@@ -44,7 +46,7 @@ const faqSchema = {
       name: "How do I generate a new WordGrid board?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Open WordGrid Play, choose a 4x4, 5x5, or 6x6 board, and start a fresh practice game. Choose Timed mode for a clock or Zen mode for unhurried practice.",
+        text: "Choose 4x4, 5x5, or 6x6 in the generator on this page, then select Generate new board. Preview the letters and choose Play timed or Play Zen to play that exact layout.",
       },
     },
     {
@@ -76,12 +78,6 @@ const breadcrumbSchema = {
   ],
 };
 
-const boardOptions = [
-  ["4x4 board", "/play?size=4", "A compact board for a quick practice round."],
-  ["5x5 board", "/play?size=5", "More tiles for broader route scanning."],
-  ["6x6 board", "/play?size=6", "The largest current practice board."],
-] as const;
-
 export default function BoggleGeneratorGuide() {
   return (
     <main className="min-h-screen px-4 py-8">
@@ -109,6 +105,8 @@ export default function BoggleGeneratorGuide() {
           <p className="text-text-muted">Choose a board, play it cleanly, then review the routes you missed.</p>
         </header>
 
+        <BoardGenerator />
+
         <GuideActionBar
           primary={{ href: "/play/", label: "Start a board", detail: "Choose Timed or Zen practice." }}
           secondary={{ href: "/daily/", label: "Play Daily", detail: "Use today's shared board." }}
@@ -120,27 +118,17 @@ export default function BoggleGeneratorGuide() {
           <section className="space-y-3 leading-relaxed">
             <p>
               Use WordGrid as a <strong>Boggle-style board generator</strong> when
-              you want a fresh board for practice. Open Play, select a 4x4, 5x5,
-              or 6x6 board, then choose Timed mode for a clock or Zen mode for
-              unhurried route finding.
+              you want a fresh board for practice. Use the generator above to
+              preview a 4x4, 5x5, or 6x6 layout, then choose Timed mode for a
+              clock or Zen mode for unhurried route finding. Both buttons keep
+              the exact letters you previewed. Share this board opens the same
+              layout in Zen mode for a friend.
             </p>
             <p>
               The reliable practice loop is simple: play before looking up
               answers, enter the finished layout into the <Link href="/solver/" className="text-primary hover:underline">solver</Link>,
               then study one missed route or word pattern on your next board.
             </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-2xl font-semibold text-primary">Choose a board size</h2>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {boardOptions.map(([title, href, description]) => (
-                <Link key={href} href={href} className="rounded-xl border border-border bg-surface/50 p-4 transition hover:bg-surface">
-                  <h3 className="font-semibold text-primary">{title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-text-muted">{description}</p>
-                </Link>
-              ))}
-            </div>
           </section>
 
           <section className="rounded-xl border border-border bg-surface/50 p-5">

@@ -100,7 +100,7 @@ export default function PwaInstallPrompt() {
             <p className="mt-0.5 text-xs text-text-muted leading-relaxed">
               {isIos
                 ? "Tap the Share button ⎋ in Safari, then select 'Add to Home Screen' ➕ for instant daily play."
-                : "Add to home screen for zero loading time, offline boards, and instant daily challenge access."}
+                : "Add WordGrid to your home screen for a shortcut to your next daily challenge. An internet connection is required."}
             </p>
           </div>
         </div>

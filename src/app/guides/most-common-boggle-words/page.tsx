@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideDesktopShell } from "@/components/GuideDesktopShell";
 import GuideActionBar from "@/components/GuideActionBar";
+import WordListPractice from "@/components/WordListPractice";
 
 const BASE_URL = "https://wordgrid.games";
 
@@ -105,6 +106,7 @@ export default function MostCommonBoggleWordsPage() {
     "@type": "Article",
     headline: "Common WordGrid Words: Verified 3-6 Letter Practice List",
     description: metadata.description,
+    dateModified: "2026-11-21",
     url: `${BASE_URL}/guides/most-common-boggle-words/`,
     mainEntity: {
       "@type": "FAQPage",
@@ -136,6 +138,8 @@ export default function MostCommonBoggleWordsPage() {
             tertiary={{ href: "/guides/boggle-dictionary", label: "Check a word", detail: "Verify dictionary entries" }}
             quaternary={{ href: "/guides/boggle-scoring-sheet", label: "See points", detail: "Learn the score rules" }}
           />
+
+          <WordListPractice />
 
           <div className="mt-10 grid gap-4 sm:grid-cols-4">
             {[

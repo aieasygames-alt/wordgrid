@@ -4,12 +4,12 @@ import HomeClient from "./HomeClient";
 const BASE_URL = "https://wordgrid.games";
 
 export const metadata: Metadata = {
-  title: "Play Word Grid Online Free — Boggle 4x4 Puzzle (No Download)",
+  title: { absolute: "WordGrid — Free Word Grid Game Online, No Download" },
   description:
     "Play the free classic word grid game online in your browser. Choose a three-minute timed board or Zen practice, then review missed words. No download or sign-up.",
   alternates: { canonical: `${BASE_URL}/` },
   openGraph: {
-    title: "Play Word Grid Online Free — Boggle 4x4 Puzzle",
+    title: "WordGrid — Free Word Grid Game Online",
     description:
       "Play the free classic word grid game online in your browser. 3-minute timed, Zen practice, and daily challenges with no download.",
     url: `${BASE_URL}/`,
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const modified = "2026-09-08";
+  const modified = "2026-11-21";
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -105,7 +105,7 @@ export default function Home() {
             Use <strong>Daily</strong> for a shared 4 by 4 board that changes each day, <strong>Complete</strong> for an untimed full-dictionary collection challenge, and the <strong>Solver</strong> after a round when you want to review possible words. WordGrid&apos;s learning guides explain scoring, common patterns, and responsible post-game review.
           </p>
           <p className="mt-4 text-xs">
-            For background on the classic Boggle format that inspired adjacent-letter word games, see <a className="font-semibold text-primary hover:underline" href="https://instructions.hasbro.com/api/download/C1009_en-us_boggle-classic-game.pdf" rel="noopener noreferrer">Hasbro&apos;s Boggle instructions</a>. This page was last updated on September 8, 2026.
+            For background on the classic Boggle format that inspired adjacent-letter word games, see <a className="font-semibold text-primary hover:underline" href="https://instructions.hasbro.com/api/download/C1009_en-us_boggle-classic-game.pdf" rel="noopener noreferrer">Hasbro&apos;s Boggle instructions</a>. This page was last updated on November 21, 2026.
           </p>
 
           <h2 className="mt-8 text-xl font-bold text-text">Frequently asked questions</h2>

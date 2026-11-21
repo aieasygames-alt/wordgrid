@@ -2,7 +2,7 @@
 
 日期：2026-10-15（UTC+8）。
 
-> 历史验收记录。2026-11-21 状态核对：Complete 已可索引并进入 sitemap；“距下一级提示还差几个目标词”也已实现。当前改动和验证见 [RELIABILITY_UPGRADES_2026-11-21.md](RELIABILITY_UPGRADES_2026-11-21.md)。下文保留当时的 beta 放行条件与未验收范围。
+> 历史验收记录。2026-11-21 状态核对：Complete 已可索引并进入 sitemap；提示倒计数、扩展词库、历史复盘及核心玩法离线已实现。当前记录见 [COMPLETE_EXPANSION_2026-11-21.md](COMPLETE_EXPANSION_2026-11-21.md)，通用验收见 [COMPLETE_BROWSER_ACCEPTANCE.md](COMPLETE_BROWSER_ACCEPTANCE.md)。下文保留当时的 beta 放行条件与未验收范围。
 
 ## 放行结论
 

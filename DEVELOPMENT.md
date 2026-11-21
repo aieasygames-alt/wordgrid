@@ -51,7 +51,10 @@
 - Complete 提示以目标词数计算 20%/40%/60% 门槛，并显示距离下一阶段还差几个词；奖励词不推进解锁。
 - 普通玩法的 Long Word 成就从 6 字母开始，与现有 3–6 字母词表一致。
 - 已接入主题切换、Cookie Banner 和 GA4 `G-MLZV98LG8Z`。同意状态先于 GA 配置排队，生产配置限正式站域名。
-- manifest 与安装提示提供桌面快捷入口，尚无 Service Worker 离线缓存。
+- Complete 从 2026-11-23 使用扩展 v2 编辑词库和路径质量分档；此前 40 题保留原计分，新增认可词为零分 extras。原题库保持不变。
+- `/complete/archive/` 提供已发布题的续玩、独立重玩和本机统计；复盘不覆盖原存档，连续天数按题目日期计算。
+- Service Worker 预缓存核心玩法、词表、Complete 题库和归档；显示离线就绪后可断网打开。更新须玩家点击重载，榜单和分析请求不缓存、不排队。
+- `qa:serve`、`qa:prepare`、`qa:check` 与 CUA 套件构成通用验收流程，详见 `plans/COMPLETE_BROWSER_ACCEPTANCE.md`。
 
 ---
 
@@ -327,7 +330,7 @@ loadDictionary()
 | `wordgrid-duration` | 计时模式偏好 | `180` / `300` / `0` |
 | `wordgrid-theme` | 主题 | `dark` / `light` |
 | `wordgrid-game-history` | 最近普通游戏统计 | JSON，最多 60 局 |
-| `wordgrid-complete-v1:…` | 分题、分版本的 Complete 进度 | found/revealed/hintLevel；练习使用独立命名空间 |
+| `wordgrid-complete-v1:…` | 分题、分版本的 Complete 进度 | found/revealed/hintLevel/extra；练习和 UUID 重玩使用独立命名空间 |
 | `wordgrid-complete-tutorial-v1` | Complete 教程完成状态 | `done` |
 
 ---
@@ -402,13 +405,11 @@ npm run check:functions
 - **词表范围**: 普通玩法 3–6 字母；Complete 使用独立有限编辑词表。两种模式都不声称是官方完整比赛词典。
 - **无实时多人对战**: 可分享同盘挑战和成绩，不是同时在线对战。
 - **无账号系统**: 无法同步进度
-- **无完整离线缓存**: 安装入口不保证断网可玩。
+- **离线需要首次准备**: 首次须在线完成缓存；浏览器配额不足或清除站点数据后需重新准备，排行榜仍需联网。
 
 ### 未来可以考虑的方向
-- PWA 离线模式 (Service Worker 缓存)
-- Complete 编辑词表、难度分档与路径多样性升级
-- Complete 历史复盘、独立重玩和个人统计
-- 通用验收流程与系统分享真机补验
+- Complete 难度模型结合玩家完成率、耗时和放弃率校准，继续人工复核词库
+- 原生系统分享、触摸拖动和跨午夜的多设备补验
 - Solver 查询到 URL 的意图映射与入口转化评估
 - 基于实测的性能优化；多语言和账号同步需另验证需求
 
@@ -432,6 +433,8 @@ npm run check:functions
 | 2026-11-21 | Weekly 按真实求解结果筛选主题盘 | 避免主题没有可玩词；已发布周盘不变 |
 | 2026-11-21 | Next.js 15 维护版本与 ESLint 9 | 更新受影响依赖，保留 Pages 静态导出架构 |
 | 2026-11-21 | Complete 显示提示解锁所需目标数 | 精确展示下一步门槛，避免将奖励词误计入 |
+| 2026-11-21 | Complete v2 分期切换、历史原档与复盘分离 | 扩充覆盖和路径质量，保留已发布题计分及旧客户端兼容 |
+| 2026-11-21 | 完整核心资源离线缓存及显式更新 | 保证缓存成功后可离线游玩，避免更新中断当前游戏 |
 
 ---
 

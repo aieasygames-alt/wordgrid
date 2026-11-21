@@ -92,6 +92,7 @@ export default function StatsClient() {
     <main className="min-h-screen px-4 py-8 sm:py-12">
       <article className="mx-auto max-w-7xl">
         <header className="mb-8">
+          <Link href="/complete/archive/" className="mb-4 inline-block rounded-full border border-border px-4 py-2 text-sm text-primary">Complete archive & personal stats →</Link>
           <nav className="text-sm text-text-dim flex items-center gap-2 mb-4">
             <Link href="/" className="hover:text-text">
               WordGrid

@@ -10,7 +10,10 @@ export interface CompletePuzzle {
   board: string[][];
   requiredWords: string[];
   bonusWords: string[];
+  // Recognized extras on legacy boards never change their published score/list.
+  extraWords?: string[];
   difficulty: "Gentle" | "Steady" | "Stretch";
+  quality?: { score: number; longWords: number; averageTurns: number; anchorDiagonals: number; anchorTurns: number; model: string };
 }
 export interface CompleteBank {
   version: string;
@@ -22,6 +25,7 @@ export interface CompleteProgress {
   found: string[];
   revealed: string[];
   hintLevel?: number;
+  extra?: string[];
 }
 export type Position = { row: number; col: number };
 
@@ -34,8 +38,8 @@ export function selectCompletePuzzle(bank: CompleteBank, date: string) {
   return { puzzle: daily ?? bank.puzzles[0], practice: !daily };
 }
 
-export function progressKey(puzzle: CompletePuzzle, practice = false): string {
-  return `wordgrid-complete-v1:${practice ? "practice:" : ""}${puzzle.id}:${puzzle.version}:${puzzle.rulesVersion}:${puzzle.dictionaryVersion}`;
+export function progressKey(puzzle: CompletePuzzle, practice = false, replay = ""): string {
+  return `wordgrid-complete-v1:${replay ? `replay:${replay}:` : practice ? "practice:" : ""}${puzzle.id}:${puzzle.version}:${puzzle.rulesVersion}:${puzzle.dictionaryVersion}`;
 }
 
 export function wordFromPath(puzzle: CompletePuzzle, path: Position[]): string | null {
@@ -50,7 +54,7 @@ export function wordFromPath(puzzle: CompletePuzzle, path: Position[]): string |
   return word.length >= 4 ? word : null;
 }
 
-export function findCompletePath(puzzle: CompletePuzzle, input: string, start?: Position): Position[] | null {
+export function findCompletePath(puzzle: Pick<CompletePuzzle, "board">, input: string, start?: Position): Position[] | null {
   const word = input.trim().toUpperCase();
   if (!/^[A-Z]{4,16}$/.test(word)) return null;
   const visit = (row: number, col: number, offset: number, path: Position[]): Position[] | null => {
@@ -80,6 +84,7 @@ export function checkCompleteWord(puzzle: CompletePuzzle, input: string, found: 
   if (!findCompletePath(puzzle, word)) return { word, kind: "invalid" as const };
   if (puzzle.requiredWords.includes(word)) return { word, kind: "required" as const };
   if (puzzle.bonusWords.includes(word)) return { word, kind: "bonus" as const };
+  if (puzzle.extraWords?.includes(word)) return { word, kind: "extra" as const };
   return { word, kind: "unknown" as const };
 }
 
@@ -91,7 +96,8 @@ export function cleanProgress(puzzle: CompletePuzzle, raw: unknown): CompletePro
     ? [...new Set(words.filter((word): word is string => typeof word === "string" && allowed.has(word)))] : [];
   const revealed = clean(value.revealed).filter((word) => puzzle.requiredWords.includes(word));
   const hintLevel = Number.isInteger(value.hintLevel) && Number(value.hintLevel) > 0 ? Math.min(3, Number(value.hintLevel)) : 0;
-  return { found: [...new Set([...clean(value.found), ...revealed])], revealed, ...(hintLevel ? {hintLevel} : {}) };
+  const extra = Array.isArray(value.extra) ? [...new Set(value.extra.filter((word): word is string => typeof word === "string" && !!puzzle.extraWords?.includes(word)))] : [];
+  return { found: [...new Set([...clean(value.found), ...revealed])], revealed, ...(hintLevel ? {hintLevel} : {}), ...(extra.length ? {extra} : {}) };
 }
 
 export function completeScore(puzzle: CompletePuzzle, found: string[], revealed: string[] = []): number {
@@ -107,6 +113,7 @@ export function mergeCompleteProgress(puzzle: CompletePuzzle, left: unknown, rig
     found: [...new Set([...a.found, ...b.found])].sort(),
     revealed: [...new Set([...a.revealed, ...b.revealed])].sort(),
     ...(Math.max(a.hintLevel || 0, b.hintLevel || 0) ? {hintLevel: Math.max(a.hintLevel || 0, b.hintLevel || 0)} : {}),
+    ...((a.extra?.length || b.extra?.length) ? { extra: [...new Set([...(a.extra || []), ...(b.extra || [])])].sort() } : {}),
   };
 }
 
@@ -143,5 +150,5 @@ export function completeShareText(puzzle: CompletePuzzle, progress: CompleteProg
   const targets = puzzle.requiredWords.filter(word => progress.found.includes(word)).length;
   const bonuses = puzzle.bonusWords.filter(word => progress.found.includes(word)).length;
   const percentage = Math.round(targets / puzzle.requiredWords.length * 100);
-  return `WordGrid Complete${practice ? " / Practice" : ""} - ${puzzle.date}\n${targets}/${puzzle.requiredWords.length} targets (${percentage}%)\n${bonuses} bonus words\n${progress.hintLevel || progress.revealed.length ? `Hints used / ${progress.revealed.length} revealed` : "No hints used"}\nhttps://wordgrid.games/complete/`;
+  return `WordGrid Complete${practice ? " / Practice" : ""} - ${puzzle.date}\n${targets}/${puzzle.requiredWords.length} targets (${percentage}%)\n${bonuses} bonus words\n${progress.hintLevel || progress.revealed.length ? `Hints used / ${progress.revealed.length} revealed` : "No hints used"}\nhttps://wordgrid.games/complete/?date=${puzzle.date}`;
 }

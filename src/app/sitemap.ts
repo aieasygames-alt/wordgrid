@@ -14,7 +14,7 @@ const GUIDE_WORD_LIST_UPDATED = new Date("2026-07-13");
 const WORDS_UPDATED = new Date("2026-07-24");
 const NOVEMBER_UPDATED = new Date("2026-11-21");
 const UPDATED_URLS = new Set([
-  "/", "/play/", "/daily/", "/complete/", "/training/",
+  "/", "/play/", "/daily/", "/complete/", "/complete/archive/", "/training/",
   "/guides/boggle-rules-beginners/", "/guides/boggle-word-lists/",
   "/guides/most-common-boggle-words/", "/guides/boggle-generator/", "/guides/boggle-dictionary/",
 ]);
@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/zen/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.82 },
     { url: `${BASE_URL}/daily/`, lastModified: SITE_UPDATED, changeFrequency: "daily", priority: 0.9 },
     { url: `${BASE_URL}/complete/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE_URL}/complete/archive/`, lastModified: NOVEMBER_UPDATED, changeFrequency: "daily", priority: 0.65 },
     { url: `${BASE_URL}/weekly/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.82 },
     { url: `${BASE_URL}/training/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.78 },
     { url: `${BASE_URL}/challenge/`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.72 },

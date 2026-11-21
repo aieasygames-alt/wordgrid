@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import CookieBanner from "@/components/CookieBanner";
 import SiteFooter from "@/components/SiteFooter";
 import GameHeader from "@/components/GameHeader";
+import OfflineStatus from "@/components/OfflineStatus";
 import { analyticsBootstrapScript, GA_MEASUREMENT_ID } from "@/lib/analytics-config";
 
 // Anti-flash: apply saved theme before first paint
@@ -99,6 +100,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-bg text-text game-backdrop">
         <ThemeProvider>
           <GameHeader />
+          <OfflineStatus />
           <div className="flex-1">{children}</div>
           <SiteFooter />
         </ThemeProvider>

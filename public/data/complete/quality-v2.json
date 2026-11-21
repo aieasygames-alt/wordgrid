@@ -1,0 +1,21 @@
+{
+  "model": "editorial-path-1",
+  "cutover": "2026-11-23",
+  "requiredSpellings": 2273,
+  "bonusSpellings": 232,
+  "legacyBoards": 40,
+  "newBoards": 325,
+  "recognizedLegacyExtras": 795,
+  "difficulty": {
+    "Gentle": 93,
+    "Steady": 140,
+    "Stretch": 92
+  },
+  "pathTurns": {
+    "min": 1.8,
+    "max": 3.5
+  },
+  "meanCandidates": 13,
+  "maxCandidates": 173,
+  "note": "Editorial estimates using target count, long-word burden and representative path turns; player validation remains necessary."
+}

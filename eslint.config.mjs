@@ -7,7 +7,7 @@ const compat = new FlatCompat({
 });
 
 const config = [
-  { ignores: [".next/**", "out/**", ".wrangler/**", "node_modules/**", "reports/**", "squaredle-public/**"] },
+  { ignores: [".next/**", "out/**", ".wrangler/**", ".qa/**", "node_modules/**", "reports/**", "squaredle-public/**"] },
   ...compat.extends("next/core-web-vitals"),
   { rules: { "react/no-unescaped-entities": "off" } },
 ];

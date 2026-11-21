@@ -4,12 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/build-offline.mjs",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "check:functions": "wrangler pages functions build functions --outdir .wrangler/functions-build",
     "test": "node scripts/verify-word-list.mjs && node scripts/test-complete.cjs",
-    "generate:complete": "node scripts/generate-complete.cjs"
+    "generate:complete": "node scripts/generate-complete.cjs",
+    "generate:complete:v2": "node scripts/generate-complete-v2.cjs",
+    "qa:serve": "node scripts/qa-serve.mjs",
+    "qa:prepare": "node scripts/qa-prepare.mjs",
+    "qa:check": "node scripts/check-export.mjs"
   },
   "dependencies": {
     "next": "15.5.29",

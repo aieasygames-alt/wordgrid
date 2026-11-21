@@ -1,3 +1,5 @@
+// Historical one-off; use COMPLETE_BROWSER_ACCEPTANCE.md and the portable qa:*
+// commands. This original script requires an undeclared browser driver.
 import https from "node:https";
 import fs from "node:fs";
 import path from "node:path";

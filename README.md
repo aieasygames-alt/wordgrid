@@ -57,11 +57,16 @@ if no qualifying candidate is found instead of publishing a mismatched board.
 
 `/complete/` is an independent untimed daily collection game: find all target
 words, discover optional bonuses, reveal words for zero points, and save progress
-locally. Daily boards change at midnight UTC+8. The initial editorial bank covers
+locally. Daily boards change at midnight UTC+8. The editorial bank covers
 2026-10-14 through 2027-10-13; outside coverage, a clearly labelled practice board
 remains playable. The published mode is indexable and included in the sitemap.
 
-- `npm run generate:complete` regenerates the deterministic editorial bank.
+- `bank-v1.json` stays immutable for saved progress and old clients. From
+  2026-11-23, new boards use the expanded v2 lexicon, turning diagonal paths and
+  an explicit editorial difficulty model. Legacy boards recognize additional
+  spellings as zero-point extras without changing targets or rankings.
+- `npm run generate:complete:v2 -- [END_DATE]` generates the deterministic v2
+  bank and quality report. See `plans/COMPLETE_LEXICON_POLICY.md`.
 - `npm test` includes Complete rules, all generated puzzles, and SQLite API tests;
   use Node 22.13+ (Node 24 LTS recommended).
 - Optional ranking uses `/api/complete/score`, the Cloudflare `DB` binding, and
@@ -72,4 +77,25 @@ remains playable. The published mode is indexable and included in the sitemap.
 - Hints unlock at 20%, 40%, and 60% of target collection. The interface shows
   the exact number of targets needed for the next stage; bonuses do not count.
 
-See `plans/COMPLETE_IMPLEMENTATION.md` for verification and deployment steps.
+- `/complete/archive/` lists published dates and personal stats. Each original
+  save is separate from UUID-based replays; future boards cannot be opened.
+  Stats stay on this browser; streaks describe consecutive completed puzzle dates.
+
+## Offline play and browser acceptance
+
+Production builds generate a versioned Service Worker and offline manifest.
+After “Offline play ready on this device”, the core game routes, Complete bank,
+archive and dictionaries work without a connection. Scores and analytics are
+never cached or queued. Updates activate only after the player chooses reload;
+progress remains in localStorage. First visits need a successful online setup,
+and clearing site storage removes offline resources and personal saves.
+
+Run `npm run qa:check` after building to verify sitemap and offline export
+completeness. `npm run qa:serve -- --port=4180` serves an isolated local export
+with no score writes; `npm run qa:prepare -- --url=http://127.0.0.1:4180`
+prepares date-independent UI fixtures. The reusable CUA browser workflow,
+offline/reconnect/update phases and device-only limits are documented in
+`plans/COMPLETE_BROWSER_ACCEPTANCE.md`.
+
+See `plans/COMPLETE_EXPANSION_2026-11-21.md` for the current implementation record
+and `plans/COMPLETE_IMPLEMENTATION.md` for the original launch history.

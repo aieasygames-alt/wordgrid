@@ -17,3 +17,10 @@
 # The published daily bank may be extended; always revalidate it.
 /data/complete/bank-v1.json
   Cache-Control: public, max-age=0, must-revalidate
+/data/complete/bank-v2.json
+  Cache-Control: public, max-age=0, must-revalidate
+/sw.js
+  Cache-Control: no-cache
+  Service-Worker-Allowed: /
+/offline-manifest.json
+  Cache-Control: no-cache

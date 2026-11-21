@@ -49,6 +49,7 @@ test("stale tabs merge discoveries and reveals without losing words or restoring
 });
 
 import bankData from "../public/data/complete/bank-v1.json";
+import expandedBankData from "../public/data/complete/bank-v2.json";
 import { onRequestGet, onRequestPost } from "../functions/api/complete/score";
 const { DatabaseSync } = require("node:sqlite") as { DatabaseSync: new (path: string) => { exec(sql: string): void; close(): void; prepare(sql: string): { all(...args: (string | number)[]): unknown[]; run(...args: (string | number)[]): unknown } } };
 import { readFileSync } from "node:fs";
@@ -146,6 +147,27 @@ test("D1 rate limit is atomic; oversized payloads and missing source fail closed
     for(let i=0;i<10;i++) assert.notEqual((await onRequestPost({request:request({},"192.0.2.5"),env})).status,429);
     const limited=await onRequestPost({request:request({},"192.0.2.5"),env});
     assert.equal(limited.status,429);assert.equal(limited.headers.get("retry-after"),"60");
+  } finally {db.close();}
+});
+
+test("current v2 and legacy clients retain separate validated rankings without accepting unscored extras", async context => {
+  context.mock.timers.enable({apis:["Date"],now:Date.UTC(2026,10,23,4)});
+  const current=expandedBankData.puzzles.find(p=>p.date==="2026-11-23")!;
+  const old=bank.puzzles.find(p=>p.date===current.date)!;
+  const {db,binding}=database();
+  try {
+    for(const p of [current,old]) {
+      const body={date:p.date,version:p.version,name:"Version Check",words:[p.requiredWords[0]],revealed:[]};
+      const response=await onRequestPost({request:request(body),env:{DB:binding}});
+      assert.equal(response.status,200);
+      const list=await onRequestGet({request:new Request(`https://wordgrid.games/api/complete/score?date=${p.date}&version=${p.version}`),env:{DB:binding}});
+      assert.equal((await list.json()).entries.length,1);
+    }
+    const invalid=await onRequestGet({request:new Request(`https://wordgrid.games/api/complete/score?date=${current.date}&version=unknown`),env:{DB:binding}});
+    assert.equal(invalid.status,404);
+    assert.equal((await onRequestPost({request:request({...valid,date:current.date,version:current.version,words:["NOTAWORD"]}),env:{DB:binding}})).status,400);
+    context.mock.timers.setTime(Date.UTC(2026,9,14,12));
+    assert.equal((await onRequestPost({request:request({...valid,words:["STAND"]}),env:{DB:binding}})).status,400);
   } finally {db.close();}
 });
 

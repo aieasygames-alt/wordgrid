@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { checkCompleteWord, completeDate, completeScore, CompleteBank, CompleteProgress, CompletePuzzle, findCompletePath, completeHintProgress, completeShareText, remainingStartCounts, mergeCompleteProgress, Position, progressKey, selectCompletePuzzle, wordFromPath } from "@/lib/complete";
+import { checkCompleteWord, completeScore, CompleteProgress, CompletePuzzle, findCompletePath, completeHintProgress, completeShareText, remainingStartCounts, mergeCompleteProgress, Position, progressKey, wordFromPath } from "@/lib/complete";
 import Link from "next/link";
 import { INDEXABLE_WORDS } from "@/lib/indexable-words";
 import CompleteLetterBoard from "@/components/CompleteLetterBoard";
@@ -9,36 +9,28 @@ import CompleteTutorial from "@/components/CompleteTutorial";
 import ThemeToggle from "@/components/ThemeToggle";
 import { trackEvent } from "@/lib/analytics";
 import { crossedCompleteMilestones } from "@/lib/complete-milestones";
+import { useCompleteBank } from "@/lib/use-complete-bank";
+import { replayUrl, selectCompleteSession } from "@/lib/complete-history";
+import { useNetworkStatus } from "@/lib/use-network-status";
+import { useSearchParams } from "next/navigation";
+import { shareCompleteResult } from "@/lib/complete-sharing";
 
 interface Entry { name: string; score: number; found: number; completed: number }
 const EMPTY: CompleteProgress = { found: [], revealed: [] };
 
 export default function CompleteClient() {
-  const [bank, setBank] = useState<CompleteBank | null>(null);
-  const [error, setError] = useState("");
-  const [date, setDate] = useState("");
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch("/data/complete/bank-v1.json", { signal: controller.signal }).then((response) => {
-      if (!response.ok) throw new Error("The puzzle bank could not be loaded.");
-      return response.json();
-    }).then((value: CompleteBank) => {
-      if (value.version !== "1" || !Array.isArray(value.puzzles) || !value.puzzles.length) throw new Error("Unsupported puzzle bank.");
-      setBank(value);
-    }).catch((reason: Error) => { if (reason.name !== "AbortError") setError("Unable to load today's board. Please reload to try again."); });
-    const tick = () => setDate(completeDate());
-    tick();
-    const timer = window.setInterval(tick, 1000);
-    document.addEventListener("visibilitychange", tick);
-    return () => { controller.abort(); clearInterval(timer); document.removeEventListener("visibilitychange", tick); };
-  }, []);
+  const { bank, date, error } = useCompleteBank();
+  const query = useSearchParams().toString();
   if (error) return <p role="alert" className="rounded-2xl border border-danger p-6">{error} <button onClick={() => location.reload()} className="underline">Reload</button></p>;
   if (!bank || !date) return <p role="status" className="p-8 text-text-muted">Preparing the board...</p>;
-  const { puzzle, practice } = selectCompletePuzzle(bank, date);
-  return <CompleteGame key={progressKey(puzzle, practice)} puzzle={puzzle} practice={practice} />;
+  const selection = selectCompleteSession(bank, date, query);
+  if ("error" in selection) return <p role="alert" className="rounded-2xl border border-accent p-6">{selection.error} <Link href="/complete/archive/" className="underline">Open archive</Link></p>;
+  const { puzzle, mode, replay } = selection;
+  const practice = mode === "practice" || mode === "replay";
+  return <CompleteGame key={progressKey(puzzle, mode === "practice", replay)} puzzle={puzzle} practice={practice} ranked={mode === "daily"} replay={replay} mode={mode} />;
 }
 
-function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: boolean }) {
+function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: CompletePuzzle; practice: boolean; ranked: boolean; replay: string; mode: string }) {
   const [progress, setProgress] = useState<CompleteProgress>(EMPTY);
   const [ready, setReady] = useState(false);
   const [storageWarning, setStorageWarning] = useState(false);
@@ -61,7 +53,8 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
   const mounted = useRef(true);
   const autoTutorialTracked = useRef(false);
   const reportedMilestones = useRef(new Set<number>());
-  const key = progressKey(puzzle, practice);
+  const online = useNetworkStatus();
+  const key = progressKey(puzzle, mode === "practice", replay);
   useEffect(() => {
     mounted.current = true;
     try {
@@ -104,9 +97,10 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
   }, [key, progress, puzzle, ready]);
 
   const loadLeaderboard = useCallback(async (signal?: AbortSignal) => {
-    if (practice) { setBoardStatus("Practice boards are not ranked."); return; }
+    if (!ranked) { setBoardStatus("Archive and replay sessions are not submitted to today's leaderboard."); return; }
+    if (!online) { setBoardStatus("Offline: scores stay on this device. Reconnect to load the leaderboard or submit today's original session."); return; }
     try {
-      const response = await fetch(`/api/complete/score?date=${puzzle.date}`, { signal });
+      const response = await fetch(`/api/complete/score?date=${puzzle.date}&version=${puzzle.version}`, { signal });
       if (!response.ok) throw new Error();
       const data = await response.json();
       if (!Array.isArray(data.entries)) throw new Error();
@@ -114,7 +108,7 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
     } catch (reason) {
       if (mounted.current && !(reason instanceof Error && reason.name === "AbortError")) setBoardStatus("Leaderboard unavailable. Your progress is saved locally when storage is available.");
     }
-  }, [practice, puzzle.date]);
+  }, [ranked, puzzle.date, puzzle.version, online]);
   useEffect(() => {
     const controller = new AbortController();
     void loadLeaderboard(controller.signal);
@@ -139,10 +133,14 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
   };
   const submit = (value: string) => {
     if (!ready || tutorial) return;
-    const result = checkCompleteWord(puzzle, value, progressRef.current.found);
+    const result = checkCompleteWord(puzzle, value, [...progressRef.current.found, ...(progressRef.current.extra || [])]);
     if (result.kind === "required" || result.kind === "bonus") {
       recordFind(result.word);
       setMessage(`${result.word}: ${result.kind === "bonus" ? "bonus word" : "target found"}!`);
+    } else if (result.kind === "extra") {
+      const next = { ...progressRef.current, extra: [...new Set([...(progressRef.current.extra || []), result.word])] };
+      progressRef.current = next; setProgress(next);
+      setMessage(`${result.word}: extra word recognized! No points; this board keeps its original target and bonus lists.`);
     } else setMessage(result.kind === "duplicate" ? `${result.word} is already found.` : result.kind === "unknown" ? `${result.word} is not in this puzzle's editorial word list.` : "Use a connected path of at least four letters without reusing tiles.");
     setInput(""); changePath([]); setHint("");
   };
@@ -173,13 +171,12 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
   };
   const share = async (copy: boolean) => {
     const text = completeShareText(puzzle, progress, practice);
-    const method = !copy && typeof navigator.share === "function" ? "share" : "clipboard";
     setSharePreview(text);
-    try {
-      if (method === "share") { await navigator.share({text}); setShareStatus("Share sheet completed."); }
-      else { await navigator.clipboard.writeText(text); setShareStatus("Result copied. No answers included."); }
-      trackEvent("complete_share_success", { practice, method, targets_found: targets.length, target_count: puzzle.requiredWords.length });
-    } catch (reason) {setShareStatus(reason instanceof Error && reason.name === "AbortError" ? "Sharing cancelled." : "Sharing unavailable. Select and copy the preview below.");}
+    const result = await shareCompleteResult(text, copy, {
+      share: navigator.share?.bind(navigator), clipboard: navigator.clipboard,
+    });
+    setShareStatus(result.message);
+    if (result.success) trackEvent("complete_share_success", { practice, method: result.method, targets_found: targets.length, target_count: puzzle.requiredWords.length });
   };
   const review = (word: string) => {setPath([]);setHint(word);setMessage(`Reviewing ${word}: follow the numbered trail. This does not change your score.`);};
   const reveal = () => {
@@ -191,7 +188,7 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
   };
   const postScore = async (event: FormEvent) => {
     event.preventDefault();
-    if (posting || practice || !progress.found.length) return;
+    if (posting || !ranked || !online || !progress.found.length) return;
     setPosting(true); setReceipt("Submitting...");
     try {
       const response = await fetch("/api/complete/score", {
@@ -210,7 +207,14 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
 
   return (
     <>
-      {practice && <p role="status" className="mb-5 rounded-xl border border-accent/40 bg-accent/10 p-4 text-sm">Practice board: there is no published puzzle for today. This is a saved board from {puzzle.date}, not today's challenge.</p>}
+      <nav aria-label="Complete navigation" className="mb-5 flex flex-wrap items-center gap-3 text-sm">
+        <Link href="/complete/" className="rounded-full border border-border px-4 py-2 hover:border-primary">Today's board</Link>
+        <Link href="/complete/archive/" className="rounded-full border border-border px-4 py-2 hover:border-primary">Archive & personal stats</Link>
+        <button onClick={() => window.location.assign(replayUrl(puzzle))} className="px-2 py-2 text-primary">Start separate replay</button>
+      </nav>
+      {mode === "practice" && <p role="status" className="mb-5 rounded-xl border border-accent/40 bg-accent/10 p-4 text-sm">Practice board: there is no published puzzle for today. This is a saved board from {puzzle.date}, not today's challenge.</p>}
+      {mode === "replay" && <p role="status" className="mb-5 rounded-xl border border-accent/40 bg-accent/10 p-4 text-sm">Separate replay · {puzzle.date}. Your original collection and personal stats are preserved. This replay is not ranked.</p>}
+      {mode === "archive" && <p role="status" className="mb-5 rounded-xl border border-primary/30 bg-primary/10 p-4 text-sm">Archive · {puzzle.date}. Continue your original saved collection, or start a separate replay. Historical sessions are not ranked.</p>}
       {storageWarning && <p role="status" className="mb-4 text-sm text-accent">Browser storage is unavailable or the saved game could not be read. Progress may not survive a reload.</p>}
       {tutorial && <CompleteTutorial onClose={closeTutorial} />}
       <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr]">
@@ -231,6 +235,7 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
               <span className="text-2xl font-black text-amber-400 tabular-nums">{score}</span>
             </div>
           </div>
+          {puzzle.quality && <details className="mt-3 text-xs text-text-muted"><summary className="cursor-pointer">About this difficulty</summary><p className="mt-2">{puzzle.requiredWords.length} targets, including {puzzle.quality.longWords} words of eight or more letters. Longer words and paths with more turns raise the difficulty estimate.</p></details>}
 
           {/* Gamified XP Collection Progress Bar */}
           <div className="mt-4 space-y-1.5">
@@ -303,6 +308,7 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
           })}</div>
           <h3 className="mt-6 border-t border-border pt-4 text-sm font-semibold">Bonus collection</h3><div className="mt-2 flex flex-wrap gap-2 text-sm text-text-muted">{bonus.length ? bonus.map(word=><button key={word} onClick={()=>review(word)} aria-label={`Review path for ${word}`} className="rounded-lg border border-border px-2 py-1 font-mono">{word}</button>) : "Extra discoveries will appear here."}</div>
           {progress.revealed.length > 0 && <p className="mt-3 text-xs text-accent">* Revealed words earn no points.</p>}
+          {!!puzzle.extraWords?.length && <div className="mt-5 border-t border-border pt-4"><h3 className="text-sm font-semibold">Recognized extras · {progress.extra?.length || 0}</h3><p className="mt-2 text-xs text-text-muted">Other accepted words earn no points on this original-edition board, keeping its published targets and scores intact.</p><div className="mt-2 flex flex-wrap gap-2">{progress.extra?.map(word => <button key={word} onClick={() => review(word)} className="rounded-lg border border-border px-2 py-1 font-mono text-sm">{word}</button>)}</div></div>}
         </section>
       </div>
       <section className="mt-6 rounded-3xl border border-border p-5 sm:p-6" aria-label="Spoiler-free sharing">
@@ -314,7 +320,7 @@ function CompleteGame({ puzzle, practice }: { puzzle: CompletePuzzle; practice: 
       </section>
       <section className="mt-6 rounded-3xl border border-border p-5 sm:p-6" aria-label="Daily leaderboard">
         <h2 className="text-xl font-bold">Daily collection board</h2><p className="mt-2 text-sm text-text-muted">Optional public leaderboard. Submitting publishes your display name and score. Do not use personal information. Found words are sent for validation. No speed ranking or account verification.</p>
-        {!practice && <form onSubmit={postScore} className="mt-4 flex flex-wrap gap-2"><label htmlFor="complete-name" className="sr-only">Public display name</label><input id="complete-name" value={name} onChange={(event) => setName(event.target.value)} maxLength={24} required pattern="[A-Za-z0-9 _-]{1,24}" placeholder="Public display name" className="min-w-0 rounded-xl border border-border bg-surface px-3 py-2" /><button disabled={!ready || posting || !progress.found.length} className="rounded-xl bg-surface px-4 py-2 font-semibold disabled:opacity-40">{posting ? "Submitting..." : "Submit my score"}</button><button type="button" onClick={() => void loadLeaderboard()} className="px-3 py-2 text-sm text-text-muted">Refresh</button></form>}
+        {ranked && <form onSubmit={postScore} className="mt-4 flex flex-wrap gap-2"><label htmlFor="complete-name" className="sr-only">Public display name</label><input id="complete-name" value={name} onChange={(event) => setName(event.target.value)} maxLength={24} required pattern="[A-Za-z0-9 _-]{1,24}" placeholder="Public display name" className="min-w-0 rounded-xl border border-border bg-surface px-3 py-2" /><button disabled={!ready || posting || !online || !progress.found.length} className="rounded-xl bg-surface px-4 py-2 font-semibold disabled:opacity-40">{posting ? "Submitting..." : "Submit my score"}</button><button type="button" disabled={!online} onClick={() => void loadLeaderboard()} className="px-3 py-2 text-sm text-text-muted disabled:opacity-40">Refresh</button></form>}
         <p role="status" className="mt-3 text-sm text-text-muted">{boardStatus}</p>
         <p role="status" className="mt-2 text-sm text-text-muted">{receipt}</p>
         {entries.length > 0 && <div className="mt-4 overflow-x-auto"><table className="w-full text-left text-sm"><caption className="sr-only">Top 50 daily scores</caption><thead><tr className="border-b border-border"><th className="py-2">Name</th><th>Points</th><th>Targets</th><th>Complete</th></tr></thead><tbody>{entries.map((entry, index) => <tr key={index} className="border-b border-border/50"><td className="py-2">{entry.name}</td><td>{entry.score}</td><td>{entry.found}/{puzzle.requiredWords.length}</td><td>{entry.completed ? "Yes" : "Not yet"}</td></tr>)}</tbody></table></div>}

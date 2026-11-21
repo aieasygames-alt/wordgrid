@@ -1,4 +1,5 @@
-import bankData from "../../../public/data/complete/bank-v1.json";
+import bankData from "../../../public/data/complete/bank-v2.json";
+import legacyData from "../../../public/data/complete/bank-v1.json";
 import { CompleteBank, CompletePuzzle, completeDate, completeScore, findCompletePath } from "../../../src/lib/complete";
 
 interface Statement {
@@ -11,14 +12,15 @@ interface Env { DB?: Database }
 interface Context { request: Request; env: Env }
 interface Entry { name: string; score: number; found: number; completed: number }
 const bank = bankData as CompleteBank;
+const legacyBank = legacyData as CompleteBank;
 const MAX_BODY = 8192;
 const json = (data: unknown, status = 200, headers: Record<string, string> = {}) => new Response(JSON.stringify(data), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", ...headers },
 });
 
-function puzzleFor(date: string): CompletePuzzle | undefined {
+function puzzleFor(date: string, version?: string | null): CompletePuzzle | undefined {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date > completeDate()) return undefined;
-  return bank.puzzles.find((puzzle) => puzzle.date === date);
+  return [...bank.puzzles, ...legacyBank.puzzles].find((puzzle) => puzzle.date === date && (!version || puzzle.version === version));
 }
 
 async function entries(db: Database, puzzle: CompletePuzzle) {
@@ -28,7 +30,8 @@ async function entries(db: Database, puzzle: CompletePuzzle) {
 }
 
 export async function onRequestGet({ request, env }: Context): Promise<Response> {
-  const puzzle = puzzleFor(new URL(request.url).searchParams.get("date") || "");
+  const params = new URL(request.url).searchParams;
+  const puzzle = puzzleFor(params.get("date") || "", params.get("version"));
   if (!puzzle) return json({error: "Published puzzle not found."}, 404);
   if (!env.DB) return json({entries: [], remote: false});
   try { return json({entries: await entries(env.DB, puzzle), remote: true}); }
@@ -80,7 +83,7 @@ export async function onRequestPost({ request, env }: Context): Promise<Response
   catch (reason) { return json({error: reason instanceof Error && reason.message === "size" ? "Submission too large." : "Invalid JSON."}, reason instanceof Error && reason.message === "size" ? 413 : 400); }
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) return json({error:"Invalid submission."},400);
   const body = raw as Record<string,unknown>;
-  const puzzle = typeof body.date === "string" ? puzzleFor(body.date) : undefined;
+  const puzzle = typeof body.date === "string" && typeof body.version === "string" ? puzzleFor(body.date, body.version) : undefined;
   if (!puzzle || puzzle.date !== completeDate() || body.version !== puzzle.version) return json({error:"Only today's published puzzle version can be submitted."},400);
   const name = typeof body.name === "string" ? body.name.trim() : "";
   if (!/^[A-Za-z0-9 _-]{1,24}$/.test(name)) return json({error:"Use 1-24 letters, numbers, spaces, hyphens or underscores for your public name."},400);

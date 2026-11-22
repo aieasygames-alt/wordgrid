@@ -43,12 +43,12 @@ export default function GameHeader({ currentMode }: Props) {
       if (href === "/training" && currentMode === "training") return true;
       if (href === "/challenge" && currentMode === "challenge") return true;
     }
-    return pathname === href;
+    return pathname.replace(/\/+$/, "") === href;
   };
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-border/80 bg-slate-900/90 backdrop-blur-md transition-colors">
+      <header className="sticky top-0 z-40 w-full border-b border-border/80 bg-bg/95 backdrop-blur-md transition-colors">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2.5 sm:px-6">
           {/* Brand Logo with 3D Tactile Cubes */}
           <Link href="/" className="group flex items-center gap-2.5 select-none shrink-0" aria-label="WordGrid Home">
@@ -61,10 +61,10 @@ export default function GameHeader({ currentMode }: Props) {
               </span>
             </div>
             <div className="hidden min-[360px]:flex flex-col">
-              <span className="text-lg font-black tracking-tight text-text leading-none group-hover:text-primary transition-colors">
+              <span className="text-lg font-black tracking-tight text-text leading-none group-hover:text-primary dark:group-hover:text-primary-hover transition-colors">
                 WordGrid
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-primary/80 leading-none mt-0.5">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-primary dark:text-primary-hover leading-none mt-0.5">
                 Games
               </span>
             </div>
@@ -78,9 +78,10 @@ export default function GameHeader({ currentMode }: Props) {
                 <Link
                   key={mode.href}
                   href={mode.href}
+                  aria-current={active ? "page" : undefined}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
                     active
-                      ? "bg-primary text-white shadow-md shadow-primary/30 scale-[1.02]"
+                      ? "bg-primary/90 text-white shadow-md shadow-primary/30 scale-[1.02]"
                       : "text-text-muted hover:text-text hover:bg-surface-hover/80"
                   }`}
                 >
@@ -138,9 +139,10 @@ export default function GameHeader({ currentMode }: Props) {
               <Link
                 key={mode.href}
                 href={mode.href}
+                aria-current={active ? "page" : undefined}
                 className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold shrink-0 transition ${
                   active
-                    ? "bg-primary text-white shadow-sm"
+                    ? "bg-primary/90 text-white shadow-sm"
                     : "bg-surface/60 text-text-muted hover:text-text"
                 }`}
               >

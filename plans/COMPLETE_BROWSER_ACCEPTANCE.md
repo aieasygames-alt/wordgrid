@@ -1,5 +1,8 @@
 # Complete 通用浏览器验收
 
+> 2026-11-22 移动设备范围调整：本轮仅安排 iOS，Android 暂不纳入。
+> 实体 iPhone 的连接与自动化安排见 [IOS_SAFARI_ACCEPTANCE.md](IOS_SAFARI_ACCEPTANCE.md)。
+
 适用于本地静态导出、Pages 预览和正式站只读检查，不依赖某一天的固定答案。
 原始十目标题的精确坐标流程保存在 `fixtures/`，不是通用通过标准。
 

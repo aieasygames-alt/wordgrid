@@ -8,7 +8,7 @@ import CompleteLetterBoard from "@/components/CompleteLetterBoard";
 import CompleteTutorial from "@/components/CompleteTutorial";
 import ThemeToggle from "@/components/ThemeToggle";
 import { trackEvent } from "@/lib/analytics";
-import { crossedCompleteMilestones } from "@/lib/complete-milestones";
+import { completeAnalyticsContext, CompleteMeasurement, CompleteMode } from "@/lib/complete-measurement";
 import { useCompleteBank } from "@/lib/use-complete-bank";
 import { replayUrl, selectCompleteSession } from "@/lib/complete-history";
 import { useNetworkStatus } from "@/lib/use-network-status";
@@ -30,7 +30,7 @@ export default function CompleteClient() {
   return <CompleteGame key={progressKey(puzzle, mode === "practice", replay)} puzzle={puzzle} practice={practice} ranked={mode === "daily"} replay={replay} mode={mode} />;
 }
 
-function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: CompletePuzzle; practice: boolean; ranked: boolean; replay: string; mode: string }) {
+function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: CompletePuzzle; practice: boolean; ranked: boolean; replay: string; mode: CompleteMode }) {
   const [progress, setProgress] = useState<CompleteProgress>(EMPTY);
   const [ready, setReady] = useState(false);
   const [storageWarning, setStorageWarning] = useState(false);
@@ -52,7 +52,8 @@ function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: Comp
   const [receipt, setReceipt] = useState("");
   const mounted = useRef(true);
   const autoTutorialTracked = useRef(false);
-  const reportedMilestones = useRef(new Set<number>());
+  const measurement = useRef<CompleteMeasurement | null>(null);
+  const analyticsContext = useMemo(() => completeAnalyticsContext(puzzle, mode), [puzzle, mode]);
   const online = useNetworkStatus();
   const key = progressKey(puzzle, mode === "practice", replay);
   useEffect(() => {
@@ -67,9 +68,14 @@ function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: Comp
     let needsTutorial = true;
     try { needsTutorial = localStorage.getItem("wordgrid-complete-tutorial-v1") !== "done"; } catch { /* Show tutorial without storage. */ }
     setTutorial(needsTutorial);
+    // Access storage lazily so a blocked getter cannot prevent gameplay.
+    measurement.current = new CompleteMeasurement(puzzle, mode, progressRef.current, key, {
+      getItem: name => localStorage.getItem(name), setItem: (name, value) => localStorage.setItem(name, value),
+    }, trackEvent, () => performance.now());
+    measurement.current.clock.setEnabled(!document.hidden && !needsTutorial);
     if (needsTutorial && !autoTutorialTracked.current) {
       autoTutorialTracked.current = true;
-      trackEvent("complete_tutorial_start", { source: "first_visit", practice });
+      trackEvent("complete_tutorial_start", { ...analyticsContext, source: "first_visit" });
     }
     setReady(true);
     const sync = (event: StorageEvent) => {
@@ -84,7 +90,13 @@ function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: Comp
     };
     window.addEventListener("storage", sync);
     return () => { mounted.current = false; window.removeEventListener("storage", sync); };
-  }, [key, puzzle, practice]);
+  }, [key, puzzle, mode, analyticsContext]);
+  useEffect(() => {
+    const visibility = () => measurement.current?.clock.setEnabled(!document.hidden && !tutorial);
+    visibility();
+    document.addEventListener("visibilitychange", visibility);
+    return () => document.removeEventListener("visibilitychange", visibility);
+  }, [tutorial]);
   useEffect(() => {
     if (!ready) return;
     try {
@@ -115,31 +127,30 @@ function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: Comp
     return () => controller.abort();
   }, [loadLeaderboard]);
 
-  const changePath = (next: Position[]) => { setPath(next); if (next.length) setHint(""); };
+  const changePath = (next: Position[]) => {
+    if (ready && !tutorial && next.length >= 2) measurement.current?.interaction(progressRef.current);
+    setPath(next); if (next.length) setHint("");
+  };
   const recordFind = (word: string, revealed = false) => {
     const before = progressRef.current;
     if (before.found.includes(word)) return;
     const next = { ...before, found: [...new Set([...before.found, word])], revealed: revealed ? [...before.revealed, word] : before.revealed, hintLevel: revealed ? 3 : before.hintLevel };
     progressRef.current = next;
     setProgress(next);
-    const beforeTargets = before.found.filter((item) => puzzle.requiredWords.includes(item)).length;
-    const afterTargets = next.found.filter((item) => puzzle.requiredWords.includes(item)).length;
-    if (!before.found.length && !revealed) trackEvent("complete_first_word", { practice, word_type: puzzle.requiredWords.includes(word) ? "target" : "bonus" });
-    for (const milestone of crossedCompleteMilestones(beforeTargets, afterTargets, puzzle.requiredWords.length)) {
-      if (reportedMilestones.current.has(milestone)) continue;
-      reportedMilestones.current.add(milestone);
-      trackEvent("complete_milestone", { percent: milestone, practice, targets_found: afterTargets, target_count: puzzle.requiredWords.length, revealed_count: next.revealed.length });
-    }
+    measurement.current?.record(before, next, revealed ? "reveal" : "find");
   };
   const submit = (value: string) => {
     if (!ready || tutorial) return;
+    if (value.trim().length >= 4) measurement.current?.interaction(progressRef.current);
     const result = checkCompleteWord(puzzle, value, [...progressRef.current.found, ...(progressRef.current.extra || [])]);
     if (result.kind === "required" || result.kind === "bonus") {
       recordFind(result.word);
       setMessage(`${result.word}: ${result.kind === "bonus" ? "bonus word" : "target found"}!`);
     } else if (result.kind === "extra") {
+      const before = progressRef.current;
       const next = { ...progressRef.current, extra: [...new Set([...(progressRef.current.extra || []), result.word])] };
       progressRef.current = next; setProgress(next);
+      measurement.current?.record(before, next, "extra");
       setMessage(`${result.word}: extra word recognized! No points; this board keeps its original target and bonus lists.`);
     } else setMessage(result.kind === "duplicate" ? `${result.word} is already found.` : result.kind === "unknown" ? `${result.word} is not in this puzzle's editorial word list.` : "Use a connected path of at least four letters without reusing tiles.");
     setInput(""); changePath([]); setHint("");
@@ -159,13 +170,15 @@ function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: Comp
   const activateHints = (level: number) => {
     if (!ready || tutorial || level > unlock) return;
     setHintView(level);
+    const before = progressRef.current;
     const next = { ...progressRef.current, hintLevel: Math.max(progressRef.current.hintLevel || 0, level) };
     progressRef.current = next;
     setProgress(next);
+    measurement.current?.record(before, next, "hint");
     setMessage(level === 1 ? "Tile badges count remaining target words starting there." : "Missing targets now show their first letter.");
   };
   const closeTutorial = (reason: "complete" | "skip", step: number) => {
-    trackEvent(reason === "complete" ? "complete_tutorial_finish" : "complete_tutorial_skip", { step, practice });
+    trackEvent(reason === "complete" ? "complete_tutorial_finish" : "complete_tutorial_skip", { ...analyticsContext, step });
     setTutorial(false);
     try { localStorage.setItem("wordgrid-complete-tutorial-v1", "done"); } catch { /* The tutorial remains available without storage. */ }
   };
@@ -176,7 +189,7 @@ function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: Comp
       share: navigator.share?.bind(navigator), clipboard: navigator.clipboard,
     });
     setShareStatus(result.message);
-    if (result.success) trackEvent("complete_share_success", { practice, method: result.method, targets_found: targets.length, target_count: puzzle.requiredWords.length });
+    if (result.success) trackEvent("complete_share_success", { ...analyticsContext, method: result.method, targets_found: targets.length });
   };
   const review = (word: string) => {setPath([]);setHint(word);setMessage(`Reviewing ${word}: follow the numbered trail. This does not change your score.`);};
   const reveal = () => {
@@ -217,7 +230,7 @@ function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: Comp
       {mode === "archive" && <p role="status" className="mb-5 rounded-xl border border-primary/30 bg-primary/10 p-4 text-sm">Archive · {puzzle.date}. Continue your original saved collection, or start a separate replay. Historical sessions are not ranked.</p>}
       {storageWarning && <p role="status" className="mb-4 text-sm text-accent">Browser storage is unavailable or the saved game could not be read. Progress may not survive a reload.</p>}
       {tutorial && <CompleteTutorial onClose={closeTutorial} />}
-      <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr]">
+      <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr]" onPointerDown={() => { if (!tutorial) measurement.current?.activity(); }} onKeyDown={() => { if (!tutorial) measurement.current?.activity(); }}>
         <section className="min-w-0 rounded-3xl border border-border bg-gradient-to-br from-surface to-bg p-4 sm:p-6 shadow-xl" aria-label="Daily puzzle">
           <div className="flex items-center justify-between gap-3">
             <div>
@@ -262,7 +275,7 @@ function CompleteGame({ puzzle, practice, ranked, replay, mode }: { puzzle: Comp
           <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
             <button disabled={!ready} className="text-primary disabled:opacity-40" onClick={()=>{setTurns((turns+1)%4);setMessage("Board rotated 90 degrees. Score and progress are unchanged.");}}>Rotate 90°</button>
             <span className="text-text-dim">View {turns*90}°</span>
-            <button className="text-text-muted" onClick={()=>{trackEvent("complete_tutorial_start", { source: "replay", practice });setTutorial(true);}}>Quick start</button>
+            <button className="text-text-muted" onClick={()=>{trackEvent("complete_tutorial_start", { ...analyticsContext, source: "replay" });setTutorial(true);}}>Quick start</button>
           </div>
           <CompleteLetterBoard puzzle={puzzle} turns={turns} path={path} preview={preview} counts={counts} disabled={!ready || tutorial} onPath={changePath} onSubmit={trail=>submit(wordFromPath(puzzle,trail)||"")} onFeedback={setMessage} />
           {hint && <div className="mb-4 rounded-xl border border-accent/30 p-3 text-sm">

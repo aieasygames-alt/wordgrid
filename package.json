@@ -11,6 +11,7 @@
     "test": "node scripts/verify-word-list.mjs && node scripts/test-complete.cjs",
     "generate:complete": "node scripts/generate-complete.cjs",
     "generate:complete:v2": "node scripts/generate-complete-v2.cjs",
+    "audit:complete": "node scripts/audit-complete.cjs",
     "qa:serve": "node scripts/qa-serve.mjs",
     "qa:prepare": "node scripts/qa-prepare.mjs",
     "qa:check": "node scripts/check-export.mjs"

@@ -28,6 +28,10 @@ The historical search comparison point is `plans/seo-measurement-baseline-2026-0
 
 Never send full word input, a player's name, raw challenge URL, or free-text query as analytics parameters.
 
+Complete uses an untimed, resumable puzzle funnel with separate daily/archive/replay
+dimensions. Its event definitions, visit-only duration limits, deduplication and
+calibration criteria are in [COMPLETE_MEASUREMENT.md](COMPLETE_MEASUREMENT.md).
+
 ## GA4 Explorations
 
 Build three saved explorations. Use `page_path` as a breakdown where sample size allows.
